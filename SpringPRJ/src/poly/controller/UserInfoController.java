@@ -80,6 +80,18 @@ public class UserInfoController {
 		return "/redirect";
 	}
 	
+	@RequestMapping(value="spoilbroth/main")
+	public String main(HttpSession session) {
+		log.info(this.getClass().getClass().getName() +"user/login start!!");
+		
+//		if(session.getAttribute("user_id") != null) {
+//			
+//			return "/spoilbroth/main";
+//		}else {
+//			session.invalidate();
+//		}
+		return "spoilbroth/main";
+	}
 	
 	
 	

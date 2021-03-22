@@ -11,19 +11,10 @@
 
 
 %>
+
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-
-<dir>	user_seq : <%= user_seq %></dir>
-<dir>	user_id : <%= user_id %></dir>
-<dir>	user_pwd : <%= user_pwd %></dir>
-<dir>	user_email : <%= user_email %></dir>
-<dir>	join_dt : <%= join_dt %></dir>
-
-
+<html lang="en">
+  <head>
     <title>Andrea - Free Bootstrap 4 Template by Colorlib</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -54,8 +45,8 @@
   <body>
 
 	<div id="colorlib-page">
-		<a href="#" class="andrea-master/js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
-		<aside id="colorlib-aside" role="complementary" class="andrea-master/js-fullheight">
+		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+		<aside id="colorlib-aside" role="complementary" class="js-fullheight">
 			<nav id="colorlib-main-menu" role="navigation">
 				<ul>
 					<li class="colorlib-active"><a href="index.html">Home</a></li>
