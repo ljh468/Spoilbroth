@@ -14,35 +14,29 @@ import poly.service.IMyRedisService;
 @Controller
 public class MyRedisController {
 	private Logger log = Logger.getLogger(this.getClass());
-	
+
 	/*
 	 * 비즈니스 로직 (중요 로직을 수행하기 위해 사용되는 서비스를 메모리에 적재( 싱글톤패턴 적용됨 )
 	 */
-	
-	@Resource(name="MyRedisService")
+
+	@Resource(name = "MyRedisService")
 	IMyRedisService myRedisService;
-	
+
 	/**
 	 * 빅데이터 처리를 위한
 	 */
-	
-	@RequestMapping(value="myRedis/test")
+
+	@RequestMapping(value = "myRedis/test")
 	@ResponseBody
-	public String myRedis(HttpServletRequest request, HttpServletResponse response)throws Exception{
-		
+	public String myRedis(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
 		log.info(this.getClass().getName() + ".myRedis start!!");
-		
+
 		myRedisService.doSaveData();
-		
+
 		log.info(this.getClass().getName() + ".myRedis End!!");
-		
+
 		return "success";
 	}
-	
-	@RequestMapping(value="index")
-	public String Index() {
-		log.info(this.getClass());
-		
-		return "/index";
-	}
+
 }
