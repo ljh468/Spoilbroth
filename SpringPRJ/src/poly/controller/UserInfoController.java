@@ -9,7 +9,6 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import poly.dto.UserDTO;
 import poly.service.IUserService;
@@ -25,7 +24,7 @@ public class UserInfoController {
 	
 	// 로그인
 	@RequestMapping(value="user/login")
-	public String login(HttpSession session) {
+	public String login(HttpServletRequest request, HttpSession session) {
 		log.info(this.getClass().getClass().getName() +"user/login start!!");
 		
 //		if(session.getAttribute("user_id") != null) {
@@ -81,7 +80,7 @@ public class UserInfoController {
 	}
 	
 	@RequestMapping(value="spoilbroth/main")
-	public String main(HttpSession session) {
+	public String main(HttpServletRequest request, HttpSession session) {
 		log.info(this.getClass().getClass().getName() +"user/login start!!");
 		
 //		if(session.getAttribute("user_id") != null) {
