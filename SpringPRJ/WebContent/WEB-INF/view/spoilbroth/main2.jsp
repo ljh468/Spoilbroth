@@ -48,22 +48,83 @@ String join_dt = (String) request.getAttribute("join_dt");
 <link rel="stylesheet" href="/andrea-master/css/flaticon.css">
 <link rel="stylesheet" href="/andrea-master/css/icomoon.css">
 <link rel="stylesheet" href="/andrea-master/css/style.css">
-
-
-
 </head>
 <body data-aos-easing="slide" data-aos-duration="800" data-aos-delay="0">
 
 	<div id="colorlib-page">
 	
 		<!-- START 상단 NANI -->
-		
+		<div class="padding" style="padding-bottom: 157px;"></div>
+		<div class="sidebar-heading"
+			style="text-align: center; position: fixed; top: 0; width: 100%; background-color: #fff; z-index: 5; padding-top: 20px;">
+			Tag Cloud
+			<hr />
+			<ul class="tagcloud">
+				<a href="#" class="tag-cloud-link">animals</a>
+				<a href="#" class="tag-cloud-link">human</a>
+				<a href="#" class="tag-cloud-link">people</a>
+				<a href="#" class="tag-cloud-link">cat</a>
+				<a href="#" class="tag-cloud-link">dog</a>
+				<a href="#" class="tag-cloud-link">nature</a>
+				<a href="#" class="tag-cloud-link">leaves</a>
+				<a href="#" class="tag-cloud-link">food</a>
+			</ul>
+		</div>
 		<!-- END 상단 NANI -->
 		
 		<!-- START 왼쪽 NANI -->
-		<%@ include file="/WEB-INF/view/sidebar.jsp"%>
+		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+		<aside id="colorlib-aside" role="complementary" class="js-fullheight"
+			style="height: 812px;">
+			<nav id="colorlib-main-menu" role="navigation">
+				<ul>
+					<li class="colorlib-active"><a href="index.html">Home</a></li>
+					<li><a href="fashion.html">MBTI분석</a></li>
+					<li><a href="travel.html">STUDY매칭</a></li>
+					<li><a href="about.html">Setting</a></li>
+					<li><a href="contact.html">Contact</a></li>
+				</ul>
+			</nav>
+
+			<div class="colorlib-footer">
+				<h1 id="colorlib-logo" class="mb-4">
+					<a href="index.html"
+						style="background-image: url(/andrea-master/images/bg_1.jpg);">Andrea
+						<span>Moore</span>
+					</a>
+				</h1>
+				<div class="mb-4">
+					<h3>Subscribe for newsletter</h3>
+					<form action="#" class="colorlib-subscribe-form">
+						<div class="form-group d-flex">
+							<div class="icon">
+								<span class="icon-paper-plane"></span>
+							</div>
+							<input type="text" class="form-control"
+								placeholder="Enter Email Address">
+						</div>
+					</form>
+				</div>
+				<p class="pfooter">
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					Copyright ©
+					<script>
+						document.write(new Date().getFullYear());
+					</script>
+					2021 All rights reserved | This template is made with <i
+						class="icon-heart" aria-hidden="true"></i> by <a
+						href="https://colorlib.com" target="_blank">Colorlib</a>
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+				</p>
+			</div>
+		</aside>
 		<!-- END 왼쪽 NANI -->
-		
+
+
+
+
+
+
 		<div id="colorlib-main">
 
 			<section class="ftco-section ftco-no-pt ftco-no-pb">
