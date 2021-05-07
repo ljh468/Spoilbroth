@@ -9025,7 +9025,7 @@ textarea.form-control {
     border: 1px solid #ccc;
     font-size: 11px; }
     .tagcloud a:hover {
-      border: 1px solid #000; }
+      border: 1px solid rgb(255, 128, 0); }
 
 .comment-form-wrap {
   clear: both; }
