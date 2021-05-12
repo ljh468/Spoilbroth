@@ -79,6 +79,16 @@ public class UserInfoController {
 		return "/redirect";
 	}
 	
+	// 로그인
+		@RequestMapping(value="user/signup")
+		public String signup(HttpServletRequest request, HttpSession session) {
+			log.info(this.getClass().getClass().getName() +"user/signup start!!");
+			
+			
+			return "user/signup";
+		}
+		
+	
 	@RequestMapping(value="spoilbroth/main")
 	public String main(HttpServletRequest request, HttpSession session) {
 		log.info(this.getClass().getClass().getName() +"user/login start!!");
@@ -90,6 +100,19 @@ public class UserInfoController {
 //			session.invalidate();
 //		}
 		return "spoilbroth/main";
+	}
+	
+	@RequestMapping(value="spoilbroth/main2")
+	public String main2(HttpServletRequest request, HttpSession session) {
+		log.info(this.getClass().getClass().getName() +"user/login start!!");
+		
+//		if(session.getAttribute("user_id") != null) {
+//			
+//			return "/spoilbroth/main";
+//		}else {
+//			session.invalidate();
+//		}
+		return "spoilbroth/main2";
 	}
 	
 	
