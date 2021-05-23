@@ -17,6 +17,7 @@ public class MainController {
 		return "/index";
 	}
 	
+	
 	@RequestMapping(value="practice")
 	public String practice() {
 		log.info("practice 시작!!");

@@ -2,6 +2,7 @@ package poly.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import poly.dto.MelonDTO;
 import poly.dto.MovieDTO;
+import poly.service.IMelonService;
 import poly.service.IMovieRankService;
 import poly.util.CmmUtil;
 import poly.util.DateUtil;
@@ -32,7 +35,68 @@ public class MovieRankController {
 	 */
 	@Resource(name = "MovieRankService")
 	private IMovieRankService movieRankService;
-
+	
+	@Resource(name = "MelonService")
+	private IMelonService melonService;
+	
+	
+	/**
+	 * 멜론 노래 리스트 저장하기
+	 */
+	@RequestMapping(value="melon/collectMelonSong")
+	@ResponseBody
+	public String collectMelonRank(HttpServletRequest request, HttpServletResponse response)
+		throws Exception{
+		
+		log.info(this.getClass().getName() + ".collectMelonSong Start!!");
+		
+		melonService.collectMelonSong();
+		
+		log.info(this.getClass().getName() + ".collectMelonSong End!!");
+		
+		return "success";
+	}
+	
+	/**
+	 * 오늘 수집된 멜론 노래리스트 가져오기
+	 */
+	@RequestMapping(value="melon/getSongList")
+	@ResponseBody
+	public List<MelonDTO> getSongList(HttpServletRequest request, HttpServletResponse response)
+		throws Exception{
+		log.info(this.getClass().getName() + ".getSongList start!!");
+		
+		List<MelonDTO> rList = melonService.getSongList();
+		
+		log.info(this.getClass().getName() + ".getSongList End!!");
+		
+		return rList;
+	}
+	
+	/**
+	 * 가수별 수집된 노래의 수 가져오기
+	 */
+	@RequestMapping(value="melon/getSingerSongcnt")
+	@ResponseBody
+	public List<Map<String, Object>> getSingerSongCnt(HttpServletRequest request, HttpServletResponse response)
+		throws Exception{
+		log.info(this.getClass().getName() + ".getSingerSongCnt start!!");
+		
+		List<Map<String, Object>> rList = melonService.getSingerSongCnt();
+		
+		log.info(this.getClass().getName() + ".getSingerSongCnt end!!");
+		
+		return rList;
+	}
+	
+	
+	
+	
+	
+	
+	
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
 	/**
 	 * 음성 명령 첫화면
 	 */
