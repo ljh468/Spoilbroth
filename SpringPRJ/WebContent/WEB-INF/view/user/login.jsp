@@ -40,16 +40,16 @@
 					</span>
 				</div>
 
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" action="/user/loginProc.do">
 					<div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
-						<span class="label-input100">Email</span>
-						<input class="input100" type="text" name="username" placeholder="Enter useremail">
+						<span class="label-input100">ID</span>
+						<input class="input100" type="text" name="user_id" placeholder="Enter userid">
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-18" data-validate = "Password is required">
 						<span class="label-input100">Password</span>
-						<input class="input100" type="password" name="pass" placeholder="Enter password">
+						<input class="input100" type="password" name="user_pwd" placeholder="Enter password">
 						<span class="focus-input100"></span>
 					</div>
 

@@ -4,6 +4,8 @@ import poly.dto.UserDTO;
 
 public interface IUserService {
 
-	UserDTO getUserInfo(UserDTO uDTO);
+	UserDTO getUserInfo(UserDTO uDTO) throws Exception;
+
+	int insertUserInfo(UserDTO uDTO) throws Exception;
 	
 }

@@ -1,17 +1,18 @@
 package poly.persistance.mapper;
 
-import java.util.List;
-
 import config.Mapper;
-import poly.dto.DummyDTO;
 import poly.dto.UserDTO;
 
 @Mapper("UserMapper")
 public interface IUserMapper {
 
-	//게시판 리스트
-	List<DummyDTO> getDummyList() throws Exception;
-
-	UserDTO getUserInfo(UserDTO uDTO);
+	// 회원가입 하기 ( 회원정보 등록하기 )
+	int insertUserInfo(UserDTO uDTO) throws Exception;
+	
+	// 회원가입 전 중복체크하기 ( DB 조회히기)
+	UserDTO getUserExists(UserDTO uDTO) throws Exception;
+	
+	// 회원정보 불러오기
+	UserDTO getUserInfo(UserDTO uDTO) throws Exception;
 	
 }
