@@ -40,7 +40,7 @@
 					</span>
 				</div>
 
-				<form class="login100-form validate-form" action="/user/loginProc.do">
+				<form class="login100-form validate-form" action="/user/loginProc.do" method="post">
 					<div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
 						<span class="label-input100">ID</span>
 						<input class="input100" type="text" name="user_id" placeholder="Enter userid">
@@ -75,7 +75,7 @@
 					</div>
 					
 					<div class="container-login100-form-btn" style="padding-top: 10px; ">
-						<button class="login100-form-btn" style="margin: auto; background-color: #565c568c;">
+						<button onclick="location.href='/user/signup.do'" class="login100-form-btn" style="margin: auto; background-color: #565c568c;">
 							Sign up
 						</button>
 					</div>

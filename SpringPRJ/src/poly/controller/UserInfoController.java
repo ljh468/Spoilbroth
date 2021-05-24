@@ -10,10 +10,11 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import poly.dto.UserDTO;
 import poly.service.IUserService;
-import poly.util.EncryptUtil;
 
 
 @Controller
@@ -28,17 +29,12 @@ public class UserInfoController {
 	@RequestMapping(value="user/login")
 	public String login(HttpServletRequest request, HttpSession session) {
 		log.info(this.getClass().getClass().getName() +"user/login start!!");
-		
-//		if(session.getAttribute("user_id") != null) {
-//			
-//			return "/spoilbroth/main";
-//		}else {
-//			session.invalidate();
-//		}
+		session.invalidate();
+			
 		return "user/login";
 	}
 	
-	@RequestMapping(value="user/loginProc")
+	@RequestMapping(value="user/loginProc", method = RequestMethod.POST)
 	public String loginProc(HttpServletRequest request, HttpSession session, ModelMap model) 
 			throws Exception {
 		
@@ -66,7 +62,7 @@ public class UserInfoController {
 			log.info("데이터 조회완료");
 			
 			session.setAttribute("user_id", rDTO.getUser_id());
-			session.setAttribute("user_pwd", rDTO.getUser_pwd());
+			session.setAttribute("join_dt", rDTO.getJoin_DT());
 			model.addAttribute("user_seq", rDTO.getUser_seq());
 			model.addAttribute("user_id", rDTO.getUser_id());
 			model.addAttribute("user_pwd", rDTO.getUser_pwd());
@@ -82,6 +78,26 @@ public class UserInfoController {
 		url = "/user/login";
 		
 		log.info("user/loginproc End!!");
+		return "/redirect";
+	}
+	
+	@RequestMapping(value="/user/logOut")
+	public String logOut(HttpSession session, ModelMap model) throws Exception{
+		log.info(this.getClass().getName() + "user/logOut start!!");
+		
+		String msg ="";
+		String url ="";
+		
+		msg = "로그아웃 성공";
+		
+		session.invalidate();
+		url ="/user/login.do";
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		
+		log.info(this.getClass().getName() + "user/logOut end!!");
 		return "/redirect";
 	}
 	
@@ -169,22 +185,36 @@ public class UserInfoController {
 				pDTO = null;
 			}
 			
-			
-			
 			return "/redirect";
 		}
 		
+		// 아이디 중복확인
+		@ResponseBody
+		@RequestMapping(value = "/user/idCheck", method = RequestMethod.POST)
+		public int idCheck(HttpServletRequest request) throws Exception {
+			log.info("idCheck 시작");
+
+			String userId = request.getParameter("userId");
+
+			log.info("TheService.idCheck 시작");
+			UserDTO idCheck = userService.idCheck(userId);
+			log.info("TheService.idCheck 종료");
+
+			int res = 0;
+
+			log.info("if 시작");
+			if (idCheck != null)
+				res = 1;
+
+			log.info("result : " + res);
+			log.info("if 종료");
+
+			log.info("idCheck 종료");
+			return res;
+		}
 
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		
 		
 		
@@ -192,12 +222,9 @@ public class UserInfoController {
 	public String main(HttpServletRequest request, HttpSession session) {
 		log.info(this.getClass().getClass().getName() +"user/login start!!");
 		
-//		if(session.getAttribute("user_id") != null) {
-//			
-//			return "/spoilbroth/main";
-//		}else {
-//			session.invalidate();
-//		}
+		
+			session.invalidate();
+		
 		return "spoilbroth/main";
 	}
 	

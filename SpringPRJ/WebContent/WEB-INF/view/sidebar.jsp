@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
+<%@page import="static poly.util.CmmUtil.nvl" %>
+<%
+
+	String id = nvl((String)session.getAttribute("user_id"));
+	String date = nvl((String)session.getAttribute("join_dt")); 
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +22,30 @@
 <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
 		<aside id="colorlib-aside" role="complementary" class="js-fullheight"
 			style="height: 812px;">
+			
 			<nav id="colorlib-main-menu" role="navigation">
+			<a href="single.html" class="img img-2" style="background-image: url(/andrea-master/images/image_1.jpg);"></a>
+			<div class="colorlib-active">
+			<ul>
+				<li>
+					<%if(date.isEmpty()) { %>
+						<a href="/user/login.do" style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 32px;">가입 하시겠습니까?</a>
+					<% } else { %>
+						<a href="#" style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 24px;" method=post>첫방문  : <%=date %></a>
+					<%} %>
+				
+				</li>
+				<li>
+					<%if(id.isEmpty()) { %>
+						<a href="/user/login.do" style= "font-family: 'Nanum Pen Script', cursive; font-size: 20px; padding-left: 80px;">Sign in</a>
+					<% } else { %>
+						<a href="/user/logOut.do" style=" font-family: 'Nanum Pen Script', cursive; font-size: 24px; padding-left: 80px;"><%=id %> 님 Log out</a>
+					<%} %>
+				</li>
+			</ul>
+		</div>
+		<hr style=" width: 90%; height: 1.5px; border: none; background-color: #666666;
+"/>
 				<ul>
 					<li class="colorlib-active"><a href="index.html">Home</a></li>
 					<li><a href="fashion.html">MBTI Analysis</a></li>

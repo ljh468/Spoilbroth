@@ -14,5 +14,7 @@ public interface IUserMapper {
 	
 	// 회원정보 불러오기
 	UserDTO getUserInfo(UserDTO uDTO) throws Exception;
+
+	UserDTO idCheck(String userId) throws Exception;
 	
 }

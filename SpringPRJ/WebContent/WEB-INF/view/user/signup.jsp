@@ -106,7 +106,7 @@
 							type="text" name="user_id" id="user_id" placeholder="Enter userId">
 						<span class="focus-input100"></span>
 					</div>
-
+					<div class="msg m-b-15"></div>
 
 
 					<div class="wrap-input100 validate-input m-b-20"
@@ -119,7 +119,7 @@
 					<div class="wrap-input100 validate-input m-b-18"
 						data-validate="Password is required">
 						<span class="label-input100">Password</span> <input
-							class="input100" type="password" name="user_pwd", id="user_pwd"
+							class="input100" type="password" name="user_pwd" id="newPassWord"
 							placeholder="Enter password"> <span
 							class="focus-input100"></span>
 					</div>
@@ -130,6 +130,7 @@
 							placeholder="your Password Check"> <span
 							class="focus-input100"></span>
 					</div>
+					<div class="renew m-b-15"></div> 
 
 					<div class="wrap-input100 m-b-20"
 						data-validate="userdept is required">
@@ -164,7 +165,7 @@
 			</div>
 		</div>
 	</div>
-
+	
 
 	<!--===============================================================================================-->
 	<script src="/login/vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -182,6 +183,60 @@
 	<script src="/login/vendor/countdowntime/countdowntime.js"></script>
 	<!--===============================================================================================-->
 	<script src="/login/js/main.js"></script>
-
+	
 </body>
+
+<script>
+	
+	$('#passWordCheck').on('keyup', function(){
+			
+				var pw = document.getElementById("newPassWord").value; //비밀번호
+				var pw2 = document.getElementById("passWordCheck").value; // 확인 비밀번호
+				
+		if (pw != '' && pw2 == '') {
+			null;
+		} else if (pw != "" || pw2 != "") {
+			if (pw == pw2) {
+				$(".renew").text("비밀번호가 일치합니다.");
+				$(".renew").css("color", "#00f");
+				newPwd = 'Y';
+			} else {
+				$(".renew").text("비밀번호가 일치하지 않습니다.");
+				$(".renew").css("color", "#f00");
+				newPwd = 'N';
+			}
+		}
+	})
+	var doCheck = 'N'
+	
+	$('#user_id').on('keyup', function(){
+		var query = {
+			userId : $("#user_id").val()
+		};
+		$.ajax({
+			url : "idCheck.do",
+			type : "post",
+			data : query,
+			success : function(data) {
+				if (data == 1) {
+					$(".msg").text("사용하고 있는 아이디입니다.");
+					$(".msg").attr("style", "color:#f00");
+					doCheck = 'N'
+				} else {
+					$(".msg").text("사용 가능한 아이디입니다.");
+					$(".msg").attr("style", "color:#00f");
+					//$('#userId').attr("disabled", true);
+					doCheck = 'Y'
+				}
+			}
+		}); // ajax 끝
+	});
+	function check() {
+		if (doCheck == 'N') {
+			alert("사용중인 아이디입니다.")
+			return false;
+		}
+	}
+	
+	</script>
 </html>

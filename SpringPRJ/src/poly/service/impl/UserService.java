@@ -60,4 +60,11 @@ public class UserService implements IUserService{
 		}
 		return res;
 	}
+	
+	// 아이디 확인
+	@Override
+	public UserDTO idCheck(String userId) throws Exception {
+		
+		return userMapper.idCheck(userId);
+	}
 }
