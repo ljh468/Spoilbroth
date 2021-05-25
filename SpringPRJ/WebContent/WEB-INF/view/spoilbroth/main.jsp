@@ -3,10 +3,10 @@
 
 <%
 	String user_seq = (String) request.getAttribute("user_seq");
-String user_id = (String) request.getAttribute("user_id");
-String user_pwd = (String) request.getAttribute("user_pwd");
-String user_email = (String) request.getAttribute("user_email");
-String join_dt = (String) request.getAttribute("join_dt");
+	String user_id = (String) request.getAttribute("user_id");
+	String user_pwd = (String) request.getAttribute("user_pwd");
+	String user_email = (String) request.getAttribute("user_email");
+	String join_dt = (String) request.getAttribute("join_dt");
 %>
 
 <!DOCTYPE html>

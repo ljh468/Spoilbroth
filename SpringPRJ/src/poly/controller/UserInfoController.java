@@ -58,25 +58,20 @@ public class UserInfoController {
 		if(rDTO == null) {
 			log.info("rDTO == null?"+(rDTO==null));
 			msg = "아이디 비밀번호를 확인해주세요";
+			url = "/user/login.do";
 		}else {
 			log.info("데이터 조회완료");
 			
 			session.setAttribute("user_id", rDTO.getUser_id());
+			session.setAttribute("user_pwd", rDTO.getUser_pwd());
 			session.setAttribute("join_dt", rDTO.getJoin_DT());
-			model.addAttribute("user_seq", rDTO.getUser_seq());
-			model.addAttribute("user_id", rDTO.getUser_id());
-			model.addAttribute("user_pwd", rDTO.getUser_pwd());
-			model.addAttribute("user_email", rDTO.getUser_email());
-			model.addAttribute("user_age", rDTO.getUser_age());
-			model.addAttribute("user_dept", rDTO.getUser_dept());
-			model.addAttribute("user_auth", rDTO.getUser_email());
-			model.addAttribute("join_dt", rDTO.getJoin_DT());
 			
-		return "/spoilbroth/main";
+			msg = "환영합니다.";
+			url = "/spoilbroth/main.do";
 		
 		}
-		url = "/user/login";
-		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
 		log.info("user/loginproc End!!");
 		return "/redirect";
 	}
@@ -219,11 +214,28 @@ public class UserInfoController {
 		
 		
 	@RequestMapping(value="spoilbroth/main")
-	public String main(HttpServletRequest request, HttpSession session) {
+	public String main(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
 		log.info(this.getClass().getClass().getName() +"user/login start!!");
 		
+		UserDTO uDTO = new UserDTO();
+		String id = (String) session.getAttribute("user_id" );
+		String pwd = (String) session.getAttribute("user_pwd" );
+		System.out.println("user_id : " + id);
+		System.out.println("user_pwd : " + pwd);
+		uDTO.setUser_id(id);
+		uDTO.setUser_pwd(pwd);
 		
-			session.invalidate();
+		UserDTO rDTO = new UserDTO();
+		rDTO = userService.getUserInfo(uDTO);
+		
+		model.addAttribute("user_seq", rDTO.getUser_seq());
+		model.addAttribute("user_id", rDTO.getUser_id());
+		model.addAttribute("user_pwd", rDTO.getUser_pwd());
+		model.addAttribute("user_email", rDTO.getUser_email());
+		model.addAttribute("user_age", rDTO.getUser_age());
+		model.addAttribute("user_dept", rDTO.getUser_dept());
+		model.addAttribute("user_auth", rDTO.getUser_email());
+		model.addAttribute("join_dt", rDTO.getJoin_DT());
 		
 		return "spoilbroth/main";
 	}

@@ -37,9 +37,9 @@
 				</li>
 				<li>
 					<%if(id.isEmpty()) { %>
-						<a href="/user/login.do" style= "font-family: 'Nanum Pen Script', cursive; font-size: 20px; padding-left: 80px;">Sign in</a>
+						<a href="/user/login.do" style= "font-family: 'Nanum Pen Script', cursive; font-size: 20px; padding-left: 70px;">Sign in</a>
 					<% } else { %>
-						<a href="/user/logOut.do" style=" font-family: 'Nanum Pen Script', cursive; font-size: 24px; padding-left: 80px;"><%=id %> 님 Log out</a>
+						<a href="/user/logOut.do" style=" font-family: 'Nanum Pen Script', cursive; font-size: 24px; padding-left: 40px;"><%=id %> 님 Log out</a>
 					<%} %>
 				</li>
 			</ul>
@@ -47,7 +47,7 @@
 		<hr style=" width: 90%; height: 1.5px; border: none; background-color: #666666;
 "/>
 				<ul>
-					<li class="colorlib-active"><a href="index.html">Home</a></li>
+					<li class="colorlib-active"><a href="/spoilbroth/main.do">Home</a></li>
 					<li><a href="fashion.html">MBTI Analysis</a></li>
 					<li><a href="travel.html">Study Matching</a></li>
 					<li><a href="about.html">Setting</a></li>
@@ -56,7 +56,7 @@
 
 			<div class="colorlib-footer" style="padding-bottom: 20px;">
 				<h1 id="colorlib-logo" class="mb-4">
-					<a href="index.html" style="background-image: url(/andrea-master/images/bg_1.jpg); font-size: 57px;">Spoilbroth</a>
+					<a href="/spoilbroth/main.do" style="background-image: url(/andrea-master/images/bg_1.jpg); font-size: 57px;">Spoilbroth</a>
 				</h1>
 				<span style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 28px;">요리사가 너무 많으면 수프를 망친다.</span>
 				<div class="mb-4">
