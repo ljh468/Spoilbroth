@@ -208,54 +208,6 @@ public class UserInfoController {
 			return res;
 		}
 
-		
-
-		
-		
-		
-	@RequestMapping(value="spoilbroth/main")
-	public String main(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
-		log.info(this.getClass().getClass().getName() +"user/login start!!");
-		
-		UserDTO uDTO = new UserDTO();
-		String id = (String) session.getAttribute("user_id" );
-		String pwd = (String) session.getAttribute("user_pwd" );
-		System.out.println("user_id : " + id);
-		System.out.println("user_pwd : " + pwd);
-		uDTO.setUser_id(id);
-		uDTO.setUser_pwd(pwd);
-		
-		UserDTO rDTO = new UserDTO();
-		rDTO = userService.getUserInfo(uDTO);
-		
-		model.addAttribute("user_seq", rDTO.getUser_seq());
-		model.addAttribute("user_id", rDTO.getUser_id());
-		model.addAttribute("user_pwd", rDTO.getUser_pwd());
-		model.addAttribute("user_email", rDTO.getUser_email());
-		model.addAttribute("user_age", rDTO.getUser_age());
-		model.addAttribute("user_dept", rDTO.getUser_dept());
-		model.addAttribute("user_auth", rDTO.getUser_email());
-		model.addAttribute("join_dt", rDTO.getJoin_DT());
-		
-		return "spoilbroth/main";
-	}
-	
-	@RequestMapping(value="spoilbroth/main2")
-	public String main2(HttpServletRequest request, HttpSession session) {
-		log.info(this.getClass().getClass().getName() +"user/login start!!");
-		
-//		if(session.getAttribute("user_id") != null) {
-//			
-//			return "/spoilbroth/main";
-//		}else {
-//			session.invalidate();
-//		}
-		return "spoilbroth/main2";
-	}
-	
-	
-	
-	
 	
 }
 
