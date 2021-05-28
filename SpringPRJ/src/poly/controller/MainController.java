@@ -40,8 +40,10 @@ public class MainController {
 		log.info(this.getClass().getClass().getName() + "spoilbroth/mystudy start!!");
 		
 		UserDTO uDTO = new UserDTO();
-		String id = (String) session.getAttribute("user_id");
-		String pwd = (String) session.getAttribute("user_pwd");
+//		String id = (String) session.getAttribute("user_id");
+		String id = "ljh468";
+//		String pwd = (String) session.getAttribute("user_pwd");
+		String pwd = "1234";
 		System.out.println("user_id : " + id);
 		System.out.println("user_pwd : " + pwd);
 		uDTO.setUser_id(id);

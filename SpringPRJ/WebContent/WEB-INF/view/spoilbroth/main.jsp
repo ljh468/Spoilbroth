@@ -61,7 +61,6 @@
 
 		<div id="colorlib-main">
 			<section class="ftco-section ftco-no-pt ftco-no-pb">
-
 				<div class="container">
 
 					<!-- 왼쪽 오른쪽 2분할 -->
@@ -69,6 +68,12 @@
 						<!-- 왼쪽 스크립트 -->
 						<div class="col-xl-8 py-5 px-md-5">
 							왼쪽 스크립트 시작
+
+							
+
+
+
+
 							<div class="row pt-md-4">
 								<div class="col-md-12">
 									<div
@@ -102,7 +107,8 @@
 
 						</div>
 						<!-- 오른쪽 스크립트 -->
-						<div class="col-xl-4 sidebar ftco-animate bg-light pt-5 fadeInUp ftco-animated">
+						<div
+							class="col-xl-4 sidebar ftco-animate bg-light pt-5 fadeInUp ftco-animated">
 							<div>오른쪽 스크립트 시작</div>
 
 

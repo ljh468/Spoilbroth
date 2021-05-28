@@ -67,7 +67,7 @@ public class UserInfoController {
 			session.setAttribute("join_dt", rDTO.getJoin_DT());
 			
 			msg = "환영합니다.";
-			url = "/spoilbroth/main.do";
+			url = "/spoilbroth/mystudy.do";
 		
 		}
 		model.addAttribute("msg", msg);

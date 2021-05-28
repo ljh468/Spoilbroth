@@ -47,7 +47,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.carousel.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.theme.default.min.css">
-<link rel="stylesheet" href="/css/owlowl.css">
 <!-- owl -->
 
 
@@ -61,8 +60,8 @@
 		<!-- END 왼쪽 NANI -->
 
 		<!-- START 상단 NANI -->
-		<div class="padding" style="padding-bottom: 130px;"></div>
-		<div class="sidebar-heading" style="text-align: center; position: fixed; top: 0; width: 100%; background-color: #fff; z-index: 5; padding-top: 20px;">
+		<div class="padding" style="padding-bottom: 150px;"></div>
+		<div class="sidebar-heading" style="text-align: center; position: fixed; top: 0; width: 100%; background-color: #fff; z-index: 5; padding-top: 20px;font-weight: 500;">
 		My Study Page
 			<hr />
 			<ul class="tagcloud">
@@ -205,9 +204,11 @@
 							<!-- 슬라이드 -->
 							<div class="slider-1">
 								<label style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
-								추천 스터디
+								My 스터디
 								</label>
 								<div class="owl-carousel owl-theme">
+									
+									<!-- 가입한 스터디 리스트로 뿌려줌 -->
 									<div class="item" style="coler:white">
 										<div style="background-image: url(/andrea-master/images/image_1.jpg); height:300px;">
 											<div class="txt-box">
@@ -216,7 +217,6 @@
 										<div>
 										<div style="font-size:20px">hi</div>
 											<ul>
-											
 												<li>목록1</li>
 												<li>목록1</li>
 											</ul>
@@ -340,7 +340,7 @@
 			.owlCarousel(
 					{
 						autoplay : true, // 오토 플레이
-						autoplayTimeout : 6000, // 오토 플레이 시에 다음 슬라이드로 넘어가는 주기, 2초
+						autoplayTimeout : 3000, // 오토 플레이 시에 다음 슬라이드로 넘어가는 주기, 2초
 						loop : true,
 						margin : 0,
 						nav : true,

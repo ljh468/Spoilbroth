@@ -44,13 +44,12 @@
 				</li>
 			</ul>
 		</div>
-		<hr style=" width: 90%; height: 1.5px; border: none; background-color: #666666;
-"/>
-				<ul>
-					<li class="colorlib-active"><a href="/spoilbroth/main.do">Home</a></li>
-					<li><a href="fashion.html">MBTI Analysis</a></li>
-					<li><a href="travel.html">Study Matching</a></li>
-					<li><a href="about.html">Setting</a></li>
+		<hr style=" width: 90%; height: 1.5px; border: none; background-color: #666666;"/>
+				<ul class="nav2">
+					<li class="colorlib-active"><a href="/spoilbroth/mystudy.do">Home</a></li>
+					<li class="nana"><a href="/mbti/mbtimain.do">MBTI Analysis</a></li>
+					<li class=""><a href="travel.html">Study Matching</a></li>
+					<li class=""><a href="about.html">Setting</a></li>
 				</ul>
 			</nav>
 
@@ -76,5 +75,29 @@
 		</aside>
 
 
+<script src="/andrea-master/js/jquery.min.js"></script>
 </body>
+<script>
+$(function(){
+    var url = window.location.pathname;  
+    var activePage = url.substring(url.lastIndexOf('/')+1);
+    console.log("activePage: " + activePage);
+    
+    $('.nav2 li a').each(function(){  
+        var currentPage = this.href.substring(this.href.lastIndexOf('/')+1);
+		console.log("currentPage : "+currentPage)
+		
+        if (activePage == currentPage) {
+        	$(".nav2").find(".colorlib-active").removeClass("colorlib-active");
+            $(this).parent().addClass('colorlib-active');
+            $(this).addClass('colorlib-active');
+            
+        }else if(activePage == "mbtianalysis.do"){
+        	$(".nav2").find(".colorlib-active").removeClass("colorlib-active");
+        	$('.nana').addClass('colorlib-active');
+        }
+    });
+})
+
+</script>
 </html>

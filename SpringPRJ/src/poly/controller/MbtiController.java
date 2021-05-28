@@ -38,10 +38,10 @@ public class MbtiController {
 	}
 	
 	// MBTI 검사화면
-	@RequestMapping(value = "mbti/mbtiexamine")
+	@RequestMapping(value = "mbti/mbtianalysis")
 	public String mbtiexamine(HttpServletRequest request, HttpSession session) {
 		log.info(this.getClass().getClass().getName() + "mbtimain start!!");
 
-		return "mbti/mbtiexamine";
+		return "mbti/mbtianalysis";
 	}
 }
