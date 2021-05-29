@@ -36,7 +36,27 @@ String join_dt = (String) request.getAttribute("join_dt");
 
 <style>
 
-</style>
+	.card {
+		border-radius: 12px;
+		box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
+		background-color: #FFFFFF;
+		color: #252422;
+		margin-bottom: 20px;
+		position: relative;
+		border: 0 none;
+		transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1), box-shadow 200ms ease;
+	}
+	article{
+		display: flex;
+		flex-direction: column;
+	}
+	.question{
+		display: none;
+	}
+	.result{
+		display: none;
+	}
+	</style>
 </head>
 <body data-aos-easing="slide" data-aos-duration="800" data-aos-delay="0">
 
@@ -70,43 +90,46 @@ String join_dt = (String) request.getAttribute("join_dt");
 							<span style="padding-left: 50px;"></span>
 							<button type="button" class="btn btn-outline-warning active" onclick="location.href='/mbti/mbtianalysis.do' ">MBTI Analysis</button>
 							<hr>
-							<div style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 32px;">
-							My MBTI</div>
+							<div class="text-center" style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 32px;">
+							내 성격은 무엇일까요?</div>
+							
 							
 							<div class="row p-2">
-								<div class="card p-l-55 p-r-55 p-t-65 p-b-54 shadowbox col-7" 
-								style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 20px;">
-								
-									<div>MBTI 검사</div>
-									<div>MBTI 검사</div>
-									<div>MBTI 검사</div>
-									<div>MBTI 검사</div>
-						
-								</div>
-								<div></div>
-								<div class="card p-l-55 p-r-55 p-t-65 p-b-54 shadowbox col-4" style="background-image: url(/andrea-master/images/image_1.jpg); 
-										margin-left: 15px;
-										border:none; border-radius: 7px;-moz-border-radius: 7px;-khtml-border-radius: 7px;-webkit-border-radius: 7px;">
-								</div>
-							
-							</div>
-							<div class="row p-2">
-								<div class="card p-l-55 p-r-55 p-t-65 p-b-54 shadowbox col-12" 
-								style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 20px;">
-								
-									<div>MBTI 검사</div>
-									<div>MBTI 검사</div>
-									<div>MBTI 검사</div>
-									<div>MBTI 검사</div>
-									<div>MBTI 검사</div>
-									<div>MBTI 검사</div>
-									<div>MBTI 검사</div>
-									<div>MBTI 검사</div>
-									<div>MBTI 검사</div>
-									<div>MBTI 검사</div>
-						
-							
-							
+								<div class="card p-l-55 p-r-55 p-t-65 p-b-54 shadowbox col-12" style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 20px;">
+									
+									<article class="start mt-5 mb-3">
+										<button type="button" class="btn btn-success" style="border-radius: 10px;" onclick="start();">
+											Test Start</button>
+									</article>
+
+									<article class="question">
+										<div class="progress mt-4">
+											<div class="progress-bar" role="progressbar" style="width: calc(100/12*0%)" ></div>
+										  </div>
+										<h3 id="title" class="text-center mt-2" style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 32px;"
+										>문제</h3>
+										
+										<input type="hidden" id="type" value="EI">
+										
+
+										<button type="button" id="A" class="btn btn-primary mt-3" style="border-radius: 10px;" >
+											Test Start</button>
+										<button type="button" id="B" class="btn btn-primary mt-2 mb-3" style="border-radius: 10px;" >
+											Test Start</button>
+									</article>
+									<article class="result">
+										<img id="img" src="" alt="">
+										<h3 id="animal" class="text-center mt-2" style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 32px;">
+										이름</h3>
+										<h3 id="explain" class="mt-2" style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 20px;">
+										설명</h3>
+
+									</article>
+									<input type="hidden" id="EI" value="0">
+									<input type="hidden" id="SN" value="0">
+									<input type="hidden" id="TF" value="0">
+									<input type="hidden" id="JP" value="0">
+
 								</div>
 							</div>
 							
@@ -187,23 +210,67 @@ String join_dt = (String) request.getAttribute("join_dt");
 	</div>
 </div>
 
-	<script src="/andrea-master/js/jquery.min.js"></script>
-	<script src="/andrea-master/js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="/andrea-master/js/popper.min.js"></script>
-	<script src="/andrea-master/js/bootstrap.min.js"></script>
-	<script src="/andrea-master/js/jquery.easing.1.3.js"></script>
-	<script src="/andrea-master/js/jquery.waypoints.min.js"></script>
-	<script src="/andrea-master/js/jquery.stellar.min.js"></script>
-	<script src="/andrea-master/js/owl.carousel.min.js"></script>
-	<script src="/andrea-master/js/jquery.magnific-popup.min.js"></script>
-	<script src="/andrea-master/js/aos.js"></script>
-	<script src="/andrea-master/js/jquery.animateNumber.min.js"></script>
-	<script src="/andrea-master/js/scrollax.min.js"></script>
-	<script src="/andrea-master/js/main.js"></script>
+	<script src="andrea-master/js/jquery.min.js"></script>
+	<script src="andrea-master/js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="andrea-master/js/jquery.easing.1.3.js"></script>
+	<script src="andrea-master/js/jquery.waypoints.min.js"></script>
+	<script src="andrea-master/js/jquery.stellar.min.js"></script>
+	<script src="andrea-master/js/jquery.magnific-popup.min.js"></script>
+	<script src="andrea-master/js/jquery.animateNumber.min.js"></script>
+	<script src="andrea-master/js/main.js"></script>
+	<script src="andrea-master/js/bootstrap.min.js"></script>
+	<script src="andrea-master/js/popper.min.js"></script>
+	<script src="andrea-master/js/aos.js"></script>
+	<script src="andrea-master/js/scrollax.min.js"></script>
+	<script src="andrea-master/js/owl.carousel.min.js"></script>
 
 
 </body>
+<!-- 문제 가져오는 로직 -->
 <script>
+	var num = 1;
+	var q = {
+		1: {"title" : "문제1" , "type" : "EI", "A" : "E", "B" : "I" },
+		2: {"title" : "문제2" , "type" : "EI", "A" : "E", "B" : "I" },
+		3: {"title" : "문제3" , "type" : "EI", "A" : "E", "B" : "I" },
+		4: {"title" : "문제4" , "type" : "SN", "A" : "S", "B" : "N" },
+		5: {"title" : "문제5" , "type" : "SN", "A" : "S", "B" : "N" },
+		6: {"title" : "문제6" , "type" : "SN", "A" : "S", "B" : "N" },
+		7: {"title" : "문제7" , "type" : "TF", "A" : "T", "B" : "F" },
+		8: {"title" : "문제8" , "type" : "TF", "A" : "T", "B" : "F" },
+		9: {"title" : "문제9" , "type" : "TF", "A" : "T", "B" : "F" },
+		10: {"title" : "문제10" , "type" : "JP", "A" : "J", "B" : "P" },
+		11: {"title" : "문제11" , "type" : "JP", "A" : "J", "B" : "P" },
+		12: {"title" : "문제12" , "type" : "JP", "A" : "J", "B" : "P" },
+
+	}
+
+	function start (){
+		$(".start").hide();
+		$(".question").show();
+		next();
+	}
+	$("#A").click(function(){
+		var type = $("#type").val();
+		var preValue = $("#"+type).val();
+		$("#"+type).val(parseInt(preValue)+1);
+		next();
+	});
+	$("#B").click(function(){
+		next();
+	});
+	function next() {
+		if(num == 13){
+			$(".question").hide();
+			$(".result").show();
+		}
+		$(".progress-bar").attr('style','width : calc(100/12*'+num+'%)'); 
+		$("#title").html(q[num]["title"]);
+		$("#type").val(q[num]["type"]);
+		$("#A").html(q[num]["A"]);
+		$("#B").html(q[num]["B"]);
+		num++;
+	}
 
 </script>
 </html>

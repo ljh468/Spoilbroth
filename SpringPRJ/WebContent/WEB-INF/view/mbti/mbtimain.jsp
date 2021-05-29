@@ -35,7 +35,16 @@ String join_dt = (String) request.getAttribute("join_dt");
 
 
 <style>
-
+.card {
+		border-radius: 12px;
+		box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
+		background-color: #FFFFFF;
+		color: #252422;
+		margin-bottom: 20px;
+		position: relative;
+		border: 0 none;
+		transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1), box-shadow 200ms ease;
+	}
 </style>
 </head>
 <body data-aos-easing="slide" data-aos-duration="800" data-aos-delay="0">
@@ -187,19 +196,19 @@ String join_dt = (String) request.getAttribute("join_dt");
 	</div>
 </div>
 
-	<script src="/andrea-master/js/jquery.min.js"></script>
-	<script src="/andrea-master/js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="/andrea-master/js/popper.min.js"></script>
-	<script src="/andrea-master/js/bootstrap.min.js"></script>
-	<script src="/andrea-master/js/jquery.easing.1.3.js"></script>
-	<script src="/andrea-master/js/jquery.waypoints.min.js"></script>
-	<script src="/andrea-master/js/jquery.stellar.min.js"></script>
-	<script src="/andrea-master/js/owl.carousel.min.js"></script>
-	<script src="/andrea-master/js/jquery.magnific-popup.min.js"></script>
-	<script src="/andrea-master/js/aos.js"></script>
-	<script src="/andrea-master/js/jquery.animateNumber.min.js"></script>
-	<script src="/andrea-master/js/scrollax.min.js"></script>
-	<script src="/andrea-master/js/main.js"></script>
+	<script src="andrea-master/js/jquery.min.js"></script>
+	<script src="andrea-master/js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="andrea-master/js/jquery.easing.1.3.js"></script>
+	<script src="andrea-master/js/jquery.waypoints.min.js"></script>
+	<script src="andrea-master/js/jquery.stellar.min.js"></script>
+	<script src="andrea-master/js/jquery.magnific-popup.min.js"></script>
+	<script src="andrea-master/js/jquery.animateNumber.min.js"></script>
+	<script src="andrea-master/js/main.js"></script>
+	<script src="andrea-master/js/bootstrap.min.js"></script>
+	<script src="andrea-master/js/popper.min.js"></script>
+	<script src="andrea-master/js/aos.js"></script>
+	<script src="andrea-master/js/scrollax.min.js"></script>
+	<script src="andrea-master/js/owl.carousel.min.js"></script>
 
 
 </body>
