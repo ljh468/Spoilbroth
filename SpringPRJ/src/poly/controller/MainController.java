@@ -91,6 +91,12 @@ public class MainController {
 		return "spoilbroth/main";
 	}
 
+	@RequestMapping(value = "spoilbroth/main2")
+	public String main2(HttpServletRequest request, HttpSession session) {
+		log.info(this.getClass().getClass().getName() + "user/login start!!");
+
+		return "spoilbroth/main2";
+	}
 	
 	
 	@RequestMapping(value = "spoilbroth/main3")

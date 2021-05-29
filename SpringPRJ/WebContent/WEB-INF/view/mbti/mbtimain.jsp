@@ -25,6 +25,7 @@ String join_dt = (String) request.getAttribute("join_dt");
 <link rel="stylesheet" href="/andrea-master/css/owl.carousel.min.css">
 <link rel="stylesheet" href="/andrea-master/css/owl.theme.default.min.css">
 <link rel="stylesheet" href="/andrea-master/css/magnific-popup.css">
+<link rel="stylesheet" href="/andrea-master/css/aos.css">
 <link rel="stylesheet" href="/andrea-master/css/ionicons.min.css">
 <link rel="stylesheet" href="/andrea-master/css/bootstrap-datepicker.css">
 <link rel="stylesheet" href="/andrea-master/css/jquery.timepicker.css">
@@ -33,7 +34,9 @@ String join_dt = (String) request.getAttribute("join_dt");
 <link rel="stylesheet" href="/andrea-master/css/style.css">
 
 
+<style>
 
+</style>
 </head>
 <body data-aos-easing="slide" data-aos-duration="800" data-aos-delay="0">
 
@@ -43,11 +46,14 @@ String join_dt = (String) request.getAttribute("join_dt");
 		<!-- END 왼쪽 NANI -->
 		
 		<!-- START 상단 NANI -->
-		<div class="padding" style="padding-bottom: 80px;"></div>
-		<div class="sidebar-heading" style="text-align: center; position: fixed; top: 0; width: 100%; background-color: #fff; z-index: 5; padding-top: 20px;font-weight: 500;">
+		<div class="padding" style="padding-bottom: 64px;"></div>
+		<div class="sidebar-heading" style="text-align: center; position: fixed; top: 0; width: 100%; height:0;background-color: #fff; z-index: 5; padding-top: 20px;font-weight: 500;">
 		MBTI Analysis
 			<hr />
+			
 		</div>
+		
+		
 		<!-- END 상단 NANI -->
 		
 		<div id="colorlib-main">
@@ -131,7 +137,7 @@ String join_dt = (String) request.getAttribute("join_dt");
 							</div>
 						
 						<div style="text-align: center;">
-								<button type="button" class="btn btn-success" style="border-radius: 10px;" onclick="location.href='/mbti/mbtiexamine.do' ">Start</button>
+								<button type="button" class="btn btn-success" style="border-radius: 10px;" onclick="location.href='/mbti/mbtianalysis.do' ">Start</button>
 							
 						</div>
 						왼쪽 스크립트 끝
@@ -140,7 +146,8 @@ String join_dt = (String) request.getAttribute("join_dt");
 						<!-- 오른쪽 스크립트 -->
 						<div class="col-xl-3 sidebar ftco-animate bg-light pt-5 fadeInUp ftco-animated">
 							<div>오른쪽 스크립트 시작</div>
-
+							
+							
 
 							<div class="sidebar-box ftco-animate">
 								<h3 class="sidebar-heading">Archives</h3>
@@ -182,11 +189,14 @@ String join_dt = (String) request.getAttribute("join_dt");
 
 	<script src="/andrea-master/js/jquery.min.js"></script>
 	<script src="/andrea-master/js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="/andrea-master/js/popper.min.js"></script>
+	<script src="/andrea-master/js/bootstrap.min.js"></script>
 	<script src="/andrea-master/js/jquery.easing.1.3.js"></script>
 	<script src="/andrea-master/js/jquery.waypoints.min.js"></script>
 	<script src="/andrea-master/js/jquery.stellar.min.js"></script>
 	<script src="/andrea-master/js/owl.carousel.min.js"></script>
 	<script src="/andrea-master/js/jquery.magnific-popup.min.js"></script>
+	<script src="/andrea-master/js/aos.js"></script>
 	<script src="/andrea-master/js/jquery.animateNumber.min.js"></script>
 	<script src="/andrea-master/js/scrollax.min.js"></script>
 	<script src="/andrea-master/js/main.js"></script>
