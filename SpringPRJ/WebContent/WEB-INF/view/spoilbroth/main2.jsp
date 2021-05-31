@@ -319,20 +319,20 @@
 			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"></circle></svg>
 	</div>
 
-	<script src="andrea-master/js/jquery.min.js"></script>
-	<script src="andrea-master/js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="andrea-master/js/jquery.easing.1.3.js"></script>
-	<script src="andrea-master/js/jquery.waypoints.min.js"></script>
-	<script src="andrea-master/js/jquery.stellar.min.js"></script>
-	<script src="andrea-master/js/jquery.magnific-popup.min.js"></script>
-	<script src="andrea-master/js/jquery.animateNumber.min.js"></script>
-	<script src="andrea-master/js/main.js"></script>
-	<script src="andrea-master/js/bootstrap.min.js"></script>
-	<script src="andrea-master/js/popper.min.js"></script>
-	<script src="andrea-master/js/aos.js"></script>
-	<script src="andrea-master/js/scrollax.min.js"></script>
-	<script src="andrea-master/js/owl.carousel.min.js"></script>
-
+	<script src="/andrea-master/js/jquery.min.js"></script>
+	<script src="/andrea-master/js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="/andrea-master/js/popper.min.js"></script>
+	<script src="/andrea-master/js/bootstrap.min.js"></script>
+	<script src="/andrea-master/js/jquery.easing.1.3.js"></script>
+	<script src="/andrea-master/js/jquery.waypoints.min.js"></script>
+	<script src="/andrea-master/js/jquery.stellar.min.js"></script>
+	<script src="/andrea-master/js/owl.carousel.min.js"></script>
+	<script src="/andrea-master/js/jquery.magnific-popup.min.js"></script>
+	<script src="/andrea-master/js/aos.js"></script>
+	<script src="/andrea-master/js/jquery.animateNumber.min.js"></script>
+	<script src="/andrea-master/js/scrollax.min.js"></script>
+	<script src="/andrea-master/js/main.js"></script>
+	
 </body>
 <script type="text/javascript">
 	$('.slider-1 > .owl-carousel')

@@ -210,19 +210,19 @@ String join_dt = (String) request.getAttribute("join_dt");
 	</div>
 </div>
 
-	<script src="andrea-master/js/jquery.min.js"></script>
-	<script src="andrea-master/js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="andrea-master/js/jquery.easing.1.3.js"></script>
-	<script src="andrea-master/js/jquery.waypoints.min.js"></script>
-	<script src="andrea-master/js/jquery.stellar.min.js"></script>
-	<script src="andrea-master/js/jquery.magnific-popup.min.js"></script>
-	<script src="andrea-master/js/jquery.animateNumber.min.js"></script>
-	<script src="andrea-master/js/main.js"></script>
-	<script src="andrea-master/js/bootstrap.min.js"></script>
-	<script src="andrea-master/js/popper.min.js"></script>
-	<script src="andrea-master/js/aos.js"></script>
-	<script src="andrea-master/js/scrollax.min.js"></script>
-	<script src="andrea-master/js/owl.carousel.min.js"></script>
+	<script src="/andrea-master/js/jquery.min.js"></script>
+	<script src="/andrea-master/js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="/andrea-master/js/popper.min.js"></script>
+	<script src="/andrea-master/js/bootstrap.min.js"></script>
+	<script src="/andrea-master/js/jquery.easing.1.3.js"></script>
+	<script src="/andrea-master/js/jquery.waypoints.min.js"></script>
+	<script src="/andrea-master/js/jquery.stellar.min.js"></script>
+	<script src="/andrea-master/js/owl.carousel.min.js"></script>
+	<script src="/andrea-master/js/jquery.magnific-popup.min.js"></script>
+	<script src="/andrea-master/js/aos.js"></script>
+	<script src="/andrea-master/js/jquery.animateNumber.min.js"></script>
+	<script src="/andrea-master/js/scrollax.min.js"></script>
+	<script src="/andrea-master/js/main.js"></script>
 
 
 </body>
