@@ -64,7 +64,7 @@
 		<div class="padding" style="padding-bottom: 130px;"></div>
 		<div class="sidebar-heading" style="text-align: center; position: fixed; top: 0; width: 100%; background-color: #fff; z-index: 5; padding-top: 20px;">
 		My Study Page
-			<hr />
+			<hr style=" width: 90%; height: 1.5px; border: none; background-color: #666666;">
 			<ul class="tagcloud">
 				<a href="#" class="tag-cloud-link" style="font-size: 14px;">자유스터디</a>
 				<a href="#" class="tag-cloud-link" style="font-size: 14px;">공모전</a>

@@ -48,7 +48,7 @@
 				<ul class="nav2">
 					<li class="colorlib-active"><a href="/spoilbroth/mystudy.do">Home</a></li>
 					<li class="nana"><a href="/mbti/mbtimain.do">MBTI Analysis</a></li>
-					<li class=""><a href="travel.html">Study Matching</a></li>
+					<li class=""><a href="/study/match.do">Study Matching</a></li>
 					<li class=""><a href="about.html">Setting</a></li>
 				</ul>
 			</nav>

@@ -23,15 +23,21 @@
 <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap"	rel="stylesheet">
+
 <link rel="stylesheet" href="/andrea-master/css/open-iconic-bootstrap.min.css">
 <link rel="stylesheet" href="/andrea-master/css/animate.css">
+
 <link rel="stylesheet" href="/andrea-master/css/owl.carousel.min.css">
 <link rel="stylesheet" href="/andrea-master/css/owl.theme.default.min.css">
 <link rel="stylesheet" href="/andrea-master/css/magnific-popup.css">
+
 <link rel="stylesheet" href="/andrea-master/css/aos.css">
+
 <link rel="stylesheet" href="/andrea-master/css/ionicons.min.css">
+
 <link rel="stylesheet" href="/andrea-master/css/bootstrap-datepicker.css">
 <link rel="stylesheet" href="/andrea-master/css/jquery.timepicker.css">
+
 <link rel="stylesheet" href="/andrea-master/css/flaticon.css">
 <link rel="stylesheet" href="/andrea-master/css/icomoon.css">
 <link rel="stylesheet" href="/andrea-master/css/style.css">
@@ -49,6 +55,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.theme.default.min.css">
 <!-- owl -->
 
+<!-- card -->
+<style>
+
+</style>
 
 </head>
 <body data-aos-easing="slide" data-aos-duration="800" data-aos-delay="0">
@@ -60,19 +70,10 @@
 		<!-- END 왼쪽 NANI -->
 
 		<!-- START 상단 NANI -->
-		<div class="padding" style="padding-bottom: 150px;"></div>
-		<div class="sidebar-heading" style="text-align: center; position: fixed; top: 0; width: 100%; background-color: #fff; z-index: 5; padding-top: 20px;font-weight: 500;">
+		<div class="padding" style="padding-bottom: 64px;"></div>
+		<div class="sidebar-heading" style="text-align: center; position: fixed; top: 0; width: 100%; height:64px; background-color: #fff; z-index: 5; padding-top: 20px;font-weight: 500;">
 		My Study Page
-			<hr />
-			<ul class="tagcloud">
-				<a href="#" class="tag-cloud-link" style="font-size: 14px;">자유스터디</a>
-				<a href="#" class="tag-cloud-link" style="font-size: 14px;">공모전</a>
-				<a href="#" class="tag-cloud-link" style="font-size: 14px;">어학/회화</a>
-				<a href="#" class="tag-cloud-link" style="font-size: 14px;">봉사활동</a>
-				<a href="#" class="tag-cloud-link" style="font-size: 14px;">취업/면접</a>
-				<a href="#" class="tag-cloud-link" style="font-size: 14px;">스포츠</a>
-				<a href="#" class="tag-cloud-link" style="font-size: 14px;">여행</a>
-			</ul>
+		<hr style=" width: 90%; height: 1.5px; border: none; background-color: #666666;">
 		</div>
 		<!-- END 상단 NANI -->
 		
@@ -98,8 +99,8 @@
 											</div>
 										</div>
 										<div class="button mt-2 d-flex flex-row align-items-center">
-											<button class="btn btn-sm btn-primary w-100">Change
-												My Gallery</button>
+											<button class="btn btn-sm btn-primary w-100">
+											Change My Gallery</button>
 										</div>
 
 									</div>

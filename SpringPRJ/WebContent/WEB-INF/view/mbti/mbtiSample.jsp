@@ -63,7 +63,7 @@ String join_dt = (String) request.getAttribute("join_dt");
 		<div class="padding" style="padding-bottom: 80px;"></div>
 		<div class="sidebar-heading" style="text-align: center; position: fixed; top: 0; width: 100%; background-color: #fff; z-index: 5; padding-top: 20px;font-weight: 500;">
 		MBTI Analysis
-			<hr />
+			<hr style=" width: 90%; height: 1.5px; border: none; background-color: #666666;">
 		</div>
 		<!-- END 상단 NANI -->
 		

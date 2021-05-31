@@ -90,15 +90,15 @@
 		<div class="padding" style="padding-bottom: 164px;"></div>
 		<div class="sidebar-heading" style="text-align: center; position: fixed; top: 0; width: 100%; background-color: #fff; z-index: 5; padding-top: 20px;font-weight: 500;">
 		Study Matching
-			<hr />
+			<hr style=" width: 90%; height: 1.5px; border: none; background-color: #666666;">
 			<ul class="tagcloud" style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;margin-bottom: 0px;">
-				<a href="#" class="tag-cloud-link" style="font-size: 15px;border-width: 1.5px;border-color: #ffc107;">자유스터디</a>
-				<a href="#" class="tag-cloud-link" style="font-size: 15px;border-width: 1.5px;border-color: #ffc107;">공모전</a>
-				<a href="#" class="tag-cloud-link" style="font-size: 15px;border-width: 1.5px;border-color: #ffc107;">어학/회화</a>
-				<a href="#" class="tag-cloud-link" style="font-size: 15px;border-width: 1.5px;border-color: #ffc107;">봉사활동</a>
-				<a href="#" class="tag-cloud-link" style="font-size: 15px;border-width: 1.5px;border-color: #ffc107;">취업/면접</a>
-				<a href="#" class="tag-cloud-link" style="font-size: 15px;border-width: 1.5px;border-color: #ffc107;">스포츠</a>
-				<a href="#" class="tag-cloud-link" style="font-size: 15px;border-width: 1.5px;border-color: #ffc107;">여행</a>
+				<a href="#" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;"> 자유스터디</a>
+				<a href="#" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">공모전</a>
+				<a href="#" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">어학/회화</a>
+				<a href="#" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">봉사활동</a>
+				<a href="#" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">취업/면접</a>
+				<a href="#" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">스포츠</a>
+				<a href="#" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">여행</a>
 			</ul>
 		</div>
 		<!-- END 상단 NANI -->

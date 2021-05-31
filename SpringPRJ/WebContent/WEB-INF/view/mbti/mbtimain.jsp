@@ -34,18 +34,7 @@ String join_dt = (String) request.getAttribute("join_dt");
 <link rel="stylesheet" href="/andrea-master/css/style.css">
 
 
-<style>
-.card {
-		border-radius: 12px;
-		box-shadow: 0 6px 10px -4px rgb(0 0 0 / 15%);
-		background-color: #FFFFFF;
-		color: #252422;
-		margin-bottom: 20px;
-		position: relative;
-		border: 0 none;
-		transition: transform 300ms cubic-bezier(0.34, 2, 0.6, 1), box-shadow 200ms ease;
-	}
-</style>
+
 </head>
 <body data-aos-easing="slide" data-aos-duration="800" data-aos-delay="0">
 
@@ -56,9 +45,9 @@ String join_dt = (String) request.getAttribute("join_dt");
 		
 		<!-- START 상단 NANI -->
 		<div class="padding" style="padding-bottom: 64px;"></div>
-		<div class="sidebar-heading" style="text-align: center; position: fixed; top: 0; width: 100%; height:0;background-color: #fff; z-index: 5; padding-top: 20px;font-weight: 500;">
+		<div class="sidebar-heading" style="text-align: center; position: fixed; top: 0; width: 100%; height:64px; background-color: #fff; z-index: 5; padding-top: 20px;font-weight: 500; color: black;">
 		MBTI Analysis
-			<hr />
+			<hr style=" width: 90%; height: 1.5px; border: none; background-color: #666666;">
 			
 		</div>
 		
@@ -72,12 +61,12 @@ String join_dt = (String) request.getAttribute("join_dt");
 					<!-- 왼쪽 오른쪽 2분할 -->
 					<div class="row d-flex">
 						<!-- 왼쪽 스크립트 -->
-						<div class="col-xl-8 py-5 px-md-5" style="background-color: #f4f3ef;">
-							<div>왼쪽 스크립트 시작</div>
+						<div class="col-xl-8 py-4 px-md-5" style="background-color: #f4f3ef;">
+							
 
-							<button type="button" class="btn btn-outline-warning active" onclick="location.href='/mbti/mbtimain.do' ">My MBTI</button>
+							<button type="button" class="btn btn-outline-warning active" onclick="location.href='/mbti/mbtimain.do'" style="border-radius: 5px;">My MBTI</button>
 							<span style="padding-left: 50px;"></span>
-							<button type="button" class="btn btn-outline-warning" onclick="location.href='/mbti/mbtianalysis.do' ">MBTI Analysis</button>
+							<button type="button" class="btn btn-outline-warning" onclick="location.href='/mbti/mbtianalysis.do'" style="border-radius: 5px;">MBTI Analysis</button>
 							<hr>
 							<div style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 32px;">
 							My MBTI</div>
