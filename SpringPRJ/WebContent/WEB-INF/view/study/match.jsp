@@ -111,7 +111,7 @@
 				<!-- 공보전정보, 개설하기 버튼 Start -->
 				<div class="row">
 					<div class="col-2">
-					<span class="hex-icon-sun" OnClick="location.href='http://canyou2.tistory.com/'">
+					<span class="hex-icon-sun" OnClick="location.href='/study/contest.do'">
     					<svg>
       					<path d="M19,1 Q21,0,23,1 L39,10 Q41.5,11,42,14 L42,36 Q41.5,39,39,40 L23,49 Q21,50,19,49 L3,40 Q0.5,39,0,36 L0,14 Q0.5,11,3,10 L19,1" />
       					<circle cx="21" cy="25" r="8" />
@@ -122,13 +122,13 @@
   					</span>
 					</div>
 					
-					<div class="col-3" OnClick="location.href='http://canyou2.tistory.com/'">
+					<div class="col-3" OnClick="location.href='/study/contest.do'">
   					<label style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
 							공모전 정보</label>
 					</div>
 					
-					<div class="col-2">
-					<span class="hex-icon-heart" OnClick="location.href='http://canyou2.tistory.com/'">
+					<div class="col-2" OnClick="location.href='/study/studyopen.do'">
+					<span class="hex-icon-heart">
     					<svg>
       					<path d="M19,1 Q21,0,23,1 L39,10 Q41.5,11,42,14 L42,36 Q41.5,39,39,40 L23,49 Q21,50,19,49 L3,40 Q0.5,39,0,36 L0,14 Q0.5,11,3,10 L19,1" />
       					<path d="M11,17 Q16,14,21,20 Q26,14,31,17 Q35,22,31,27 L21,36 L11,27 Q7,22,11,17" />
@@ -136,7 +136,7 @@
   					</span>
 					</div>
 					
-					<div class="col-3" OnClick="location.href='http://canyou2.tistory.com/'">
+					<div class="col-3" OnClick="location.href='/study/studyopen.do'">
   					<label style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
 							개설하기</label>
 					</div>
@@ -146,6 +146,7 @@
 					
 					<!-- 왼쪽 오른쪽 2분할 -->
 					<div class="row d-flex">
+					
 						<!-- 왼쪽 스크립트 -->
 						<div class="col-xl-8 px-md-5">
 							<!-- 추천 Study Group -->

@@ -134,8 +134,8 @@
 
 					<div class="wrap-input100 m-b-20"
 						data-validate="userdept is required">
-						<span class="label-input100">DEPT</span> <select
-							class="form-control" style="width: 100%" name="user_dept">
+						<span class="label-input100">DEPT</span> 
+						<select class="form-control" style="width: 100%" name="user_dept">
 							<option value="dataAnalysis" selected>데이터분석과</option>
 							<option value="medicalInformation">의료정보과</option>
 							<option value="digitalContent">디지털콘텐츠과</option>

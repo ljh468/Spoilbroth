@@ -102,7 +102,7 @@ String join_dt = (String) request.getAttribute("join_dt");
 					<!-- 왼쪽 오른쪽 2분할 -->
 					<div class="row d-flex">
 						<!-- 왼쪽 스크립트 -->
-						<div class="col-xl-8 py-4 px-md-5" style="background-color: #f4f3ef;">
+						<div class="col-xl-8 py-4 px-md-5" style="background-color: #f7fbff;">
 							
 
 							<button type="button" class="btn btn-outline-warning" onclick="location.href='/mbti/mbtimain.do'" style="border-radius: 5px;">My MBTI</button>
