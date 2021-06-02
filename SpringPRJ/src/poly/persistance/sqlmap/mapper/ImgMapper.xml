@@ -25,4 +25,13 @@
 				SYSDATE()
 			)
 	</insert>
+	<select id="getImgList" parameterType="String" resultType="hashmap">
+		SELECT *
+		FROM IMG_INFO
+		WHERE CHG_ID = #{id}
+		ORDER BY CHG_DT DESC LIMIT 1
+	
+	</select>
+	
+	
 </mapper>

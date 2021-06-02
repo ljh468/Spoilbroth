@@ -9,6 +9,7 @@
 			(
 				USER_SEQ,
 				USER_ID,
+				USER_NAME,
 				USER_EMAIL,
 				USER_PWD,
 				USER_AGE,
@@ -20,13 +21,14 @@
 		VALUES(	
 				(SELECT IFNULL(MAX(USER_SEQ), 0)+1 FROM USER_INFO A),
 				#{user_id},
+				#{user_name},
 				#{user_email},
 				#{user_pwd},
 				#{user_age},
 				#{user_dept},
 				#{user_mbti},
 				#{user_study},
-				SYSDATE()
+				#{join_dt}
 				
 			)
 				

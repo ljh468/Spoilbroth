@@ -9,13 +9,14 @@ public class UserDTO {
 	private String user_seq; // 기본키, 순번
 	private String user_auth; // 유저 권한
 	private String user_id; // 아이디
+	private String user_name; // 이름
 	private String user_email; // 이메일
 	private String user_pwd; // 비밀번호
 	private String user_age; // 나이
 	private String user_dept; // 학과
 	private String user_mbti; // MBTI
 	private String user_study; // 가입한 스터디그룹
-	private String join_DT; // 가입일
+	private String join_dt; // 가입일
 	private String exists_yn; // 중복가입 방지를 위한 가상의 컬럼
 	
 	public String getUser_seq() {
@@ -35,6 +36,12 @@ public class UserDTO {
 	}
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
+	}
+	public String getUser_name() {
+		return user_name;
+	}
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
 	}
 	public String getUser_email() {
 		return user_email;
@@ -72,11 +79,11 @@ public class UserDTO {
 	public void setUser_study(String user_study) {
 		this.user_study = user_study;
 	}
-	public String getJoin_DT() {
-		return join_DT;
+	public String getJoin_dt() {
+		return join_dt;
 	}
-	public void setJoin_DT(String join_DT) {
-		this.join_DT = join_DT;
+	public void setJoin_dt(String join_dt) {
+		this.join_dt = join_dt;
 	}
 	public String getExists_yn() {
 		return exists_yn;

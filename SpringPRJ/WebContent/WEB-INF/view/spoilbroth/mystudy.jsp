@@ -1,16 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%
 	String user_id = (String) request.getAttribute("user_id");
 	String user_email = (String) request.getAttribute("user_email");
-	String join_dt = (String) request.getAttribute("join_dt");
-	String user_name = "이재훈";
-	String user_mbti = "ENTP";
-	String user_dept = "데이터분석과";
-	
-	String[] study_group = user_name.split("");
-	int study_count = study_group.length;
+	String user_name = (String) request.getAttribute("user_name");
+	String user_mbti = (String) request.getAttribute("user_mbti");
+	String user_dept = (String) request.getAttribute("user_dept");
+	String user_img = (String) request.getAttribute("user_img");
+	String studys = (String)request.getAttribute("user_study");
+	System.out.print("studys : " + studys);
+	int study_count = 0;
+		String[] user_study = studys.split(",");
+		if(studys.equals("")){
+			study_count = user_study.length-1;
+		}else{
+			study_count = user_study.length;
+		}
 %>
 
 <!DOCTYPE html>
@@ -100,15 +105,13 @@
 										<form id="uploadForm" enctype="multipart/form-data">
 											<div class="d-flex align-items-center">
 												<div class="image">
-													<img src="/andrea-master/images/image_1.jpg" class="rounded" width="100%">
+													<img id="preview-image" src="/getImage.do?user_id=<%=user_id %>" class="rounded" width="100%" alt="My Image">
 												</div>
 											</div>
-											
-											<div id="preView"></div>
-											<div class="button mt-2 d-flex flex-row align-items-center">
+											<div id="input-image" class="button mt-2 d-flex flex-row align-items-center">
 												<input type="file" id="file" name="fileUplod" onchange="changeValue(this)" style="display:none"/>
-												<button class="btn btn-sm btn-primary w-100" id="btn-upload">Change My Gallery</button>
-												<button id="btnUpload" class="btn btn-sm btn-primary w-100" onclick="">submit</button>
+												<button class="btn btn-sm btn-primary w-100" id="btn-upload" style="margin-right: 2px;">Select File</button>
+												<button id="btnUpload" class="btn btn-sm btn-primary w-100" style="margin-left: 2px;">Register</button>
 										</div>
 										</form>
 									</div>
@@ -195,7 +198,7 @@
 													for (int i = 0; i < study_count; i++) {
 												%>
 												<div class="row">
-													<div style="margin-left: 20px; color:#0062cc;font-size: 15px;"><%=study_group[i]%></div>
+													<div style="margin-left: 20px; color:#0062cc;font-size: 15px;"><%=user_study[i]%></div>
 												</div>
 												<%
 													}
@@ -352,10 +355,28 @@
 			});
 		});
 		
-		function changeValue(obj){
-			alert(obj.value);
+		
+		function readImage(input) {
+		    // 인풋 태그에 파일이 있는 경우
+		    if(input.files && input.files[0]) {
+		       
+		        // FileReader 인스턴스 생성
+		        const reader = new FileReader()
+		        // 이미지가 로드가 된 경우
+		        reader.onload = e => {
+		            const previewImage = document.getElementById("preview-image")
+		            console.log("previewImage : " + previewImage)
+		            previewImage.src = e.target.result
+		        }
+		        // reader가 이미지 읽도록 하기
+		        reader.readAsDataURL(input.files[0])
+		    }
 		}
-
+		// input file에 change 이벤트 부여
+		const inputImage = document.getElementById("input-image")
+		inputImage.addEventListener("change", e => {
+		    readImage(e.target)
+		})
 </script>
 
 <script type="text/javascript">
@@ -385,32 +406,31 @@
 </script>
 
 <script type="text/javascript">
-$('#btnUpload').on('click', function(event) {
-    event.preventDefault();
-    
-    var form = $('#uploadForm')[0]
-    var data = new FormData(form);
-    console.log("ajax 가기전");
-    $('#btnUpload').prop('disabled', true);
-	
-    $.ajax({
-        type: "POST",
-        enctype: 'multipart/form-data',
-        url: "/FileUplod.do",
-        data: data,
-        processData: false,
-        contentType: false,
-        cache: false,
-        timeout: 600000,
-        success: function (data) {
-        	$('#btnUpload').prop('disabled', false);
-        	alert('success')
-        },
-        error: function (e) {
-            $('#btnUpload').prop('disabled', false);
-            alert('fail');
-        }
-    });
-})
+	$('#btnUpload').on('click', function(event) {
+	    event.preventDefault();
+	    
+	    var form = $('#uploadForm')[0]
+	    var data = new FormData(form);
+	    $('#btnUpload').prop('disabled', true);
+		
+	    $.ajax({
+	        type: "POST",
+	        enctype: 'multipart/form-data',
+	        url: "/FileUplod.do",
+	        data: data,
+	        processData: false,
+	        contentType: false,
+	        cache: false,
+	        timeout: 600000,
+	        success: function (data) {
+	        	$('#btnUpload').prop('disabled', false);
+	        	alert('등록이 성공하였습니다.')
+	        },
+	        error: function (e) {
+	            $('#btnUpload').prop('disabled', false);
+	            alert('등록이 실패하였습니다.');
+	        }
+	    });
+	})
 </script>
 </html>

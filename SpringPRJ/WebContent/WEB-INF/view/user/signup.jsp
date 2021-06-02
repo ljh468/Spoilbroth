@@ -107,7 +107,13 @@
 						<span class="focus-input100"></span>
 					</div>
 					<div class="msg m-b-15"></div>
-
+					
+					<div class="wrap-input100 validate-input m-b-20"
+						data-validate="UserName is required">
+						<span class="label-input100">Name</span> <input class="input100"
+							type="text" name="user_name" id="user_name" placeholder="Enter userName">
+						<span class="focus-input100"></span>
+					</div>
 
 					<div class="wrap-input100 validate-input m-b-20"
 						data-validate="Useremail is required">
@@ -136,12 +142,12 @@
 						data-validate="userdept is required">
 						<span class="label-input100">DEPT</span> 
 						<select class="form-control" style="width: 100%" name="user_dept">
-							<option value="dataAnalysis" selected>데이터분석과</option>
-							<option value="medicalInformation">의료정보과</option>
-							<option value="digitalContent">디지털콘텐츠과</option>
-							<option value="jewelryDesign">주얼리디자인과</option>
-							<option value="fashionDesign">패션디자인과</option>
-							<option value="fashionIndustry">패션산업과</option>
+							<option value="데이터분석과" selected>데이터분석과</option>
+							<option value="의료정보과">의료정보과</option>
+							<option value="디지털콘텐츠과">디지털콘텐츠과</option>
+							<option value="주얼리디자인과">주얼리디자인과</option>
+							<option value="패션디자인과">패션디자인과</option>
+							<option value="패션산업과">패션산업과</option>
 						</select>
 					</div>
 

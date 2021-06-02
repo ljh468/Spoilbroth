@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import poly.dto.UserDTO;
 import poly.service.IUserService;
+import poly.util.DateUtil;
 
 
 @Controller
@@ -64,7 +65,7 @@ public class UserInfoController {
 			
 			session.setAttribute("user_id", rDTO.getUser_id());
 			session.setAttribute("user_pwd", rDTO.getUser_pwd());
-			session.setAttribute("join_dt", rDTO.getJoin_DT());
+			session.setAttribute("join_dt", rDTO.getJoin_dt());
 			
 			msg = "환영합니다.";
 			url = "/spoilbroth/mystudy.do";
@@ -121,11 +122,13 @@ public class UserInfoController {
 			try {
 				
 				String user_id = nvl(request.getParameter("user_id"));
+				String user_name = nvl(request.getParameter("user_name"));
 				String user_email = nvl(request.getParameter("user_email"));
 				String user_pwd = nvl(request.getParameter("user_pwd"));
 				String user_dept = nvl(request.getParameter("user_dept"));
 				String user_age = nvl(request.getParameter("user_age"));
-				String user_mbti = "entp";
+				String user_mbti = "";
+				
 				
 				log.info("user_id : " + user_id);
 				log.info("user_email : " + user_email);
@@ -136,7 +139,7 @@ public class UserInfoController {
 				pDTO = new UserDTO();
 				
 				pDTO.setUser_id(user_id);
-				
+				pDTO.setUser_name(user_name);
 				pDTO.setUser_email(user_email);
 				// 이메일은 AES128-CBC로 암호화
 				// pDTO.setUser_email(EncryptUtil.encAES128CBC(user_email));
@@ -147,6 +150,8 @@ public class UserInfoController {
 				pDTO.setUser_dept(user_dept);
 				pDTO.setUser_age(user_age);
 				pDTO.setUser_mbti(user_mbti);
+				pDTO.setJoin_dt(DateUtil.getDateTime("yyyy-MM-dd-hh:mm:ss"));
+				log.info("date : " + pDTO.getJoin_dt());
 				
 				/**
 				 * 회원가입
@@ -210,7 +215,3 @@ public class UserInfoController {
 
 	
 }
-
-
-
-

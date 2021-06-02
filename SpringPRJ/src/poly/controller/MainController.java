@@ -1,7 +1,9 @@
 package poly.controller;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
-import java.util.HashMap;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -13,17 +15,13 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import poly.dto.OcrDTO;
 import poly.dto.UserDTO;
 import poly.service.IImgService;
 import poly.service.IUserService;
-import poly.util.DateUtil;
-import poly.util.FileUtil;
+import static poly.util.CmmUtil.nvl;
 
 
 
@@ -39,10 +37,6 @@ public class MainController {
 	@Resource(name="ImgService")
 	IImgService imgService;
 	
-	
-	// 업로드되는 파일이 저장되는 기본폴더 설정(자바에서 경로는 /로 표현함)
-	final private String FILE_UPLOAD_SAVE_PATH = "c:/upload"; // C:\\upload 폴더에 저장
-	
 	@RequestMapping(value = "index")
 	public String Index() {
 		log.info(this.getClass());
@@ -50,38 +44,84 @@ public class MainController {
 		return "/index";
 	}
 	
-	/**
-	 * MyStudy 메인화면
-	 * 
-	 */
+	// MyStudy 메인화면
 	@RequestMapping(value = "spoilbroth/mystudy")
 	public String mystudy(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception{
+		
 		log.info(this.getClass().getClass().getName() + "spoilbroth/mystudy start!!");
 		
-		UserDTO uDTO = new UserDTO();
-//		String id = (String) session.getAttribute("user_id");
-		String id = "ljh468";
-//		String pwd = (String) session.getAttribute("user_pwd");
-		String pwd = "1234";
+		
+		String id = (String) session.getAttribute("user_id");
+		String pwd = (String) session.getAttribute("user_pwd");
+		
 		System.out.println("user_id : " + id);
 		System.out.println("user_pwd : " + pwd);
+		UserDTO uDTO = new UserDTO();
 		uDTO.setUser_id(id);
 		uDTO.setUser_pwd(pwd);
 
 		UserDTO rDTO = new UserDTO();
 		rDTO = userService.getUserInfo(uDTO);
-        
-		model.addAttribute("user_id", rDTO.getUser_id());
-		model.addAttribute("user_email", rDTO.getUser_email());
-		model.addAttribute("user_dept", rDTO.getUser_dept());
-		model.addAttribute("user_auth", rDTO.getUser_email());
-		model.addAttribute("join_dt", rDTO.getJoin_DT());
+		System.out.println(rDTO.getUser_study());
+		
+		model.addAttribute("user_id", nvl(rDTO.getUser_id()));
+		model.addAttribute("user_name", nvl(rDTO.getUser_name()));
+		model.addAttribute("user_email", nvl(rDTO.getUser_email()));
+		model.addAttribute("user_dept", nvl(rDTO.getUser_dept()));
+		model.addAttribute("user_mbti", nvl(rDTO.getUser_mbti()));
+		model.addAttribute("user_study", nvl(rDTO.getUser_study()));
+		
 		
 		log.info(this.getClass().getClass().getName() + "spoilbroth/mystudy end!!");
 
 		return "spoilbroth/mystudy";
 	}
 	
+	// 프로필 이미지 불러오기 ( InputStream으로 파일 불러옴 )
+	@RequestMapping(value="/getImage", method=RequestMethod.GET)
+	public void getImage(HttpServletRequest request, HttpSession session, HttpServletResponse response, @RequestParam (value="user_id") String user_id) 
+			throws Exception {
+		
+		log.info("user_id : " + user_id);
+		
+		// 가장 최근에 등록한 프로필 사진 정보가져오기
+		log.info("getImgList start! ");
+		Map<String, String> pMap = imgService.getImgList(user_id);
+		log.info("getImgList end! ");
+		
+		
+		String realFile = pMap.get("SAVE_FILE_PATH")+"\\"; // 파일이 저장된 경로 C:\\upload\\
+		String fileNm = pMap.get("SAVE_FILE_NAME"); // 파일명
+		String ext = pMap.get("EXT"); // 파일 확장자
+		log.info("realFile : " + realFile);
+		log.info("fileNm : " + fileNm);
+		log.info("ext : " + ext);
+
+		BufferedOutputStream out = null;
+		InputStream in = null;
+
+		try {
+			response.setContentType("image/" + ext);
+			response.setHeader("Content-Disposition", "inline;filename=" + fileNm);
+			File file = new File(realFile+fileNm);
+			
+			if(file.exists()){
+				in = new FileInputStream(file);
+				out = new BufferedOutputStream(response.getOutputStream());
+				int len;
+				byte[] buf = new byte[1024];
+				while ((len = in.read(buf)) > 0) {
+					out.write(buf, 0, len);
+				}
+			}
+		} catch (Exception e) {
+			log.info(e.getStackTrace());
+		} finally {
+			if(out != null){ out.flush(); }
+			if(out != null){ out.close(); }
+			if(in != null){ in.close(); }
+		}
+	}
 	
 	@RequestMapping(value = "spoilbroth/main")
 	public String main(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
@@ -105,7 +145,7 @@ public class MainController {
 		model.addAttribute("user_age", rDTO.getUser_age());
 		model.addAttribute("user_dept", rDTO.getUser_dept());
 		model.addAttribute("user_auth", rDTO.getUser_email());
-		model.addAttribute("join_dt", rDTO.getJoin_DT());
+		model.addAttribute("join_dt", rDTO.getJoin_dt());
 
 		return "spoilbroth/main";
 	}
@@ -132,64 +172,7 @@ public class MainController {
 		return "spoilbroth/main4";
 	}
 	
-	@RequestMapping(value = "FileUplod")
-	@ResponseBody
-	public Map<String, String> FileUpload(HttpServletRequest  request, HttpServletResponse response, ModelMap model,
-			@RequestParam(value = "fileUplod") MultipartFile mf) throws Exception{
-		
-		log.info("FileUplod start");
-		int res = 0;
-		
-		Map<String, String> rMap = new HashMap<String, String>();
-		// 이미지 파일 저장하는 사용자 ID
-		String user_id = "ljh468";
-		
-		// 임의로 정의된 파일명을 원래대로 만들어주기 위한 목적
-		String originalFileName = mf.getOriginalFilename();
-		
-		// 파일 확장자 가져오기
-		String ext = originalFileName.substring(originalFileName.lastIndexOf(".") + 1, originalFileName.length()).toLowerCase();
-		
-		// 이미지 파일만 실행되도록 함
-		if ( ext.equals("jpeg") || ext.equals("jpg") || ext.equals("gif") || ext.equals("png")) {
-			
-			// 웹서버에 저장되는 파일이름 (영어, 숫자로 파일명 변경)
-			String saveFileName = DateUtil.getDateTime("24hhmmss") + "." + ext;
-			
-			// 웹서버에 업로드한 파일 저장하는 물리적 경로
-			String saveFilePath = FileUtil.mkdirForDate(FILE_UPLOAD_SAVE_PATH);
-			String fullFileInfo = saveFilePath + "/" + saveFileName;
-			
-			
-			rMap.put("path", fullFileInfo);
-			
-			// 정상적으로 값이 생성되었는지 로그에 찍어서 확인
-			log.info("ext : " + ext);
-			log.info("originalFileName : " + originalFileName);
-			log.info("saveFileName : " + saveFileName);
-			log.info("saveFilePath : " + saveFilePath);
-			log.info("fullFileInfo : " + fullFileInfo);
-			
-			// 업로드 되는 파일을 서버에 저장
-			mf.transferTo(new File(fullFileInfo));
-			
-			OcrDTO pDTO = new OcrDTO();
-			
-			pDTO.setSave_file_name(saveFileName);
-			pDTO.setSave_file_path(saveFilePath);
-			pDTO.setOrg_file_name(originalFileName);
-			pDTO.setExt(ext);
-			pDTO.setChg_id(user_id);
-			
-			log.info("imgService start!!");
-			res = imgService.InsertImage(pDTO);
-			log.info("imgService end!!");
-		}else {
-			log.info("확장자가 올바르지 않음");
-		}
-		
-		return rMap;
-	}
+
 	
 	
 	
