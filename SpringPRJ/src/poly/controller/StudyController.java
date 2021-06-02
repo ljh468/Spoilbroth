@@ -30,13 +30,39 @@ public class StudyController {
 	 */
 	@RequestMapping(value = "study/match")
 	public String mystudy(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception{
-		log.info(this.getClass().getClass().getName() + "spoilbroth/match start!!");
+		log.info(this.getClass().getClass().getName() + "study/match start!!");
 		
 		
-		log.info(this.getClass().getClass().getName() + "spoilbroth/match end!!");
+		
+		
+		
+		
+		log.info(this.getClass().getClass().getName() + "study/match end!!");
 
 		return "study/match";
 	}
+	
+	@RequestMapping(value = "study/getAllstudy")
+	public String getAllstudy(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception{
+		log.info(this.getClass().getClass().getName() + "study/getAllstudy start!!");
+		
+		
+		log.info(this.getClass().getClass().getName() + "study/getAllstudy end!!");
+
+		return "study/getAllstudy";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@RequestMapping(value = "study/studyopen")
 	public String studyopen(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception{
