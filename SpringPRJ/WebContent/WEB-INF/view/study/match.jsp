@@ -87,11 +87,13 @@
 		<!-- END 왼쪽 NANI -->
 
 		<!-- START 상단 NANI -->
-		<div class="padding" style="padding-bottom: 164px;"></div>
-		<div class="sidebar-heading" style="text-align: center; position: fixed; top: 0; width: 100%; background-color: #fff; z-index: 5; padding-top: 20px;font-weight: 500;">
-		Study Matching
+		<div class="padding" style="padding-bottom: 175px;"></div>
+		<div class="sidebar-heading" style="text-align: center; position: fixed; top: 0; width: 100%; height:190px; background-color: #fff; z-index: 5; padding-top: 20px;font-weight: 500; color: black;">
+			<div class="hh" style="font-size: 23px;height: 32px;">
+			<span>S</span><span>T</span><span>U</span><span>D</span><span>Y</span><span>&nbsp;</span><span>M</span><span>A</span><span>T</span><span>C</span><span>H</span><span>I</span><span>N</span><span>G</span>
+			</div>
 			<hr style=" width: 90%; height: 1.5px; border: none; background-color: #666666;">
-			<ul class="tagcloud" style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;margin-bottom: 0px;">
+			<ul class="tagcloud" style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
 				<a href="#" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;"> 자유스터디</a>
 				<a href="#" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">공모전</a>
 				<a href="#" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">어학/회화</a>

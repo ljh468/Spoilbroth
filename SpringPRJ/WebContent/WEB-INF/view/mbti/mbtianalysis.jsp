@@ -85,14 +85,13 @@ String join_dt = (String) request.getAttribute("join_dt");
 		<!-- END 왼쪽 NANI -->
 		
 		<!-- START 상단 NANI -->
-		<div class="padding" style="padding-bottom: 64px;"></div>
-		<div class="sidebar-heading" style="text-align: center; position: fixed; top: 0; width: 100%; height:64px; background-color: #fff; z-index: 5; padding-top: 20px;font-weight: 500;color: black;">
-		MBTI Analysis
-		<hr style=" width: 90%; height: 1.5px; border: none; background-color: #666666;">
-			
+		<div class="padding" style="padding-bottom: 70px;"></div>
+		<div class="sidebar-heading" style="text-align: center; position: fixed; top: 0; width: 100%; height:70px; background-color: #fff; z-index: 5; padding-top: 20px;font-weight: 500; color: black;">
+			<div class="hh" style="font-size: 23px;height: 32px;">
+			<span>M</span><span>B</span><span>T</span><span>I</span><span>&nbsp;</span><span>A</span><span>N</span><span>A</span><span>L</span><span>Y</span><span>S</span><span>I</span><span>S</span>
+			</div>
+			<hr style=" width: 90%; height: 1.5px; border: none; background-color: #666666;">
 		</div>
-		
-		
 		<!-- END 상단 NANI -->
 		
 		<div id="colorlib-main">
