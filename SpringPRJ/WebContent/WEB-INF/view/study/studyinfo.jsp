@@ -61,18 +61,14 @@
 		<!-- END 왼쪽 NANI -->
 
 		<!-- START 상단 NANI -->
-		<div class="padding" style="padding-bottom: 130px;"></div>
-		<div class="sidebar-heading" style="text-align: center; position: fixed; top: 0; width: 100%; background-color: #fff; z-index: 5; padding-top: 20px;">
-		My Study Page
+		<div class="padding" style="padding-bottom: 105px;"></div>
+		<div class="sidebar-heading" style="text-align: center; position: fixed; top: 0; width: 100%; height:130px; background-color: #fff; z-index: 5; padding-top: 20px;font-weight: 500; color: black;">
+			<div class="hh" style="font-size: 23px;height: 32px;">
+			<span>S</span><span>T</span><span>U</span><span>D</span><span>Y</span><span>&nbsp;</span><span>M</span><span>A</span><span>T</span><span>C</span><span>H</span><span>I</span><span>N</span><span>G</span>
+			</div>
 			<hr style=" width: 90%; height: 1.5px; border: none; background-color: #666666;">
-			<ul class="tagcloud">
-				<a href="#" class="tag-cloud-link" style="font-size: 14px;">자유스터디</a>
-				<a href="#" class="tag-cloud-link" style="font-size: 14px;">공모전</a>
-				<a href="#" class="tag-cloud-link" style="font-size: 14px;">어학/회화</a>
-				<a href="#" class="tag-cloud-link" style="font-size: 14px;">봉사활동</a>
-				<a href="#" class="tag-cloud-link" style="font-size: 14px;">취업/면접</a>
-				<a href="#" class="tag-cloud-link" style="font-size: 14px;">스포츠</a>
-				<a href="#" class="tag-cloud-link" style="font-size: 14px;">여행</a>
+			<ul class="tagcloud" style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;margin-bottom: 0px;">
+				<a href="/study/match.do" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ff0050; float: left; margin-left: 20px;">이전</a>
 			</ul>
 		</div>
 		<!-- END 상단 NANI -->
@@ -81,17 +77,20 @@
 		<div id="colorlib-main">
 			<section class="ftco-section ftco-no-pt ftco-no-pb">
 				<div class="container">
+				
 					<!-- 왼쪽 오른쪽 2분할 -->
 					<div class="row d-flex">
 					
 						<!-- 왼쪽 스크립트 -->
-						<div class="col-xl-8 px-md-5">
-							<!-- My 프로필 메인화면 -->
+						<div class="col-xl-8 px-md-5" style="background-color: #f7fbff;">
+							<!-- 스터디 개설  START -->
 							<div class="emp-profile">
-
+								<label style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
+								스터디 개설하기
+								</label>
 								<!-- 사진 프로필 START -->
-								<div class="d-flex">
-									<div class="profile-card">
+								<div class="d-flex card m-2 p-3">
+									
 										<div class="d-flex align-items-center">
 											<div class="image">
 												<img src="/andrea-master/images/image_1.jpg" class="rounded"
@@ -99,189 +98,42 @@
 											</div>
 										</div>
 										<div class="button mt-2 d-flex flex-row align-items-center">
-											<button class="btn btn-sm btn-primary w-100">Change
-												My Gallery</button>
+											<button class="btn btn-sm btn-primary w-100" style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
+											Change My Gallery</button>
 										</div>
-
-									</div>
-
-									<div class="profile-card"
-										style="padding-left: 20px; padding-top: 20px;">
-										<h5
-											style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;letter-spacing: 13px;">
-											<%=user_name%></h5>
-										<h6
-											style="font-size: 25px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
-											<%=user_dept%></h6>
-										<p class="mb-2"
-											style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; color: #6c757d;">
-											Join Study : <span><%=study_count%>/5</span>
-										</p>
+									<div>
+	              							<label style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
+											스터디 분야
+											</label>
+	              							<div class="form-group">
+		              							<div type="text" class="form-control" placeholder="Study Name" name="study_name" style="font-size: 20px;"></div>
+	              							</div>
+	              							<div class="form-group">
+	                							<div type="text" class="form-control" placeholder="Study Name" name="study_name" style="font-size: 20px;"></div>
+	              							</div>
+								            <div class="form-group">
+								                <textarea id="" cols="20" rows="7" class="form-control" placeholder="<%="미나어림나어리ㅏㄴ얼미나얼님아ㅓㄹ미ㅏ넝ㄹ" %>" name="study_msg" style="font-size: 18px;" readonly></textarea>
+								            </div>
+								            <div class="form-group text-center" style="font-size:24px;margin-bottom: 0px;">
+												<button type="button" class="btn btn-success py-2 px-3" style="border-radius: 10px; font-size: 20px;" onclick="location.href='/mbti/mbtianalysis.do' ">Create Study</button>
+								             </div>
+								            <p class="mb-3" style="font-size: 20px;font-family: 'Do Hyeon', sans-serif;font-family: 'Nanum Pen Script', cursive;color: #6c757d;float: right;">
+											By <span><%=user_name%></span>
+											</p>
 									</div>
 								</div>
-								<!-- 사진프로필  END -->
-
+								<!-- 스터디 개설  END -->
 
 								<hr style="margin-top: 10px; margin-bottom: 0px;" />
 								
-								
-								<!-- 사용자 정보 START-->
-								<div class="row" style="font-size: 15px;">
-									<div class="col-md-6">
-										<div class="profile-head">
-											<ul class="nav nav-tabs" id="myTab" role="tablist">
-												<li class="nav-item"><a class="nav-link active"
-													id="home-tab" data-toggle="tab" href="#home" role="tab"
-													aria-controls="home" aria-selected="true">About</a></li>
-												<li class="nav-item"><a class="nav-link"
-													id="profile-tab" data-toggle="tab" href="#profile"
-													role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
-												</li>
-											</ul>
-										</div>
-									</div>
-
-								</div>
-								<div class="row" style="font-size: 13px;">
-									<div class="col-md-8">
-										<div class="tab-content profile-tab" id="myTabContent">
-											<div class="tab-pane fade show active" id="home"
-												role="tabpanel" aria-labelledby="home-tab">
-												<div class="row">
-													<div class="col-6">
-														<label>User Id</label>
-													</div>
-													<div class="col-6">
-														<div style="margin-left: 20px; color:#0062cc;font-size: 15px;"><%=user_id%></div>
-													</div>
-												</div>
-
-												<div class="row">
-													<div class="col-6">
-														<label>Email</label>
-													</div>
-													<div class="col-6">
-														<div style="margin-left: 20px; color:#0062cc;font-size: 15px;" ><%=user_email%></div>
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-6">
-														<label>MBTI</label>
-													</div>
-													<div class="col-6">
-														<div style="margin-left: 20px; color:#0062cc;font-size: 15px;"><%=user_mbti%></div>
-													</div>
-												</div>
-
-											</div>
-
-											<div class="tab-pane fade" id="profile" role="tabpanel"
-												aria-labelledby="profile-tab">
-												<div class="row">
-													<div class="col-md-12">
-														<label>Join Study Group List</label>
-													</div>
-												</div>
-
-												<%
-													for (int i = 0; i < study_count; i++) {
-												%>
-												<div class="row">
-													<div style="margin-left: 20px; color:#0062cc;font-size: 15px;"><%=study_group[i]%></div>
-												</div>
-												<%
-													}
-												%>
-
-											</div>
-										</div>
-									</div>
-								</div>
 							</div>
-							<!-- 사용자 정보 END-->
-							
-							
-							<!-- Join Study Group -->
-							<!-- 슬라이드 -->
-							<div class="slider-1">
-								<label style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
-								추천 스터디
-								</label>
-								<div class="owl-carousel owl-theme">
-									<div class="item" style="coler:white">
-										<div style="background-image: url(/andrea-master/images/image_1.jpg); height:300px;">
-											<div class="txt-box">
-											</div>
-										</div>
-										<div>
-										<div style="font-size:20px">hi</div>
-											<ul>
-											
-												<li>목록1</li>
-												<li>목록1</li>
-											</ul>
-										</div>
-									</div>
-									
-									<div class="item" style="coler:white">
-										<div style="background-image: url(/andrea-master/images/image_2.jpg); height:300px;">
-										</div>
-										<div>
-											<div style="font-size:20px">hi</div>
-											<ul>
-												<li>목록1</li>
-												<li>목록1</li>
-											</ul>
-										</div>
-									</div>
-									
-
-								</div>
-							</div>
-							<!-- 슬라이드 END-->
-							
-							<!-- Join Study Group -->
-							<!-- 그룹목록 START -->
-							<div class="row pt-md-4">
-								<div class="col-md-12">
-									<div
-										class="blog-entry ftco-animate d-md-flex fadeInUp ftco-animated">
-										<a href="single.html" class="img img-2"
-											style="background-image: url(/andrea-master/images/image_3.jpg);"></a>
-										<div class="text text-2 pl-md-4">
-											<h3 class="mb-2">
-												<a href="single.html">A Loving Heart is the Truest
-													Wisdom</a>
-											</h3>
-
-											<div class="meta-wrap">
-												<p class="meta">
-													<span><i class="icon-calendar mr-2"></i>June 28,
-														2019</span> <span><a href="single.html"><i
-															class="icon-folder-o mr-2"></i>Travel</a></span> <span><i
-														class="icon-comment2 mr-2"></i>5 Comment</span>
-												</p>
-											</div>
-											<p class="mb-4">A small river named Duden flows by their
-												place and supplies it with the necessary regelialia.</p>
-											<p>
-												<a href="#" class="btn-custom">Read More <span
-													class="ion-ios-arrow-forward"></span></a>
-											</p>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- 그룹목록 END -->
-							
-							왼쪽 스크립트 끝
 						</div>
-
-						<!-- 오른쪽 스크립트 -->
+						<!-- 왼쪽 스크립트 끝 -->
+						
+						<!-- 오른쪽 스크립트 시작 -->
 						<div
 							class="col-xl-4 sidebar ftco-animate bg-light pt-5 fadeInUp ftco-animated">
 							<div>오른쪽 스크립트 시작</div>
-
 
 							<div class="sidebar-box ftco-animate">
 								<h3 class="sidebar-heading">Archives</h3>
@@ -301,7 +153,7 @@
 									Ducimus itaque, autem necessitatibus voluptate quod mollitia
 									delectus aut.</p>
 							</div>
-							<div>오른쪽 스크립트 시작</div>
+							<div>오른쪽 스크립트 끝</div>
 						</div>
 
 					</div>

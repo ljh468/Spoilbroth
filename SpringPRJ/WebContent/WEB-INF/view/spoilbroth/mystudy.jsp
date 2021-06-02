@@ -88,26 +88,31 @@
 					<div class="row d-flex">
 					
 						<!-- 왼쪽 스크립트 -->
-						<div class="col-xl-8 px-md-5">
+						<div class="col-xl-8 px-md-5" style="background-color: #f7fbff;">
 							<!-- My 프로필 메인화면 -->
 							<div class="emp-profile">
 
 								<!-- 사진 프로필 START -->
 								<div class="d-flex">
+									
+									
 									<div class="profile-card">
-										<div class="d-flex align-items-center">
-											<div class="image">
-												<img src="/andrea-master/images/image_1.jpg" class="rounded"
-													width="100%">
+										<form id="uploadForm" enctype="multipart/form-data">
+											<div class="d-flex align-items-center">
+												<div class="image">
+													<img src="/andrea-master/images/image_1.jpg" class="rounded" width="100%">
+												</div>
 											</div>
+											
+											<div id="preView"></div>
+											<div class="button mt-2 d-flex flex-row align-items-center">
+												<input type="file" id="file" name="fileUplod" onchange="changeValue(this)" style="display:none"/>
+												<button class="btn btn-sm btn-primary w-100" id="btn-upload">Change My Gallery</button>
+												<button id="btnUpload" class="btn btn-sm btn-primary w-100" onclick="">submit</button>
 										</div>
-										<div class="button mt-2 d-flex flex-row align-items-center">
-											<button class="btn btn-sm btn-primary w-100">
-											Change My Gallery</button>
-										</div>
-
+										</form>
 									</div>
-
+									
 									<div class="profile-card"
 										style="padding-left: 20px; padding-top: 20px;">
 										<h5
@@ -338,6 +343,21 @@
 	<script src="/andrea-master/js/main.js"></script>
 
 </body>
+
+<script type="text/javascript">
+		$(function () {
+			$('#btn-upload').click(function (e) {
+				e.preventDefault();
+				$('#file').click();
+			});
+		});
+		
+		function changeValue(obj){
+			alert(obj.value);
+		}
+
+</script>
+
 <script type="text/javascript">
 	$('.slider-1 > .owl-carousel')
 			.owlCarousel(
@@ -362,5 +382,35 @@
 	setTimeout(function() {
 		$firstDot.addClass('active');
 	}, 100);
+</script>
+
+<script type="text/javascript">
+$('#btnUpload').on('click', function(event) {
+    event.preventDefault();
+    
+    var form = $('#uploadForm')[0]
+    var data = new FormData(form);
+    console.log("ajax 가기전");
+    $('#btnUpload').prop('disabled', true);
+	
+    $.ajax({
+        type: "POST",
+        enctype: 'multipart/form-data',
+        url: "/FileUplod.do",
+        data: data,
+        processData: false,
+        contentType: false,
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+        	$('#btnUpload').prop('disabled', false);
+        	alert('success')
+        },
+        error: function (e) {
+            $('#btnUpload').prop('disabled', false);
+            alert('fail');
+        }
+    });
+})
 </script>
 </html>

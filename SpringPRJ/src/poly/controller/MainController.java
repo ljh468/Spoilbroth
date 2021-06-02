@@ -1,16 +1,29 @@
 package poly.controller;
 
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import poly.dto.OcrDTO;
 import poly.dto.UserDTO;
+import poly.service.IImgService;
 import poly.service.IUserService;
+import poly.util.DateUtil;
+import poly.util.FileUtil;
 
 
 
@@ -23,6 +36,12 @@ public class MainController {
 	@Resource(name="UserService")
 	IUserService userService;
 	
+	@Resource(name="ImgService")
+	IImgService imgService;
+	
+	
+	// 업로드되는 파일이 저장되는 기본폴더 설정(자바에서 경로는 /로 표현함)
+	final private String FILE_UPLOAD_SAVE_PATH = "c:/upload"; // C:\\upload 폴더에 저장
 	
 	@RequestMapping(value = "index")
 	public String Index() {
@@ -112,5 +131,66 @@ public class MainController {
 
 		return "spoilbroth/main4";
 	}
+	
+	@RequestMapping(value = "FileUplod")
+	@ResponseBody
+	public Map<String, String> FileUpload(HttpServletRequest  request, HttpServletResponse response, ModelMap model,
+			@RequestParam(value = "fileUplod") MultipartFile mf) throws Exception{
+		
+		log.info("FileUplod start");
+		int res = 0;
+		
+		Map<String, String> rMap = new HashMap<String, String>();
+		// 이미지 파일 저장하는 사용자 ID
+		String user_id = "ljh468";
+		
+		// 임의로 정의된 파일명을 원래대로 만들어주기 위한 목적
+		String originalFileName = mf.getOriginalFilename();
+		
+		// 파일 확장자 가져오기
+		String ext = originalFileName.substring(originalFileName.lastIndexOf(".") + 1, originalFileName.length()).toLowerCase();
+		
+		// 이미지 파일만 실행되도록 함
+		if ( ext.equals("jpeg") || ext.equals("jpg") || ext.equals("gif") || ext.equals("png")) {
+			
+			// 웹서버에 저장되는 파일이름 (영어, 숫자로 파일명 변경)
+			String saveFileName = DateUtil.getDateTime("24hhmmss") + "." + ext;
+			
+			// 웹서버에 업로드한 파일 저장하는 물리적 경로
+			String saveFilePath = FileUtil.mkdirForDate(FILE_UPLOAD_SAVE_PATH);
+			String fullFileInfo = saveFilePath + "/" + saveFileName;
+			
+			
+			rMap.put("path", fullFileInfo);
+			
+			// 정상적으로 값이 생성되었는지 로그에 찍어서 확인
+			log.info("ext : " + ext);
+			log.info("originalFileName : " + originalFileName);
+			log.info("saveFileName : " + saveFileName);
+			log.info("saveFilePath : " + saveFilePath);
+			log.info("fullFileInfo : " + fullFileInfo);
+			
+			// 업로드 되는 파일을 서버에 저장
+			mf.transferTo(new File(fullFileInfo));
+			
+			OcrDTO pDTO = new OcrDTO();
+			
+			pDTO.setSave_file_name(saveFileName);
+			pDTO.setSave_file_path(saveFilePath);
+			pDTO.setOrg_file_name(originalFileName);
+			pDTO.setExt(ext);
+			pDTO.setChg_id(user_id);
+			
+			log.info("imgService start!!");
+			res = imgService.InsertImage(pDTO);
+			log.info("imgService end!!");
+		}else {
+			log.info("확장자가 올바르지 않음");
+		}
+		
+		return rMap;
+	}
+	
+	
 	
 }

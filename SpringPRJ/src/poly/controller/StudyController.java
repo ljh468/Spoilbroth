@@ -68,6 +68,16 @@ public class StudyController {
 		return "study/contestdetail";
 	}
 	
+	@RequestMapping(value = "study/studyinfo")
+	public String studyinfo(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception{
+		log.info(this.getClass().getClass().getName() + "study/studyinfo start!!");
+		
+		
+		log.info(this.getClass().getClass().getName() + "study/studyinfo end!!");
+
+		return "study/studyinfo";
+	}
+	
 	@RequestMapping(value = "study/studyboard")
 	public String studyboard(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception{
 		log.info(this.getClass().getClass().getName() + "study/contestdetail start!!");

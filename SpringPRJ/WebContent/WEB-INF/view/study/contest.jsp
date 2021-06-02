@@ -111,7 +111,7 @@ int study_count = study_group.length;
 					<div class="row d-flex">
 
 						<!-- 왼쪽 스크립트 -->
-						<div class="col-xl-8 px-md-5">
+						<div class="col-xl-8 px-md-5" style="background-color: #f7fbff;">
 
 							<!-- My 프로필 메인화면 -->
 							<div class="emp-profile">

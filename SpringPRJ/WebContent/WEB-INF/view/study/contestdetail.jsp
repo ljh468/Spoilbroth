@@ -89,7 +89,7 @@
 					<div class="row d-flex">
 					
 						<!-- 왼쪽 스크립트 -->
-						<div class="col-xl-8 px-md-5">
+						<div class="col-xl-8 px-md-5" style="background-color: #f7fbff;">
 							<!-- 스터디 개설  START -->
 							<div class="emp-profile">
 								<label style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">

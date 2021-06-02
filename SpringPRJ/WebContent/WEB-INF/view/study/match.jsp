@@ -150,7 +150,7 @@
 					<div class="row d-flex">
 					
 						<!-- 왼쪽 스크립트 -->
-						<div class="col-xl-8 px-md-5">
+						<div class="col-xl-8 px-md-5" style="background-color: #f7fbff;">
 							<!-- 추천 Study Group -->
 							<!-- 슬라이드 -->
 							<div class="slider-1">
@@ -208,7 +208,7 @@
 											</div>
 										</div>
 										<div class="button mt-2 d-flex flex-row align-items-center">
-											<button class="btn btn-sm btn-primary w-100">
+											<button class="btn btn-sm btn-primary w-100" onclick="location.href='/study/studyinfo.do' ">
 												Study Join</button>
 										</div>
 									</div>

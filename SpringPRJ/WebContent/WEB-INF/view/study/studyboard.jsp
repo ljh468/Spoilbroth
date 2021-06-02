@@ -80,7 +80,7 @@
 					<div class="row d-flex">
 					
 						<!-- 왼쪽 스크립트 -->
-						<div class="col-xl-8 px-md-5">
+						<div class="col-xl-8 px-md-5" style="background-color: #f7fbff;">
 							<!-- 스터디 개설  START -->
 							<div class="emp-profile">
 								<label style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
@@ -100,6 +100,8 @@
 											Change My Gallery</button>
 										</div>
 									<div class="form-group mt-3">
+									<label style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
+										알림</label>
               							<div class="card fontstyle p-2">
 		              						Study Name<br>
 		              						Study Name<br>

@@ -28,6 +28,10 @@
 	<!-- 의존성 주입 dependencies 시작 -->
 	<dependencies>
 		
+		
+		
+		
+		
 		<!-- 웹 크롤링을 위해 jsoup 외부라이브러리 추가 -->
 		<dependency>
 			<groupId>org.jsoup</groupId>
@@ -177,6 +181,8 @@
 			<version>1.10</version>
 		</dependency>
 		
+		<!-- 이미지 파일 업로드를 위해 추가  -->
+		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 		<!--  스프링에서 Multipart 기능을 사용하기 위해 MultipartResolve  -->
 		<dependency>
     		<groupId>commons-fileupload</groupId>
