@@ -11,6 +11,8 @@
 	
 	String[] study_group = user_name.split("");
 	int study_count = study_group.length;
+	
+	String study_name ="슈퍼개발자";
 %>
 
 <!DOCTYPE html>
@@ -90,19 +92,21 @@
 								</label>
 								<!-- 사진 프로필 START -->
 								<div class="d-flex card m-2 p-3">
-									
-										<div class="d-flex align-items-center">
-											<div class="image">
-												<img src="/andrea-master/images/image_1.jpg" class="rounded"
-													width="100%">
-											</div>
+										<form action="openProc" class="p-1 contact-form" style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
+										<div class="profile-card" style="width: 100%;">
+												<div class="align-items-center">
+													<div class="image">
+														<img id="preview-image" src="/getStudyImage.do?study_name=<%=study_name %>" class="rounded" width="100%" alt="My Image">
+													</div>
+												</div>
+												<div id="input-image" class="button mt-2 d-flex flex-row align-items-center">
+													<input type="file" id="file" name="fileUplod2" onchange="changeValue(this)" style="display:none;"/>
+													<button class="btn btn-sm btn-primary w-100" id="btn-upload" style="margin-right: 2px;font-size: 20px;">Select File</button>
+												</div>
+											
 										</div>
-										<div class="button mt-2 d-flex flex-row align-items-center">
-											<button class="btn btn-sm btn-primary w-100" style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
-											Change My Gallery</button>
-										</div>
-									<div>
-										<form action="#" class="p-1 contact-form" style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
+										
+										<div>
 	              							<label style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
 											스터디 분야
 											</label>
@@ -118,17 +122,21 @@
 												</select>
 	              							</div>
 	              							<div class="form-group">
-	                							<input type="text" class="form-control" placeholder="Study Name" name="study_name" style="font-size: 20px;">
+	                							<input type="text" id="study_name" class="form-control" placeholder="Study Name" name="study_name" style="font-size: 20px;">
+	              							</div>
+	              							<div class="form-group">
+	                							<input type="text" class="form-control" placeholder="Study Title" name="study_title" style="font-size: 20px;">
 	              							</div>
 								            <div class="form-group">
-								                <textarea id="" cols="20" rows="7" class="form-control" placeholder="Message" name="study_msg" style="font-size: 18px;"></textarea>
+								                <textarea id="" cols="20" rows="7" class="form-control" placeholder="Message" name="study_contents" style="font-size: 18px;"></textarea>
 								            </div>
 								            <div class="form-group text-center" style="font-size:24px;margin-bottom: 0px;">
-												<input type="submit" value="Create Study" class="btn btn-success py-2 px-3" onclick="location.href='/mbti/mbtianalysis.do' " style="font-size: 20px;">
+												<input type="submit" value="Create Study" class="btn btn-success py-2 px-3" style="font-size: 20px;">
 								             </div>
 								            <p class="mb-3" style="font-size: 20px;font-family: 'Do Hyeon', sans-serif;font-family: 'Nanum Pen Script', cursive;color: #6c757d;float: right;">
 											By <span><%=user_name%></span>
 											</p>
+										</div>
 								        </form>
 									</div>
 								</div>
@@ -141,33 +149,9 @@
 						<!-- 왼쪽 스크립트 끝 -->
 						
 						<!-- 오른쪽 스크립트 시작 -->
-						<div
-							class="col-xl-4 sidebar ftco-animate bg-light pt-5 fadeInUp ftco-animated">
-							<div>오른쪽 스크립트 시작</div>
-
-							<div class="sidebar-box ftco-animate">
-								<h3 class="sidebar-heading">Archives</h3>
-								<ul class="categories">
-									<li><a href="#">Decob14 2018 <span>(10)</span></a></li>
-									<li><a href="#">September 2018 <span>(6)</span></a></li>
-									<li><a href="#">August 2018 <span>(8)</span></a></li>
-									<li><a href="#">July 2018 <span>(2)</span></a></li>
-									<li><a href="#">June 2018 <span>(7)</span></a></li>
-									<li><a href="#">May 2018 <span>(5)</span></a></li>
-								</ul>
-							</div>
-
-							<div class="sidebar-box ftco-animate">
-								<h3 class="sidebar-heading">Paragraph</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-									Ducimus itaque, autem necessitatibus voluptate quod mollitia
-									delectus aut.</p>
-							</div>
-							<div>오른쪽 스크립트 끝</div>
-						</div>
+						
 
 					</div>
-				</div>
 			</section>
 		</div>
 		<!-- 메인 페이지 END-->
@@ -196,6 +180,39 @@
 	<script src="/andrea-master/js/main.js"></script>
 </body>
 <script type="text/javascript">
+		$(function () {
+			$('#btn-upload').click(function (e) {
+				e.preventDefault();
+				$('#file').click();
+			});
+		});
+		
+		
+		function readImage(input) {
+		    // 인풋 태그에 파일이 있는 경우
+		    if(input.files && input.files[0]) {
+		       
+		        // FileReader 인스턴스 생성
+		        const reader = new FileReader()
+		        // 이미지가 로드가 된 경우
+		        reader.onload = e => {
+		            const previewImage = document.getElementById("preview-image")
+		            console.log("previewImage : " + previewImage)
+		            previewImage.src = e.target.result
+		        }
+		        // reader가 이미지 읽도록 하기
+		        reader.readAsDataURL(input.files[0])
+		    }
+		}
+		// input file에 change 이벤트 부여
+		const inputImage = document.getElementById("input-image")
+		inputImage.addEventListener("change", e => {
+		    readImage(e.target)
+		})
+</script>
+
+
+<script type="text/javascript">
 	$('.slider-1 > .owl-carousel')
 			.owlCarousel(
 					{
@@ -220,4 +237,6 @@
 		$firstDot.addClass('active');
 	}, 100);
 </script>
+
+
 </html>

@@ -5,7 +5,7 @@
 
 	<!-- 이미지파일 저장 쿼리 -->
 	<insert id="InsertImage" parameterType="OcrDTO">
-		INSERT INTO IMG_INFO
+		INSERT INTO USER_IMG_INFO
 			(
 				SEQ,
 				SAVE_FILE_PATH,
@@ -22,12 +22,12 @@
 				#{org_file_name},
 				#{ext},
 				#{chg_id},
-				SYSDATE()
+				#{chg_dt}
 			)
 	</insert>
 	<select id="getImgList" parameterType="String" resultType="hashmap">
 		SELECT *
-		FROM IMG_INFO
+		FROM USER_IMG_INFO
 		WHERE CHG_ID = #{id}
 		ORDER BY CHG_DT DESC LIMIT 1
 	

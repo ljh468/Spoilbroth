@@ -1,3 +1,7 @@
+<%@page import="poly.dto.StudyListDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -9,8 +13,8 @@
 	String user_mbti = "ENTP";
 	String user_dept = "데이터분석과";
 	
-	String[] study_group = user_name.split("");
-	int study_count = study_group.length;
+	List<StudyListDTO> pList = (List<StudyListDTO>)request.getAttribute("pList");
+	int count = pList.size();
 %>
 
 <!DOCTYPE html>
@@ -159,6 +163,8 @@
 								</label>
 								
 								<div class="owl-carousel owl-theme">
+								
+								
 									<!-- 가입한 스터디 리스트로 뿌려줌 -->
 									<div class="item" style="coler:white">
 										<div style="background-image: url(/andrea-master/images/image_1.jpg); height:180px;">
@@ -198,7 +204,10 @@
 							<hr style="margin-top: 5px; margin-bottom: 0px;" />
 							
 							<!-- 스터디 목록 정보 START-->
-							<%for(int i=0; i<3; i++) {%>
+							<%for(StudyListDTO pDTO : pList) {%>
+							<% 	String[] arr = pDTO.getStudy_member().split(",");
+								int membercount = arr.length;
+							%>
 							<div class="emp-profile">
 								<div class="d-flex">
 									<div class="profile-card">
@@ -208,43 +217,37 @@
 											</div>
 										</div>
 										<div class="button mt-2 d-flex flex-row align-items-center">
-											<button class="btn btn-sm btn-primary w-100" onclick="location.href='/study/studyinfo.do' ">
+											<button class="btn btn-sm btn-primary w-100" onclick="location.href='/study/studyinfo.do?study_seq=<%=pDTO.getStudy_seq() %>' " method="get";>
 												Study Join</button>
 										</div>
 									</div>
 									
-									<div class="profile-card"
-										style="padding-left: 20px; padding-top: 20px;">
+									<div class="profile-card" style="padding-left: 20px; padding-top: 20px;">
 										<h5
-											style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;letter-spacing: 13px;">
-											<%=user_name%></h5>
+											style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;letter-spacing: 10px;">
+											<%=pDTO.getStudy_name()%></h5>
 										<h6
-											style="font-size: 25px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
-											<%=user_dept%></h6>
+											style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
+											<%=pDTO.getStudy_title()%></h6>
 										<p class="mb-2"
 											style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; color: #6c757d;">
-											Join Study : <span><%=study_count%>/5</span>
+											Join Study : <span><%=membercount%>/5</span>
 										</p>
 									</div>
 								</div>
 							</div>
-							<div class="meta-wrap">
+							<div class="meta-wrap" style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
 								<p class="meta">
-									<span><i class="icon-calendar mr-2"></i>June 28, 2019</span>
-									<span><i class="icon-folder-o mr-2"></i>Travel</span>
+									<span  style="color: cornflowerblue;"><i class="icon-folder-o mr-2"></i><%=pDTO.getStudy_field() %></span>
+									<span><i class="icon-calendar mr-2"></i><%=pDTO.getStudy_dt() %></span>
 								</p>
+								<p class="mb-4" style="font-size: 18px;"><%=pDTO.getStudy_contents()%></p>
 							</div>
-								<p class="mb-4">A small river named Duden flows by their 
-								place and supplies it with the necessary regelialia.</p>
+								
 							<!-- 스터디 목록 정보 END-->
 							<hr style="margin-top: 5px; margin-bottom: 0px;" />
 							<% } %>
-							
-							
-							왼쪽 스크립트 끝
 						</div>
-
-
 
 						<!-- 오른쪽 스크립트 START -->
 						
