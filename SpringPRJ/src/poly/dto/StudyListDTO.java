@@ -13,7 +13,8 @@ public class StudyListDTO {
 	private String study_member;
 	private String study_title;
 	private String study_contents;
-	
+	private String exists_yn; // 중복가입 방지를 위한 가상의 컬럼
+	private String study_notify; // 게시판 알림
 	
 	public String getStudy_seq() {
 		return study_seq;
@@ -57,7 +58,17 @@ public class StudyListDTO {
 	public void setStudy_contents(String study_contents) {
 		this.study_contents = study_contents;
 	}
-
-	
-	
+	public String getExists_yn() {
+		return exists_yn;
+	}
+	public void setExists_yn(String exists_yn) {
+		this.exists_yn = exists_yn;
+	}
+	public String getStudy_notify() {
+		return study_notify;
+	}
+	public void setStudy_notify(String study_notify) {
+		this.study_notify = study_notify;
+	}
+	 
 }

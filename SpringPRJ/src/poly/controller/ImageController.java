@@ -1,5 +1,7 @@
 package poly.controller;
 
+import static poly.util.CmmUtil.nvl;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,15 +32,16 @@ public class ImageController {
 	@Resource(name= "ImgService")
 	IImgService imgService;
 	
-	// 업로드되는 파일이 저장되는 기본폴더 설정(자바에서 경로는 /로 표현함)
-	final private String USERFILE_UPLOAD_SAVE_PATH = "C:\\upload"; // C:\\upload 폴더에 저장  /upload
-	final private String STUDYFILE_UPLOAD_SAVE_PATH = "C:\\upload"; // C:\\upload 폴더에 저장  /upload
-		
+	// 프로필 이미지가 업로드되는 파일이 저장되는 기본폴더 설정(자바에서 경로는 /로 표현함)
+	final private String USERFILE_UPLOAD_SAVE_PATH = "C:\\userimg"; // C:\\upload 폴더에 저장  /upload
+	// 스터디 이미지가 업로드되는 기본폴더 설정
+	final private String STUDYFILE_UPLOAD_SAVE_PATH = "C:\\studyimg"; // C:\\upload 폴더에 저장 /upload
+	
 	// 프로필 이미지파일 업로드 (ajax로 구현)
 	@RequestMapping(value = "FileUplod")
 	@ResponseBody
 	public Map<String, String> UserFileUpload(HttpServletRequest  request, HttpServletResponse response, ModelMap model,
-			@RequestParam(value = "fileUplod") MultipartFile mf, HttpSession session) throws Exception{
+			@RequestParam(value = "FileUplod") MultipartFile mf, HttpSession session) throws Exception{
 		
 		log.info("FileUplod start");
 		int res = 0;
@@ -101,11 +104,11 @@ public class ImageController {
 				@RequestParam(value = "fileUplod2") MultipartFile mf, HttpSession session) throws Exception{
 			
 			log.info("fileUplod2 start");
-			int res = 0;
+			int studyImg = 0;
 			
 			Map<String, String> rMap = new HashMap<String, String>();
-			// 이미지 파일 저장하는 사용자 ID
-			String study_name = (String) session.getAttribute("user_id");
+			// 이미지 파일 저장하는 스터디이름
+			String study_name = nvl(request.getParameter("study_name"));
 			
 			// 임의로 정의된 파일명을 원래대로 만들어주기 위한 목적
 			String originalFileName = mf.getOriginalFilename();
@@ -146,11 +149,12 @@ public class ImageController {
 				pDTO.setChg_dt(DateUtil.getDateTime("yyyy-MM-dd-hh:mm:ss"));
 				
 				log.info("imgService start!!");
-				res = imgService.InsertImage(pDTO);
+				studyImg = imgService.StudyInsertImage(pDTO);
 				log.info("imgService end!!");
-				
-				
-			}
+			}	
+				log.info("StudyFileUplod end!!");
+				// ###################################################################
+				// 스터디 이미지 파일 업로드 끝
 			return rMap;
 		}
 }

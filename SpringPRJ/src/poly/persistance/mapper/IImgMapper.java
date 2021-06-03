@@ -12,7 +12,13 @@ public interface IImgMapper {
 	int InsertImage(OcrDTO pDTO) throws Exception;
 	
 	// 프로필 이미지 가져오기
-	Map<String, String> getImgList(String id);
+	Map<String, String> getImgList(String id) throws Exception;
+	
+	// 스터디그룹 이미지 저장하기
+	int StudyInsertImage(OcrDTO pDTO) throws Exception;
+	
+	// 스터디그룹 이미지 가져오기
+	Map<String, String> getStudyImgList(String study_name) throws Exception;
 
 	
 	

@@ -42,7 +42,6 @@
 		SELECT CASE WHEN COUNT(*)=0 THEN 'N' ELSE 'Y' END EXISTS_YN
 		FROM USER_INFO
 		WHERE USER_EMAIL = #{user_email}
-	
 	</select>
 	
 	<!-- USER 조회 -->
@@ -50,7 +49,7 @@
 	SELECT * 
 	FROM USER_INFO
 	WHERE 
-		USER_ID = #{user_id} AND USER_PWD = #{user_pwd}
+		USER_ID = #{user_id}
 	</select>
 	
 	<!-- ID 조회 -->

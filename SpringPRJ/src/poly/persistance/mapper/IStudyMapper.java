@@ -8,6 +8,12 @@ import poly.dto.StudyListDTO;
 @Mapper("StudyMapper")
 public interface IStudyMapper {
 
-	public List<StudyListDTO> getAllStudyList();
+	List<StudyListDTO> getAllStudyList();
+
+	StudyListDTO getStudyExists(StudyListDTO sDTO);
+
+	int insertStudyInfo(StudyListDTO sDTO);
+
+	StudyListDTO getStudyInfo(String study_name);
 
 }

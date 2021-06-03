@@ -112,7 +112,7 @@
 												<input type="file" id="file" name="fileUplod" onchange="changeValue(this)" style="display:none"/>
 												<button class="btn btn-sm btn-primary w-100" id="btn-upload" style="margin-right: 2px;">Select File</button>
 												<button id="btnUpload" class="btn btn-sm btn-primary w-100" style="margin-left: 2px;">Register</button>
-										</div>
+											</div>
 										</form>
 									</div>
 									

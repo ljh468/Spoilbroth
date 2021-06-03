@@ -92,11 +92,13 @@
 								</label>
 								<!-- 사진 프로필 START -->
 								<div class="d-flex card m-2 p-3">
-										<form action="openProc" class="p-1 contact-form" style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
+								
+										<form action="/study/inserStudyInfo.do" class="p-1 contact-form" method="post" enctype="multipart/form-data" 
+											style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
 										<div class="profile-card" style="width: 100%;">
 												<div class="align-items-center">
 													<div class="image">
-														<img id="preview-image" src="/getStudyImage.do?study_name=<%=study_name %>" class="rounded" width="100%" alt="My Image">
+														<img id="preview-image" src="/" class="rounded" width="100%" alt="My Image">
 													</div>
 												</div>
 												<div id="input-image" class="button mt-2 d-flex flex-row align-items-center">

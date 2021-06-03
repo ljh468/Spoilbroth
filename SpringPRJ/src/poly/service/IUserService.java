@@ -1,5 +1,6 @@
 package poly.service;
 
+import poly.dto.StudyListDTO;
 import poly.dto.UserDTO;
 
 public interface IUserService {
@@ -9,5 +10,6 @@ public interface IUserService {
 	int insertUserInfo(UserDTO uDTO) throws Exception;
 
 	UserDTO idCheck(String userId) throws Exception;
+
 	
 }

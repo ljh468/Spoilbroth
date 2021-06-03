@@ -7,11 +7,12 @@
 
 <%
 	String user_id = (String) request.getAttribute("user_id");
+	String user_name = (String) request.getAttribute("user_name");
 	String user_email = (String) request.getAttribute("user_email");
 	String join_dt = (String) request.getAttribute("join_dt");
-	String user_name = "이재훈";
-	String user_mbti = "ENTP";
-	String user_dept = "데이터분석과";
+	String user_mbti = (String) request.getAttribute("user_mbti");
+	String user_dept = (String) request.getAttribute("user_dept");
+	String user_study = (String) request.getAttribute("user_study");
 	
 	List<StudyListDTO> pList = (List<StudyListDTO>)request.getAttribute("pList");
 	int count = pList.size();
@@ -164,7 +165,6 @@
 								
 								<div class="owl-carousel owl-theme">
 								
-								
 									<!-- 가입한 스터디 리스트로 뿌려줌 -->
 									<div class="item" style="coler:white">
 										<div style="background-image: url(/andrea-master/images/image_1.jpg); height:180px;">
@@ -213,18 +213,23 @@
 									<div class="profile-card">
 										<div class="d-flex align-items-center">
 											<div class="image">
-												<img src="/andrea-master/images/image_1.jpg" class="rounded" width="100%">
+												<img src="/getStudyImage.do?study_name=<%=pDTO.getStudy_name() %>" class="rounded" width="100%">
 											</div>
 										</div>
 										<div class="button mt-2 d-flex flex-row align-items-center">
-											<button class="btn btn-sm btn-primary w-100" onclick="location.href='/study/studyinfo.do?study_seq=<%=pDTO.getStudy_seq() %>' " method="get";>
+										<% if(user_study.contains(pDTO.getStudy_name())) { %>
+											<button class="btn btn-sm btn-primary w-100" onclick="location.href='/study/studyboard.do?study_name=<%=pDTO.getStudy_name() %>' " method="get";>
 												Study Join</button>
+										<% }else { %>
+											<button class="btn btn-sm btn-primary w-100" onclick="location.href='/study/studyinfo.do?study_name=<%=pDTO.getStudy_name() %>' " method="get";>
+												Study Join</button>
+										<% } %>
 										</div>
 									</div>
 									
 									<div class="profile-card" style="padding-left: 20px; padding-top: 20px;">
 										<h5
-											style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;letter-spacing: 10px;">
+											style="font-size: 26px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;letter-spacing: 8px;">
 											<%=pDTO.getStudy_name()%></h5>
 										<h6
 											style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
@@ -252,8 +257,8 @@
 						<!-- 오른쪽 스크립트 START -->
 						
 						<!-- 오른쪽 스크립트 END -->
-						
-					</div>
+ 					</div>
+					
 				</div>
 			</section>
 		</div>
@@ -283,10 +288,66 @@
 	<script src="/andrea-master/js/main.js"></script>
 </body>
 
-<script>
-
+<script type="text/javascript">
+		$(function () {
+			$('#btn-upload').click(function (e) {
+				e.preventDefault();
+				$('#file').click();
+			});
+		});
+		
+		
+		function readImage(input) {
+		    // 인풋 태그에 파일이 있는 경우
+		    if(input.files && input.files[0]) {
+		       
+		        // FileReader 인스턴스 생성
+		        const reader = new FileReader()
+		        // 이미지가 로드가 된 경우
+		        reader.onload = e => {
+		            const previewImage = document.getElementById("preview-image")
+		            console.log("previewImage : " + previewImage)
+		            previewImage.src = e.target.result
+		        }
+		        // reader가 이미지 읽도록 하기
+		        reader.readAsDataURL(input.files[0])
+		    }
+		}
+		// input file에 change 이벤트 부여
+		const inputImage = document.getElementById("input-image")
+		inputImage.addEventListener("change", e => {
+		    readImage(e.target)
+		})
 </script>
 
+<script type="text/javascript">
+	$('#btnUpload').on('click', function(event) {
+	    event.preventDefault();
+	    
+	    var form = $('#uploadForm')[0]
+	    var data = new FormData(form);
+	    $('#btnUpload').prop('disabled', true);
+		
+	    $.ajax({
+	        type: "POST",
+	        enctype: 'multipart/form-data',
+	        url: "/FileUplod2.do",
+	        data: data,
+	        processData: false,
+	        contentType: false,
+	        cache: false,
+	        timeout: 600000,
+	        success: function (data) {
+	        	$('#btnUpload').prop('disabled', false);
+	        	alert('등록이 성공하였습니다.')
+	        },
+	        error: function (e) {
+	            $('#btnUpload').prop('disabled', false);
+	            alert('등록이 실패하였습니다.');
+	        }
+	    });
+	})
+</script>
 
 <script type="text/javascript">
 	$('.slider-1 > .owl-carousel')

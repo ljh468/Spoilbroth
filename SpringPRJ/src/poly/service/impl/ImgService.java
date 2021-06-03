@@ -1,6 +1,5 @@
 package poly.service.impl;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -19,14 +18,22 @@ public class ImgService implements IImgService{
 
 	@Override
 	public int InsertImage(OcrDTO pDTO) throws Exception {
-		
 		return imgMapper.InsertImage(pDTO);
 	}
 
 	@Override
-	public Map<String, String> getImgList(String id) {
-		
+	public Map<String, String> getImgList(String id) throws Exception {
 		return imgMapper.getImgList(id);
+	}
+
+	@Override
+	public int StudyInsertImage(OcrDTO pDTO) throws Exception {
+		return imgMapper.StudyInsertImage(pDTO);
+	}
+
+	@Override
+	public Map<String, String> getStudyImgList(String study_name) throws Exception {
+		return imgMapper.getStudyImgList(study_name);
 	}
 
 }
