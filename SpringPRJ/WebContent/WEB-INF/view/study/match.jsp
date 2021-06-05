@@ -221,8 +221,8 @@
 											<button class="btn btn-sm btn-primary w-100" onclick="location.href='/study/studyboard.do?study_name=<%=pDTO.getStudy_name() %>' " method="get";>
 												Study Join</button>
 										<% }else { %>
-											<button class="btn btn-sm btn-primary w-100" onclick="location.href='/study/studyinfo.do?study_name=<%=pDTO.getStudy_name() %>' " method="get";>
-												Study Join</button>
+											<button class="btn btn-sm btn-secondary w-100" onclick="location.href='/study/studyinfo.do?study_name=<%=pDTO.getStudy_name() %>' " method="get";>
+												Sign Up</button>
 										<% } %>
 										</div>
 									</div>

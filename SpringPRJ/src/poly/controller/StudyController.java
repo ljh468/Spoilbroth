@@ -71,7 +71,7 @@ public class StudyController {
 		for (StudyListDTO pDTO : pList) {
 			System.out.println(pDTO.getStudy_name());
 		}
-		
+
 		model.addAttribute("user_id", nvl(rDTO.getUser_id()));
 		model.addAttribute("user_name", nvl(rDTO.getUser_name()));
 		model.addAttribute("user_email", nvl(rDTO.getUser_email()));
@@ -95,7 +95,7 @@ public class StudyController {
 		return "study/studyopen";
 	}
 
-	@RequestMapping(value = "study/inserStudyInfo", method=RequestMethod.POST)
+	@RequestMapping(value = "study/inserStudyInfo", method = RequestMethod.POST)
 	public String inserStudyInfo(HttpServletRequest request, HttpSession session, ModelMap model,
 			@RequestParam(value = "fileUplod2") MultipartFile mf) throws Exception {
 
@@ -107,7 +107,7 @@ public class StudyController {
 
 		// 웹에서 받는 정보를 저장할 변수
 		StudyListDTO sDTO = null;
-		
+
 		try {
 			// ###################################################################
 			// 개설 스터디 등록
@@ -138,55 +138,56 @@ public class StudyController {
 			log.info("insertStudyInfo end!!");
 			// 스터디 등록 끝
 			// ###################################################################
-			
+
 			// ###################################################################
 			// 스터디 이미지 파일 업로드 시작
 			log.info("StudyFileUplod start");
 			int studyImg = 0;
-			
+
 			// 임의로 정의된 파일명을 원래대로 만들어주기 위한 목적
 			String originalFileName = mf.getOriginalFilename();
 
 			// 파일 확장자 가져오기
-			String ext = originalFileName.substring(originalFileName.lastIndexOf(".") + 1, originalFileName.length()).toLowerCase();
-			
+			String ext = originalFileName.substring(originalFileName.lastIndexOf(".") + 1, originalFileName.length())
+					.toLowerCase();
+
 			// 이미지 파일만 실행되도록 함
-			if ( ext.equals("jpeg") || ext.equals("jpg") || ext.equals("gif") || ext.equals("png")) {
-				
+			if (ext.equals("jpeg") || ext.equals("jpg") || ext.equals("gif") || ext.equals("png")) {
+
 				// 웹서버에 저장되는 파일이름 (영어, 숫자로 파일명 변경)
 				String saveFileName = DateUtil.getDateTime("24hhmmss") + "." + ext;
-				
+
 				// 웹서버에 업로드한 파일 저장하는 물리적 경로
 				String saveFilePath = FileUtil.mkdirForDate(STUDYFILE_UPLOAD_SAVE_PATH);
 				String fullFileInfo = saveFilePath + "/" + saveFileName;
-				
+
 				// 정상적으로 값이 생성되었는지 로그에 찍어서 확인
 				log.info("ext : " + ext);
 				log.info("originalFileName : " + originalFileName);
 				log.info("saveFileName : " + saveFileName);
 				log.info("saveFilePath : " + saveFilePath);
 				log.info("fullFileInfo : " + fullFileInfo);
-				
+
 				// 업로드 되는 파일을 서버에 저장
 				mf.transferTo(new File(fullFileInfo));
-				
+
 				OcrDTO pDTO = new OcrDTO();
-				
+
 				pDTO.setSave_file_name(saveFileName);
 				pDTO.setSave_file_path(saveFilePath);
 				pDTO.setOrg_file_name(originalFileName);
 				pDTO.setExt(ext);
 				pDTO.setChg_id(study_name);
 				pDTO.setChg_dt(DateUtil.getDateTime("yyyy-MM-dd-hh:mm:ss"));
-				
+
 				log.info("imgService start!!");
 				studyImg = imgService.StudyInsertImage(pDTO);
 				log.info("imgService end!!");
-			}	
-				log.info("StudyFileUplod end!!");
-				// ###################################################################
-				// 스터디 이미지 파일 업로드 끝
-				
+			}
+			log.info("StudyFileUplod end!!");
+			// ###################################################################
+			// 스터디 이미지 파일 업로드 끝
+
 			if (res == 1 && studyImg == 1) {
 				msg = "스터디그룹이 개설 되었습니다.";
 				url = "/study/studyboard.do?study_name=" + study_name;
@@ -196,7 +197,7 @@ public class StudyController {
 				msg = "오류로 인해  개설이 실패 하였습니다.";
 				url = "/study/match.do";
 			}
-			
+
 		} catch (Exception e) {
 			// 저장이 실패되면 사용자에세 보여줄 메시지
 			msg = "실패하였습니다. : " + e.toString();
@@ -236,10 +237,33 @@ public class StudyController {
 		return "study/contestdetail";
 	}
 
-	@RequestMapping(value = "study/studyinfo")
+	@RequestMapping(value = "study/studyinfo", method = RequestMethod.GET)
 	public String studyinfo(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
 		log.info(this.getClass().getClass().getName() + "study/studyinfo start!!");
 
+		String user_id = (String) session.getAttribute("user_id");
+		String study_name = nvl(request.getParameter("study_name"));
+		log.info("study_name : " + study_name);
+
+		UserDTO uDTO = new UserDTO();
+
+		uDTO.setUser_id(user_id);
+
+		// 유저 정보 가져오기
+		UserDTO rDTO = new UserDTO();
+		log.info("getUserInfo start");
+		rDTO = userService.getUserInfo(uDTO);
+		log.info("getUserInfo end");
+
+		// 스터디 정보 가져오기
+		StudyListDTO sDTO = new StudyListDTO();
+		log.info("getStudyInfo start");
+		sDTO = studyService.getStudyInfo(study_name);
+		log.info("getStudyInfo end");
+
+		model.addAttribute("sDTO", sDTO);
+		model.addAttribute("rDTO", rDTO);
+		model.addAttribute("study_name", study_name);
 		log.info(this.getClass().getClass().getName() + "study/studyinfo end!!");
 
 		return "study/studyinfo";
@@ -248,89 +272,88 @@ public class StudyController {
 	@RequestMapping(value = "study/studyboard", method = RequestMethod.GET)
 	public String studyboard(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
 		log.info(this.getClass().getClass().getName() + "study/studyboard start!!");
-		
-		String user_id = (String)session.getAttribute("user_id");
+
+		String user_id = (String) session.getAttribute("user_id");
 		String study_name = nvl(request.getParameter("study_name"));
 		log.info("study_name : " + study_name);
-		
+
 		UserDTO uDTO = new UserDTO();
-		
+
 		uDTO.setUser_id(user_id);
-		
+
+		// 유저 정보 가져오기
 		UserDTO rDTO = new UserDTO();
 		log.info("getUserInfo start");
 		rDTO = userService.getUserInfo(uDTO);
 		log.info("getUserInfo end");
-		
+
 		String user_studys = rDTO.getUser_study();
 		log.info("user_studys : " + user_studys);
-		
 		log.info("contains : " + user_studys.contains(study_name));
-		// 가입된 회원인지 아닌지 검사
-		if (user_studys.contains(study_name)) {
-			
-			log.info("getStudyInfo start");
-			StudyListDTO sDTO = new StudyListDTO();
-			sDTO = studyService.getStudyInfo(study_name);
-			log.info("getStudyInfo end");
-			
-			model.addAttribute("sDTO", sDTO);
-			model.addAttribute("rDTO", rDTO);
-			model.addAttribute("study_name", study_name);
-			
-			log.info(this.getClass().getClass().getName() + "study/studyboard end!!");
-			
-			return "study/studyboard";
-		}else {
-			log.info(this.getClass().getClass().getName() + "study/studyboard end!!");
-			return "study/studyinfo";
-		}
-		
+
+		// 스터디 정보 가져오기
+		StudyListDTO sDTO = new StudyListDTO();
+		log.info("getStudyInfo start");
+		sDTO = studyService.getStudyInfo(study_name);
+		log.info("getStudyInfo end");
+
+		model.addAttribute("sDTO", sDTO);
+		model.addAttribute("rDTO", rDTO);
+		model.addAttribute("study_name", study_name);
+
+		log.info(this.getClass().getClass().getName() + "study/studyboard end!!");
+
+		return "study/studyboard";
 	}
-	
-		// 프로필 이미지 불러오기 ( InputStream으로 파일 불러옴 )
-		@RequestMapping(value="/getStudyImage", method=RequestMethod.GET)
-		public void getStudyImage(HttpServletRequest request, HttpSession session, HttpServletResponse response, @RequestParam (value="study_name") String study_name) 
-				throws Exception {
-			
-			log.info("study_name : " + study_name);
-			
-			// 가장 최근에 등록한 프로필 사진 정보가져오기
-			log.info("getStudyImgList start! ");
-			Map<String, String> pMap = imgService.getStudyImgList(study_name);
-			log.info("getStudyImgList end! ");
-			
-			
-			String realFile = pMap.get("SAVE_FILE_PATH")+"\\"; // 파일이 저장된 경로 C:\\upload\\
-			String fileNm = pMap.get("SAVE_FILE_NAME"); // 파일명
-			String ext = pMap.get("EXT"); // 파일 확장자
-			log.info("realFile : " + realFile);
-			log.info("fileNm : " + fileNm);
-			log.info("ext : " + ext);
 
-			BufferedOutputStream out = null;
-			InputStream in = null;
+	// 프로필 이미지 불러오기 ( InputStream으로 파일 불러옴 )
+	@RequestMapping(value = "/getStudyImage", method = RequestMethod.GET)
+	public void getStudyImage(HttpServletRequest request, HttpSession session, HttpServletResponse response,
+			@RequestParam(value = "study_name") String study_name) throws Exception {
 
-			try {
-				response.setContentType("image/" + ext);
-				response.setHeader("Content-Disposition", "inline;filename=" + fileNm);
-				File file = new File(realFile+fileNm);
-				
-				if(file.exists()){
-					in = new FileInputStream(file);
-					out = new BufferedOutputStream(response.getOutputStream());
-					int len;
-					byte[] buf = new byte[1024];
-					while ((len = in.read(buf)) > 0) {
-						out.write(buf, 0, len);
-					}
+		log.info("study_name : " + study_name);
+
+		// 가장 최근에 등록한 프로필 사진 정보가져오기
+		log.info("getStudyImgList start! ");
+		Map<String, String> pMap = imgService.getStudyImgList(study_name);
+		log.info("getStudyImgList end! ");
+
+		String realFile = pMap.get("SAVE_FILE_PATH") + "\\"; // 파일이 저장된 경로 C:\\upload\\
+		String fileNm = pMap.get("SAVE_FILE_NAME"); // 파일명
+		String ext = pMap.get("EXT"); // 파일 확장자
+		log.info("realFile : " + realFile);
+		log.info("fileNm : " + fileNm);
+		log.info("ext : " + ext);
+
+		BufferedOutputStream out = null;
+		InputStream in = null;
+
+		try {
+			response.setContentType("image/" + ext);
+			response.setHeader("Content-Disposition", "inline;filename=" + fileNm);
+			File file = new File(realFile + fileNm);
+
+			if (file.exists()) {
+				in = new FileInputStream(file);
+				out = new BufferedOutputStream(response.getOutputStream());
+				int len;
+				byte[] buf = new byte[1024];
+				while ((len = in.read(buf)) > 0) {
+					out.write(buf, 0, len);
 				}
-			} catch (Exception e) {
-				log.info(e.getStackTrace());
-			} finally {
-				if(out != null){ out.flush(); }
-				if(out != null){ out.close(); }
-				if(in != null){ in.close(); }
+			}
+		} catch (Exception e) {
+			log.info(e.getStackTrace());
+		} finally {
+			if (out != null) {
+				out.flush();
+			}
+			if (out != null) {
+				out.close();
+			}
+			if (in != null) {
+				in.close();
 			}
 		}
+	}
 }
