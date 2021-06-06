@@ -111,11 +111,11 @@
 
 						<!-- 왼쪽 스크립트 -->
 						<div class="col-xl-8 px-md-5" style="background-color: #f7fbff;">
-							<!-- 스터디 개설  START -->
+							<!-- 스터디 가입  START -->
 							<div class="emp-profile">
 								<label
 									style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
-									스터디 개설하기 </label>
+									<%=study_name%> 팀 의 스터디 </label>
 								<!-- 사진 프로필 START -->
 								<div class="d-flex card m-2 p-3">
 
@@ -149,8 +149,7 @@
 											style="font-size: 24px; margin-bottom: 0px;">
 											<button type="button" class="btn btn-success py-2 px-3"
 												style="border-radius: 10px; font-size: 20px;"
-												onclick="location.href='/mbti/mbtianalysis.do' ">Create
-												Study</button>
+												onclick="location.href='/study/studysignup.do?study_name=<%=study_name %>' ">Sign up</button>
 										</div>
 										<p class="mb-3"
 											style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; color: #6c757d; float: right;">
@@ -158,7 +157,7 @@
 										</p>
 									</div>
 								</div>
-								<!-- 스터디 개설  END -->
+								<!-- 스터디 가입  END -->
 
 								<hr style="margin-top: 10px; margin-bottom: 0px;" />
 

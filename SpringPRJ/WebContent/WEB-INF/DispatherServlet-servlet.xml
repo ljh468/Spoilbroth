@@ -54,7 +54,7 @@
 	<!-- 파일업로드 기능 -->	
 	<!-- MultipartResolver 설정 -->	
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" 
-		p:maxUploadSize="2000000" p:maxInMemorySize="2000000" p:defaultEncoding="UTF-8"/>
+		p:maxUploadSize="3000000" p:maxInMemorySize="3000000" p:defaultEncoding="UTF-8"/>
 		
 </beans>
 

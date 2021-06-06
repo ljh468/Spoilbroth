@@ -127,6 +127,7 @@ public class UserInfoController {
 				String user_pwd = nvl(request.getParameter("user_pwd"));
 				String user_dept = nvl(request.getParameter("user_dept"));
 				String user_age = nvl(request.getParameter("user_age"));
+				String user_study = "";
 				String user_mbti = "";
 				
 				
@@ -150,6 +151,7 @@ public class UserInfoController {
 				pDTO.setUser_dept(user_dept);
 				pDTO.setUser_age(user_age);
 				pDTO.setUser_mbti(user_mbti);
+				pDTO.setUser_study(user_study);
 				pDTO.setJoin_dt(DateUtil.getDateTime("yyyy-MM-dd-hh:mm:ss"));
 				log.info("date : " + pDTO.getJoin_dt());
 				

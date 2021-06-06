@@ -159,39 +159,32 @@
 							<!-- 추천 Study Group -->
 							<!-- 슬라이드 -->
 							<div class="slider-1">
-								<label style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
-								추천 스터디
-								</label>
-								
+								<label
+									style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
+									추천 스터디 </label>
 								<div class="owl-carousel owl-theme">
-								
+									<%
+										for (StudyListDTO sDTO : pList) {
+									%>
 									<!-- 가입한 스터디 리스트로 뿌려줌 -->
-									<div class="item" style="coler:white">
-										<div style="background-image: url(/andrea-master/images/image_1.jpg); height:180px;">
-											<div class="txt-box">
-											</div>
-										</div>
-										<div>
-										<div style="font-size:20px">hi</div>
-											<ul>
-												<li>목록1</li>
-												<li>목록1</li>
+									<div class="item"
+										style="font-size: 33px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; coler: white;">
+										<img
+											src="/getStudyImage.do?study_name=<%=sDTO.getStudy_name()%>"
+											class="rounded" width="100%">
+										<div class="txt-box"></div>
+										<div style="margin-top: 20px; margin-bottom: 0px;">
+											<div style="font-size: 25px"><%=sDTO.getStudy_name()%></div>
+											<ul style="font-size: 20px">
+												<li><%=sDTO.getStudy_title()%></li>
+												<li><%=sDTO.getStudy_contents()%></li>
+												<li><%=sDTO.getStudy_member()%></li>
 											</ul>
 										</div>
 									</div>
-									
-									<div class="item" style="coler:white">
-										<div style="background-image: url(/andrea-master/images/image_2.jpg); height:180px;">
-										</div>
-										<div>
-											<div style="font-size:20px">hi</div>
-											<ul>
-												<li>목록1</li>
-												<li>목록1</li>
-											</ul>
-										</div>
-									</div>
-									
+									<%
+										}
+									%>
 
 								</div>
 							</div>

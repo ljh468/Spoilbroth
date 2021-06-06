@@ -1,6 +1,7 @@
 package poly.service;
 
-import poly.dto.StudyListDTO;
+import java.util.Map;
+
 import poly.dto.UserDTO;
 
 public interface IUserService {
@@ -10,6 +11,8 @@ public interface IUserService {
 	int insertUserInfo(UserDTO uDTO) throws Exception;
 
 	UserDTO idCheck(String userId) throws Exception;
+
+	int updateJoinStudy(Map<String, String> sMap) throws Exception;
 
 	
 }

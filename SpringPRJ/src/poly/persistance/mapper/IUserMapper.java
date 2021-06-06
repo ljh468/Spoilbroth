@@ -1,5 +1,7 @@
 package poly.persistance.mapper;
 
+import java.util.Map;
+
 import config.Mapper;
 import poly.dto.UserDTO;
 
@@ -16,5 +18,7 @@ public interface IUserMapper {
 	UserDTO getUserInfo(UserDTO uDTO) throws Exception;
 
 	UserDTO idCheck(String userId) throws Exception;
+
+	int updateJoinStudy(Map<String, String> sMap) throws Exception;
 	
 }

@@ -6,6 +6,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -99,6 +100,8 @@ public class StudyController {
 	public String inserStudyInfo(HttpServletRequest request, HttpSession session, ModelMap model,
 			@RequestParam(value = "fileUplod2") MultipartFile mf) throws Exception {
 
+		String user_id = (String) session.getAttribute("user_id");
+
 		log.info(this.getClass().getClass().getName() + "study/inserStudyInfo start!!");
 
 		// 가입 결과에 대한 메시지 전달할 변수
@@ -136,6 +139,16 @@ public class StudyController {
 			log.info("insertStudyInfo start!!");
 			int res = studyService.insertStudyInfo(sDTO);
 			log.info("insertStudyInfo end!!");
+
+			// 스터디 개설하면서 스터디정보 DB에 자신의 아이디 추가
+			Map<String, String> sMap = new HashMap<String, String>();
+			sMap.put("user_id", user_id);
+			sMap.put("study_name", study_name);
+
+			log.info("updateJoinStudy start!!");
+			int res2 = userService.updateJoinStudy(sMap);
+			log.info("updateJoinStudy end!!");
+
 			// 스터디 등록 끝
 			// ###################################################################
 
@@ -237,6 +250,7 @@ public class StudyController {
 		return "study/contestdetail";
 	}
 
+	// 스터디 상세정보 페이지 (가입전 정보보기)
 	@RequestMapping(value = "study/studyinfo", method = RequestMethod.GET)
 	public String studyinfo(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
 		log.info(this.getClass().getClass().getName() + "study/studyinfo start!!");
@@ -269,6 +283,52 @@ public class StudyController {
 		return "study/studyinfo";
 	}
 
+	// 스터디 가입하기
+	@RequestMapping(value = "study/studysignup")
+	public String studysignup(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
+		log.info(this.getClass().getClass().getName() + "study/studysignup start!!");
+
+		String user_id = (String) session.getAttribute("user_id");
+		String study_name = nvl(request.getParameter("study_name"));
+
+		log.info("user_id : " + user_id);
+		log.info("study_name : " + study_name);
+
+		String msg = "";
+		String url = "";
+
+		// 스터디 가입하면서 자신의 유저DB에 가입한 스터디이름 추가
+		Map<String, String> sMap = new HashMap<String, String>();
+		sMap.put("user_id", user_id);
+		sMap.put("study_name", study_name);
+		
+		int res = 0;
+		log.info("updateJoinStudy start!!");
+		res = userService.updateJoinStudy(sMap);
+		log.info("updateJoinStudy end!!");
+		// updateJoinStudy 끝
+		
+		// 가입하려는 스터디 팀원정보에 자신의 아이디추가  
+		int res2 = 0;
+		log.info("updateJoinUser start!!");
+		res2 = studyService.updateJoinUser(sMap); 
+		log.info("updateJoinUser end!!");
+		
+		if(res == 1 && res2 == 1) {
+			msg = study_name + "에 가입되었습니다.";
+			url = "/study/studyboard.do?study_name="+study_name;
+		}else {
+			msg = "가입에 실패하였습니다.";
+			url = "/study/match.do";
+			
+		}
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		log.info(this.getClass().getClass().getName() + "study/studysignup end!!");
+		return "/redirect";
+	}
+
+	// 스터디 게시판 페이지
 	@RequestMapping(value = "study/studyboard", method = RequestMethod.GET)
 	public String studyboard(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
 		log.info(this.getClass().getClass().getName() + "study/studyboard start!!");
@@ -306,7 +366,7 @@ public class StudyController {
 		return "study/studyboard";
 	}
 
-	// 프로필 이미지 불러오기 ( InputStream으로 파일 불러옴 )
+	// 스터디 이미지 불러오기 ( InputStream으로 파일 불러옴 )
 	@RequestMapping(value = "/getStudyImage", method = RequestMethod.GET)
 	public void getStudyImage(HttpServletRequest request, HttpSession session, HttpServletResponse response,
 			@RequestParam(value = "study_name") String study_name) throws Exception {

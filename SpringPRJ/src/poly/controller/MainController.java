@@ -1,9 +1,14 @@
 package poly.controller;
 
+import static poly.util.CmmUtil.nvl;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -18,10 +23,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import poly.dto.StudyListDTO;
 import poly.dto.UserDTO;
 import poly.service.IImgService;
+import poly.service.IStudyService;
 import poly.service.IUserService;
-import static poly.util.CmmUtil.nvl;
 
 
 
@@ -36,6 +42,10 @@ public class MainController {
 	
 	@Resource(name="ImgService")
 	IImgService imgService;
+	
+	@Resource(name = "StudyService")
+	IStudyService studyService;
+
 	
 	@RequestMapping(value = "index")
 	public String Index() {
@@ -56,20 +66,39 @@ public class MainController {
 		
 		System.out.println("user_id : " + id);
 		System.out.println("user_pwd : " + pwd);
+		
 		UserDTO uDTO = new UserDTO();
 		uDTO.setUser_id(id);
 		uDTO.setUser_pwd(pwd);
-
+		
+		// 사용자 정보 조회
 		UserDTO rDTO = new UserDTO();
 		rDTO = userService.getUserInfo(uDTO);
 		System.out.println(rDTO.getUser_study());
-		
+		System.out.println("nvl : " + nvl(rDTO.getUser_study()));
 		model.addAttribute("user_id", nvl(rDTO.getUser_id()));
 		model.addAttribute("user_name", nvl(rDTO.getUser_name()));
 		model.addAttribute("user_email", nvl(rDTO.getUser_email()));
 		model.addAttribute("user_dept", nvl(rDTO.getUser_dept()));
 		model.addAttribute("user_mbti", nvl(rDTO.getUser_mbti()));
 		model.addAttribute("user_study", nvl(rDTO.getUser_study()));
+		
+		String[] jrr = rDTO.getUser_study().split(",");
+		Map<String, String> pMap = new HashMap<String, String>();
+
+		List<String> aList = new ArrayList<String>();
+		for(String j : jrr) {
+		aList.add(j);
+		}
+		
+		// 가입한 스터디 조회 (가입한 스터디를 list로 넘겨서 스터디 정보 가져오기)
+		List<StudyListDTO> pList = studyService.getJoinStudyList(aList);
+		aList = null;
+		for(StudyListDTO sDTO : pList) {
+			System.out.println("sDTO : " + sDTO.getStudy_name());
+		}
+		
+		model.addAttribute("pList", pList);
 		
 		
 		log.info(this.getClass().getClass().getName() + "spoilbroth/mystudy end!!");

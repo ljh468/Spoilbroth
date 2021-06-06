@@ -10,6 +10,8 @@ import poly.persistance.mapper.IUserMapper;
 import poly.service.IUserService;
 import static poly.util.CmmUtil.nvl;
 
+import java.util.Map;
+
 @Service("UserService")
 public class UserService implements IUserService {
 
@@ -67,4 +69,11 @@ public class UserService implements IUserService {
 
 		return userMapper.idCheck(userId);
 	}
+
+	@Override
+	public int updateJoinStudy(Map<String, String> sMap) throws Exception {
+		return userMapper.updateJoinStudy(sMap);
+	}
+
+	
 }

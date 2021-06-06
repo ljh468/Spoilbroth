@@ -3,6 +3,7 @@ package poly.service.impl;
 import static poly.util.CmmUtil.nvl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -69,6 +70,16 @@ public class StudyService implements IStudyService {
 	@Override
 	public StudyListDTO getStudyInfo(String study_name) {
 		return studyMapper.getStudyInfo(study_name);
+	}
+
+	@Override
+	public List<StudyListDTO> getJoinStudyList(List<String> aList) {
+		return studyMapper.getJoinStudyList(aList);
+	}
+
+	@Override
+	public int updateJoinUser(Map<String, String> sMap) {
+		return studyMapper.updateJoinUser(sMap);
 	}
 
 }

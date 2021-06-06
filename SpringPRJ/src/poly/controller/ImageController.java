@@ -41,7 +41,7 @@ public class ImageController {
 	@RequestMapping(value = "FileUplod")
 	@ResponseBody
 	public Map<String, String> UserFileUpload(HttpServletRequest request, HttpServletResponse response, ModelMap model,
-			@RequestParam(value = "FileUplod") MultipartFile mf, HttpSession session) throws Exception {
+			@RequestParam(value = "fileUplod") MultipartFile mf, HttpSession session) throws Exception {
 
 		log.info("FileUplod start");
 		int res = 0;

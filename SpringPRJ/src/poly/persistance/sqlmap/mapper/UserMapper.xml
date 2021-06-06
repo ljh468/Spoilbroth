@@ -59,4 +59,13 @@
 	WHERE
 		USER_ID = #{user_id}
 	</select>
+	
+	<!-- 스터디 업데이트 -->
+	<update id="updateJoinStudy" parameterType="hashMap">
+		UPDATE USER_INFO
+		SET USER_STUDY = CASE WHEN USER_STUDY = ""
+							THEN #{study_name}
+							ELSE (CONCAT(USER_STUDY,',',#{study_name})) END
+		WHERE USER_SEQ = (SELECT USER_SEQ FROM USER_INFO WHERE USER_ID = #{user_id})
+	</update>
 </mapper>
