@@ -97,7 +97,7 @@ public class UserInfoController {
 		return "/redirect";
 	}
 	
-	// 회원가입
+		// 회원가입
 		@RequestMapping(value="user/signup")
 		public String signup(HttpServletRequest request, HttpSession session) {
 			log.info(this.getClass().getClass().getName() +"user/signup start!!");

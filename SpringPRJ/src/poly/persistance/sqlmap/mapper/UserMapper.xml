@@ -50,6 +50,8 @@
 	FROM USER_INFO
 	WHERE 
 		USER_ID = #{user_id}
+		
+		
 	</select>
 	
 	<!-- ID 조회 -->
@@ -60,12 +62,19 @@
 		USER_ID = #{user_id}
 	</select>
 	
-	<!-- 스터디 업데이트 -->
+	<!-- 유저 가입한 스터디정보에 가입한 스터디이름 추가 -->
 	<update id="updateJoinStudy" parameterType="hashMap">
 		UPDATE USER_INFO
 		SET USER_STUDY = CASE WHEN USER_STUDY = ""
 							THEN #{study_name}
 							ELSE (CONCAT(USER_STUDY,',',#{study_name})) END
+		WHERE USER_SEQ = (SELECT USER_SEQ FROM USER_INFO WHERE USER_ID = #{user_id})
+	</update>
+	
+	<!-- 유저 가입한 스터디정보에 탈퇴한 스터디이름 제거 -->
+	<update id="updateLeaveStudy" parameterType="hashMap">
+		UPDATE USER_INFO
+		SET USER_STUDY = #{user_study}
 		WHERE USER_SEQ = (SELECT USER_SEQ FROM USER_INFO WHERE USER_ID = #{user_id})
 	</update>
 </mapper>

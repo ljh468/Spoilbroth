@@ -16,5 +16,7 @@ public interface IStudyService {
 	List<StudyListDTO> getJoinStudyList(List<String> aList);
 
 	int updateJoinUser(Map<String, String> sMap);
+
+	int updateLeaveUser(Map<String, String> pMap);
 	
 }

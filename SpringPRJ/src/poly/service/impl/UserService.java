@@ -75,5 +75,10 @@ public class UserService implements IUserService {
 		return userMapper.updateJoinStudy(sMap);
 	}
 
+	@Override
+	public int updateLeaveStudy(Map<String, String> pMap) throws Exception {
+		return userMapper.updateLeaveStudy(pMap);
+	}
+
 	
 }

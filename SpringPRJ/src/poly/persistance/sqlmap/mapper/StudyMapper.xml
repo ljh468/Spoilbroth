@@ -19,7 +19,8 @@
 				STUDY_NAME,
 				STUDY_MEMBER,
 				STUDY_TITLE,
-				STUDY_CONTENTS
+				STUDY_CONTENTS,
+				STUDY_CREATOR
 			)
 		VALUES(	
 				(SELECT IFNULL(MAX(STUDY_SEQ), 0)+1 FROM STUDY_INFO S),
@@ -28,7 +29,9 @@
 				#{study_name},
 				#{study_member},
 				#{study_title},
-				#{study_contents}
+				#{study_contents},
+				#{creator}
+				
 			)
 				
 	
@@ -66,6 +69,13 @@
 		SET STUDY_MEMBER = CASE WHEN STUDY_MEMBER = ""
 							THEN #{user_id}
 							ELSE (CONCAT(STUDY_MEMBER,',',#{user_id})) END
+		WHERE STUDY_SEQ = (SELECT STUDY_SEQ FROM STUDY_INFO WHERE STUDY_NAME = #{study_name})
+	</update>
+	
+	<!-- 스터디 팀원정보에 가입한 유저 아이디 삭제 -->
+	<update id="updateLeaveUser" parameterType="hashMap">
+		UPDATE STUDY_INFO
+		SET STUDY_MEMBER = #{sutdy_member}
 		WHERE STUDY_SEQ = (SELECT STUDY_SEQ FROM STUDY_INFO WHERE STUDY_NAME = #{study_name})
 	</update>
 </mapper>

@@ -21,4 +21,6 @@ public interface IStudyMapper {
 
 	int updateJoinUser(Map<String, String> sMap);
 
+	int updateLeaveUser(Map<String, String> pMap);
+
 }

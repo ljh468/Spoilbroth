@@ -82,4 +82,9 @@ public class StudyService implements IStudyService {
 		return studyMapper.updateJoinUser(sMap);
 	}
 
+	@Override
+	public int updateLeaveUser(Map<String, String> pMap) {
+		return studyMapper.updateLeaveUser(pMap);
+	}
+
 }

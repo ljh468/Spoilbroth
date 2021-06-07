@@ -6,6 +6,8 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -135,12 +137,13 @@ public class StudyController {
 			sDTO.setStudy_member(study_member);
 			sDTO.setStudy_title(study_title);
 			sDTO.setStudy_contents(study_contents);
+			sDTO.setCreator(user_id);
 
 			log.info("insertStudyInfo start!!");
 			int res = studyService.insertStudyInfo(sDTO);
 			log.info("insertStudyInfo end!!");
 
-			// 스터디 개설하면서 스터디정보 DB에 자신의 아이디 추가
+			// 스터디 개설하면서 유저정보 DB에 스터디이름 추가
 			Map<String, String> sMap = new HashMap<String, String>();
 			sMap.put("user_id", user_id);
 			sMap.put("study_name", study_name);
@@ -301,26 +304,26 @@ public class StudyController {
 		Map<String, String> sMap = new HashMap<String, String>();
 		sMap.put("user_id", user_id);
 		sMap.put("study_name", study_name);
-		
+
 		int res = 0;
 		log.info("updateJoinStudy start!!");
 		res = userService.updateJoinStudy(sMap);
 		log.info("updateJoinStudy end!!");
 		// updateJoinStudy 끝
-		
-		// 가입하려는 스터디 팀원정보에 자신의 아이디추가  
+
+		// 가입하려는 스터디 팀원정보에 자신의 아이디추가
 		int res2 = 0;
 		log.info("updateJoinUser start!!");
-		res2 = studyService.updateJoinUser(sMap); 
+		res2 = studyService.updateJoinUser(sMap);
 		log.info("updateJoinUser end!!");
-		
-		if(res == 1 && res2 == 1) {
+
+		if (res == 1 && res2 == 1) {
 			msg = study_name + "에 가입되었습니다.";
-			url = "/study/studyboard.do?study_name="+study_name;
-		}else {
+			url = "/study/studyboard.do?study_name=" + study_name;
+		} else {
 			msg = "가입에 실패하였습니다.";
 			url = "/study/match.do";
-			
+
 		}
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
@@ -415,5 +418,90 @@ public class StudyController {
 				in.close();
 			}
 		}
+	}
+
+	// 스터디 탈퇴하기
+	@RequestMapping(value = "/study/leave", method = RequestMethod.GET)
+	public String leave(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
+
+		log.info("/study/leave start !! ");
+		String user_id = (String) session.getAttribute("user_id");
+		String study_name = nvl(request.getParameter("study_name"));
+		
+		String msg = "";
+		String url = "";
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// 스터디 정보에서 스터디 맴버 가져오기
+		StudyListDTO pDTO = studyService.getStudyInfo(study_name);
+		log.info("members : " + pDTO.getStudy_member());
+		String[] arr = pDTO.getStudy_member().split(",");
+
+		ArrayList<String> list = new ArrayList<String>(Arrays.asList(arr));
+		arr = null;
+		String leave_study_member = "";
+		for (int i = 0; i < list.size(); i++) {
+			String str = list.get(i);
+			if (str.equals(user_id)) {
+				list.remove(i);
+			}
+		}
+		leave_study_member = String.join(",", list);
+		log.info("leave_study_member : " + leave_study_member);
+		list = null;
+		
+		// 스터디 정보에서 탈퇴하는 아이디 지우기
+		Map<String, String> pMap = new HashMap<String, String>();
+		pMap.put("sutdy_member", leave_study_member);
+		pMap.put("study_name", study_name);
+
+		log.info("updateLeaveUser Start!!");
+		int res = studyService.updateLeaveUser(pMap);
+		log.info("updateLeaveUser End!!");
+		pMap = null;
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// 유저 정보에서 가입한 스터디 목록 가져오기
+		UserDTO uDTO = new UserDTO();
+		uDTO.setUser_id(user_id);
+		uDTO = userService.getUserInfo(uDTO);
+		arr = uDTO.getUser_study().split(",");
+		
+		list = new ArrayList<String>(Arrays.asList(arr));
+		arr = null;
+		String leave_user_study = "";
+		for (int i = 0; i < list.size(); i++) {
+			String str = list.get(i);
+			if (str.equals(study_name)) {
+				list.remove(i);
+			}
+		}
+		leave_user_study = String.join(",", list);
+		log.info("leave_user_study : " + leave_user_study);
+		
+		// 유저 정보에서 탈퇴하는 스터디 지우기
+		pMap = new HashMap<String, String>();
+		pMap.put("user_study", leave_user_study);
+		pMap.put("user_id", user_id);
+		
+		log.info("updateLeaveStudy Start!!");
+		int res2 = userService.updateLeaveStudy(pMap);
+		log.info("updateLeaveStudy End!!");
+		pMap = null;
+		
+		log.info("res : "+ res);
+		log.info("res2 : "+ res2);
+		if(res==1 && res2==1) {
+			msg = "탈퇴가 완료되었습니다.";
+			url = "/study/mystudy.do";
+		}else {
+			msg = "탈퇴에 실패하였습니다.";
+			url = "/study/studyboard.do?study_name=" + study_name;
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		return "/redirect";
 	}
 }

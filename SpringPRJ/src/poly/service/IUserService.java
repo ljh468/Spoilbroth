@@ -14,5 +14,7 @@ public interface IUserService {
 
 	int updateJoinStudy(Map<String, String> sMap) throws Exception;
 
+	int updateLeaveStudy(Map<String, String> pMap) throws Exception;
+
 	
 }
