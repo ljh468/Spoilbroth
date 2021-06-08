@@ -23,4 +23,6 @@ public interface IStudyMapper {
 
 	int updateLeaveUser(Map<String, String> pMap);
 
+	int deleteStudy(String study_name);
+
 }

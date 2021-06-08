@@ -13,6 +13,8 @@
 	String study_name = (String) request.getAttribute("study_name");
 	String study_notify = CmmUtil.nvl(sDTO.getStudy_notify());
 	String study_title = CmmUtil.nvl(sDTO.getStudy_title());
+	String study_creator = CmmUtil.nvl(sDTO.getStudy_creator());
+	System.out.println("study_creator : " + study_creator);
 	
 	String[] study_group = user_name.split("");
 	int study_count = study_group.length;
@@ -200,6 +202,17 @@
 										
 									</table>
 									<!-- 스터디 개설  END -->
+									<%if (user_id.equals(study_creator)) { %>
+										
+									<button id="btnUpload" class="btn btn-sm btn-danger w-100" style="margin-top: 20px; margin-left: 2px;"
+                           			onclick="del();">스터디 삭제하기</button>
+										
+									<%} else { %>
+									
+									<button id="btnUpload" class="btn btn-sm btn-danger w-100" style="margin-top: 20px; margin-left: 2px;"
+                           			onclick="leave();">스터디 탈퇴하기</button>
+                           			
+									<%} %>
 
 									<hr style="margin-top: 10px; margin-bottom: 0px;" />
 
@@ -332,5 +345,24 @@
 	$(document).ready(function() {
 		$('#example').DataTable({});
 	});
+</script>
+<script type="text/javascript">
+
+function del() {
+	if (window.confirm('삭제를 진행하시겠습니까?')){
+		window.location = '/study/del.do?study_name=<%=study_name %>';
+	}else{
+	    // They clicked no
+	}
+}
+
+function leave() {
+	if (window.confirm('스터디 그룹을 탈퇴하시겠습니까?')){
+		window.location = '/study/leave.do?study_name=<%=study_name %>';
+	}else{
+	    // They clicked no
+	}
+}
+
 </script>
 </html>

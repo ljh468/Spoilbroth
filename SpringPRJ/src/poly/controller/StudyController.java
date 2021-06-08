@@ -137,7 +137,7 @@ public class StudyController {
 			sDTO.setStudy_member(study_member);
 			sDTO.setStudy_title(study_title);
 			sDTO.setStudy_contents(study_contents);
-			sDTO.setCreator(user_id);
+			sDTO.setStudy_creator(user_id);
 
 			log.info("insertStudyInfo start!!");
 			int res = studyService.insertStudyInfo(sDTO);
@@ -277,6 +277,8 @@ public class StudyController {
 		log.info("getStudyInfo start");
 		sDTO = studyService.getStudyInfo(study_name);
 		log.info("getStudyInfo end");
+		log.info("rDTO : " + rDTO.getUser_email());
+		log.info("sDTO : " + sDTO.getStudy_creator());
 
 		model.addAttribute("sDTO", sDTO);
 		model.addAttribute("rDTO", rDTO);
@@ -427,10 +429,10 @@ public class StudyController {
 		log.info("/study/leave start !! ");
 		String user_id = (String) session.getAttribute("user_id");
 		String study_name = nvl(request.getParameter("study_name"));
-		
+
 		String msg = "";
 		String url = "";
-		
+
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// 스터디 정보에서 스터디 맴버 가져오기
@@ -450,7 +452,7 @@ public class StudyController {
 		leave_study_member = String.join(",", list);
 		log.info("leave_study_member : " + leave_study_member);
 		list = null;
-		
+
 		// 스터디 정보에서 탈퇴하는 아이디 지우기
 		Map<String, String> pMap = new HashMap<String, String>();
 		pMap.put("sutdy_member", leave_study_member);
@@ -467,7 +469,7 @@ public class StudyController {
 		uDTO.setUser_id(user_id);
 		uDTO = userService.getUserInfo(uDTO);
 		arr = uDTO.getUser_study().split(",");
-		
+
 		list = new ArrayList<String>(Arrays.asList(arr));
 		arr = null;
 		String leave_user_study = "";
@@ -479,25 +481,101 @@ public class StudyController {
 		}
 		leave_user_study = String.join(",", list);
 		log.info("leave_user_study : " + leave_user_study);
-		
+
 		// 유저 정보에서 탈퇴하는 스터디 지우기
 		pMap = new HashMap<String, String>();
 		pMap.put("user_study", leave_user_study);
 		pMap.put("user_id", user_id);
-		
+
 		log.info("updateLeaveStudy Start!!");
 		int res2 = userService.updateLeaveStudy(pMap);
 		log.info("updateLeaveStudy End!!");
 		pMap = null;
-		
-		log.info("res : "+ res);
-		log.info("res2 : "+ res2);
-		if(res==1 && res2==1) {
+
+		log.info("res : " + res);
+		log.info("res2 : " + res2);
+		if (res == 1 && res2 == 1) {
 			msg = "탈퇴가 완료되었습니다.";
-			url = "/study/mystudy.do";
-		}else {
+			url = "/spoilbroth/mystudy.do";
+		} else {
 			msg = "탈퇴에 실패하였습니다.";
 			url = "/study/studyboard.do?study_name=" + study_name;
+		}
+
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		return "/redirect";
+	}
+
+	// 스터디 삭제하기 (스터디 개설자만 삭제할수 있음)
+	@RequestMapping(value = "/study/del", method = RequestMethod.GET)
+	public String del(HttpSession session, HttpServletRequest request, ModelMap model) throws Exception {
+
+		log.info("/study/del start !! ");
+		String user_id = (String) session.getAttribute("user_id");
+		String study_name = nvl(request.getParameter("study_name"));
+
+		String msg = "";
+		String url = "";
+		int res = 0;
+		int res2 = 0;
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// 모든 유저 user_study에서 study_name을 제거
+		
+		// 스터디 정보에서 팀원정보를 가져옴
+		StudyListDTO pDTO = studyService.getStudyInfo(study_name);
+		log.info("members : " + pDTO.getStudy_member());
+		String[] arr = pDTO.getStudy_member().split(",");
+
+		ArrayList<String> list = new ArrayList<String>(Arrays.asList(arr));
+		arr = null;
+		
+		// 모든 팀원정보를 조회하면서 스터디 목록 지우기
+		for(String user : list) {
+			// 유저 정보에서 가입한 스터디 목록 가져오기
+			UserDTO uDTO = new UserDTO();
+			uDTO.setUser_id(user);
+			uDTO = userService.getUserInfo(uDTO);
+			arr = uDTO.getUser_study().split(",");
+
+			list = new ArrayList<String>(Arrays.asList(arr));
+			arr = null;
+			String leave_user_study = "";
+			for (int i = 0; i < list.size(); i++) {
+				String str = list.get(i);
+				if (str.equals(study_name)) {
+					list.remove(i);
+				}
+			}
+			leave_user_study = String.join(",", list);
+			log.info("leave_user_study : " + leave_user_study);
+
+			// 유저 정보에서 삭제하려는 스터디 지우기
+			HashMap<String, String> pMap = new HashMap<String, String>();
+			pMap.put("user_study", leave_user_study);
+			pMap.put("user_id", user);
+
+			log.info("updateLeaveStudy Start!!");
+			res = 0;
+			res = userService.updateLeaveStudy(pMap);
+			log.info("updateLeaveStudy End!!");
+			pMap = null;
+		}
+		
+		// 스터디 삭제
+		log.info("deleteStudy Start!!");
+		res2 = studyService.deleteStudy(study_name);
+		log.info("deleteStudy End!!");
+		
+		// 스터디 삭제가 완료되면 실행
+		if (res2==1) {
+			msg = "삭제가 완료되었습니다.";
+			url = "/spoilbroth/mystudy.do";
+		}else {
+			msg = "삭제에 실패하였습니다.";
+			url = "/spoilbroth/mystudy.do";
 		}
 		
 		model.addAttribute("msg", msg);

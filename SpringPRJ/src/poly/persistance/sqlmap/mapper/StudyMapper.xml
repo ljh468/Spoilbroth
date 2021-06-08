@@ -30,7 +30,7 @@
 				#{study_member},
 				#{study_title},
 				#{study_contents},
-				#{creator}
+				#{study_creator}
 				
 			)
 				
@@ -78,4 +78,10 @@
 		SET STUDY_MEMBER = #{sutdy_member}
 		WHERE STUDY_SEQ = (SELECT STUDY_SEQ FROM STUDY_INFO WHERE STUDY_NAME = #{study_name})
 	</update>
+	
+	<!-- 스터디 삭제 하기 -->
+	<delete id="deleteStudy" parameterType="String">
+		DELETE FROM STUDY_INFO
+		WHERE STUDY_NAME = #{study_name}
+	</delete>
 </mapper>

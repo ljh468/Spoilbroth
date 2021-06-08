@@ -87,4 +87,9 @@ public class StudyService implements IStudyService {
 		return studyMapper.updateLeaveUser(pMap);
 	}
 
+	@Override
+	public int deleteStudy(String study_name) {
+		return studyMapper.deleteStudy(study_name);
+	}
+
 }

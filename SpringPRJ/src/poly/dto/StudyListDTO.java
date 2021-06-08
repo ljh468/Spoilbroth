@@ -15,7 +15,7 @@ public class StudyListDTO {
 	private String study_contents;
 	private String exists_yn; // 중복가입 방지를 위한 가상의 컬럼
 	private String study_notify; // 게시판 알림
-	private String creator; // 개설자
+	private String study_creator; // 개설자
 	
 	public String getStudy_seq() {
 		return study_seq;
@@ -71,11 +71,11 @@ public class StudyListDTO {
 	public void setStudy_notify(String study_notify) {
 		this.study_notify = study_notify;
 	}
-	public String getCreator() {
-		return creator;
+	public String getStudy_creator() {
+		return study_creator;
 	}
-	public void setCreator(String creator) {
-		this.creator = creator;
+	public void setStudy_creator(String study_creator) {
+		this.study_creator = study_creator;
 	}
 	
 }

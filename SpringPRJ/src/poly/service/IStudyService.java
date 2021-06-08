@@ -18,5 +18,7 @@ public interface IStudyService {
 	int updateJoinUser(Map<String, String> sMap);
 
 	int updateLeaveUser(Map<String, String> pMap);
+
+	int deleteStudy(String study_name);
 	
 }
