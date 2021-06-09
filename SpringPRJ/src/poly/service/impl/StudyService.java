@@ -92,4 +92,9 @@ public class StudyService implements IStudyService {
 		return studyMapper.deleteStudy(study_name);
 	}
 
+	@Override
+	public String getStudyName(String study_seq) {
+		return studyMapper.getStudyName(study_seq);
+	}
+
 }

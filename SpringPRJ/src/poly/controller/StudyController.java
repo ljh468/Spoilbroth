@@ -25,10 +25,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import poly.dto.BoardDTO;
 import poly.dto.OcrDTO;
 import poly.dto.StudyListDTO;
 import poly.dto.UserDTO;
 import poly.service.IImgService;
+import poly.service.IBoardService;
 import poly.service.IStudyService;
 import poly.service.IUserService;
 import poly.util.DateUtil;
@@ -49,6 +51,9 @@ public class StudyController {
 
 	@Resource(name = "ImgService")
 	IImgService imgService;
+	
+	@Resource(name = "BoardService")
+	IBoardService boardService;
 
 	// MyStudy Maching 메인화면
 	@RequestMapping(value = "study/match")
@@ -361,9 +366,18 @@ public class StudyController {
 		log.info("getStudyInfo start");
 		sDTO = studyService.getStudyInfo(study_name);
 		log.info("getStudyInfo end");
-
-		model.addAttribute("sDTO", sDTO);
-		model.addAttribute("rDTO", rDTO);
+		
+		// 스터디 게시판 데이터 가져오기
+		String study_seq = nvl(sDTO.getStudy_seq());
+		log.info("study_seq : " + study_seq);
+		List<BoardDTO> rList = boardService.getBoardList(study_seq);
+		if(rList==null) {
+			rList = new ArrayList<>();
+		}
+		
+		model.addAttribute("rList", rList); // 스터디별 게시판 정보
+		model.addAttribute("sDTO", sDTO); // 스터디 정보
+		model.addAttribute("rDTO", rDTO); // 유저 정보
 		model.addAttribute("study_name", study_name);
 
 		log.info(this.getClass().getClass().getName() + "study/studyboard end!!");

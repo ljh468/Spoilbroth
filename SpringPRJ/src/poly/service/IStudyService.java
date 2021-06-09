@@ -20,5 +20,7 @@ public interface IStudyService {
 	int updateLeaveUser(Map<String, String> pMap);
 
 	int deleteStudy(String study_name);
+
+	String getStudyName(String study_seq);
 	
 }

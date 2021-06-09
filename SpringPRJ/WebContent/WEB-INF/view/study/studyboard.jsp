@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="poly.dto.BoardDTO"%>
 <%@page import="poly.util.CmmUtil"%>
 <%@page import="poly.dto.StudyListDTO"%>
 <%@page import="poly.dto.UserDTO"%>
@@ -14,10 +17,18 @@
 	String study_notify = CmmUtil.nvl(sDTO.getStudy_notify());
 	String study_title = CmmUtil.nvl(sDTO.getStudy_title());
 	String study_creator = CmmUtil.nvl(sDTO.getStudy_creator());
+	String study_seq = CmmUtil.nvl(sDTO.getStudy_seq());
 	System.out.println("study_creator : " + study_creator);
+	System.out.println("study_seq : " + study_seq);
 	
 	String[] study_group = user_name.split("");
 	int study_count = study_group.length;
+	
+	// 게시판 조회 결과 보여주기
+	List<BoardDTO> rList = (List<BoardDTO>)request.getAttribute("rList");
+	if( rList == null){
+		rList = new ArrayList<BoardDTO>();
+	}
 %>
 
 <!DOCTYPE html>
@@ -172,38 +183,54 @@
 									<hr>
 									<!-- 게시판 -->
 									<table id="example" class="display" style="width: 100%;font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;"">
-										<thead>
+										<thead style="font-size:15px";>
 											<tr>
 												<th>no</th>
 												<th>tile</th>
 												<th>name</th>
-												
+												<th>v</th>
 												
 											</tr>
 										</thead>
 
 										<%
-											for (int i = 0; i < 2; i++) {
+											for (int i = 0; i < rList.size(); i++) {
+												BoardDTO rDTO = rList.get(i);
+												if(rDTO == null){
+													rDTO = new BoardDTO();
+												}
 										%>
 										<tr>
-											<td>1</td>
-											<td>공지사항</td>
-											<th>재훈</th>
-										</tr>
-										<tr>
-											<td>2</td>
-											<td>오늘 언제 보실껀가요??</td>
-											<th>두표</th>
+											<td style="font-size:15px";>
+											<%
+											// 공지글이라면, [공지]표시
+											if(CmmUtil.nvl(rDTO.getNotice_yn()).equals("1")){
+												out.print("<b>[공지]</b>");
+											}else{
+												out.print(CmmUtil.nvl(rDTO.getNotice_seq()));
+											}
+											%>
+											</td>
+											<td><a href="javascript:doDetail('<%=CmmUtil.nvl(rDTO.getNotice_seq())%>','<%=CmmUtil.nvl(study_seq)%>');">
+											<%=CmmUtil.nvl(rDTO.getTitle()) %></a>
+											</td>
+											<th style="font-size:15px";>
+											<%=CmmUtil.nvl(rDTO.getUser_name()) %>
+											</th>
+											<th style="font-size:15px";>
+											<%=CmmUtil.nvl(rDTO.getRead_cnt()) %>
+											</th>
 										</tr>
 										<%
 											}
 										%>
-
-										
 									</table>
+									<div style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
+									<a href="javascript:newReg('<%=study_seq %>');">
+									[글쓰기]</a>
+									</div>
 									<!-- 스터디 개설  END -->
 									<%if (user_id.equals(study_creator)) { %>
-										
 									<button id="btnUpload" class="btn btn-sm btn-danger w-100" style="margin-top: 20px; margin-left: 2px;"
                            			onclick="del();">스터디 삭제하기</button>
 										
@@ -256,7 +283,16 @@
 
 
 </body>
+<script type="text/javascript">
+//상세보기 이동
+function doDetail(seq, seq2){
+	location.href="/board/BoardInfo.do?notice_seq="+seq+"&study_seq="+seq2;
+}
 
+function newReg(seq){
+	location.href="/board/BoardReg.do?study_seq="+seq;
+}
+</script>
 <script type="text/javascript">
 		$(function () {
 			$('#btn-upload').click(function (e) {
@@ -343,7 +379,14 @@
 </script>
 <script>
 	$(document).ready(function() {
-		$('#example').DataTable({});
+		$('#example').DataTable({
+			"columns" : [
+					{"width" : "10%"},
+					{ "width" : "80%" },
+					{ "width" : "5%" },
+					{ "width" : "5%" } 
+			]
+		});
 	});
 </script>
 <script type="text/javascript">

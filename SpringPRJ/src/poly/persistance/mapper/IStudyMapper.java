@@ -25,4 +25,6 @@ public interface IStudyMapper {
 
 	int deleteStudy(String study_name);
 
+	String getStudyName(String study_seq);
+
 }
