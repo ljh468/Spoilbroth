@@ -10,6 +10,7 @@
 		<typeAlias type="poly.dto.MelonDTO" alias="MelonDTO"/>
 		<typeAlias type="poly.dto.OcrDTO" alias="OcrDTO"/>
 		<typeAlias type="poly.dto.StudyListDTO" alias="StudyListDTO"/>
+		<typeAlias type="poly.dto.BoardDTO" alias="BoardDTO"/>
 		
     </typeAliases>
 </configuration>
