@@ -77,4 +77,10 @@
 		SET USER_STUDY = #{user_study}
 		WHERE USER_SEQ = (SELECT USER_SEQ FROM USER_INFO WHERE USER_ID = #{user_id})
 	</update>
+	
+	<update id="updateUserMbti" parameterType="UserDTO">
+		UPDATE USER_INFO
+		SET USER_MBTI = #{user_mbti}
+		WHERE USER_ID = #{user_id}
+	</update>
 </mapper>

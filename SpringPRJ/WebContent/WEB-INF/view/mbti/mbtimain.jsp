@@ -1,12 +1,13 @@
+<%@page import="poly.dto.MbtiDTO"%>
+<%@page import="poly.util.CmmUtil"%>
+<%@page import="poly.dto.UserDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
 <%
-	String user_seq = (String) request.getAttribute("user_seq");
-String user_id = (String) request.getAttribute("user_id");
-String user_pwd = (String) request.getAttribute("user_pwd");
-String user_email = (String) request.getAttribute("user_email");
-String join_dt = (String) request.getAttribute("join_dt");
+	UserDTO uDTO = (UserDTO)request.getAttribute("rDTO");
+	MbtiDTO mDTO = (MbtiDTO)request.getAttribute("mDTO");
+	String user_id = CmmUtil.nvl(uDTO.getUser_id());
 %>
 
 <!DOCTYPE html>
@@ -71,19 +72,23 @@ String join_dt = (String) request.getAttribute("join_dt");
 							My MBTI</div>
 							
 							<div class="row p-2">
-								<div class="card p-l-55 p-r-55 p-t-65 p-b-54 shadowbox col-7" 
-								style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 20px;">
+								<div class="card p-l-55 p-r-55 p-t-65 p-b-54 shadowbox col-6" 
+								style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 20px; margin-bottom: 0px;">
 								
-									<div>MBTI 검사</div>
-									<div>MBTI 검사</div>
-									<div>MBTI 검사</div>
-									<div>MBTI 검사</div>
-						
+									<%if(mDTO.getMbti_name().equals("")){ %>
+										<div style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 20px;">
+										아직 측정이 되어있지 않습니다.</div>
+									<% }else{ %>
+										<div>
+										<strong style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 30px;">
+										<%=mDTO.getMbti_name() %></strong></div>
+										<div style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 20px;">
+										<%=mDTO.getMbti_content() %></div>
+									<% } %>
 								</div>
-								<div></div>
-								<div class="card p-l-55 p-r-55 p-t-65 p-b-54 shadowbox col-4" style="background-image: url(/andrea-master/images/image_1.jpg); 
-										margin-left: 15px;
-										border:none; border-radius: 7px;-moz-border-radius: 7px;-khtml-border-radius: 7px;-webkit-border-radius: 7px;">
+								<div class="card p-l-55 p-r-55 p-t-65 p-b-54 shadowbox col-6" style="border:none; border-radius: 7px;-moz-border-radius: 7px;
+									-khtml-border-radius: 7px;-webkit-border-radius: 7px; padding-left:0px;padding-right:0px; width:100%; margin-bottom: 0px;">
+								<img src="<%=mDTO.getMbti_img_path() %>" width="100%" height="202" alt="등록된 사진이 없습니다." style="border:none; border-radius: 7px;">
 								</div>
 							
 							</div>
@@ -91,83 +96,29 @@ String join_dt = (String) request.getAttribute("join_dt");
 								<div class="card p-l-55 p-r-55 p-t-65 p-b-54 shadowbox col-12" 
 								style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 20px;">
 								
-									<div>MBTI 검사</div>
-									<div>MBTI 검사</div>
-									<div>MBTI 검사</div>
-									<div>MBTI 검사</div>
-									<div>MBTI 검사</div>
-									<div>MBTI 검사</div>
-									<div>MBTI 검사</div>
-									<div>MBTI 검사</div>
-									<div>MBTI 검사</div>
-									<div>MBTI 검사</div>
-						
-							
-							
-								</div>
-							</div>
-							
-								
-
-							<div class="row pt-md-4">
-								<div class="col-md-12">
-									<div class="blog-entry ftco-animate d-md-flex fadeInUp ftco-animated">
-										<div class="text text-2 pl-md-4">
-											
-											<div class="meta-wrap">
-												<p class="meta">
-													<span><i class="icon-calendar mr-2"></i>June 28,
-														2019</span> <span><a href="single.html"><i
-															class="icon-folder-o mr-2"></i>Travel</a></span> <span><i
-														class="icon-comment2 mr-2"></i>5 Comment</span>
-												</p>
-											</div>
-											<p class="mb-4">A small river named Duden flows by their
-												place and supplies it with the necessary regelialia.</p>
-											<p>
-												<a href="#" class="btn-custom">Read More <span
-													class="ion-ios-arrow-forward"></span></a>
-											</p>
-										</div>
+									<div class="mb-3 mt-2">
+										<img src="/andrea-master/images/mbtiex00.png" alt="등록된 사진이 없습니다." style="border:none; border-radius: 7px; width:100%">
+										<p style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 19px;">
+										MBTI 검사는 전세계에서 가장 유명한 성격유형검사 중 하나로, 인간의 성격을 4가지 척도로 분류한 성격유형검사입니다.
+										두 개의 태도지표(외향-내향, 판단-인식)와 두 개의 기능지표(감각-직관, 사고-감정)에 대한 
+										개인의 선호도를 밝혀서 4가지 척도에서 바라본 개인의 성격유형을 알려줍니다.
+										</p>
+										
+										<img src="/andrea-master/images/mbticon01.jpg" width="100%" height="210" alt="등록된 사진이 없습니다." style="border:none; border-radius: 7px;">
 									</div>
+									
+									<button type="button" class="btn btn-success mb-2" style="font-size:20px;border-radius: 10px;" onclick="location.href='/mbti/mbtianalysis.do' ">Start</button>
+							
+								</div>
+								<div style="text-align: center;" class="mb-3">
+								<p style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 20px;">
+								※자신의 MBTI를 12문제로 간단히 테스트하고 <br>나와 잘맞는 성격의 팀원과 스터디그룹을 찾아봅시다!<br>
+								꾸미지 않고 솔직한 답변을 부탁드립니다.</p>
 								</div>
 							</div>
+							
 						
-						<div style="text-align: center;">
-								<button type="button" class="btn btn-success" style="border-radius: 10px;" onclick="location.href='/mbti/mbtianalysis.do' ">Start</button>
-							
-						</div>
-						왼쪽 스크립트 끝
-						</div>
-							
-						<!-- 오른쪽 스크립트 -->
-						<div class="col-xl-3 sidebar ftco-animate bg-light pt-5 fadeInUp ftco-animated">
-							<div>오른쪽 스크립트 시작</div>
-							
-							
-
-							<div class="sidebar-box ftco-animate">
-								<h3 class="sidebar-heading">Archives</h3>
-								<ul class="categories">
-									<li><a href="#">Decob14 2018 <span>(10)</span></a></li>
-									<li><a href="#">September 2018 <span>(6)</span></a></li>
-									<li><a href="#">August 2018 <span>(8)</span></a></li>
-									<li><a href="#">July 2018 <span>(2)</span></a></li>
-									<li><a href="#">June 2018 <span>(7)</span></a></li>
-									<li><a href="#">May 2018 <span>(5)</span></a></li>
-								</ul>
-							</div>
-
-							<div class="sidebar-box ftco-animate">
-								<h3 class="sidebar-heading">Paragraph</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-									Ducimus itaque, autem necessitatibus voluptate quod mollitia
-									delectus aut.</p>
-							</div>
-							<div>오른쪽 스크립트 끝</div>
-						</div>
-
-					
+					</div>
 				</div>
 			</section>
 		</div>

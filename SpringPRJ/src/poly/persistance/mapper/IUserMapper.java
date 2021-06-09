@@ -22,5 +22,7 @@ public interface IUserMapper {
 	int updateJoinStudy(Map<String, String> sMap) throws Exception;
 
 	int updateLeaveStudy(Map<String, String> pMap) throws Exception;
+
+	int updateUserMbti(UserDTO pDTO) throws Exception;
 	
 }

@@ -16,5 +16,7 @@ public interface IUserService {
 
 	int updateLeaveStudy(Map<String, String> pMap) throws Exception;
 
+	int updateUserMbti(UserDTO pDTO) throws Exception;
+
 	
 }

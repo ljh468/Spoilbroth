@@ -80,5 +80,10 @@ public class UserService implements IUserService {
 		return userMapper.updateLeaveStudy(pMap);
 	}
 
+	@Override
+	public int updateUserMbti(UserDTO pDTO) throws Exception {
+		return userMapper.updateUserMbti(pDTO);
+	}
+
 	
 }
