@@ -35,18 +35,27 @@ public class MbtiController {
 		log.info(this.getClass().getClass().getName() + "mbtimain start!!");
 		
 		String user_id = (String)session.getAttribute("user_id");
-		
+		if (user_id == null) {
+	         return "/user/login";
+	      }
 		// 사용자 정보 조회
 		UserDTO rDTO = new UserDTO();
 		rDTO.setUser_id(user_id);
 		rDTO = userService.getUserInfo(rDTO);
-		
+		if(rDTO== null) {
+			rDTO = new UserDTO();
+		}
 		// MBTI 정보 조회
 		MbtiDTO mDTO = new MbtiDTO();
 		mDTO.setMbti_name(rDTO.getUser_mbti());
 		log.info(rDTO.getUser_mbti());
 		
 		mDTO = mbtiService.getMbtiInfo(mDTO);
+		if(mDTO == null) {
+			mDTO = new MbtiDTO();
+		}
+		
+		log.info("MBTI : " + mDTO.getMbti_name());
 		
 		model.addAttribute("mDTO", mDTO); // mbti 정보
 		model.addAttribute("rDTO", rDTO); // 유저 정보

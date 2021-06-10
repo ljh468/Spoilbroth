@@ -75,7 +75,7 @@
 								<div class="card p-l-55 p-r-55 p-t-65 p-b-54 shadowbox col-6" 
 								style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 20px; margin-bottom: 0px;">
 								
-									<%if(mDTO.getMbti_name().equals("")){ %>
+									<%if(mDTO.getMbti_name()==null){ %>
 										<div style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 20px;">
 										아직 측정이 되어있지 않습니다.</div>
 									<% }else{ %>
@@ -98,7 +98,7 @@
 								
 									<div class="mb-3 mt-2">
 										<img src="/andrea-master/images/mbtiex00.png" alt="등록된 사진이 없습니다." style="border:none; border-radius: 7px; width:100%">
-										<p style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 19px;">
+										<p style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 22px;">
 										MBTI 검사는 전세계에서 가장 유명한 성격유형검사 중 하나로, 인간의 성격을 4가지 척도로 분류한 성격유형검사입니다.
 										두 개의 태도지표(외향-내향, 판단-인식)와 두 개의 기능지표(감각-직관, 사고-감정)에 대한 
 										개인의 선호도를 밝혀서 4가지 척도에서 바라본 개인의 성격유형을 알려줍니다.
@@ -110,8 +110,8 @@
 									<button type="button" class="btn btn-success mb-2" style="font-size:20px;border-radius: 10px;" onclick="location.href='/mbti/mbtianalysis.do' ">Start</button>
 							
 								</div>
-								<div style="text-align: center;" class="mb-3">
-								<p style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 20px;">
+								<div style="text-align: center; width:100%;" class="mb-3">
+								<p style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 22px; color:orangered;">
 								※자신의 MBTI를 12문제로 간단히 테스트하고 <br>나와 잘맞는 성격의 팀원과 스터디그룹을 찾아봅시다!<br>
 								꾸미지 않고 솔직한 답변을 부탁드립니다.</p>
 								</div>

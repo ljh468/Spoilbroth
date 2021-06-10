@@ -1,5 +1,6 @@
 package poly.persistance.mapper;
 
+import java.util.List;
 import java.util.Map;
 
 import config.Mapper;
@@ -24,5 +25,7 @@ public interface IUserMapper {
 	int updateLeaveStudy(Map<String, String> pMap) throws Exception;
 
 	int updateUserMbti(UserDTO pDTO) throws Exception;
+
+	List<String> getUserMbti(List<String> list) throws Exception;
 	
 }

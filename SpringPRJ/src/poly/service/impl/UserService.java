@@ -1,5 +1,10 @@
 package poly.service.impl;
 
+import static poly.util.CmmUtil.nvl;
+
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.mortbay.log.Log;
@@ -8,9 +13,6 @@ import org.springframework.stereotype.Service;
 import poly.dto.UserDTO;
 import poly.persistance.mapper.IUserMapper;
 import poly.service.IUserService;
-import static poly.util.CmmUtil.nvl;
-
-import java.util.Map;
 
 @Service("UserService")
 public class UserService implements IUserService {
@@ -83,6 +85,11 @@ public class UserService implements IUserService {
 	@Override
 	public int updateUserMbti(UserDTO pDTO) throws Exception {
 		return userMapper.updateUserMbti(pDTO);
+	}
+
+	@Override
+	public List<String> getUserMbti(List<String> list) throws Exception {
+		return userMapper.getUserMbti(list);
 	}
 
 	

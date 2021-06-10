@@ -253,9 +253,9 @@
 									<!-- 가입한 스터디 리스트로 뿌려줌 -->
 									<div class="item"
 										style="font-size: 33px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; coler: white;">
-										<img
-											src="/getStudyImage.do?study_name=<%=sDTO.getStudy_name()%>"
-											class="rounded" width="100%">
+										<a href="/study/studyboard.do?study_name=<%=sDTO.getStudy_name()%>">
+										<img src="/getStudyImage.do?study_name=<%=sDTO.getStudy_name()%>" class="rounded" width="100%">
+										</a>
 										<div class="txt-box"></div>
 										<div style="margin-top: 20px; margin-bottom: 0px;">
 											<div style="font-size: 25px"><%=sDTO.getStudy_name()%></div>
@@ -304,8 +304,8 @@
 										<div class="button mt-2 d-flex flex-row align-items-center">
 											
 											<button class="btn btn-sm btn-primary w-100"
-												onclick="location.href='/study/studyboard.do?study_name=<%=pDTO.getStudy_name()%>' "
-												method="get";>Study Join</button>
+												onclick="location.href='/study/studyboard.do?study_name=<%=pDTO.getStudy_name()%>'">
+												Study Join</button>
 											
 										</div>
 									</div>

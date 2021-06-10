@@ -1,4 +1,4 @@
-<%@page import="java.util.ArrayList"%>
+ <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="poly.dto.BoardDTO"%>
 <%@page import="poly.util.CmmUtil"%>
@@ -29,6 +29,10 @@
 	if( rList == null){
 		rList = new ArrayList<BoardDTO>();
 	}
+	
+	// 스터디그룹에 가입한 유저의 MBTI정보
+	List<String> mList = (List<String>)request.getAttribute("mList");
+	String member_mbti = String.join(",", mList);
 %>
 
 <!DOCTYPE html>
@@ -160,7 +164,7 @@
 										멤버 : <%=sDTO.getStudy_member() %>
 										</label><br>
 										<label style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
-										멤버의 MBTI : 
+										멤버의 MBTI : <%=member_mbti %>
 										</label>
 	                					
 	              					</div>
@@ -168,8 +172,7 @@
 										<label style="font-size: 25px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
 											알림</label>
 										<div class="card fontstyle p-2" style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
-											<%=study_notify %>
-											알림문구입니다.알림문구입니다.알림문구입니다.알림문구입니다.알림문구입니다.알림문구입니다.알림문구입니다.알림문구입니다.알림문구입니다.알림문구입니다.알림문구입니다.알림문구입니다.알림문구입니다.알림문구입니다.알림문구입니다.알림문구입니다.알림문구입니다.알림문구입니다.알림문구입니다.알림문구입니다.알림문구입니다.알림문구입니다.
+											<%=sDTO.getStudy_contents() %>
 										</div>
 									</div>
 									<div style="display: flex">

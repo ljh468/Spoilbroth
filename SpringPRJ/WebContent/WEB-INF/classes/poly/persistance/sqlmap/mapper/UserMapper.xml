@@ -62,7 +62,7 @@
 		USER_ID = #{user_id}
 	</select>
 	
-	<!-- 유저 가입한 스터디정보에 가입한 스터디이름 추가 -->
+	<!-- 유저가 가입한 스터디정보에 가입한 스터디이름 추가 -->
 	<update id="updateJoinStudy" parameterType="hashMap">
 		UPDATE USER_INFO
 		SET USER_STUDY = CASE WHEN USER_STUDY = ""
@@ -83,4 +83,15 @@
 		SET USER_MBTI = #{user_mbti}
 		WHERE USER_ID = #{user_id}
 	</update>
+	
+	<!-- 스터디에 가입한 유저 MBTI 조회 -->
+	<select id="getUserMbti" parameterType="ArrayList" resultType="String">
+		SELECT USER_MBTI
+		FROM USER_INFO
+		WHERE USER_ID IN
+		<foreach collection="list" item="value" index="index" open="(" separator="," close=")">
+			 #{value}
+		</foreach>
+	
+	</select>
 </mapper>

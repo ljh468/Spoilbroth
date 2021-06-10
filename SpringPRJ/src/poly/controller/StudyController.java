@@ -29,8 +29,8 @@ import poly.dto.BoardDTO;
 import poly.dto.OcrDTO;
 import poly.dto.StudyListDTO;
 import poly.dto.UserDTO;
-import poly.service.IImgService;
 import poly.service.IBoardService;
+import poly.service.IImgService;
 import poly.service.IStudyService;
 import poly.service.IUserService;
 import poly.util.DateUtil;
@@ -63,6 +63,9 @@ public class StudyController {
 		String id = (String) session.getAttribute("user_id");
 		String pwd = (String) session.getAttribute("user_pwd");
 		String join_dt = (String) session.getAttribute("join_dt");
+		if (id == null) {
+	         return "/user/login";
+	      }
 		UserDTO uDTO = new UserDTO();
 		uDTO.setUser_id(id);
 		uDTO.setUser_pwd(pwd);
@@ -97,7 +100,7 @@ public class StudyController {
 	@RequestMapping(value = "study/studyopen")
 	public String studyopen(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
 		log.info(this.getClass().getClass().getName() + "study/studyopen start!!");
-
+		
 		log.info(this.getClass().getClass().getName() + "study/studyopen end!!");
 
 		return "study/studyopen";
@@ -108,7 +111,9 @@ public class StudyController {
 			@RequestParam(value = "fileUplod2") MultipartFile mf) throws Exception {
 
 		String user_id = (String) session.getAttribute("user_id");
-
+		if (user_id == null) {
+	         return "/user/login";
+	      }
 		log.info(this.getClass().getClass().getName() + "study/inserStudyInfo start!!");
 
 		// 가입 결과에 대한 메시지 전달할 변수
@@ -264,6 +269,9 @@ public class StudyController {
 		log.info(this.getClass().getClass().getName() + "study/studyinfo start!!");
 
 		String user_id = (String) session.getAttribute("user_id");
+		if (user_id == null) {
+	         return "/user/login";
+	      }
 		String study_name = nvl(request.getParameter("study_name"));
 		log.info("study_name : " + study_name);
 
@@ -300,9 +308,19 @@ public class StudyController {
 
 		String user_id = (String) session.getAttribute("user_id");
 		String study_name = nvl(request.getParameter("study_name"));
-
+		if (user_id == null) {
+	         return "/user/login";
+	      }
+		// 유저 정보 가져오기
+		UserDTO uDTO = new UserDTO();
+		uDTO.setUser_id(user_id);
+		uDTO = userService.getUserInfo(uDTO);
+		// 유저 MBTI 뽑아오기
+		String user_mbti = uDTO.getUser_mbti();
+		
 		log.info("user_id : " + user_id);
 		log.info("study_name : " + study_name);
+		log.info("user_mbti : " + user_mbti);
 
 		String msg = "";
 		String url = "";
@@ -323,7 +341,8 @@ public class StudyController {
 		log.info("updateJoinUser start!!");
 		res2 = studyService.updateJoinUser(sMap);
 		log.info("updateJoinUser end!!");
-
+		
+		
 		if (res == 1 && res2 == 1) {
 			msg = study_name + "에 가입되었습니다.";
 			url = "/study/studyboard.do?study_name=" + study_name;
@@ -332,6 +351,7 @@ public class StudyController {
 			url = "/study/match.do";
 
 		}
+		
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
 		log.info(this.getClass().getClass().getName() + "study/studysignup end!!");
@@ -346,9 +366,10 @@ public class StudyController {
 		String user_id = (String) session.getAttribute("user_id");
 		String study_name = nvl(request.getParameter("study_name"));
 		log.info("study_name : " + study_name);
-
+		if (user_id == null) {
+	         return "/user/login";
+	      }
 		UserDTO uDTO = new UserDTO();
-
 		uDTO.setUser_id(user_id);
 
 		// 유저 정보 가져오기
@@ -367,6 +388,18 @@ public class StudyController {
 		sDTO = studyService.getStudyInfo(study_name);
 		log.info("getStudyInfo end");
 		
+		// 유저 MBTI 가져오기
+		String[] arr = sDTO.getStudy_member().split(",");
+		List<String> list = new ArrayList<String>(Arrays.asList(arr));
+		List<String> mList = new ArrayList<String>();
+		log.info("getUserMbti start");
+		mList = userService.getUserMbti(list);
+		list = null;
+		log.info("getUserMbti end");
+		if(mList == null) {
+			mList = new ArrayList<>();
+		}
+		
 		// 스터디 게시판 데이터 가져오기
 		String study_seq = nvl(sDTO.getStudy_seq());
 		log.info("study_seq : " + study_seq);
@@ -375,6 +408,7 @@ public class StudyController {
 			rList = new ArrayList<>();
 		}
 		
+		model.addAttribute("mList", mList); // 스터디에 가입된 유저의 MBTI
 		model.addAttribute("rList", rList); // 스터디별 게시판 정보
 		model.addAttribute("sDTO", sDTO); // 스터디 정보
 		model.addAttribute("rDTO", rDTO); // 유저 정보
@@ -443,7 +477,9 @@ public class StudyController {
 		log.info("/study/leave start !! ");
 		String user_id = (String) session.getAttribute("user_id");
 		String study_name = nvl(request.getParameter("study_name"));
-
+		if (user_id == null) {
+	         return "/user/login";
+	      }
 		String msg = "";
 		String url = "";
 
@@ -528,7 +564,9 @@ public class StudyController {
 		log.info("/study/del start !! ");
 		String user_id = (String) session.getAttribute("user_id");
 		String study_name = nvl(request.getParameter("study_name"));
-
+		if (user_id == null) {
+	         return "/user/login";
+	      }
 		String msg = "";
 		String url = "";
 		int res = 0;

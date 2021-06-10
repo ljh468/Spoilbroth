@@ -63,7 +63,9 @@ public class MainController {
 		
 		String id = (String) session.getAttribute("user_id");
 		String pwd = (String) session.getAttribute("user_pwd");
-		
+		if (id == null) {
+	         return "/user/login";
+	      }
 		System.out.println("user_id : " + id);
 		System.out.println("user_pwd : " + pwd);
 		
@@ -159,6 +161,9 @@ public class MainController {
 		UserDTO uDTO = new UserDTO();
 		String id = (String) session.getAttribute("user_id");
 		String pwd = (String) session.getAttribute("user_pwd");
+		if (id == null) {
+	         return "/user/login";
+	      }
 		System.out.println("user_id : " + id);
 		System.out.println("user_pwd : " + pwd);
 		uDTO.setUser_id(id);
