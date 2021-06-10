@@ -114,13 +114,14 @@
 											</label>
 	              							<div class="form-group">
 		              							<select class="form-control" style="width: 100%; font-size: 22px;" name="study_field">
-													<option value="free" selected>자유스터디</option>
-													<option value="contest">공모전</option>
-													<option value="language">어학/회화</option>
-													<option value="service">봉사활동</option>
-													<option value="employ">취업/면접</option>
-													<option value="sports">스포츠</option>
-													<option value="travel">여행</option>
+													<option value="자유스터디" selected>자유스터디</option>
+													<option value="IT개발" selected>IT개발</option>
+													<option value="공모전">공모전</option>
+													<option value="어학/회화">어학/회화</option>
+													<option value="봉사활동">봉사활동</option>
+													<option value="취업/면접">취업/면접</option>
+													<option value="스포츠">스포츠</option>
+													<option value="여행">여행</option>
 												</select>
 	              							</div>
 	              							<div class="form-group">

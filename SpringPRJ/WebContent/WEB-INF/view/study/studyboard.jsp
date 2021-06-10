@@ -33,6 +33,8 @@
 	// 스터디그룹에 가입한 유저의 MBTI정보
 	List<String> mList = (List<String>)request.getAttribute("mList");
 	String member_mbti = String.join(",", mList);
+	
+	int mbti_score = (int)request.getAttribute("mbti_score");
 %>
 
 <!DOCTYPE html>
@@ -165,7 +167,11 @@
 										</label><br>
 										<label style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
 										멤버의 MBTI : <%=member_mbti %>
+										</label><br>
+										<label style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
+										멤버의 Score : <%=mbti_score %>
 										</label>
+										
 	                					
 	              					</div>
 									<div class="form-group mt-3">

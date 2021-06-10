@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,100 +29,110 @@ import poly.dto.UserDTO;
 import poly.service.IImgService;
 import poly.service.IStudyService;
 import poly.service.IUserService;
-
-
-
+import poly.util.MbtiUtil;
 
 @Controller
 public class MainController {
 
 	private Logger log = Logger.getLogger(this.getClass());
-	
-	@Resource(name="UserService")
+
+	@Resource(name = "UserService")
 	IUserService userService;
-	
-	@Resource(name="ImgService")
+
+	@Resource(name = "ImgService")
 	IImgService imgService;
-	
+
 	@Resource(name = "StudyService")
 	IStudyService studyService;
 
-	
-	@RequestMapping(value = "index")
-	public String Index() {
-		log.info(this.getClass());
-
-		return "/index";
-	}
-	
 	// MyStudy 메인화면
 	@RequestMapping(value = "spoilbroth/mystudy")
-	public String mystudy(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception{
-		
+	public String mystudy(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
+
 		log.info(this.getClass().getClass().getName() + "spoilbroth/mystudy start!!");
-		
-		
+
 		String id = (String) session.getAttribute("user_id");
 		String pwd = (String) session.getAttribute("user_pwd");
 		if (id == null) {
-	         return "/user/login";
-	      }
+			return "/user/login";
+		}
 		System.out.println("user_id : " + id);
 		System.out.println("user_pwd : " + pwd);
-		
+
 		UserDTO uDTO = new UserDTO();
 		uDTO.setUser_id(id);
 		uDTO.setUser_pwd(pwd);
-		
+
 		// 사용자 정보 조회
 		UserDTO rDTO = new UserDTO();
 		rDTO = userService.getUserInfo(uDTO);
-		System.out.println(rDTO.getUser_study());
-		System.out.println("nvl : " + nvl(rDTO.getUser_study()));
+		
 		model.addAttribute("user_id", nvl(rDTO.getUser_id()));
 		model.addAttribute("user_name", nvl(rDTO.getUser_name()));
 		model.addAttribute("user_email", nvl(rDTO.getUser_email()));
 		model.addAttribute("user_dept", nvl(rDTO.getUser_dept()));
 		model.addAttribute("user_mbti", nvl(rDTO.getUser_mbti()));
 		model.addAttribute("user_study", nvl(rDTO.getUser_study()));
-		
+
 		String[] jrr = rDTO.getUser_study().split(",");
 		Map<String, String> pMap = new HashMap<String, String>();
 
 		List<String> aList = new ArrayList<String>();
-		for(String j : jrr) {
-		aList.add(j);
+		for (String j : jrr) {
+			aList.add(j);
 		}
-		
+
 		// 가입한 스터디 조회 (가입한 스터디를 list로 넘겨서 스터디 정보 가져오기)
 		List<StudyListDTO> pList = studyService.getJoinStudyList(aList);
 		aList = null;
-		for(StudyListDTO sDTO : pList) {
-			System.out.println("sDTO : " + sDTO.getStudy_name());
-		}
-		
 		model.addAttribute("pList", pList);
 		
+		// 스터디에 가입된 유저 MBTI 가져오기
+		List<List<String>> mLists = new ArrayList<List<String>>();
 		
+		for (StudyListDTO sDTO : pList) {
+			List<String> mList = new ArrayList<String>();
+			String[] arr = sDTO.getStudy_member().split(",");
+			List<String> list = new ArrayList<String>(Arrays.asList(arr));
+			log.info("getUserMbti start");
+			mList = userService.getUserMbti(list);
+			mLists.add(mList);
+			list = null;
+			mList = null;
+			log.info("getUserMbti end");
+		}
+		for(List<String> dd : mLists) {
+			log.info("dd : "+ dd);
+		}
+		// MBTI 점수 분석
+		String my_mbti = nvl(rDTO.getUser_mbti());
+		
+		log.info("getAnalysis start");
+		List<String> mbti_scores = MbtiUtil.getAnalysis(my_mbti, mLists);
+		log.info("getAnalysis end");
+		
+		for(String str : mbti_scores) {
+		log.info("mbti_scores : " + str);
+		}
+		model.addAttribute("mbti_scores", mbti_scores);
 		log.info(this.getClass().getClass().getName() + "spoilbroth/mystudy end!!");
 
 		return "spoilbroth/mystudy";
 	}
-	
+
 	// 프로필 이미지 불러오기 ( InputStream으로 파일 불러옴 )
-	@RequestMapping(value="/getImage", method=RequestMethod.GET)
-	public void getImage(HttpServletRequest request, HttpSession session, HttpServletResponse response, @RequestParam (value="user_id") String user_id) 
-			throws Exception {
-		
+	@RequestMapping(value = "/getImage", method = RequestMethod.GET)
+	public void getImage(HttpServletRequest request, HttpSession session, HttpServletResponse response,
+			@RequestParam(value = "user_id") String user_id) throws Exception {
+
 		log.info("user_id : " + user_id);
-		
+
 		// 가장 최근에 등록한 프로필 사진 정보가져오기
 		log.info("getImgList start! ");
 		Map<String, String> pMap = imgService.getImgList(user_id);
 		log.info("getImgList end! ");
-		
-		
-		String realFile = pMap.get("SAVE_FILE_PATH")+"\\"; // 파일이 저장된 경로 C:\\upload\\
+
+		String realFile = pMap.get("SAVE_FILE_PATH") + "\\"; // 파일이 저장된 경로 C:\\upload\\
 		String fileNm = pMap.get("SAVE_FILE_NAME"); // 파일명
 		String ext = pMap.get("EXT"); // 파일 확장자
 		log.info("realFile : " + realFile);
@@ -134,9 +145,9 @@ public class MainController {
 		try {
 			response.setContentType("image/" + ext);
 			response.setHeader("Content-Disposition", "inline;filename=" + fileNm);
-			File file = new File(realFile+fileNm);
-			
-			if(file.exists()){
+			File file = new File(realFile + fileNm);
+
+			if (file.exists()) {
 				in = new FileInputStream(file);
 				out = new BufferedOutputStream(response.getOutputStream());
 				int len;
@@ -148,12 +159,18 @@ public class MainController {
 		} catch (Exception e) {
 			log.info(e.getStackTrace());
 		} finally {
-			if(out != null){ out.flush(); }
-			if(out != null){ out.close(); }
-			if(in != null){ in.close(); }
+			if (out != null) {
+				out.flush();
+			}
+			if (out != null) {
+				out.close();
+			}
+			if (in != null) {
+				in.close();
+			}
 		}
 	}
-	
+
 	@RequestMapping(value = "spoilbroth/main")
 	public String main(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
 		log.info(this.getClass().getClass().getName() + "user/login start!!");
@@ -162,8 +179,8 @@ public class MainController {
 		String id = (String) session.getAttribute("user_id");
 		String pwd = (String) session.getAttribute("user_pwd");
 		if (id == null) {
-	         return "/user/login";
-	      }
+			return "/user/login";
+		}
 		System.out.println("user_id : " + id);
 		System.out.println("user_pwd : " + pwd);
 		uDTO.setUser_id(id);
@@ -190,24 +207,19 @@ public class MainController {
 
 		return "spoilbroth/main2";
 	}
-	
-	
+
 	@RequestMapping(value = "spoilbroth/main3")
 	public String main3(HttpServletRequest request, HttpSession session) {
 		log.info(this.getClass().getClass().getName() + "user/login start!!");
 
 		return "spoilbroth/main3";
 	}
-	
+
 	@RequestMapping(value = "spoilbroth/main4")
 	public String main4(HttpServletRequest request, HttpSession session) {
 		log.info(this.getClass().getClass().getName() + "user/login start!!");
 
 		return "spoilbroth/main4";
 	}
-	
 
-	
-	
-	
 }

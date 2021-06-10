@@ -15,9 +15,11 @@
 
 	StudyListDTO sDTO = (StudyListDTO) request.getAttribute("sDTO");
 	String study_name = (String) request.getAttribute("study_name");
-	String study_notify = CmmUtil.nvl(sDTO.getStudy_notify());
+	String study_contents = CmmUtil.nvl(sDTO.getStudy_contents());
 	String study_title = CmmUtil.nvl(sDTO.getStudy_title());
-
+	String study_field = CmmUtil.nvl(sDTO.getStudy_field());
+	
+	int mbti_score = (int)request.getAttribute("mbti_score");
 	
 %>
 
@@ -126,24 +128,26 @@
 										</div>
 									</div>
 									<hr>
-									<div>
+									<div style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; 
+										font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px; font-size:25px;">
+										<div class="form-group" style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
+											팀원 MBTI 점수: <%=mbti_score %>
+										</div>
 										<label
 											style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
-											스터디 분야 </label>
+											스터디 분야</label>
 										<div class="form-group">
-											<div type="text" class="form-control"
-												placeholder="<%=user_id %>" name="study_name"
-												style="font-size: 20px;"><%=user_id %></div>
+											<div class="form-control" style="font-size: 25px;">
+											<%=study_field %></div>
 										</div>
 										<div class="form-group">
-											<div type="text" class="form-control"
-												placeholder="<%=user_name %>" name="study_name"
-												style="font-size: 20px;"><%=user_name %></div>
+											<div class="form-control" style="font-size: 25px;">
+											<%=study_title %></div>
 										</div>
 										<div class="form-group">
 											<textarea id="" cols="20" rows="7" class="form-control"
-												placeholder="<%=user_mbti%>" name="study_msg"
-												style="font-size: 18px;" readonly></textarea>
+												name="study_msg"
+												style="font-size: 20px;" readonly><%=study_contents%></textarea>
 										</div>
 										<div class="form-group text-center"
 											style="font-size: 24px; margin-bottom: 0px;">
@@ -153,7 +157,7 @@
 										</div>
 										<p class="mb-3"
 											style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; color: #6c757d; float: right;">
-											By <span><%=user_name%></span>
+											By Creator :  <span><%=user_name%></span>
 										</p>
 									</div>
 								</div>
@@ -164,35 +168,8 @@
 							</div>
 						</div>
 						<!-- 왼쪽 스크립트 끝 -->
-
-						<!-- 오른쪽 스크립트 시작 -->
-						<div
-							class="col-xl-4 sidebar ftco-animate bg-light pt-5 fadeInUp ftco-animated">
-							<div>오른쪽 스크립트 시작</div>
-
-							<div class="sidebar-box ftco-animate">
-								<h3 class="sidebar-heading">Archives</h3>
-								<ul class="categories">
-									<li><a href="#">Decob14 2018 <span>(10)</span></a></li>
-									<li><a href="#">September 2018 <span>(6)</span></a></li>
-									<li><a href="#">August 2018 <span>(8)</span></a></li>
-									<li><a href="#">July 2018 <span>(2)</span></a></li>
-									<li><a href="#">June 2018 <span>(7)</span></a></li>
-									<li><a href="#">May 2018 <span>(5)</span></a></li>
-								</ul>
-							</div>
-
-							<div class="sidebar-box ftco-animate">
-								<h3 class="sidebar-heading">Paragraph</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-									Ducimus itaque, autem necessitatibus voluptate quod mollitia
-									delectus aut.</p>
-							</div>
-							<div>오른쪽 스크립트 끝</div>
 						</div>
-
 					</div>
-				</div>
 			</section>
 		</div>
 		<!-- 메인 페이지 END-->

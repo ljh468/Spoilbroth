@@ -16,6 +16,13 @@
 		FROM STUDY_INFO
 	</select>
 	
+	<!-- 분야별 스터디 리스트 조회 쿼리 -->
+	<select id="getfieldStudyList" resultType="StudyListDTO">
+		SELECT *
+		FROM STUDY_INFO
+		WHERE STUDY_FIELD = #{study_field}
+	</select>
+	
 	<!-- 스터디그룹 등록 -->
 	<insert id="insertStudyInfo" parameterType="StudyListDTO" >
 		INSERT INTO STUDY_INFO

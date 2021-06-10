@@ -25,6 +25,8 @@
 		pList = new ArrayList<StudyListDTO>();
 	}
 	int count = pList.size();
+	
+	List<String> mbti_scores = (List<String>)request.getAttribute("mbti_scores");
 %>
 
 <!DOCTYPE html>
@@ -248,6 +250,7 @@
 									내가 가입한 스터디 </label>
 								<div class="owl-carousel owl-theme">
 									<%
+										int i = 0;
 										for (StudyListDTO sDTO : pList) {
 									%>
 									<!-- 가입한 스터디 리스트로 뿌려줌 -->
@@ -263,10 +266,12 @@
 												<li><%=sDTO.getStudy_title()%></li>
 												<li><%=sDTO.getStudy_contents()%></li>
 												<li><%=sDTO.getStudy_member()%></li>
+												<li><%=mbti_scores.get(i)%></li>
 											</ul>
 										</div>
 									</div>
 									<%
+										i++;
 										}
 									%>
 
@@ -285,6 +290,7 @@
 
 							<!-- 스터디 목록 정보 START-->
 							<%
+								int j = 0 ;
 								for (StudyListDTO pDTO : pList) {
 							%>
 							<%
@@ -322,6 +328,9 @@
 											style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; color: #6c757d;">
 											Join Study : <span><%=membercount%>/5</span>
 										</p>
+										<p class="mb-2" style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; color: #6c757d;">
+											Score : <span><%=mbti_scores.get(j)%></span>
+										</p>
 									</div>
 								</div>
 							</div>
@@ -332,14 +341,14 @@
 										class="icon-folder-o mr-2"></i><%=pDTO.getStudy_field()%></span> <span><i
 										class="icon-calendar mr-2"></i><%=pDTO.getStudy_dt()%></span>
 								</p>
-								<p class="mb-4" style="font-size: 18px;"><%=pDTO.getStudy_contents()%></p>
+								<p class="mb-4" style="font-size: 18px;"><%=pDTO.getStudy_contents() %></p>
 							</div>
 
 							<!-- 스터디 목록 정보 END-->
 							<hr style="margin-top: 5px; margin-bottom: 0px;" />
-							<%
-								}
-							%>
+							<% 
+								j++;							
+							} %>
 							<!-- 그룹목록 END -->
 
 						</div>

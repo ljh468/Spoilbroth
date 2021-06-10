@@ -9,13 +9,13 @@
 	String user_id = (String) request.getAttribute("user_id");
 	String user_name = (String) request.getAttribute("user_name");
 	String user_email = (String) request.getAttribute("user_email");
-	String join_dt = (String) request.getAttribute("join_dt");
 	String user_mbti = (String) request.getAttribute("user_mbti");
 	String user_dept = (String) request.getAttribute("user_dept");
 	String user_study = (String) request.getAttribute("user_study");
 	
 	List<StudyListDTO> pList = (List<StudyListDTO>)request.getAttribute("pList");
 	int count = pList.size();
+	List<String> mbti_scores = (List<String>)request.getAttribute("mbti_scores");
 %>
 
 <!DOCTYPE html>
@@ -99,13 +99,14 @@
 			</div>
 			<hr style=" width: 90%; height: 1.5px; border: none; background-color: #666666;">
 			<ul class="tagcloud" style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
-				<a href="#" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;"> 자유스터디</a>
-				<a href="#" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">공모전</a>
-				<a href="#" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">어학/회화</a>
-				<a href="#" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">봉사활동</a>
-				<a href="#" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">취업/면접</a>
-				<a href="#" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">스포츠</a>
-				<a href="#" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">여행</a>
+				<a href="/study/match.do" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;"> 전체</a>
+				<a href="/study/match2.do?study_field=자유스터디" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;"> 자유스터디</a>
+				<a href="/study/match2.do?study_field=공모전" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">공모전</a>
+				<a href="/study/match2.do?study_field=어학/회화" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">어학/회화</a>
+				<a href="/study/match2.do?study_field=봉사활동" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">봉사활동</a>
+				<a href="/study/match2.do?study_field=취업/면접" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">취업/면접</a>
+				<a href="/study/match2.do?study_field=스포츠" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">스포츠</a>
+				<a href="/study/match2.do?study_field=여행" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">여행</a>
 			</ul>
 		</div>
 		<!-- END 상단 NANI -->
@@ -164,14 +165,16 @@
 									추천 스터디 </label>
 								<div class="owl-carousel owl-theme">
 									<%
+										int i = 0;
 										for (StudyListDTO sDTO : pList) {
+											if(Integer.parseInt(mbti_scores.get(i)) >= 4){
 									%>
 									<!-- 가입한 스터디 리스트로 뿌려줌 -->
 									<div class="item"
 										style="font-size: 33px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; coler: white;">
-										<img
-											src="/getStudyImage.do?study_name=<%=sDTO.getStudy_name()%>"
-											class="rounded" width="100%">
+										<a href="/study/studyboard.do?study_name=<%=sDTO.getStudy_name()%>">
+										<img src="/getStudyImage.do?study_name=<%=sDTO.getStudy_name()%>" class="rounded" width="100%">
+										</a>
 										<div class="txt-box"></div>
 										<div style="margin-top: 20px; margin-bottom: 0px;">
 											<div style="font-size: 25px"><%=sDTO.getStudy_name()%></div>
@@ -179,10 +182,13 @@
 												<li><%=sDTO.getStudy_title()%></li>
 												<li><%=sDTO.getStudy_contents()%></li>
 												<li><%=sDTO.getStudy_member()%></li>
+												<li><%=mbti_scores.get(i)%></li>
 											</ul>
 										</div>
 									</div>
 									<%
+											}
+										i++;
 										}
 									%>
 
@@ -197,7 +203,9 @@
 							<hr style="margin-top: 5px; margin-bottom: 0px;" />
 							
 							<!-- 스터디 목록 정보 START-->
-							<%for(StudyListDTO pDTO : pList) {%>
+							<%
+								int j = 0;
+								for(StudyListDTO pDTO : pList) {%>
 							<% 	String[] arr = pDTO.getStudy_member().split(",");
 								int membercount = arr.length;
 							%>
@@ -227,9 +235,11 @@
 										<h6
 											style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
 											<%=pDTO.getStudy_title()%></h6>
-										<p class="mb-2"
-											style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; color: #6c757d;">
+										<p class="mb-2" style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; color: #6c757d;">
 											Join Study : <span><%=membercount%>/5</span>
+										</p>
+										<p class="mb-2" style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; color: #6c757d;">
+											Score : <%=mbti_scores.get(j) %>
 										</p>
 									</div>
 								</div>
@@ -244,7 +254,9 @@
 								
 							<!-- 스터디 목록 정보 END-->
 							<hr style="margin-top: 5px; margin-bottom: 0px;" />
-							<% } %>
+							<% 
+								j++;
+								} %>
 						</div>
 
 						<!-- 오른쪽 스크립트 START -->

@@ -48,8 +48,9 @@
 				<ul class="nav2">
 					<li class="colorlib-active"><a href="/spoilbroth/mystudy.do">Home</a></li>
 					<li class="nana"><a href="/mbti/mbtimain.do">MBTI Analysis</a></li>
-					<li class=""><a href="/study/match.do">Study Matching</a></li>
-					<li class=""><a href="about.html">Setting</a></li>
+					<li class="nana2"><a href="/study/match.do">Study Matching</a></li>
+					<li class="nana3"><a href="/study/contest.do">Study Imformation</a></li>
+					<li class="nana4"><a href="/mypage/setting.do">Setting</a></li>
 				</ul>
 			</nav>
 
@@ -95,6 +96,9 @@ $(function(){
         }else if(activePage == "mbtianalysis.do"){
         	$(".nav2").find(".colorlib-active").removeClass("colorlib-active");
         	$('.nana').addClass('colorlib-active');
+        }else if(activePage == "match2.do"){
+        	$(".nav2").find(".colorlib-active").removeClass("colorlib-active");
+        	$('.nana2').addClass('colorlib-active');
         }
     });
 })

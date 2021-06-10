@@ -332,6 +332,7 @@
 	<script src="/andrea-master/js/jquery.animateNumber.min.js"></script>
 	<script src="/andrea-master/js/scrollax.min.js"></script>
 	<script src="/andrea-master/js/main.js"></script>
+
 </body>
 <script type="text/javascript">
 	$('.slider-1 > .owl-carousel')

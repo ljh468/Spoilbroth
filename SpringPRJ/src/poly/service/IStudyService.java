@@ -22,5 +22,7 @@ public interface IStudyService {
 	int deleteStudy(String study_name);
 
 	String getStudyName(String study_seq);
+
+	List<StudyListDTO> getfieldStudyList(String study_field);
 	
 }

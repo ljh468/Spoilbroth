@@ -97,4 +97,9 @@ public class StudyService implements IStudyService {
 		return studyMapper.getStudyName(study_seq);
 	}
 
+	@Override
+	public List<StudyListDTO> getfieldStudyList(String study_field) {
+		return studyMapper.getfieldStudyList(study_field);
+	}
+
 }
