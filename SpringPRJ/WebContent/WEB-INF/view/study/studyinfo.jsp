@@ -130,8 +130,16 @@
 									<hr>
 									<div style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; 
 										font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px; font-size:25px;">
-										<div class="form-group" style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
-											팀원 MBTI 점수: <%=mbti_score %>
+										<div class="profile-card col-12" style="padding-right:3px; padding-left:3px;">
+										팀원 MBTI 분석 : <% for(int k=0; k<mbti_score; k++) {%>
+										<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="22" height="22"
+											 viewBox="0 0 422.448 422.448" style="enable-background:new 0 0 422.448 422.448;" xml:space="preserve">
+										<path style="fill:#FF4979;" d="M387.15,59.153c-47.066-47.065-123.374-47.065-170.44,0l-4,4l-4-4
+											C163.342,10.448,87.081,7.742,38.376,53.109s-51.412,121.628-6.044,170.334c1.885,2.023,3.839,3.981,5.858,5.871l170.8,170.8
+											c2.018,1.981,5.217,2.085,7.36,0.24l170.8-170.8c47.065-47.066,47.065-123.374,0-170.44L387.15,59.153z"/>
+										</svg>
+										
+										<%} %>
 										</div>
 										<label
 											style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
