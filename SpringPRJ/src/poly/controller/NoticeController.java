@@ -325,7 +325,6 @@ public class NoticeController {
 		return "/redirect";
 	}	
 	
-	
 	/**
 	 * 게시판 글 삭제
 	 * */

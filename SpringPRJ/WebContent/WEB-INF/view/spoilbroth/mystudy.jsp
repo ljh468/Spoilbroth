@@ -19,7 +19,6 @@
 	} else {
 		study_count = user_study.length;
 	}
-
 	List<StudyListDTO> pList = (List<StudyListDTO>) request.getAttribute("pList");
 	if(pList == null){
 		pList = new ArrayList<StudyListDTO>();
@@ -244,39 +243,7 @@
 
 							<!-- Join Study Group -->
 							<!-- 슬라이드 -->
-							<div class="slider-1">
-								<label
-									style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
-									내가 가입한 스터디 </label>
-								<div class="owl-carousel owl-theme">
-									<%
-										int i = 0;
-										for (StudyListDTO sDTO : pList) {
-									%>
-									<!-- 가입한 스터디 리스트로 뿌려줌 -->
-									<div class="item"
-										style="font-size: 33px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; coler: white;">
-										<a href="/study/studyboard.do?study_name=<%=sDTO.getStudy_name()%>">
-										<img src="/getStudyImage.do?study_name=<%=sDTO.getStudy_name()%>" class="rounded" width="100%">
-										</a>
-										<div class="txt-box"></div>
-										<div style="margin-top: 20px; margin-bottom: 0px;">
-											<div style="font-size: 25px"><%=sDTO.getStudy_name()%></div>
-											<ul style="font-size: 20px">
-												<li><%=sDTO.getStudy_title()%></li>
-												<li><%=sDTO.getStudy_contents()%></li>
-												<li><%=sDTO.getStudy_member()%></li>
-												<li><%=mbti_scores.get(i)%></li>
-											</ul>
-										</div>
-									</div>
-									<%
-										i++;
-										}
-									%>
-
-								</div>
-							</div>
+							
 							<!-- 슬라이드 END-->
 
 							<!-- Join Study Group -->
@@ -328,12 +295,49 @@
 											style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; color: #6c757d;">
 											Join Study : <span><%=membercount%>/5</span>
 										</p>
-										<p class="mb-2" style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; color: #6c757d;">
+										<%-- <p class="mb-2" style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; color: #6c757d;">
 											Score : <span><%=mbti_scores.get(j)%></span>
-										</p>
+										</p> --%>
 									</div>
 								</div>
 							</div>
+							<!-- asd -->
+							<div class="emp-profile">
+								<div class="d-flex">
+									<div class="profile-card col-5" style="padding-right:3px; padding-left:3px;">
+									<% for(int k=0; k<Integer.parseInt(mbti_scores.get(j)); k++) {%>
+									<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="22" height="22"
+										 viewBox="0 0 422.448 422.448" style="enable-background:new 0 0 422.448 422.448;" xml:space="preserve">
+									<path style="fill:#FF4979;" d="M387.15,59.153c-47.066-47.065-123.374-47.065-170.44,0l-4,4l-4-4
+										C163.342,10.448,87.081,7.742,38.376,53.109s-51.412,121.628-6.044,170.334c1.885,2.023,3.839,3.981,5.858,5.871l170.8,170.8
+										c2.018,1.981,5.217,2.085,7.36,0.24l170.8-170.8c47.065-47.066,47.065-123.374,0-170.44L387.15,59.153z"/>
+									</svg>
+									
+									<%} %>
+									</div>
+									
+									<div class="profile-card col-7">
+										<% if(Integer.parseInt(mbti_scores.get(j)) >= 0 && Integer.parseInt(mbti_scores.get(j)) <= 2) {%>
+											<span class="mb-2" style="font-size: 18px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; color: #ff4500;">
+											서로 양보하고 노력 해야해요.
+											</span>
+										<%}else if(Integer.parseInt(mbti_scores.get(j)) >= 3 && Integer.parseInt(mbti_scores.get(j)) <= 4 ){%>
+											<span class="mb-2" style="font-size: 18px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; color: royalblue;">
+											이번 기회에 친해져 볼까요?
+											</span>
+										<%}else{%>
+											<span class="mb-2" style="font-size: 18px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; color: blueviolet;">
+											더 없이 좋을수는 없어요. 
+											</span>
+										<%} %>
+									</div>
+								</div>
+								<hr style="margin: 5px;">
+								<p class="" style="font-size: 18px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; color: red; margin-bottom:0px">
+								※ 스터디그룹에 가입된 팀원의 MBTI를 분석한 결과입니다.
+								</p>
+							</div>
+							<!-- asd -->
 							<div class="meta-wrap"
 								style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
 								<p class="meta">
