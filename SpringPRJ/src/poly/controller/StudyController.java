@@ -62,14 +62,11 @@ public class StudyController {
 		log.info(this.getClass().getClass().getName() + "study/match start!!");
 
 		String id = (String) session.getAttribute("user_id");
-		String pwd = (String) session.getAttribute("user_pwd");
-		String join_dt = (String) session.getAttribute("join_dt");
 		if (id == null) {
 			return "/user/login";
 		}
 		UserDTO uDTO = new UserDTO();
 		uDTO.setUser_id(id);
-		uDTO.setUser_pwd(pwd);
 
 		UserDTO rDTO = new UserDTO();
 		rDTO = userService.getUserInfo(uDTO);

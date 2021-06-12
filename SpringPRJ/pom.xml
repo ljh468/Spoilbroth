@@ -9,7 +9,7 @@
 	<properties>
 		<java-version>1.8</java-version>
 		<!-- MongoDB에서 제공하는 스프링 버전과 연동을 위해 권장하는 버전인 4.2.9 버전으로 기존 4.3.7에서 다운그레이드함 -->
-		<org.springframework-version>4.2.9.RELEASE</org.springframework-version>
+		<org.springframework-version>4.3.7.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<slf4j.version>1.7.25</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
@@ -24,13 +24,29 @@
 		</repository>
 	</repositories>
 
-
 	<!-- 의존성 주입 dependencies 시작 -->
 	<dependencies>
 		
-		
-		
-		
+		<!-- 자바 메일 발송 라이브러리 -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4</version>
+        </dependency>
+
+        <!-- web soket -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-websocket</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.websocket/javax.websocket-api -->
+        <dependency>
+            <groupId>javax.websocket</groupId>
+            <artifactId>javax.websocket-api</artifactId>
+            <version>1.1</version>
+            <scope>provided</scope>
+        </dependency>
 		
 		<!-- 웹 크롤링을 위해 jsoup 외부라이브러리 추가 -->
 		<dependency>

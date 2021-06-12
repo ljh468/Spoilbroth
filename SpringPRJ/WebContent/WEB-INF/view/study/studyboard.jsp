@@ -194,7 +194,7 @@
 											style="font-size: 25px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
 											게시판</label>
 										<button type="button" class="btn btn-outline-warning"
-											onclick="location.href='/mbti/mbtimain.do'"
+											onclick="location.href='/chat/chatting.do?study_name=${study_name}'"
 											style="margin-left: 30%;">Let's go Chatting</button>
 									</div>
 									<hr>
