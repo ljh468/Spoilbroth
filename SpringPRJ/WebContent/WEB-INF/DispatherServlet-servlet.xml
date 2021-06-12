@@ -5,7 +5,7 @@
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
     http://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/aop
     http://www.springframework.org/schema/aop/spring-aop.xsd
@@ -16,6 +16,8 @@
     
 	<!-- 어노테이션 사용하기 -->
 	<mvc:annotation-driven />
+
+	
 	
 	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" />
 	<context:component-scan base-package="poly.controller" use-default-filters="false">
@@ -48,7 +50,7 @@
 			<value>text/html; charset=UTF-8</value>
 		</property>
 	</bean>
-	<!--  Websocket -->
+		
 	<!-- 파일업로드 기능 -->	
 	<!-- MultipartResolver 설정 -->	
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" 

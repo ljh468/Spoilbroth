@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import static poly.util.CmmUtil.nvl;
 
@@ -15,7 +16,7 @@ public class ChatController {
 
 	private Logger log = Logger.getLogger(this.getClass());
 
-	@RequestMapping(value = "/chat/chatting")
+	@RequestMapping(value = "/chat/chatting", method = RequestMethod.GET)
     public String chatting(HttpSession session, ModelMap model, HttpServletRequest request) throws Exception {
 
         log.info(this.getClass().getName() + ".chatting start!");
@@ -30,10 +31,9 @@ public class ChatController {
             model.addAttribute("msg", "로그인이 필요합니다.");
             model.addAttribute("url", "/user/login.do");
             return "/redirect";
-        }asdf
-
-        log.info(this.getClass().getName() + ".chatting end!");
-
+        }
+        
+        model.addAttribute("study_name", study_name);
         return "/chat/chatting";
     }
 	

@@ -4,6 +4,9 @@
 	pageEncoding="UTF-8"%>
 
 <%
+	String study_name = "name";
+/* (String)request.getAttribute("study_name"); */
+	String user_id = (String)session.getAttribute("user_id");
 %>
 
 <!DOCTYPE html>
@@ -71,10 +74,9 @@
 							<!-- 스터디 개설  START -->
 							<div class="" style="margin-left:20px">
 							<label style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-top: 18px; margin-bottom: -8px;">
-									 팀의 채팅창 </label>
+									<%=study_name %> 팀의 채팅창 </label>
 							</div>
 							<div class="emp-profile">
-								<!-- 사진 프로필 START -->
 								<div class="d-flex card p-3" style="magin: -11px;">
 								
 								<div>
@@ -84,6 +86,7 @@
 								<br>
 								<br>
 								<br>
+								<div>내 아이디 : <%=user_id %></div>
 								<input type="text" id="sender" value="${sessionScope.user_id}" style="display: none;" >
 								<input type=text" id= "messageinput">
 								
@@ -98,9 +101,9 @@
 								
 								 <div class="chat-box">
                                     <div class="chat-desc customscroll">
-                                        <ul id="chat__ul">
+                                        <div id="chat__ul" style="padding-left: 4px; padding-top: 18px;">
 
-                                        </ul>
+                                        </div>
                                     </div>
                                     <div class="chat-footer">
                                         <div id="micButtonBox"></div>
@@ -109,7 +112,7 @@
                                 
                                 
 									<hr style="margin-top: 10px; margin-bottom: 0px;" />
-
+								////////////////////
 								</div>
 							</div>
 							<!-- 왼쪽 스크립트 끝 -->
@@ -154,44 +157,68 @@
 
 </script>
 
-	<!-- websocket javascript -->
-    <script type="text/javascript">
-        var ws;
-        var messages=document.getElementById("messages");
+<script type="text/javascript">
+    function getDatetime() {
+        let _date = new Date();
+        let _hours = _date.getHours();
+        let _min = _date.getMinutes();
+        _hours = _hours < 10 ? '0' + _hours : _hours
+        _min = _min < 10 ? '0' + _min : _min
+        return _hours + ':' + _min;
+    }
+    /* ##### websocket js start ##### */
+    let ws;
+    function openSocket() {
+        console.log("openSocket");
+        if (ws !== undefined && ws.readyState !== WebSocket.CLOSED) {
+            console.log("WebSocket is already opened.");
+            return;
+        }
+        //웹소켓 객체 만드는 코드
+        ws = new WebSocket("ws://localhost:8090/echo.do");
         
-        function openSocket(){
-            if(ws!==undefined && ws.readyState!==WebSocket.CLOSED){
-                writeResponse("WebSocket is already opened.");
-                return;
-            }
-            //웹소켓 객체 만드는 코드
-            ws=new WebSocket("ws://localhost:8090/echo.do");
+        ws.onopen=function(event){
+            if(event.data===undefined) return;
             
-            ws.onopen=function(event){
-                if(event.data===undefined) return;
-                
-                writeResponse(event.data);
-            };
-            ws.onmessage=function(event){
-                writeResponse(event.data);
-            };
-            ws.onclose=function(event){
-                writeResponse("Connection closed");
-            }
-        }
+            writeResponse(event.data);
+        };
         
-        function send(){
-            var text=document.getElementById("messageinput").value+","+document.getElementById("sender").value;
-            ws.send(text);
-            text="";
+        ws.onmessage=function(event){
+            writeResponse(event.data);
+        };
+        ws.onclose=function(event){
+            writeResponse("Connection closed");
         }
-        
-        function closeSocket(){
-            ws.close();
-        }
-        function writeResponse(text){
-            messages.innerHTML+="<br/>"+text;
-        }
+    }
+    function send() {
+    	var text=document.getElementById("messageinput").value+","+document.getElementById("sender").value;
+        ws.send(text);
+        text="";
+    }
+    function closeSocket() {
+        ws.close();
+    }
+    function writeResponse(text) {
+        let _dateTime = getDatetime();
+        // console.log(json.res_msg);
+        let resHTML = "";
+        /* resHTML += '<li class="clearfix">';
+        resHTML += '<span class="chat-img">';
+        resHTML += '<img src="${pageContext.request.contextPath}/andrea-master/images/ISFP.png">';
+        resHTML += '</span>';
+        */
+        resHTML += '<div class="chat-body clearfix " style="display:flex; margin-left:5px";>';
+        resHTML += '<span class="chat_time">' + _dateTime + '</span>&nbsp&nbsp&nbsp&nbsp';
+        resHTML += '<p>' + text + '</p>'; 
+        resHTML += '</div>';
+        /* resHTML += '</li>'; */
+        $("#chat__ul").append(resHTML);
+    }
+    openSocket(); // websocket open
+    window.onbeforeunload = function (e) {
+        closeSocket() // 페이지 벗어나면 websocket close
+    };
+    /* ##### websocket js end ##### */
         function clearText(){
         	console.log(messages.parentNode);
         	messages.parentNode.removeChild(messages)
