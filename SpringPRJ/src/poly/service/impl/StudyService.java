@@ -11,7 +11,6 @@ import org.mortbay.log.Log;
 import org.springframework.stereotype.Service;
 
 import poly.dto.StudyListDTO;
-import poly.dto.UserDTO;
 import poly.persistance.mapper.IStudyMapper;
 import poly.service.IStudyService;
 
@@ -100,6 +99,11 @@ public class StudyService implements IStudyService {
 	@Override
 	public List<StudyListDTO> getfieldStudyList(String study_field) {
 		return studyMapper.getfieldStudyList(study_field);
+	}
+
+	@Override
+	public String getStudySeq(String study_name) {
+		return studyMapper.getStudySeq(study_name);
 	}
 
 }

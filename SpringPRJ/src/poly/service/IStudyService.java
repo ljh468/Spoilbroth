@@ -24,5 +24,7 @@ public interface IStudyService {
 	String getStudyName(String study_seq);
 
 	List<StudyListDTO> getfieldStudyList(String study_field);
+
+	String getStudySeq(String study_name);
 	
 }

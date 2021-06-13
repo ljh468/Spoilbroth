@@ -29,4 +29,6 @@ public interface IStudyMapper {
 
 	List<StudyListDTO> getfieldStudyList(String study_field);
 
+	String getStudySeq(String study_name);
+
 }

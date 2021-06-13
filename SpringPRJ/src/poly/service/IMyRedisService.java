@@ -13,4 +13,5 @@ public interface IMyRedisService {
 	public void doSaveDataforSet() throws Exception;
 	
 	public void doSaveDataforZSet() throws Exception;
+
 }

@@ -5,6 +5,7 @@
 
 <%
 	String study_name = (String)request.getAttribute("study_name");
+	String study_seq = (String)request.getAttribute("study_seq");
 	String user_id = (String) session.getAttribute("user_id");
 %>
 
@@ -272,6 +273,10 @@
 									style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-top: 18px; margin-bottom: -8px;">
 									<%=study_name%> 팀의 채팅창
 								</label>
+								<label
+									style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-top: 18px; margin-bottom: -8px; float:right;">
+									By <%=user_id%>
+								</label>
 							</div>
 							<hr>
 							<div class="">
@@ -308,9 +313,9 @@
 										</div>
 									</div> --%>
 									<div class="buttons">
-									<button class="btn btn-info" type="button" onclick="openSocket()">대화방참여</button>
-									<button class="btn btn-warning" type="button" onclick="closeSocket();">대화방 나가기</button>
-									<span>ID : <%=user_id%></span>
+									<button class="btn btn-info" type="button" onclick="openSocket()" style="font-size: 12px;">대화방참여</button>
+									<button class="btn btn-warning" type="button" onclick="closeSocket();" style="font-size: 12px;">대화방 나가기</button>
+									<button class="btn btn-success" type="button" onclick="pre();" style="font-size: 12px;">이전 메시지 불러오기</button>
 									</div>
 									<div class="chat_window">
 										<div class="top_menu">
@@ -322,6 +327,7 @@
 											<div class="title">Chat</div>
 										</div>
 										<!-- 메시지 창 -->
+										<ul class="pre"></ul>
 										<ul class="messages"></ul>
 										
 										<div class="bottom_wrapper clearfix">
@@ -419,6 +425,37 @@
 		console.log("text : " +text)
 		ws.send(text);
 		text = "";
+		
+		
+		let chat_id = '<%=user_id %>';
+		let chat_dt = getDatetime();
+		let study_seq = <%=study_seq %>;
+		let study_name = '<%=study_name %>';
+		let chat_content = $(".message_input").val();
+		
+		console.log("chat_id : " + chat_id)
+		var param = {};
+		
+		param['chat_id'] = chat_id;
+		param['chat_dt'] = chat_dt;
+		param['study_seq'] = study_seq;
+		param['study_name'] = study_name;
+		param['chat_contents'] = chat_content;
+		
+		console.table(param);
+		
+		 $.ajax({
+	         url: "/chat/messageeForRedis.do",
+	         type: 'POST',
+	         data: param, 
+	         success:function(result) {
+	            console.log(result);
+	         },
+	         error:function(e) {
+	            console.log(e);
+	         }
+	      })
+		
 		$('.message_input').val('');
 	}
 	function closeSocket() {
@@ -472,6 +509,47 @@
 	function clearText() {
 		console.log(messages.parentNode);
 		messages.parentNode.removeChild(messages)
+	}
+	
+	function pre(){
+		console.log("pre start!!");
+		$.ajax({
+	         url: "/chat/messageeFromRedis.do",
+	         type: 'GET',
+	         data: 'json', 
+	         success:function(data) {
+	            console.log(data);
+	            console.table(data);
+	            /* var result = data
+	            
+	            $.each(data, function(result, function(idx, val)) {
+	        		console.log(idx + " " + val.title);
+	        	}); */
+	         },
+	         error:function(e) {
+	            console.log(e);
+	         }
+	      })
+	      
+		let pre = "";
+		
+		if('<%=user_id%>' == "나"){
+			pre += '<li class="message left appeared" id="chat_ul">';
+			pre += '<div class="avatar"></div>';
+			pre += '<div class="text_wrapper">';
+			pre += '<div class="text">'+ _dateTime + '&nbsp&nbsp&nbsp&nbsp' + text + '</div>';
+			pre += '</div>';
+			pre += '</li>';
+		}else{
+			pre += '<li class="message right appeared" id="chat_ul">';
+			pre += '<div class="avatar"></div>';
+			pre += '<div class="text_wrapper">';
+			pre += '<div class="text">'+ _dateTime + '&nbsp&nbsp&nbsp&nbsp' + text + '</div>';
+			pre += '</div>';
+			pre += '</li>';
+		}
+		
+		$(".pre").append(pre);
 	}
 </script>
 <script type="text/javascript">
