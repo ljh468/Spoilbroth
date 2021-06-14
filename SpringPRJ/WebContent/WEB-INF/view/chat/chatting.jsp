@@ -327,7 +327,7 @@
 											<div class="title">Chat</div>
 										</div>
 										<!-- 메시지 창 -->
-										<ul class="pre"></ul>
+										<div id ="chat"></div>
 										<ul class="messages"></ul>
 										
 										<div class="bottom_wrapper clearfix">
@@ -486,14 +486,14 @@
 			res += '<li class="message left appeared" id="chat_ul">';
 			res += '<div class="avatar"></div>';
 			res += '<div class="text_wrapper">';
-			res += '<div class="text">'+ _dateTime + '&nbsp&nbsp&nbsp&nbsp' + text + '</div>';
+			res += '<div class="text" style="font-size: 20px; font-family: \'Do Hyeon\', sans-serif; font-family: \'Nanum Pen Script\', cursive;  margin-bottom: -8px;">'+ _dateTime + '&nbsp;&nbsp;' + text + '</div>';
 			res += '</div>';
 			res += '</li>';
 		}else{
 			res += '<li class="message right appeared" id="chat_ul">';
 			res += '<div class="avatar"></div>';
 			res += '<div class="text_wrapper">';
-			res += '<div class="text">'+ _dateTime + '&nbsp&nbsp&nbsp&nbsp' + text + '</div>';
+			res += '<div class="text" style="font-size: 20px; font-family: \'Do Hyeon\', sans-serif; font-family: \'Nanum Pen Script\', cursive;  margin-bottom: -8px;">'+ _dateTime + '&nbsp;&nbsp;' + text + '</div>';
 			res += '</div>';
 			res += '</li>';
 		}
@@ -516,40 +516,60 @@
 		$.ajax({
 	         url: "/chat/messageeFromRedis.do",
 	         type: 'GET',
-	         data: 'json', 
+	         data: {
+	        	 study_name : '<%=study_name%>'
+	         },
+	         dataType: "text",
 	         success:function(data) {
-	            console.log(data);
 	            console.table(data);
-	            /* var result = data
 	            
-	            $.each(data, function(result, function(idx, val)) {
-	        		console.log(idx + " " + val.title);
-	        	}); */
+	            var result = data
+	            /* $('#chat').html(data); */
+	            $(".messages").append(data);
+	            
+	            
+	           <%-- 자바스크립트에서 이중 for문으로 List<List<ChatJsonDTO> rList>> 를 처리한다.  dataType: "json"
+	           		그러나 유지보수면에서 model에서 새로운 jsp로 가공하여 text로 뿌려주면 효율적이기때문에 다른방법으로 구현
+	           
+	           $.each(result, function(index, object) {
+	        		console.log("result" + index + " " + object);
+	        		
+	        		$.each(object, function(index, val) {
+	        			console.log("result" + index + " " + val.chat_id);
+	        			
+	        			 let pre = "";
+	     	    		
+	        			 if('<%=user_id%>' == val.chat_id){
+		     	    			pre += '<li class="message left appeared" id="chat_ul">';
+		     	    			pre += '<div class="avatar"></div>';
+		     	    			pre += '<div class="text_wrapper">';
+		     	    			pre += '<div class="text">'+ val.chat_dt + '&nbsp&nbsp&nbsp&nbsp' + val.chat_contents + '</div>';
+		     	    			pre += '</div>';
+		     	    			pre += '</li>';
+	     	    		}else{
+	     	    			pre += '<li class="message right appeared" id="chat_ul">';
+	     	    			pre += '<div class="avatar"></div>';
+	     	    			pre += '<div class="text_wrapper">';
+	     	    			pre += '<div class="text">'+ val.chat_dt + '&nbsp&nbsp&nbsp&nbsp' + val.chat_contents + '</div>';
+	     	    			pre += '</div>';
+	     	    			pre += '</li>';
+	     	    		}
+	     	    		
+	     	    		$(".messages").append(pre);
+	        		
+	        		});
+	        		
+	        	}); --%>
+	        	
+	        	 /* console.log("data : "+ data);
+	        	 console.log("data.get[0] : "+ data[0][0]['chat_contents']); */
 	         },
 	         error:function(e) {
 	            console.log(e);
 	         }
 	      })
 	      
-		let pre = "";
 		
-		if('<%=user_id%>' == "나"){
-			pre += '<li class="message left appeared" id="chat_ul">';
-			pre += '<div class="avatar"></div>';
-			pre += '<div class="text_wrapper">';
-			pre += '<div class="text">'+ _dateTime + '&nbsp&nbsp&nbsp&nbsp' + text + '</div>';
-			pre += '</div>';
-			pre += '</li>';
-		}else{
-			pre += '<li class="message right appeared" id="chat_ul">';
-			pre += '<div class="avatar"></div>';
-			pre += '<div class="text_wrapper">';
-			pre += '<div class="text">'+ _dateTime + '&nbsp&nbsp&nbsp&nbsp' + text + '</div>';
-			pre += '</div>';
-			pre += '</li>';
-		}
-		
-		$(".pre").append(pre);
 	}
 </script>
 <script type="text/javascript">

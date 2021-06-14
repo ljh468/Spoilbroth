@@ -73,14 +73,15 @@ public class ChatController {
 
 	// Redis에서 채팅 내용 가져오기
 	@RequestMapping(value = "/chat/messageeFromRedis")
-	@ResponseBody
-	public List<List<ChatJsonDTO>> messageeFromRedis(HttpServletRequest request,
-			ModelMap model, HttpServletResponse response) throws Exception {
+//	@ResponseBody
+	public String messageeFromRedis(HttpServletRequest request, ModelMap model, HttpServletResponse response) throws Exception {
 
-		String study_name = "거북목";
-//		request.getParameter("study_name");
+		String study_name = request.getParameter("study_name");
+		
+		log.info("study_name : " + study_name );
 		
 		// 일주일전 데이터 모두 가져오기
+		int date00 = Integer.parseInt(DateUtil.getDateTime("yyMMdd"));
 		int date01 = Integer.parseInt(DateUtil.getDateTime("yyMMdd"))-1;
 		int date02 = date01 - 1;
 		int date03 = date01 - 2;
@@ -93,6 +94,7 @@ public class ChatController {
 		log.info("study_name + date02 : " + study_name + date02);
 		
 		List<String> key = new ArrayList<String>();
+		key.add(study_name + date00);
 		key.add(study_name + date01);
 		key.add(study_name + date02);
 		key.add(study_name + date03);
@@ -110,7 +112,12 @@ public class ChatController {
 		if (rList == null) {
 			rList = new ArrayList<List<ChatJsonDTO>>();
 		}
-		return rList;
+		
+		model.addAttribute("rList", rList);
+		//rList
+		return "chat/chatting2";
 	}
+	
+		
 
 }
