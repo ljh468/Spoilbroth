@@ -1,5 +1,7 @@
 package poly.persistance.mapper;
 
+import java.util.List;
+
 import config.Mapper;
 import poly.dto.ContestDTO;
 
@@ -7,5 +9,7 @@ import poly.dto.ContestDTO;
 public interface IContestMapper {
 
 	int saveJsonCrawl(ContestDTO pDTO) throws Exception;
+
+	List<ContestDTO> getTenContest() throws Exception;
 
 }

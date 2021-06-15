@@ -26,10 +26,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import poly.dto.BoardDTO;
+import poly.dto.ContestDTO;
 import poly.dto.OcrDTO;
 import poly.dto.StudyListDTO;
 import poly.dto.UserDTO;
 import poly.service.IBoardService;
+import poly.service.IContestService;
 import poly.service.IImgService;
 import poly.service.IStudyService;
 import poly.service.IUserService;
@@ -55,7 +57,10 @@ public class StudyController {
 
 	@Resource(name = "BoardService")
 	IBoardService boardService;
-
+	
+	@Resource(name = "ContestService")
+	IContestService contestService;
+	
 	// MyStudy Maching 메인화면
 	@RequestMapping(value = "study/match")
 	public String match(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
@@ -200,9 +205,9 @@ public class StudyController {
 	@RequestMapping(value = "study/studyopen")
 	public String studyopen(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
 		log.info(this.getClass().getClass().getName() + "study/studyopen start!!");
-		
+
 		String user_id = (String) session.getAttribute("user_id");
-		if(user_id == null) {
+		if (user_id == null) {
 			return "/user/login";
 		}
 		UserDTO uDTO = new UserDTO();
@@ -211,7 +216,7 @@ public class StudyController {
 		UserDTO rDTO = new UserDTO();
 		rDTO = userService.getUserInfo(uDTO);
 		String user_name = rDTO.getUser_name();
-		
+
 		model.addAttribute("user_name", user_name);
 		model.addAttribute("user_id", user_id);
 		log.info(this.getClass().getClass().getName() + "study/studyopen end!!");
@@ -360,7 +365,33 @@ public class StudyController {
 	@RequestMapping(value = "study/contest")
 	public String contest(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
 		log.info(this.getClass().getClass().getName() + "study/contest start!!");
+		String user_id = (String)session.getAttribute("user_id");
+		if(user_id == null) {
+			return "/user/login";
+		}
+		// 카테고리별 10개씩 가져오기
+		List<ContestDTO> rList = contestService.getTenContest();
+		
+		
+		
+		log.info(this.getClass().getClass().getName() + "study/contest end!!");
 
+		return "study/contest";
+	}
+	
+	@RequestMapping(value = "study/contest2")
+	public String contest2(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
+		log.info(this.getClass().getClass().getName() + "study/contest start!!");
+		String user_id = (String)session.getAttribute("user_id");
+		if(user_id == null) {
+			return "/user/login";
+		}
+		
+		String contest_area = nvl((String)request.getParameter("contest_area"));
+		
+		
+		
+		
 		log.info(this.getClass().getClass().getName() + "study/contest end!!");
 
 		return "study/contest";
@@ -419,7 +450,7 @@ public class StudyController {
 		String my_mbti = rDTO.getUser_mbti();
 		// 유저 MBTI 분석
 		int mbti_score = MbtiUtil.getStudyAnalysis(my_mbti, mList);
-		
+
 		model.addAttribute("mbti_score", mbti_score);
 		model.addAttribute("sDTO", sDTO);
 		model.addAttribute("rDTO", rDTO);

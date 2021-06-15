@@ -3,14 +3,7 @@
 
 <%
 	String user_id = (String) request.getAttribute("user_id");
-String user_email = (String) request.getAttribute("user_email");
-String join_dt = (String) request.getAttribute("join_dt");
-String user_name = "이재훈";
-String user_mbti = "ENTP";
-String user_dept = "데이터분석과";
-
-String[] study_group = user_name.split("");
-int study_count = study_group.length;
+	
 %>
 
 <!DOCTYPE html>
@@ -89,15 +82,15 @@ int study_count = study_group.length;
 			<ul class="tagcloud" style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
 				<a href="/study/match.do" class="tag-cloud-link"
 					style="font-size: 17px; border-width: 1.5px; border-color: #ff0050;">이전</a>
-				<a href="#" class="tag-cloud-link"
+				<a href="/contest2.do?contest_area=기획아이디어" class="tag-cloud-link"
 					style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">공익/아이디어</a>
-				<a href="#" class="tag-cloud-link"
+				<a href="/contest2.do?contest_area=IT/소프트웨어" class="tag-cloud-link"
 					style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">IT/소프트웨어</a>
-				<a href="#" class="tag-cloud-link"
+				<a href="/contest2.do?contest_area=디자인" class="tag-cloud-link"
 					style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">패션/디자인</a>
-				<a href="#" class="tag-cloud-link"
+				<a href="/contest2.do?contest_area=광고/마케팅" class="tag-cloud-link"
 					style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">광고/마케팅</a>
-				<a href="#" class="tag-cloud-link"
+				<a href="/contest2.do?contest_area=문학/시나리오" class="tag-cloud-link"
 					style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">문학/시나리오</a>
 			</ul>
 		</div>

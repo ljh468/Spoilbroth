@@ -1,5 +1,7 @@
 package poly.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -20,6 +22,11 @@ public class ContestService implements IContestService {
 			
 		save = contestMapper.saveJsonCrawl(pDTO);
 		return save;
+	}
+
+	@Override
+	public List<ContestDTO> getTenContest() throws Exception {
+		return contestMapper.getTenContest();
 	}
 
 	
