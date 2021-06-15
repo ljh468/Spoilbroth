@@ -3,16 +3,7 @@
 
 <%
 	String user_id = (String) request.getAttribute("user_id");
-	String user_email = (String) request.getAttribute("user_email");
-	String join_dt = (String) request.getAttribute("join_dt");
-	String user_name = "이재훈";
-	String user_mbti = "ENTP";
-	String user_dept = "데이터분석과";
-	
-	String[] study_group = user_name.split("");
-	int study_count = study_group.length;
-	
-	String study_name ="슈퍼개발자";
+	String user_name = (String) request.getAttribute("user_name");
 %>
 
 <!DOCTYPE html>

@@ -54,7 +54,6 @@ public class RedisChatMapper implements IRedisChatMapper {
 			List<ChatJsonDTO> pList = new ArrayList<ChatJsonDTO>(); // redisDB로 부터 조회된 데이터를 저장할 객체
 			if (redisDB.hasKey(key)) {
 				pList = (List) redisDB.opsForList().range(key, 0, -1);
-				log.info("pList : " + pList.get(i).toString());
 				rList.add(pList);
 			}
 			pList = null;

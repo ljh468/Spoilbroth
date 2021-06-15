@@ -153,7 +153,7 @@
 											<%=user_dept%></h6>
 										<p class="mb-2"
 											style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; color: #6c757d;">
-											Join Study : <span><%=study_count%>/5</span>
+											Join Study : <span><%=study_count%></span>
 										</p>
 									</div>
 								</div>

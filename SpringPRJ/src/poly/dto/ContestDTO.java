@@ -9,12 +9,12 @@ public class ContestDTO {
 	private String contest_name; // 공모전 이름
 	private String contest_area; // 분야
 	private String contest_host; // 주최
-	private String contest_img; // 주최
+	private String contest_img; // 이미지 주소
 	private String contest_addr; // 홈페이지 주소
 	private String contest_prize; // 총상금
 	private String contest_day; // 기간
 	private String contest_contents; // 상세내용
-	
+	private String reg_dt; // 등록일
 	public String getContest_name() {
 		return contest_name;
 	}
@@ -63,6 +63,13 @@ public class ContestDTO {
 	public void setContest_contents(String contest_contents) {
 		this.contest_contents = contest_contents;
 	}
+	public String getReg_dt() {
+		return reg_dt;
+	}
+	public void setReg_dt(String reg_dt) {
+		this.reg_dt = reg_dt;
+	}
+	
 	
 	
 }

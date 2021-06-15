@@ -12,6 +12,7 @@
 		<typeAlias type="poly.dto.StudyListDTO" alias="StudyListDTO"/>
 		<typeAlias type="poly.dto.BoardDTO" alias="BoardDTO"/>
 		<typeAlias type="poly.dto.MbtiDTO" alias="MbtiDTO"/>
+		<typeAlias type="poly.dto.ContestDTO" alias="ContestDTO"/>
 		
     </typeAliases>
 </configuration>

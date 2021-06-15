@@ -200,9 +200,21 @@ public class StudyController {
 	@RequestMapping(value = "study/studyopen")
 	public String studyopen(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
 		log.info(this.getClass().getClass().getName() + "study/studyopen start!!");
+		
+		String user_id = (String) session.getAttribute("user_id");
+		if(user_id == null) {
+			return "/user/login";
+		}
+		UserDTO uDTO = new UserDTO();
+		uDTO.setUser_id(user_id);
 
+		UserDTO rDTO = new UserDTO();
+		rDTO = userService.getUserInfo(uDTO);
+		String user_name = rDTO.getUser_name();
+		
+		model.addAttribute("user_name", user_name);
+		model.addAttribute("user_id", user_id);
 		log.info(this.getClass().getClass().getName() + "study/studyopen end!!");
-
 		return "study/studyopen";
 	}
 
