@@ -1,8 +1,12 @@
+<%@page import="poly.dto.ContestDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
 <%
 	String user_id = (String) request.getAttribute("user_id");
+	List<ContestDTO> rList = (List<ContestDTO>) request.getAttribute("rList");
+	
 	
 %>
 
@@ -82,15 +86,15 @@
 			<ul class="tagcloud" style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
 				<a href="/study/match.do" class="tag-cloud-link"
 					style="font-size: 17px; border-width: 1.5px; border-color: #ff0050;">이전</a>
-				<a href="/contest2.do?contest_area=기획아이디어" class="tag-cloud-link"
+				<a href="/study/contest2.do?contest_area=기획아이디어" class="tag-cloud-link"
 					style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">공익/아이디어</a>
-				<a href="/contest2.do?contest_area=IT/소프트웨어" class="tag-cloud-link"
+				<a href="/study/contest2.do?contest_area=IT/소프트웨어" class="tag-cloud-link"
 					style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">IT/소프트웨어</a>
-				<a href="/contest2.do?contest_area=디자인" class="tag-cloud-link"
+				<a href="/study/contest2.do?contest_area=디자인" class="tag-cloud-link"
 					style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">패션/디자인</a>
-				<a href="/contest2.do?contest_area=광고/마케팅" class="tag-cloud-link"
+				<a href="/study/contest2.do?contest_area=광고/마케팅" class="tag-cloud-link"
 					style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">광고/마케팅</a>
-				<a href="/contest2.do?contest_area=문학/시나리오" class="tag-cloud-link"
+				<a href="/study/contest2.do?contest_area=문학/시나리오" class="tag-cloud-link"
 					style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">문학/시나리오</a>
 			</ul>
 		</div>
@@ -141,19 +145,18 @@
 											</thead>
 
 											<%
-												for (int i = 0; i < 20; i++) {
+												for (int i = 0; i < rList.size(); i++) {
 											%>
 											<tr>
-												<td>IT개발</td>
-												<td>한이음 ICT멘토링 공모전</td>
-												<td>정보통신부</td>
-												<td>D-20</td>
-												<td onclick="location.href='/study/contestdetail.do'">클릭</td>
+												<td><%=rList.get(i).getContest_area() %></td>
+												<td><%=rList.get(i).getContest_name() %></td>
+												<td><%=rList.get(i).getContest_host() %></td>
+												<td><%=rList.get(i).getContest_day() %></td>
+												<td onclick="location.href='/study/contestdetail.do?contest_seq=<%=rList.get(i).getContest_seq()%>'">클릭</td>
 											</tr>
 											<%
 												}
 											%>
-
 											<tfoot>
 												<tr>
 													<th>분야</th>
@@ -178,35 +181,10 @@
 							</div>
 							<!-- 그룹목록 END -->
 
-							왼쪽 스크립트 끝
 						</div>
 
 						<!-- 오른쪽 스크립트 -->
-						<div
-							class="col-xl-4 sidebar ftco-animate bg-light pt-5 fadeInUp ftco-animated">
-							<div>오른쪽 스크립트 시작</div>
-
-
-							<div class="sidebar-box ftco-animate">
-								<h3 class="sidebar-heading">Archives</h3>
-								<ul class="categories">
-									<li><a href="#">Decob14 2018 <span>(10)</span></a></li>
-									<li><a href="#">September 2018 <span>(6)</span></a></li>
-									<li><a href="#">August 2018 <span>(8)</span></a></li>
-									<li><a href="#">July 2018 <span>(2)</span></a></li>
-									<li><a href="#">June 2018 <span>(7)</span></a></li>
-									<li><a href="#">May 2018 <span>(5)</span></a></li>
-								</ul>
-							</div>
-
-							<div class="sidebar-box ftco-animate">
-								<h3 class="sidebar-heading">Paragraph</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-									Ducimus itaque, autem necessitatibus voluptate quod mollitia
-									delectus aut.</p>
-							</div>
-							<div>오른쪽 스크립트 시작</div>
-						</div>
+						
 
 					</div>
 				</div>

@@ -29,6 +29,16 @@ public class ContestService implements IContestService {
 		return contestMapper.getTenContest();
 	}
 
+	@Override
+	public ContestDTO getContestDetail(String contest_seq) throws Exception {
+		return contestMapper.getContestDetail(contest_seq);
+	}
+
+	@Override
+	public List<ContestDTO> getAreaContest(String contest_area) throws Exception {
+		return contestMapper.getAreaContest(contest_area);
+	}
+
 	
 
 }

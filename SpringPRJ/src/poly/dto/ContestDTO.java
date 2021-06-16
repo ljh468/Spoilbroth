@@ -5,7 +5,8 @@ package poly.dto;
  * @version 1.1 MyJsonDTO
  */
 public class ContestDTO {
-
+	
+	private String contest_seq; // 공모전 고유번호
 	private String contest_name; // 공모전 이름
 	private String contest_area; // 분야
 	private String contest_host; // 주최
@@ -69,7 +70,11 @@ public class ContestDTO {
 	public void setReg_dt(String reg_dt) {
 		this.reg_dt = reg_dt;
 	}
-	
-	
+	public String getContest_seq() {
+		return contest_seq;
+	}
+	public void setContest_seq(String contest_seq) {
+		this.contest_seq = contest_seq;
+	}
 	
 }

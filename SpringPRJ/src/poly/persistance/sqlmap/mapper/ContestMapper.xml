@@ -34,7 +34,26 @@
 	
 	<!-- 공모전 각 카테고리당 최신 10개씩 가져오기  -->
 	<select id="getTenContest" resultType="ContestDTO">
+	SELECT 	CONTEST_SEQ,
+			CONTEST_AREA,
+			CONTEST_NAME,
+			CONTEST_HOST,
+			CONTEST_ADDR,
+			CONTEST_DAY
+	FROM CONTEST_INFO
+	</select>
+	
+	<!-- 공모전 상세정보 가져오기 -->
+	<select id="getContestDetail" resultType="ContestDTO">
 	SELECT *
 	FROM CONTEST_INFO
+	WHERE CONTEST_SEQ = #{contest_seq}
+	</select>
+	
+	<!-- 분야별 공모전 리스트 조회 -->
+	<select id="getAreaContest" resultType="ContestDTO">
+	SELECT *
+	FROM CONTEST_INFO
+	WHERE CONTEST_AREA = #{contest_area}
 	</select>
 </mapper>

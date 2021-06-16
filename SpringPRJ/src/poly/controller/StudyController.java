@@ -362,49 +362,6 @@ public class StudyController {
 		return "/redirect";
 	}
 
-	@RequestMapping(value = "study/contest")
-	public String contest(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
-		log.info(this.getClass().getClass().getName() + "study/contest start!!");
-		String user_id = (String)session.getAttribute("user_id");
-		if(user_id == null) {
-			return "/user/login";
-		}
-		// 카테고리별 10개씩 가져오기
-		List<ContestDTO> rList = contestService.getTenContest();
-		
-		
-		
-		log.info(this.getClass().getClass().getName() + "study/contest end!!");
-
-		return "study/contest";
-	}
-	
-	@RequestMapping(value = "study/contest2")
-	public String contest2(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
-		log.info(this.getClass().getClass().getName() + "study/contest start!!");
-		String user_id = (String)session.getAttribute("user_id");
-		if(user_id == null) {
-			return "/user/login";
-		}
-		
-		String contest_area = nvl((String)request.getParameter("contest_area"));
-		
-		
-		
-		
-		log.info(this.getClass().getClass().getName() + "study/contest end!!");
-
-		return "study/contest";
-	}
-
-	@RequestMapping(value = "study/contestdetail")
-	public String contestdetail(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
-		log.info(this.getClass().getClass().getName() + "study/contestdetail start!!");
-
-		log.info(this.getClass().getClass().getName() + "study/contestdetail end!!");
-
-		return "study/contestdetail";
-	}
 
 	// 스터디 상세정보 페이지 (가입전 정보보기)
 	@RequestMapping(value = "study/studyinfo", method = RequestMethod.GET)

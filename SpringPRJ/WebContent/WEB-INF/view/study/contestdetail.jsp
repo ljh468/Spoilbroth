@@ -1,16 +1,9 @@
+<%@page import="poly.dto.ContestDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
 <%
-	String user_id = (String) request.getAttribute("user_id");
-	String user_email = (String) request.getAttribute("user_email");
-	String join_dt = (String) request.getAttribute("join_dt");
-	String user_name = "이재훈";
-	String user_mbti = "ENTP";
-	String user_dept = "데이터분석과";
-	
-	String[] study_group = user_name.split("");
-	int study_count = study_group.length;
+	ContestDTO rDTO = (ContestDTO)request.getAttribute("rDTO");
 %>
 
 <!DOCTYPE html>
@@ -93,14 +86,14 @@
 							<!-- 스터디 개설  START -->
 							<div class="emp-profile">
 								<label style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
-								공모전명 : 한이음 ICT 멘토링 공모전
+								공모전명 :<%=rDTO.getContest_name() %>
 								</label>
 								<!-- 사진 프로필 START -->
 								<div class="d-flex card m-2 p-3">
 									
 									<div class="d-flex align-items-center">
 										<div class="image">
-											<img src="/andrea-master/images/image_1.jpg" class="rounded"width="100%">
+											<img src="<%=rDTO.getContest_img() %>" class="rounded"width="100%">
 										</div>
 									</div>
 											
@@ -108,37 +101,37 @@
            								<label style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
 										분야</label>
               							<div class="card fontstyle">
-		              					Study Name
-		              					</div>
-		              					
-		              					<label style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
-										응모대상</label>
-              							<div class="card fontstyle">
-		              					Study Name
+		              					<%=rDTO.getContest_area() %>
 		              					</div>
 		              					
 		              					<label style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
 										주최/주관</label>
               							<div class="card fontstyle">
-		              					Study Name
+		              					<%=rDTO.getContest_host() %>
 		              					</div>
 		              					
 		              					<label style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
 										접수기간</label>
               							<div class="card fontstyle">
-		              					Study Name
+		              					<%=rDTO.getContest_day() %>
 		              					</div>
 		              					
 		              					<label style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
 										총 상금</label>
               							<div class="card fontstyle">
-		              					Study Name
+		              					<%=rDTO.getContest_prize() %>
 		              					</div>
 		              					
 		              					<label style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
 										홈페이지</label>
               							<div class="card fontstyle">
-		              					<a href="URL">이동</a>
+		              					<a href="<%=rDTO.getContest_addr()%>">이동</a>
+		              					</div>
+		              					
+		              					<label style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
+										상세내용</label>
+              							<div class="card fontstyle">
+		              					<%=rDTO.getContest_contents() %>
 		              					</div>
 		              							
 	              						
@@ -152,31 +145,7 @@
 						</div>
 						<!-- 왼쪽 스크립트 끝 -->
 						
-						<!-- 오른쪽 스크립트 시작 -->
-						<div
-							class="col-xl-4 sidebar ftco-animate bg-light pt-5 fadeInUp ftco-animated">
-							<div>오른쪽 스크립트 시작</div>
-
-							<div class="sidebar-box ftco-animate">
-								<h3 class="sidebar-heading">Archives</h3>
-								<ul class="categories">
-									<li><a href="#">Decob14 2018 <span>(10)</span></a></li>
-									<li><a href="#">September 2018 <span>(6)</span></a></li>
-									<li><a href="#">August 2018 <span>(8)</span></a></li>
-									<li><a href="#">July 2018 <span>(2)</span></a></li>
-									<li><a href="#">June 2018 <span>(7)</span></a></li>
-									<li><a href="#">May 2018 <span>(5)</span></a></li>
-								</ul>
-							</div>
-
-							<div class="sidebar-box ftco-animate">
-								<h3 class="sidebar-heading">Paragraph</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-									Ducimus itaque, autem necessitatibus voluptate quod mollitia
-									delectus aut.</p>
-							</div>
-							<div>오른쪽 스크립트 끝</div>
-						</div>
+						
 
 					</div>
 				</div>
