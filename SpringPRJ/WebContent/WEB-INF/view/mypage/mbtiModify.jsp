@@ -100,7 +100,6 @@ int study_count = study_group.length;
 							<div class="emp-profile" style="font-size: 25px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
 
 
-
 								<div class="content" style="padding-bottom: 50px;">
 									<div class="card">
 										<div class="card-header">
@@ -115,25 +114,25 @@ int study_count = study_group.length;
 
 												<h3>
 													<button class="btn btn-warning btn-block btn-lg"
-														onclick="location='/mypage/mbtiModify.do'">MBTI 변경
-													</button>
+														onclick="location='/Mypage/TheInterestSetting.do'">관심분야
+														설정</button>
 												</h3>
 												<br> <br>
 												<h3>
 													<button class="btn btn-warning btn-block btn-lg"
-														onclick="location='/mypage/userCorrection.do'">회원정보
+														onclick="location='/Mypage/TheUserCorrection.do'">회원정보
 														수정</button>
 												</h3>
 												<br> <br>
 												<h3>
 													<button class="btn btn-warning btn-block btn-lg"
-														onclick="location='/mypage/passWordChange.do'">비밀번호
+														onclick="location='/Mypage/ThePassWordChange.do'">비밀번호
 														변경</button>
 												</h3>
 												<br> <br>
 												<h3>
 													<button class="btn btn-warning btn-block btn-lg"
-														onclick="location='/mypage/userDelete.do'">회원
+														onclick="location='/Mypage/TheUserDelete.do'">회원
 														탈퇴</button>
 												</h3>
 												<br> <br>
@@ -146,24 +145,30 @@ int study_count = study_group.length;
 									<!-- 다음으로 넘어가는 버튼 만들기  -->
 
 								</div>
-
-
-
-
-
-
 							</div>
 						</div>
-						<!-- 그룹목록 END -->
+
+
+
+
+
+
+
+
+
 
 					</div>
 
+					<!-- 그룹목록 END -->
+
+					왼쪽 스크립트 끝
 				</div>
-			</section>
 		</div>
 	</div>
+	</section>
+	</div>
 	<!-- 메인 페이지 END-->
-
+	</div>
 	<!-- 전체 페이지 END-->
 
 	<!-- loader -->

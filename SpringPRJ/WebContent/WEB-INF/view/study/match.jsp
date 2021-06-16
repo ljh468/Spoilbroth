@@ -23,7 +23,7 @@
 <head>
 <title>Spoilbroth_StudyGroup</title>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
 
 <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
@@ -169,7 +169,7 @@
 										for (StudyListDTO sDTO : pList) {
 											if(Integer.parseInt(mbti_scores.get(i)) >= 4){
 									%>
-									<!-- 가입한 스터디 리스트로 뿌려줌 -->
+									<!-- 모든 스터디 리스트로 뿌려줌 -->
 									<div class="item"
 										style="font-size: 33px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; coler: white;">
 										<a href="/study/studyboard.do?study_name=<%=sDTO.getStudy_name()%>">
@@ -482,6 +482,7 @@
 					{
 						autoplay : true, // 오토 플레이
 						autoplayTimeout : 3000, // 오토 플레이 시에 다음 슬라이드로 넘어가는 주기, 2초
+						mouseDrag: true,
 						loop : true,
 						margin : 0,
 						nav : true,

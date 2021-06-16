@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import poly.dto.BoardDTO;
-import poly.dto.ContestDTO;
 import poly.dto.OcrDTO;
 import poly.dto.StudyListDTO;
 import poly.dto.UserDTO;
@@ -44,7 +43,7 @@ public class StudyController {
 
 	private Logger log = Logger.getLogger(this.getClass());
 
-	final private String STUDYFILE_UPLOAD_SAVE_PATH = "C:\\studyimg"; // C:\\upload 폴더에 저장 /upload
+	final private String STUDYFILE_UPLOAD_SAVE_PATH = "/studyimg"; // C:\\upload 폴더에 저장 /upload
 
 	@Resource(name = "UserService")
 	IUserService userService;
@@ -206,10 +205,7 @@ public class StudyController {
 	public String studyopen(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
 		log.info(this.getClass().getClass().getName() + "study/studyopen start!!");
 
-		String user_id = (String) session.getAttribute("user_id");
-		if (user_id == null) {
-			return "/user/login";
-		}
+		String user_id = (String)session.getAttribute("user_id");
 		UserDTO uDTO = new UserDTO();
 		uDTO.setUser_id(user_id);
 
@@ -226,12 +222,10 @@ public class StudyController {
 	@RequestMapping(value = "study/inserStudyInfo", method = RequestMethod.POST)
 	public String inserStudyInfo(HttpServletRequest request, HttpSession session, ModelMap model,
 			@RequestParam(value = "fileUplod2") MultipartFile mf) throws Exception {
-
-		String user_id = (String) session.getAttribute("user_id");
-		if (user_id == null) {
-			return "/user/login";
-		}
+		
 		log.info(this.getClass().getClass().getName() + "study/inserStudyInfo start!!");
+		String user_id = (String) session.getAttribute("user_id");
+		
 
 		// 가입 결과에 대한 메시지 전달할 변수
 		String msg = "";
@@ -369,9 +363,7 @@ public class StudyController {
 		log.info(this.getClass().getClass().getName() + "study/studyinfo start!!");
 
 		String user_id = (String) session.getAttribute("user_id");
-		if (user_id == null) {
-			return "/user/login";
-		}
+		
 		String study_name = nvl(request.getParameter("study_name"));
 		log.info("study_name : " + study_name);
 

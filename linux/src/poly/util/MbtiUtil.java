@@ -10,25 +10,6 @@ public class MbtiUtil {
 		// 리스트형태로 점수를 내보내기위함
 		List<String> mbti_scores = new ArrayList<String>();
 
-		// 모든 MBTI 종류를 리스트 형태로
-//		List<String> mbtiList = new ArrayList<String>();
-//		mbtiList.add("ENTJ");
-//		mbtiList.add("ENTP");
-//		mbtiList.add("INTJ");
-//		mbtiList.add("INTP");
-//		mbtiList.add("ESTJ");
-//		mbtiList.add("ESFJ");
-//		mbtiList.add("ISTJ");
-//		mbtiList.add(("ISFJ"));
-//		mbtiList.add("ENFJ");
-//		mbtiList.add(("ENFP"));
-//		mbtiList.add("INFJ");
-//		mbtiList.add("INFP");
-//		mbtiList.add("ESTP");
-//		mbtiList.add("ESFP");
-//		mbtiList.add("ISTP");
-//		mbtiList.add("ISFP");
-
 		try {
 			int mbti_avg = 0;
 			int score = 0;

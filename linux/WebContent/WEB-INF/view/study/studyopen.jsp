@@ -89,7 +89,7 @@
 										<div class="profile-card" style="width: 100%;">
 												<div class="align-items-center">
 													<div class="image">
-														<img id="preview-image" src="/" class="rounded" width="100%" alt="My Image">
+														<img id="preview-image" src="#" class="rounded" width="100%" alt="My Image">
 													</div>
 												</div>
 												<div id="input-image" class="button mt-2 d-flex flex-row align-items-center">

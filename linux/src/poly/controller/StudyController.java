@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import poly.dto.BoardDTO;
-import poly.dto.ContestDTO;
 import poly.dto.OcrDTO;
 import poly.dto.StudyListDTO;
 import poly.dto.UserDTO;
@@ -44,7 +43,7 @@ public class StudyController {
 
 	private Logger log = Logger.getLogger(this.getClass());
 
-	final private String STUDYFILE_UPLOAD_SAVE_PATH = "C:\\studyimg"; // C:\\upload 폴더에 저장 /upload
+	final private String STUDYFILE_UPLOAD_SAVE_PATH = "/studyimg"; // C:\\upload 폴더에 저장 /upload
 
 	@Resource(name = "UserService")
 	IUserService userService;
@@ -205,11 +204,8 @@ public class StudyController {
 	@RequestMapping(value = "study/studyopen")
 	public String studyopen(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
 		log.info(this.getClass().getClass().getName() + "study/studyopen start!!");
-
 		String user_id = (String) session.getAttribute("user_id");
-		if (user_id == null) {
-			return "/user/login";
-		}
+		
 		UserDTO uDTO = new UserDTO();
 		uDTO.setUser_id(user_id);
 
@@ -227,10 +223,7 @@ public class StudyController {
 	public String inserStudyInfo(HttpServletRequest request, HttpSession session, ModelMap model,
 			@RequestParam(value = "fileUplod2") MultipartFile mf) throws Exception {
 
-		String user_id = (String) session.getAttribute("user_id");
-		if (user_id == null) {
-			return "/user/login";
-		}
+		
 		log.info(this.getClass().getClass().getName() + "study/inserStudyInfo start!!");
 
 		// 가입 결과에 대한 메시지 전달할 변수
@@ -264,7 +257,7 @@ public class StudyController {
 			sDTO.setStudy_member(study_member);
 			sDTO.setStudy_title(study_title);
 			sDTO.setStudy_contents(study_contents);
-			sDTO.setStudy_creator(user_id);
+			sDTO.setStudy_creator(study_member);
 
 			log.info("insertStudyInfo start!!");
 			int res = studyService.insertStudyInfo(sDTO);
@@ -272,7 +265,7 @@ public class StudyController {
 
 			// 스터디 개설하면서 유저정보 DB에 스터디이름 추가
 			Map<String, String> sMap = new HashMap<String, String>();
-			sMap.put("user_id", user_id);
+			sMap.put("user_id", study_member);
 			sMap.put("study_name", study_name);
 
 			log.info("updateJoinStudy start!!");

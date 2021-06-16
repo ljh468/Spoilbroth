@@ -83,7 +83,8 @@ int study_count = study_group.length;
 			<div class="hh" style="font-size: 23px; height: 32px;">
 				<span>M</span><span>Y</span><span>P</span><span>A</span><span>S</span><span>E</span>
 			</div>
-			<hr style="width: 90%; height: 1.5px; border: none; background-color: #666666;">
+			<hr
+				style="width: 90%; height: 1.5px; border: none; background-color: #666666;">
 		</div>
 		<!-- END 상단 NANI -->
 
@@ -97,73 +98,49 @@ int study_count = study_group.length;
 						<!-- 왼쪽 스크립트 -->
 						<div class="col-xl-8 px-md-5" style="background-color: #f7fbff;">
 							<!-- My 프로필 메인화면 -->
-							<div class="emp-profile" style="font-size: 25px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
-
-
-
-								<div class="content" style="padding-bottom: 50px;">
+							<div class="emp-profile"
+								style="font-size: 25px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
+								<div class="content">
 									<div class="card">
 										<div class="card-header">
 											<h4 class="mt-0 mb-0 text-center">
-												<b>Setting</b>
+												<b>탈퇴 확인</b>
 											</h4>
 										</div>
 										<hr>
 										<div class="card-body">
 
-											<div style="text-align: center; font-size: 10px;">
+											<form action="/Mypage/TheUserDeleteProc.do"
+												onsubmit="return check()" class="text-center"
+												style="font-size: 22px">
 
-												<h3>
-													<button class="btn btn-warning btn-block btn-lg"
-														onclick="location='/mypage/mbtiModify.do'">MBTI 변경
-													</button>
-												</h3>
-												<br> <br>
-												<h3>
-													<button class="btn btn-warning btn-block btn-lg"
-														onclick="location='/mypage/userCorrection.do'">회원정보
-														수정</button>
-												</h3>
-												<br> <br>
-												<h3>
-													<button class="btn btn-warning btn-block btn-lg"
-														onclick="location='/mypage/passWordChange.do'">비밀번호
-														변경</button>
-												</h3>
-												<br> <br>
-												<h3>
-													<button class="btn btn-warning btn-block btn-lg"
-														onclick="location='/mypage/userDelete.do'">회원
-														탈퇴</button>
-												</h3>
-												<br> <br>
-
-											</div>
-
+												<span id="msg" class="txt1" style="color: #706c6e;">
+													<b>회원탈퇴를 하면</b> <br> <b>다시 되돌릴 수 없으며,</b> <br> <b>모든
+														정보가 삭제됩니다.</b> <br> <b>탈퇴를 계속 진행하시려면</b> <br> <b
+													style="color: #ed4c8d;">' 삭제하겠습니다. '</b> <br>
+													<b>를 입력해주세요.</b>
+												</span> <br> <br> <br> <input class="text-center"
+													type="text" id="deleteCheck"
+													placeholder="삭제하겠습니다." required> <br>
+												<br> <input style="float: right;"
+													class="btn btn-success btn-block btn-lg" type="submit"
+													value="확인"> <input type="button"
+													onclick="location.href='/Setting/TheMypage.do'"
+													class="btn btn-warning btn-block btn-lg" value="취소">
+												<br>
+											</form>
 										</div>
 									</div>
-									<!-- 뉴스 기사 끝. -->
-									<!-- 다음으로 넘어가는 버튼 만들기  -->
-
 								</div>
-
-
-
-
-
 
 							</div>
 						</div>
-						<!-- 그룹목록 END -->
-
 					</div>
-
 				</div>
 			</section>
 		</div>
+		<!-- 메인 페이지 END-->
 	</div>
-	<!-- 메인 페이지 END-->
-
 	<!-- 전체 페이지 END-->
 
 	<!-- loader -->
