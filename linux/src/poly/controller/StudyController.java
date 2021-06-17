@@ -219,8 +219,8 @@ public class StudyController {
 		return "study/studyopen";
 	}
 
-	@RequestMapping(value = "study/inserStudyInfo", method = RequestMethod.POST)
-	public String inserStudyInfo(HttpServletRequest request, HttpSession session, ModelMap model,
+	@RequestMapping(value = "study/insertStudyInfo", method = RequestMethod.POST)
+	public String insertStudyInfo(HttpServletRequest request, HttpSession session, ModelMap model,
 			@RequestParam(value = "fileUplod2") MultipartFile mf) throws Exception {
 
 		
@@ -304,9 +304,12 @@ public class StudyController {
 				log.info("saveFilePath : " + saveFilePath);
 				log.info("fullFileInfo : " + fullFileInfo);
 
-				// 업로드 되는 파일을 서버에 저장
-				mf.transferTo(new File(fullFileInfo));
-
+				File targetFile = new File(fullFileInfo);
+				targetFile.setReadable(true, false);
+	            targetFile.setWritable(false, false);
+	            targetFile.setWritable(true, true);
+	            
+				mf.transferTo(targetFile);
 				OcrDTO pDTO = new OcrDTO();
 
 				pDTO.setSave_file_name(saveFileName);
@@ -351,7 +354,7 @@ public class StudyController {
 			// 변수 초기화
 			sDTO = null;
 		}
-		log.info(this.getClass().getClass().getName() + "study/inserStudyInfo end!!");
+		log.info(this.getClass().getClass().getName() + "study/insertStudyInfo end!!");
 		return "/redirect";
 	}
 
@@ -530,57 +533,6 @@ public class StudyController {
 		return "study/studyboard";
 	}
 
-	// 스터디 이미지 불러오기 ( InputStream으로 파일 불러옴 )
-	@RequestMapping(value = "/getStudyImage", method = RequestMethod.GET)
-	public void getStudyImage(HttpServletRequest request, HttpSession session, HttpServletResponse response,
-			@RequestParam(value = "study_name") String study_name) throws Exception {
-
-		log.info("study_name : " + study_name);
-
-		// 가장 최근에 등록한 프로필 사진 정보가져오기
-		log.info("getStudyImgList start! ");
-		Map<String, String> pMap = imgService.getStudyImgList(study_name);
-		log.info("getStudyImgList end! ");
-
-		String realFile = pMap.get("SAVE_FILE_PATH") + "/"; // 파일이 저장된 경로 C:\\upload\\
-		String fileNm = pMap.get("SAVE_FILE_NAME"); // 파일명
-		String ext = pMap.get("EXT"); // 파일 확장자
-		log.info("realFile : " + realFile);
-		log.info("fileNm : " + fileNm);
-		log.info("ext : " + ext);
-
-		BufferedOutputStream out = null;
-		InputStream in = null;
-
-		try {
-			response.setContentType("image/" + ext);
-			response.setHeader("Content-Disposition", "inline;filename=" + fileNm);
-			File file = new File(realFile + fileNm);
-
-			if (file.exists()) {
-				in = new FileInputStream(file);
-				out = new BufferedOutputStream(response.getOutputStream());
-				int len;
-				byte[] buf = new byte[1024];
-				while ((len = in.read(buf)) > 0) {
-					out.write(buf, 0, len);
-				}
-			}
-		} catch (Exception e) {
-			log.info(e.getStackTrace());
-		} finally {
-			if (out != null) {
-				out.flush();
-			}
-			if (out != null) {
-				out.close();
-			}
-			if (in != null) {
-				in.close();
-			}
-		}
-	}
-
 	// 스터디 탈퇴하기
 	@RequestMapping(value = "/study/leave", method = RequestMethod.GET)
 	public String leave(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
@@ -745,4 +697,6 @@ public class StudyController {
 		model.addAttribute("url", url);
 		return "/redirect";
 	}
+	
+	
 }

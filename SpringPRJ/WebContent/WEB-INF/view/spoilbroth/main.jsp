@@ -52,7 +52,6 @@
 
 </head>
 <body data-aos-easing="slide" data-aos-duration="800" data-aos-delay="0">
-	
 	<!-- 전체 페이지 START-->
 	<div id="colorlib-page">
 		<!-- START 왼쪽 NANI -->

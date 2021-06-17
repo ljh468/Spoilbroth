@@ -448,35 +448,6 @@
 </script>
 
 <script type="text/javascript">
-	$('#btnUpload').on('click', function(event) {
-	    event.preventDefault();
-	    
-	    var form = $('#uploadForm')[0]
-	    var data = new FormData(form);
-	    $('#btnUpload').prop('disabled', true);
-		
-	    $.ajax({
-	        type: "POST",
-	        enctype: 'multipart/form-data',
-	        url: "/FileUplod2.do",
-	        data: data,
-	        processData: false,
-	        contentType: false,
-	        cache: false,
-	        timeout: 600000,
-	        success: function (data) {
-	        	$('#btnUpload').prop('disabled', false);
-	        	alert('등록이 성공하였습니다.')
-	        },
-	        error: function (e) {
-	            $('#btnUpload').prop('disabled', false);
-	            alert('등록이 실패하였습니다.');
-	        }
-	    });
-	})
-</script>
-
-<script type="text/javascript">
 	$('.slider-1 > .owl-carousel')
 			.owlCarousel(
 					{

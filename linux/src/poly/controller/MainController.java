@@ -120,57 +120,6 @@ public class MainController {
 		return "spoilbroth/mystudy";
 	}
 
-	// 프로필 이미지 불러오기 ( InputStream으로 파일 불러옴 )
-	@RequestMapping(value = "/getImage", method = RequestMethod.GET)
-	public void getImage(HttpServletRequest request, HttpSession session, HttpServletResponse response,
-			@RequestParam(value = "user_id") String user_id) throws Exception {
-
-		log.info("user_id : " + user_id);
-
-		// 가장 최근에 등록한 프로필 사진 정보가져오기
-		log.info("getImgList start! ");
-		Map<String, String> pMap = imgService.getImgList(user_id);
-		log.info("getImgList end! ");
-
-		String realFile = pMap.get("SAVE_FILE_PATH") + "/"; // 파일이 저장된 경로 C:\\upload\\
-		String fileNm = pMap.get("SAVE_FILE_NAME"); // 파일명
-		String ext = pMap.get("EXT"); // 파일 확장자
-		log.info("realFile : " + realFile);
-		log.info("fileNm : " + fileNm);
-		log.info("ext : " + ext);
-
-		BufferedOutputStream out = null;
-		InputStream in = null;
-
-		try {
-			response.setContentType("image/" + ext);
-			response.setHeader("Content-Disposition", "inline;filename=" + fileNm);
-			File file = new File(realFile + fileNm);
-
-			if (file.exists()) {
-				in = new FileInputStream(file);
-				out = new BufferedOutputStream(response.getOutputStream());
-				int len;
-				byte[] buf = new byte[1024];
-				while ((len = in.read(buf)) > 0) {
-					out.write(buf, 0, len);
-				}
-			}
-		} catch (Exception e) {
-			log.info(e.getStackTrace());
-		} finally {
-			if (out != null) {
-				out.flush();
-			}
-			if (out != null) {
-				out.close();
-			}
-			if (in != null) {
-				in.close();
-			}
-		}
-	}
-
 	@RequestMapping(value = "spoilbroth/main")
 	public String main(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
 		log.info(this.getClass().getClass().getName() + "user/login start!!");
