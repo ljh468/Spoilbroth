@@ -31,4 +31,6 @@ public interface IStudyMapper {
 
 	String getStudySeq(String study_name);
 
+	int modifyNotice(Map<String, Object> pMap);
+
 }

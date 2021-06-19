@@ -19,15 +19,21 @@
 	
 	<!-- 모든 스터디 리스트 조회 쿼리 -->
 	<select id="getAllStudyList" resultType="StudyListDTO">
+		<![CDATA[
 		SELECT *
 		FROM STUDY_INFO
+		WHERE 
+			JOIN_COUNT < 5 
+		]]>
 	</select>
 	
 	<!-- 분야별 스터디 리스트 조회 쿼리 -->
 	<select id="getfieldStudyList" resultType="StudyListDTO">
+		<![CDATA[
 		SELECT *
 		FROM STUDY_INFO
-		WHERE STUDY_FIELD = #{study_field}
+		WHERE STUDY_FIELD = #{study_field} AND JOIN_COUNT < 5
+		]]>
 	</select>
 	
 	<!-- 스터디그룹 등록 -->
@@ -41,7 +47,9 @@
 				STUDY_MEMBER,
 				STUDY_TITLE,
 				STUDY_CONTENTS,
-				STUDY_CREATOR
+				STUDY_CREATOR,
+				STUDY_NOTIFY,
+				JOIN_COUNT
 			)
 		VALUES(	
 				(SELECT IFNULL(MAX(STUDY_SEQ), 0)+1 FROM STUDY_INFO S),
@@ -51,8 +59,9 @@
 				#{study_member},
 				#{study_title},
 				#{study_contents},
-				#{study_creator}
-				
+				#{study_creator},
+				#{study_notify},
+				1
 			)
 				
 	
@@ -89,14 +98,16 @@
 		UPDATE STUDY_INFO
 		SET STUDY_MEMBER = CASE WHEN STUDY_MEMBER = ""
 							THEN #{user_id}
-							ELSE (CONCAT(STUDY_MEMBER,',',#{user_id})) END
+							ELSE (CONCAT(STUDY_MEMBER,',',#{user_id})) END , 
+			JOIN_COUNT = JOIN_COUNT +1
 		WHERE STUDY_SEQ = (SELECT STUDY_SEQ FROM STUDY_INFO WHERE STUDY_NAME = #{study_name})
 	</update>
 	
 	<!-- 스터디 팀원정보에 가입한 유저 아이디 삭제 -->
 	<update id="updateLeaveUser" parameterType="hashMap">
 		UPDATE STUDY_INFO
-		SET STUDY_MEMBER = #{sutdy_member}
+		SET STUDY_MEMBER = #{sutdy_member} ,
+			JOIN_COUNT = JOIN_COUNT -1
 		WHERE STUDY_SEQ = (SELECT STUDY_SEQ FROM STUDY_INFO WHERE STUDY_NAME = #{study_name})
 	</update>
 	
@@ -106,5 +117,10 @@
 		WHERE STUDY_NAME = #{study_name}
 	</delete>
 	
-	
+	<!-- 스터디 알림창 업데이트 -->
+	<update id="modifyNotice" parameterType="hashMap">
+		UPDATE STUDY_INFO
+		SET STUDY_NOTIFY = #{study_notify}
+		WHERE STUDY_SEQ = #{study_seq}
+	</update>
 </mapper>

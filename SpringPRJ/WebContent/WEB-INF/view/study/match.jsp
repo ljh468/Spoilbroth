@@ -100,6 +100,7 @@
 			<hr style=" width: 90%; height: 1.5px; border: none; background-color: #666666;">
 			<ul class="tagcloud" style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
 				<a href="/study/match.do" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;"> 전체</a>
+				<a href="/study/match2.do?study_field=IT개발" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;"> IT개발</a>
 				<a href="/study/match2.do?study_field=자유스터디" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;"> 자유스터디</a>
 				<a href="/study/match2.do?study_field=공모전" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">공모전</a>
 				<a href="/study/match2.do?study_field=어학/회화" class="tag-cloud-link" style="font-size: 17px; border-width: 1.5px; border-color: #ffc107;">어학/회화</a>

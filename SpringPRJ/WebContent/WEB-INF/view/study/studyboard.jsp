@@ -1,4 +1,5 @@
- <%@page import="java.util.ArrayList"%>
+
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="poly.dto.BoardDTO"%>
 <%@page import="poly.util.CmmUtil"%>
@@ -11,7 +12,7 @@
 	UserDTO uDTO = (UserDTO) request.getAttribute("rDTO");
 	String user_id = uDTO.getUser_id();
 	String user_name = uDTO.getUser_name();
-	
+
 	StudyListDTO sDTO = (StudyListDTO) request.getAttribute("sDTO");
 	String study_name = (String) request.getAttribute("study_name");
 	String study_notify = CmmUtil.nvl(sDTO.getStudy_notify());
@@ -20,21 +21,21 @@
 	String study_seq = CmmUtil.nvl(sDTO.getStudy_seq());
 	System.out.println("study_creator : " + study_creator);
 	System.out.println("study_seq : " + study_seq);
-	
+
 	String[] study_group = user_name.split("");
 	int study_count = study_group.length;
-	
+
 	// 게시판 조회 결과 보여주기
-	List<BoardDTO> rList = (List<BoardDTO>)request.getAttribute("rList");
-	if( rList == null){
+	List<BoardDTO> rList = (List<BoardDTO>) request.getAttribute("rList");
+	if (rList == null) {
 		rList = new ArrayList<BoardDTO>();
 	}
-	
+
 	// 스터디그룹에 가입한 유저의 MBTI정보
-	List<String> mList = (List<String>)request.getAttribute("mList");
+	List<String> mList = (List<String>) request.getAttribute("mList");
 	String member_mbti = String.join(",", mList);
-	
-	int mbti_score = (int)request.getAttribute("mbti_score");
+
+	int mbti_score = (int) request.getAttribute("mbti_score");
 %>
 
 <!DOCTYPE html>
@@ -81,17 +82,16 @@
 
 <!-- owl -->
 <script src="/andrea-master/js/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.carousel.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.theme.default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.theme.default.min.css">
 <link rel="stylesheet" href="/css/owlowl.css">
 <!-- data table -->
-<link rel="stylesheet"
-	href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
 
+<style>
+
+</style>
 </head>
 <body data-aos-easing="slide" data-aos-duration="800" data-aos-delay="0">
 
@@ -125,9 +125,11 @@
 						<!-- 왼쪽 스크립트 -->
 						<div class="col-xl-8 px-md-5" style="background-color: #f7fbff;">
 							<!-- 스터디 개설  START -->
-							<div class="" style="margin-left:20px">
-							<label style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-top: 18px; margin-bottom: -8px;">
-									<%=study_name %> 팀의 커뮤니티 </label>
+							<div class="" style="margin-left: 20px">
+								<label
+									style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-top: 18px; margin-bottom: -8px;">
+									<%=study_name%> 팀의 커뮤니티
+								</label>
 							</div>
 							<div class="emp-profile">
 								<!-- 사진 프로필 START -->
@@ -135,128 +137,181 @@
 
 
 
-								<form id="uploadForm" enctype="multipart/form-data">
-									<div class="d-flex align-items-center">
-										<div class="image">
-											<img id="preview-image" src="/getStudyImage.do?study_name=<%=study_name%>"
-												class="rounded" width="100%">
+									<form id="uploadForm" enctype="multipart/form-data">
+										<div class="d-flex align-items-center">
+											<div class="image">
+												<img id="preview-image"
+													src="/getStudyImage.do?study_name=<%=study_name%>"
+													class="rounded" width="100%">
+											</div>
 										</div>
-									</div>
-									<div id="input-image" class="button mt-2 d-flex flex-row align-items-center">
-												<input type="file" id="file" name="fileUplod2" onchange="changeValue(this)" style="display:none"/>
-												<input type="hidden" name="study_name" value="<%=study_name %>">
-												<button class="btn btn-sm btn-primary w-100" id="btn-upload" style="margin-right: 2px;">Select File</button>
-												<button id="btnUpload" class="btn btn-sm btn-primary w-100" style="margin-left: 2px;">Register</button>
-									</div>
-								</form>
-									
-									
-									<!--  -->
-									
-									
+										<div id="input-image"
+											class="button mt-2 d-flex flex-row align-items-center">
+											<input type="file" id="file" name="fileUplod2"
+												onchange="changeValue(this)" style="display: none" /> <input
+												type="hidden" name="study_name" value="<%=study_name%>">
+											<button class="btn btn-sm btn-primary w-100" id="btn-upload"
+												style="margin-right: 2px;">Select File</button>
+											<button id="btnUpload" class="btn btn-sm btn-primary w-100"
+												style="margin-left: 2px;">Register</button>
+										</div>
+									</form>
+
+									<!-- 스터디 정보 -->
 									<hr>
 									<div class="form-group" style="margin-bottom: 0px;">
-										<label style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
-										Title : <%=study_title %>
+										<label
+											style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
+											Title : <%=study_title%>
+										</label><br> <label
+											style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
+											스터디 시작일 : <%=sDTO.getStudy_dt()%>
+										</label><br> <label
+											style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
+											멤버 : <%=sDTO.getStudy_member()%>
+										</label><br> <label
+											style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
+											멤버의 MBTI : <%=member_mbti%>
 										</label><br>
-										<label style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
-										스터디 시작일 : <%=sDTO.getStudy_dt() %>
-										</label><br>
-										<label style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
-										멤버 : <%=sDTO.getStudy_member() %>
-										</label><br>
-										<label style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
-										멤버의 MBTI : <%=member_mbti %>
-										</label><br>
-										<div class="profile-card" style="padding-right:3px; padding-left:3px;">
-										<% for(int k=0; k<mbti_score; k++) {%>
-										<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="22" height="22"
-											 viewBox="0 0 422.448 422.448" style="enable-background:new 0 0 422.448 422.448;" xml:space="preserve">
-										<path style="fill:#FF4979;" d="M387.15,59.153c-47.066-47.065-123.374-47.065-170.44,0l-4,4l-4-4
+										<div class="profile-card"
+											style="padding-right: 3px; padding-left: 3px;">
+											<%
+												for (int k = 0; k < mbti_score; k++) {
+											%>
+											<svg version="1.1" id="Capa_1"
+												xmlns="http://www.w3.org/2000/svg"
+												xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+												width="22" height="22" viewBox="0 0 422.448 422.448"
+												style="enable-background: new 0 0 422.448 422.448;"
+												xml:space="preserve">
+										<path style="fill:#FF4979;"
+													d="M387.15,59.153c-47.066-47.065-123.374-47.065-170.44,0l-4,4l-4-4
 											C163.342,10.448,87.081,7.742,38.376,53.109s-51.412,121.628-6.044,170.334c1.885,2.023,3.839,3.981,5.858,5.871l170.8,170.8
-											c2.018,1.981,5.217,2.085,7.36,0.24l170.8-170.8c47.065-47.066,47.065-123.374,0-170.44L387.15,59.153z"/>
+											c2.018,1.981,5.217,2.085,7.36,0.24l170.8-170.8c47.065-47.066,47.065-123.374,0-170.44L387.15,59.153z" />
 										</svg>
-										
-										<%} %>
-										</div>
-										
-	                					
-	              					</div>
-									<div class="form-group mt-3">
-										<label style="font-size: 25px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
-											알림</label>
-										<div class="card fontstyle p-2" style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
-											<%=sDTO.getStudy_contents() %>
+											<%
+												}
+											%>
 										</div>
 									</div>
-									<div style="display: flex">
+
+									<div class="form-group mt-3">
 										<label
 											style="font-size: 25px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
-											게시판</label>
-										<button type="button" class="btn btn-outline-warning"
-											onclick="location.href='/chat/chatting.do?study_name=<%=study_name %>'"
-											style="margin-left: 30%;">Let's go Chatting</button>
+											알림</label>
+										<div class="card fontstyle p-2"
+											style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
+											<div id="text_aera"><%=sDTO.getStudy_notify()%></div>
+										<!-- 스터디 개설자만 알림을 수정할 수 있음 -->
+										<% if(sDTO.getStudy_creator().equals(uDTO.getUser_id())) { %>
+										<button class="btn btn-sm btn-primary w-100" id="btn-upload" style="margin-right: 2px;"  data-toggle="modal" data-target="#exampleModalCenter">
+										알림 수정하기</button>
+										<% }else{} %>
+										</div>
+										<!-- modal 알림창  -->
+										<!-- Modal -->
+										<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"
+											 style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
+										  <div class="modal-dialog modal-dialog-centered" role="document">
+										    <div class="modal-content">
+										      <div class="modal-header">
+										        <h5 class="modal-title" style="font-size: 30px;" id="exampleModalLongTitle">알림 수정하기</h5>
+										        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										          <span aria-hidden="true">&times;</span>
+										        </button>
+										      </div>
+										      <div class="modal-body">
+										      <textarea cols="50" rows="10" style="width:100%" id="text_modify"><%=sDTO.getStudy_contents()%></textarea>
+										      </div>
+										      <div class="modal-footer" style="font-size: 25px;">
+										        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+										        <button type="button" class="btn btn-primary" onclick="text_modify();">수정하기</button>
+										      </div>
+										    </div>
+										  </div>
+										</div>
+										<!-- model 끝 -->
+										
+									</div>
+									<!-- 멀티 게시판  -->
+									<div style="display: flex">
+									<div style="margin:0 auto;">
+									<label style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
+										게시판</label>
+									</div>
+									<div>
+										<button type="button" class="btn btn-outline-warning" onclick="location.href='/chat/chatting.do?study_name=거북목'" 
+										style="font-weight:600;color: tomato;border-width: revert;border-color: tomato;">
+										Let's 채팅</button>
+									</div>
 									</div>
 									<hr>
 									<!-- 게시판 -->
-									<table id="example" class="display" style="width: 100%;font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;"">
-										<thead style="font-size:15px";>
+									<table id="example" class="display"
+										style="width: 100%; font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
+										<thead style="font-size: 15px";>
 											<tr>
 												<th>no</th>
-												<th>tile</th>
+												<th>title</th>
 												<th>name</th>
 												<th>v</th>
-												
+
 											</tr>
 										</thead>
-
 										<%
 											for (int i = 0; i < rList.size(); i++) {
 												BoardDTO rDTO = rList.get(i);
-												if(rDTO == null){
+												if (rDTO == null) {
 													rDTO = new BoardDTO();
 												}
 										%>
 										<tr>
-											<td style="font-size:15px";>
-											<%
-											// 공지글이라면, [공지]표시
-											if(CmmUtil.nvl(rDTO.getNotice_yn()).equals("1")){
-												out.print("<b>[공지]</b>");
-											}else{
-												out.print(CmmUtil.nvl(rDTO.getNotice_seq()));
-											}
-											%>
+											<td style="font-size: 15px";>
+												<%
+													// 공지글이라면, [공지]표시
+														if (CmmUtil.nvl(rDTO.getNotice_yn()).equals("1")) {
+															out.print("<b>[공지]</b>");
+														} else {
+															out.print(CmmUtil.nvl(rDTO.getNotice_seq()));
+														}
+												%>
 											</td>
-											<td><a href="javascript:doDetail('<%=CmmUtil.nvl(rDTO.getNotice_seq())%>','<%=CmmUtil.nvl(study_seq)%>');">
-											<%=CmmUtil.nvl(rDTO.getTitle()) %></a>
+											<td>
+											<a style="color:brown;" href="javascript:doDetail('<%=CmmUtil.nvl(rDTO.getNotice_seq())%>','<%=CmmUtil.nvl(study_seq)%>');">
+											<%=CmmUtil.nvl(rDTO.getTitle())%></a>
 											</td>
-											<th style="font-size:15px";>
-											<%=CmmUtil.nvl(rDTO.getUser_name()) %>
+											<th style="font-size: 15px";><%=CmmUtil.nvl(rDTO.getUser_name())%>
 											</th>
-											<th style="font-size:15px";>
-											<%=CmmUtil.nvl(rDTO.getRead_cnt()) %>
+											<th style="font-size: 15px";><%=CmmUtil.nvl(rDTO.getRead_cnt())%>
 											</th>
 										</tr>
 										<%
 											}
 										%>
 									</table>
-									<div style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
-									<a href="javascript:newReg('<%=study_seq %>');">
-									[글쓰기]</a>
+									<div
+										style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
+										<a href="javascript:newReg('<%=study_seq%>');"> [글쓰기]</a>
 									</div>
 									<!-- 스터디 개설  END -->
-									<%if (user_id.equals(study_creator)) { %>
-									<button id="btnUpload" class="btn btn-sm btn-danger w-100" style="margin-top: 20px; margin-left: 2px;"
-                           			onclick="del();">스터디 삭제하기</button>
-										
-									<%} else { %>
-									
-									<button id="btnUpload" class="btn btn-sm btn-danger w-100" style="margin-top: 20px; margin-left: 2px;"
-                           			onclick="leave();">스터디 탈퇴하기</button>
-                           			
-									<%} %>
+									<%
+										if (user_id.equals(study_creator)) {
+									%>
+									<button id="btnUpload" class="btn btn-sm btn-danger w-100"
+										style="margin-top: 20px; margin-left: 2px;" onclick="del();">스터디
+										삭제하기</button>
+
+									<%
+										} else {
+									%>
+
+									<button id="btnUpload" class="btn btn-sm btn-danger w-100"
+										style="margin-top: 20px; margin-left: 2px;" onclick="leave();">스터디
+										탈퇴하기</button>
+
+									<%
+										}
+									%>
 
 									<hr style="margin-top: 10px; margin-bottom: 0px;" />
 
@@ -372,29 +427,6 @@ function newReg(seq){
 </script>
 
 <script type="text/javascript">
-	$('.slider-1 > .owl-carousel').owlCarousel({
-		autoplay : true, // 오토 플레이
-		autoplayTimeout : 6000, // 오토 플레이 시에 다음 슬라이드로 넘어가는 주기, 2초
-		loop : true,
-		margin : 0,
-		nav : true,
-		navText : [],
-		responsive : {
-			0 : {
-				items : 1
-			}
-		}
-	});
-
-	var $firstDot = $('.slider-1 > .owl-carousel > .owl-dots > .owl-dot.active');
-
-	$firstDot.removeClass('active');
-
-	setTimeout(function() {
-		$firstDot.addClass('active');
-	}, 100);
-</script>
-<script>
 	$(document).ready(function() {
 		$('#example').DataTable({
 			"columns" : [
@@ -405,12 +437,10 @@ function newReg(seq){
 			]
 		});
 	});
-</script>
-<script type="text/javascript">
-
+	
 function del() {
-	if (window.confirm('삭제를 진행하시겠습니까?')){
-		window.location = '/study/del.do?study_name=<%=study_name %>';
+	if (window.confirm('스터디 그룹을 삭제하시겠습니까?')){
+		window.location = '/study/del.do?study_name=<%=study_name%>';
 	}else{
 	    // They clicked no
 	}
@@ -418,11 +448,37 @@ function del() {
 
 function leave() {
 	if (window.confirm('스터디 그룹을 탈퇴하시겠습니까?')){
-		window.location = '/study/leave.do?study_name=<%=study_name %>';
+		window.location = '/study/leave.do?study_name=<%=study_name%>';
 	}else{
 	    // They clicked no
 	}
 }
 
+function text_modify() {
+    let study_seq = <%=sDTO.getStudy_seq() %>
+    const study_notify = document.getElementById("text_modify").value;
+    console.log(study_notify);
+
+	let request = {
+            method: 'POST',
+            body: JSON.stringify({ study_seq : study_seq , study_notify : study_notify }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+    
+   fetch("/study/textModify.do", request)
+	.then(function(res){
+		return res.text()
+	})
+	.then(function(data){
+		console.log(data);
+		if(data == 1){
+		alert("수정을 완료되었습니다.");
+		}else{
+		alert("수정을 실패했습니다.");	
+		}
+	})
+}
 </script>
 </html>
