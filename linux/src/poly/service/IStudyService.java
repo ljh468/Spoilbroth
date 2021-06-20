@@ -26,5 +26,8 @@ public interface IStudyService {
 	List<StudyListDTO> getfieldStudyList(String study_field);
 
 	String getStudySeq(String study_name);
+
+	int modifyNotice(Map<String, Object> pMap);
+
 	
 }

@@ -106,4 +106,9 @@ public class StudyService implements IStudyService {
 		return studyMapper.getStudySeq(study_name);
 	}
 
+	@Override
+	public int modifyNotice(Map<String, Object> pMap) {
+		return studyMapper.modifyNotice(pMap);
+	}
+
 }

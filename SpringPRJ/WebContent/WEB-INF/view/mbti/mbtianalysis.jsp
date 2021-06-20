@@ -32,7 +32,8 @@
 <link rel="stylesheet" href="/andrea-master/css/flaticon.css">
 <link rel="stylesheet" href="/andrea-master/css/icomoon.css">
 <link rel="stylesheet" href="/andrea-master/css/style.css">
-
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
 <style>
 	article{
 		display: flex;
@@ -107,7 +108,7 @@
 							<span style="padding-left: 50px;"></span>
 							<button type="button" class="btn btn-outline-warning active" onclick="location.href='/mbti/mbtianalysis.do'" style="border-radius: 5px;">MBTI Analysis</button>
 							<hr>
-							<div class="text-center" style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 38px;color:black;">
+							<div class="text-center" style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 40px;color:black;">
 							나의 성격은 무엇일까요?</div>
 							
 							<div class="row p-2">
@@ -128,14 +129,16 @@
 										<div class="progress mt-4">
 											<div class="progress-bar" role="progressbar" style="width: calc(100/12*0%)" ></div>
 										  </div>
-										<h3 id="title" class="text-center mt-3" style="color:navy; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 30px;"
-										>문제</h3>
+										<h3 id="title" class="text-center mt-3" style="color:navy; font-family: 'Gamja Flower', cursive;
+										font-family: 'Nanum Gothic Coding', monospace;">문제</h3>
 
 										<input type="hidden" id="type" value="EI">
 										
-										<button type="button" id="A" class="btn btn-dark mt-3" style="border-radius: 10px; font-size: 30px;background-color: saddlebrown;border-color: saddlebrown;">
+										<button type="button" id="A" class="btn btn-dark mt-3" style="font-family: 'Gamja Flower', cursive;
+										font-family: 'Nanum Gothic Coding', monospace; border-radius: 10px; font-size: 28px;background-color: saddlebrown;border-color: saddlebrown;">
 											YES</button>
-										<button type="button" id="B" class="btn btn-dark mt-2 mb-3" style="border-radius: 10px; font-size: 30px;background-color: darkgreen;border-color: darkgreen;" >
+										<button type="button" id="B" class="btn btn-dark mt-2 mb-3" style="font-family: 'Gamja Flower', cursive;
+										font-family: 'Nanum Gothic Coding', monospace; border-radius: 10px; font-size: 28px;background-color: darkgreen;border-color: darkgreen;" >
 											NO</button>
 									
 									</article>

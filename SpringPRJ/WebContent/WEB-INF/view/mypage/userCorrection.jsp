@@ -110,17 +110,19 @@ int study_count = study_group.length;
 										<hr>
 										<div class="card-body">
 
-											<div style="text-align: left; font-size: 18px;">
+											<div style="text-align: left; font-size: 25px;">
 
-												Email: <spanid id="email"><% %></span> <br>
-												Gender: <span id="gender"><% %></span>
-												<br> Age: <span><% %>대</span>
+												닉네임: <spanid id="email">이코딩</span> <br>
+												Email: <spanid id="email">alsltnpf1209@naver.com</span> <br>
+												Gender: <span id="gender">남자</span><br>
+												Dept: <span id="gender">데이터분석과</span><br>
+												Age: <span>29살</span>
 
 												<form action="/Mypage/TheUserCorrectionDo.do">
 
 													<input class="btn btn-success btn-block btn-lg"
 														type="submit" value="수정하기"> <input type="button"
-														onclick="location.href='/Setting/TheMypage.do'"
+														onclick="location.href='/mypage/setting.do'"
 														class="btn btn-warning btn-block btn-lg" value="뒤로">
 												</form>
 											</div>
@@ -136,9 +138,6 @@ int study_count = study_group.length;
 							</div>
 						</div>
 					</div>
-					<!-- 그룹목록 END -->
-
-					왼쪽 스크립트 끝
 				</div>
 			</section>
 		</div>

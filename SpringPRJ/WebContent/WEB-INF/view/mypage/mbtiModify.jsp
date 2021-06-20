@@ -100,74 +100,47 @@ int study_count = study_group.length;
 							<div class="emp-profile" style="font-size: 25px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
 
 
-								<div class="content" style="padding-bottom: 50px;">
+								<div class="content">
 									<div class="card">
 										<div class="card-header">
 											<h4 class="mt-0 mb-0 text-center">
-												<b>Setting</b>
+												<b>MBTI 변경</b>
 											</h4>
 										</div>
 										<hr>
 										<div class="card-body">
 
-											<div style="text-align: center; font-size: 10px;">
+											<div style="text-align: right; font-size: 20px;">
+												<form action="/Mypage/passWordChangeProc.do"
+													onsubmit="return check()">
+													현재 MBTI: <div type="text" id="current_Password"><strong>ENTP</strong></div> <hr>
+														<span id="past">현재 MBTI입니다..</span> <br> 바꿀 MBTI: <input
+														type="password" id="newPassWord" name="mbti" required>
+													<br> <span class="new">바꿀 MBTI를 입력해주세요. 대문자입력</span> <br>
+													<br> MBTI 확인: <input type="password"
+														id="passWordCheck" required> <br> <span
+														class="renew">확인을 위해 한 번 더 입력해주세요.</span> <br> <br>
+													<input class="btn btn-success btn-block btn-lg"
+														type="submit" value="수정하기"> <input type="button"
+														onclick="location.href='/mypage/setting.do'"
+														class="btn btn-warning btn-block btn-lg" value="뒤로">
 
-												<h3>
-													<button class="btn btn-warning btn-block btn-lg"
-														onclick="location='/Mypage/TheInterestSetting.do'">관심분야
-														설정</button>
-												</h3>
-												<br> <br>
-												<h3>
-													<button class="btn btn-warning btn-block btn-lg"
-														onclick="location='/Mypage/TheUserCorrection.do'">회원정보
-														수정</button>
-												</h3>
-												<br> <br>
-												<h3>
-													<button class="btn btn-warning btn-block btn-lg"
-														onclick="location='/Mypage/ThePassWordChange.do'">비밀번호
-														변경</button>
-												</h3>
-												<br> <br>
-												<h3>
-													<button class="btn btn-warning btn-block btn-lg"
-														onclick="location='/Mypage/TheUserDelete.do'">회원
-														탈퇴</button>
-												</h3>
-												<br> <br>
-
+												</form>
 											</div>
-
 										</div>
 									</div>
-									<!-- 뉴스 기사 끝. -->
-									<!-- 다음으로 넘어가는 버튼 만들기  -->
-
 								</div>
+
+
+
 							</div>
 						</div>
 
-
-
-
-
-
-
-
-
-
 					</div>
-
-					<!-- 그룹목록 END -->
-
-					왼쪽 스크립트 끝
 				</div>
+			</section>
 		</div>
-	</div>
-	</section>
-	</div>
-	<!-- 메인 페이지 END-->
+		<!-- 메인 페이지 END-->
 	</div>
 	<!-- 전체 페이지 END-->
 

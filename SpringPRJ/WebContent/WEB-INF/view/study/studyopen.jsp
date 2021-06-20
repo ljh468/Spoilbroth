@@ -43,7 +43,33 @@
 <link rel="stylesheet" href="/css/owlowl.css">
 <!-- owl -->
 
-
+<script type="text/javascript">
+	function doRegFileCheck(f){
+		
+		if(f.fileUplod2.value==""){
+			alert("스터디 이미지를 등록해주세요.");
+			f.fileUplod2.focus();
+			return false;
+		}
+		
+		if(f.study_name.value==""){
+			alert("스터디 이름을 등록해주세요.");
+			f.study_name.focus();
+			return false;
+		}
+		if(f.study_title.value==""){
+			alert("스터디 제목을 등록해주세요.");
+			f.study_title.focus();
+			return false;
+		}
+		if(f.study_contents.value==""){
+			alert("스터디 메시지를 등록해주세요.");
+			f.study_contents.focus();
+			return false;
+		}
+		
+	}
+</script>
 </head>
 <body data-aos-easing="slide" data-aos-duration="800" data-aos-delay="0">
 	
@@ -85,11 +111,12 @@
 								<div class="d-flex card m-2 p-3">
 								
 										<form action="/study/insertStudyInfo.do" class="p-1 contact-form" method="post" enctype="multipart/form-data" 
+											onsubmit="return doRegFileCheck(this)"
 											style="font-size: 30px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
 										<div class="profile-card" style="width: 100%;">
 												<div class="align-items-center">
 													<div class="image">
-														<img id="preview-image" src="#" class="rounded" width="100%" alt="My Image">
+														<img id="preview-image" src="/andrea-master/images/study.jpg" class="rounded" width="100%" alt="My Image">
 													</div>
 												</div>
 												<div id="input-image" class="button mt-2 d-flex flex-row align-items-center">
@@ -205,32 +232,6 @@
 		})
 </script>
 
-
-<script type="text/javascript">
-	$('.slider-1 > .owl-carousel')
-			.owlCarousel(
-					{
-						autoplay : true, // 오토 플레이
-						autoplayTimeout : 6000, // 오토 플레이 시에 다음 슬라이드로 넘어가는 주기, 2초
-						loop : true,
-						margin : 0,
-						nav : true,
-						navText : [],
-						responsive : {
-							0 : {
-								items : 1
-							}
-						}
-					});
-
-	var $firstDot = $('.slider-1 > .owl-carousel > .owl-dots > .owl-dot.active');
-
-	$firstDot.removeClass('active');
-
-	setTimeout(function() {
-		$firstDot.addClass('active');
-	}, 100);
-</script>
 
 
 </html>

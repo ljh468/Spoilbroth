@@ -127,7 +127,7 @@
 										<label style="font-size: 27px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-left: 5px; margin-top: 18px; margin-bottom: 0px;">
 										CONTENTS</label>
 										<div class="card fontstyle p-2" style="font-size: 25px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;width:100%;">
-											<textarea name="contents"></textarea>
+											<textarea name="contents" cols="40" rows="8"></textarea>
 										</div>
 										<hr style="margin-top: 10px; margin-bottom: 0px;" />
 										<div class="row" style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">

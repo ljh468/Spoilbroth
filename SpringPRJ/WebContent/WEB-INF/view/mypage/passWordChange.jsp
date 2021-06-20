@@ -110,7 +110,7 @@ int study_count = study_group.length;
 										<hr>
 										<div class="card-body">
 
-											<div style="text-align: right; font-size: 15px;">
+											<div style="text-align: right; font-size: 20px;">
 												<form action="/Mypage/passWordChangeProc.do"
 													onsubmit="return check()">
 
@@ -124,7 +124,7 @@ int study_count = study_group.length;
 														class="renew">비밀번호 확인을 위해 한 번 더 입력해주세요.</span> <br> <br>
 													<input class="btn btn-success btn-block btn-lg"
 														type="submit" value="수정하기"> <input type="button"
-														onclick="location.href='/Setting/TheMypage.do'"
+														onclick="location.href='/mypage/setting.do'"
 														class="btn btn-warning btn-block btn-lg" value="뒤로">
 
 												</form>
@@ -133,16 +133,10 @@ int study_count = study_group.length;
 									</div>
 								</div>
 
-
-
 							</div>
 						</div>
 
 					</div>
-
-					<!-- 그룹목록 END -->
-
-					왼쪽 스크립트 끝
 				</div>
 			</section>
 		</div>

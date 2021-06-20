@@ -2,10 +2,7 @@ package poly.controller;
 
 import static poly.util.CmmUtil.nvl;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -18,11 +15,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import poly.dto.BoardDTO;
@@ -79,7 +80,7 @@ public class StudyController {
 		rDTO = userService.getUserInfo(uDTO);
 		// 추천 스터디 목록조회
 
-		// 모든 스터디 목록 조회
+		// 모든 스터디 목록 조회 ( 가입한 팀원이 5명 미만일 경우만 조회 )
 		List<StudyListDTO> pList = studyService.getAllStudyList();
 		int count = pList.size();
 		System.out.println("count : " + count);
@@ -204,8 +205,8 @@ public class StudyController {
 	@RequestMapping(value = "study/studyopen")
 	public String studyopen(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
 		log.info(this.getClass().getClass().getName() + "study/studyopen start!!");
-		String user_id = (String) session.getAttribute("user_id");
-		
+
+		String user_id = (String)session.getAttribute("user_id");
 		UserDTO uDTO = new UserDTO();
 		uDTO.setUser_id(user_id);
 
@@ -222,9 +223,10 @@ public class StudyController {
 	@RequestMapping(value = "study/insertStudyInfo", method = RequestMethod.POST)
 	public String insertStudyInfo(HttpServletRequest request, HttpSession session, ModelMap model,
 			@RequestParam(value = "fileUplod2") MultipartFile mf) throws Exception {
-
 		
 		log.info(this.getClass().getClass().getName() + "study/inserStudyInfo start!!");
+		String user_id = (String) session.getAttribute("user_id");
+		
 
 		// 가입 결과에 대한 메시지 전달할 변수
 		String msg = "";
@@ -257,7 +259,8 @@ public class StudyController {
 			sDTO.setStudy_member(study_member);
 			sDTO.setStudy_title(study_title);
 			sDTO.setStudy_contents(study_contents);
-			sDTO.setStudy_creator(study_member);
+			sDTO.setStudy_creator(user_id);
+			sDTO.setStudy_notify("");
 
 			log.info("insertStudyInfo start!!");
 			int res = studyService.insertStudyInfo(sDTO);
@@ -265,7 +268,7 @@ public class StudyController {
 
 			// 스터디 개설하면서 유저정보 DB에 스터디이름 추가
 			Map<String, String> sMap = new HashMap<String, String>();
-			sMap.put("user_id", study_member);
+			sMap.put("user_id", user_id);
 			sMap.put("study_name", study_name);
 
 			log.info("updateJoinStudy start!!");
@@ -303,13 +306,15 @@ public class StudyController {
 				log.info("saveFileName : " + saveFileName);
 				log.info("saveFilePath : " + saveFilePath);
 				log.info("fullFileInfo : " + fullFileInfo);
-
+				
+				// 업로드 되는 파일을 서버에 저장
 				File targetFile = new File(fullFileInfo);
 				targetFile.setReadable(true, false);
 	            targetFile.setWritable(false, false);
 	            targetFile.setWritable(true, true);
 	            
 				mf.transferTo(targetFile);
+
 				OcrDTO pDTO = new OcrDTO();
 
 				pDTO.setSave_file_name(saveFileName);
@@ -327,7 +332,7 @@ public class StudyController {
 			// ###################################################################
 			// 스터디 이미지 파일 업로드 끝
 
-			if (res == 1 && studyImg == 1) {
+			if (res == 1 && res2 == 1) {
 				msg = "스터디그룹이 개설 되었습니다.";
 				url = "/study/studyboard.do?study_name=" + study_name;
 			} else if (res == 2) {
@@ -365,9 +370,7 @@ public class StudyController {
 		log.info(this.getClass().getClass().getName() + "study/studyinfo start!!");
 
 		String user_id = (String) session.getAttribute("user_id");
-		if (user_id == null) {
-			return "/user/login";
-		}
+		
 		String study_name = nvl(request.getParameter("study_name"));
 		log.info("study_name : " + study_name);
 
@@ -532,6 +535,8 @@ public class StudyController {
 
 		return "study/studyboard";
 	}
+
+	
 
 	// 스터디 탈퇴하기
 	@RequestMapping(value = "/study/leave", method = RequestMethod.GET)
@@ -698,5 +703,35 @@ public class StudyController {
 		return "/redirect";
 	}
 	
-	
+	@RequestMapping(value = "/study/textModify", method = RequestMethod.POST)
+	@ResponseBody
+	public int messageeForRedis(@RequestBody String data, HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
+		
+		JSONParser jsonParse = new JSONParser();
+		JSONObject jsonObject = (JSONObject)jsonParse.parse(data);    // json 파일을 읽어서 JSONObject에 저장
+		log.info("jsonObject : " + jsonObject);
+		log.info("jsonObject : " + (Long) jsonObject.get("study_seq"));
+		log.info("jsonObject : " + (String) jsonObject.get("study_notify"));
+		
+		Long study_seq = (Long) jsonObject.get("study_seq");
+		String study_notify = nvl((String) jsonObject.get("study_notify"));
+		log.info("study_seq : " + study_seq);
+		log.info("study_notify : " + study_notify);
+		// 스터디 알림창 수정
+		Map<String, Object> pMap = new HashMap<String, Object>();
+		pMap.put("study_seq", study_seq);
+		pMap.put("study_notify", study_notify);
+		
+		log.info("modifyNotice start");
+		int res = studyService.modifyNotice(pMap);
+		
+		if(res == 1) {
+			log.info("modifyNotice end");
+			
+		}else if(res == 0){
+			log.info("modifyNotice falid");
+		}
+		
+	return res;
+	}
 }

@@ -222,6 +222,7 @@
 		loadingClass: 'owl-loading',
 		rtlClass: 'owl-rtl',
 		responsiveClass: 'owl-responsive',
+		
 		itemClass: 'owl-item',
 		stageClass: 'owl-stage',
 		stageOuterClass: 'owl-stage-outer',

@@ -221,7 +221,7 @@
 										        </button>
 										      </div>
 										      <div class="modal-body">
-										      <textarea cols="50" rows="10" style="width:100%" id="text_modify"><%=sDTO.getStudy_contents()%></textarea>
+										      <textarea cols="50" rows="10" style="width:100%" id="text_modify"><%=sDTO.getStudy_notify()%></textarea>
 										      </div>
 										      <div class="modal-footer" style="font-size: 25px;">
 										        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
@@ -478,6 +478,7 @@ function text_modify() {
 		}else{
 		alert("수정을 실패했습니다.");	
 		}
+		location.reload();
 	})
 }
 </script>

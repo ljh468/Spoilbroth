@@ -66,7 +66,17 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
 
 
+<style type="text/css">
+	/* 필터링 (검색) */
+	div.dataTables_filter {
+		text-align : left !important;
+	}
 
+	/* 표시 건수수 설정 */
+	div.dataTables_length {
+		text-align : left !important;
+	}
+</style>
 </head>
 <body data-aos-easing="slide" data-aos-duration="800" data-aos-delay="0">
 
@@ -120,27 +130,14 @@
 
 									<!-- 공모전 리스트 반복 -->
 									<div class="col-12">
-										<!-- 
-									<table id="userList" >
-									  <thead>
-									    <tr>
-									      <th>이름</th>
-									      <th>사번</th>
-									      <th>이메일</th>
-									      <th>SC권한</th>
-									      <th>직위</th>
-									    </tr>
-									  </thead>
-									</table>
-									 -->
-										<table id="example" class="display" style="width: 100%">
-											<thead>
+										<table id="example" class="display" style="width: 100%; font-size: 17px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
+											<thead style="font-size: 15px";>
 												<tr>
 													<th>분야</th>
 													<th>공모전명</th>
 													<th>주최</th>
 													<th>현황</th>
-													<th>보러가기</th>
+													<th>V</th>
 												</tr>
 											</thead>
 
@@ -149,23 +146,15 @@
 											%>
 											<tr>
 												<td><%=rList.get(i).getContest_area() %></td>
-												<td><%=rList.get(i).getContest_name() %></td>
-												<td><%=rList.get(i).getContest_host() %></td>
-												<td><%=rList.get(i).getContest_day() %></td>
-												<td onclick="location.href='/study/contestdetail.do?contest_seq=<%=rList.get(i).getContest_seq()%>'">클릭</td>
+												<td><strong><%=rList.get(i).getContest_name() %></strong></td>
+												<td><%=rList.get(i).getContest_host().replace("주최/주관", "") %></td>
+												<td><%=rList.get(i).getContest_day().replace("접수기간", "") %></td>
+												<td style="color:blue;" onclick="location.href='/study/contestdetail.do?contest_seq=<%=rList.get(i).getContest_seq()%>'">클릭</td>
 											</tr>
 											<%
 												}
 											%>
-											<tfoot>
-												<tr>
-													<th>분야</th>
-													<th>공모전명</th>
-													<th>주최</th>
-													<th>현황</th>
-													<th>보러가기</th>
-												</tr>
-											</tfoot>
+											
 										</table>
 									</div>
 								</div>
@@ -219,33 +208,19 @@
 	<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 
 </body>
-<script type="text/javascript">
-	$('.slider-1 > .owl-carousel').owlCarousel({
-		autoplay : true, // 오토 플레이
-		autoplayTimeout : 6000, // 오토 플레이 시에 다음 슬라이드로 넘어가는 주기, 2초
-		loop : true,
-		margin : 0,
-		nav : true,
-		navText : [],
-		responsive : {
-			0 : {
-				items : 1
-			}
-		}
-	});
-
-	var $firstDot = $('.slider-1 > .owl-carousel > .owl-dots > .owl-dot.active');
-
-	$firstDot.removeClass('active');
-
-	setTimeout(function() {
-		$firstDot.addClass('active');
-	}, 100);
-</script>
 <script>
-	$(document).ready(function() {
-		$('#example').DataTable({});
+$(document).ready(function() {
+	$('#example').DataTable({
+		"ordering": true,
+		"columns" : [
+				{"width" : "20px"},
+				{ "width" : "73px" },
+				{ "width" : "20px" },
+				{ "width" : "20px" },
+				{ "width" : "6px" }
+		]
 	});
+});
 </script>
 <!--  <script>
 var table = $("#userList").DataTable();

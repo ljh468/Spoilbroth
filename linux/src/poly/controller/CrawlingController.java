@@ -2,8 +2,15 @@ package poly.controller;
 
 import static poly.util.CmmUtil.nvl;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -13,6 +20,8 @@ import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import poly.dto.ContestDTO;
 import poly.service.IContestService;
@@ -93,26 +102,7 @@ public class CrawlingController {
 		       pDTO = null;
 		    }
 		}
-		model.addAttribute("save", save);
-//		
-//		for (int i = 0; i < jsonArray.size(); ++i) {
-//		    JSONObject jo = (JSONObject)jsonArray.get(i);                        // 첫번째 list를 꺼낸다
-//		    String id = (String)jo.get("id");// list 안의 list를 가져온다 (카테고리를 가져옴)
-//		    
-//		    JSONArray arrays = (JSONArray)jo.get("list");
-//		    for (Object obj : arrays) {
-//		       JSONObject childObj = (JSONObject)obj;
-//		       System.out.println(childObj.get("contest_name"));
-//		       System.out.println(childObj.get("contest_img"));
-//		       System.out.println(childObj.get("contest_host"));
-//		       System.out.println(childObj.get("contest_area"));
-//		       System.out.println(childObj.get("contest_day"));
-//		       System.out.println(childObj.get("contest_prize"));
-//		       System.out.println(childObj.get("contest_addr"));
-//		       System.out.println(childObj.get("contest_contents"));
-//		    }
-//		}
-		 
+		model.addAttribute("save", save);		 
 		return "/crawling";
 	}
 }

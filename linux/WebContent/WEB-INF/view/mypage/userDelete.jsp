@@ -122,11 +122,10 @@ int study_count = study_group.length;
 												</span> <br> <br> <br> <input class="text-center"
 													type="text" id="deleteCheck"
 													placeholder="삭제하겠습니다." required> <br>
-												<br> <input style="float: right;"
-													class="btn btn-success btn-block btn-lg" type="submit"
-													value="확인"> <input type="button"
-													onclick="location.href='/Setting/TheMypage.do'"
-													class="btn btn-warning btn-block btn-lg" value="취소">
+												<br> <input class="btn btn-success btn-block btn-lg"
+														type="submit" value="확인"> <input type="button"
+														onclick="location.href='/mypage/setting.do'"
+														class="btn btn-warning btn-block btn-lg" value="취소">
 												<br>
 											</form>
 										</div>
