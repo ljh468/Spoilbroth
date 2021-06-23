@@ -91,6 +91,7 @@ int study_count = study_group.length;
 		<div id="colorlib-main">
 			<section class="ftco-section ftco-no-pt ftco-no-pb">
 				<div class="container">
+                    
 					<!-- 왼쪽 오른쪽 2분할 -->
 					<div class="row d-flex">
 
