@@ -9,6 +9,7 @@
 	String user_name = (String) request.getAttribute("user_name");
 	String user_mbti = (String) request.getAttribute("user_mbti");
 	String user_dept = (String) request.getAttribute("user_dept");
+	String user_img = (String) request.getAttribute("user_img");
 	String studys = (String) request.getAttribute("user_study");
 	System.out.print("studys : " + studys);
 	int study_count = 0;
@@ -25,6 +26,7 @@
 	int count = pList.size();
 	
 	List<String> mbti_scores = (List<String>)request.getAttribute("mbti_scores");
+	
 %>
 
 <!DOCTYPE html>
@@ -132,6 +134,7 @@
 											<div class="d-flex align-items-center">
 												<div class="image">
 													<img id="preview-image" src="/getImage.do?user_id=<%=user_id %>" class="rounded" width="100%" alt="My Image">
+													<%-- <img id="preview-image" src="/getImage.do?user_id=<%=user_id %>" class="rounded" width="100%" alt="My Image"> --%>
 												</div>
 											</div>
 											<div id="input-image" class="button mt-2 d-flex flex-row align-items-center">
@@ -268,9 +271,8 @@
 									<div class="profile-card">
 										<div class="d-flex align-items-center">
 											<div class="image">
-												<img
-													src="/getStudyImage.do?study_name=<%=pDTO.getStudy_name()%>"
-													class="rounded" width="100%">
+											
+												<img src="/getStudyImage.do?study_name=<%=pDTO.getStudy_name()%>" class="rounded" width="100%">
 											</div>
 										</div>
 										<div class="button mt-2 d-flex flex-row align-items-center">
