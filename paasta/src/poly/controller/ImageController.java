@@ -42,7 +42,7 @@ public class ImageController {
 	final private String STUDYFILE_UPLOAD_SAVE_PATH = "/usr/local/images/studyimg"; // C:\\upload 폴더에 저장 /upload
 
 	// 프로필 이미지파일 업로드 (ajax로 구현)
-	@RequestMapping(value = "FileUplod")
+	@RequestMapping(value = "/FileUplod")
 	@ResponseBody
 	public Map<String, String> UserFileUpload(HttpServletRequest request, HttpServletResponse response, ModelMap model,
 			@RequestParam(value = "fileUplod") MultipartFile mf, HttpSession session) throws Exception {
@@ -106,7 +106,7 @@ public class ImageController {
 	}
 
 	// 스터디 이미지파일 업로드 (ajax로 구현)
-	@RequestMapping(value = "FileUplod2")
+	@RequestMapping(value = "/FileUplod2")
 	@ResponseBody
 	public Map<String, String> StudyFileUpload(HttpServletRequest request, HttpServletResponse response, ModelMap model,
 			@RequestParam(value = "fileUplod2") MultipartFile mf, HttpSession session) throws Exception {

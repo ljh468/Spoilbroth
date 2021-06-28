@@ -172,9 +172,9 @@ public class ImageController {
 		return rMap;
 	}
 
-	// 프로필 이미지 불러오기 ( InputStream으로 파일 불러옴 )
 	@RequestMapping(value = "/getImage", method = RequestMethod.GET)
-	public void getImage(HttpServletRequest request, HttpSession session, HttpServletResponse response,
+
+	public String getImage(HttpServletRequest request, HttpSession session, HttpServletResponse response,
 			@RequestParam(value = "user_id") String user_id) throws Exception {
 
 		log.info("user_id : " + user_id);
@@ -183,11 +183,11 @@ public class ImageController {
 		log.info("getImgList start! ");
 		Map<String, String> pMap = imgService.getImgList(user_id);
 		log.info("getImgList end! ");
-		if(pMap == null) {
+		if (pMap == null) {
 			pMap = new HashMap<String, String>();
 		}
-		String realFile = nvl(pMap.get("SAVE_FILE_PATH") + "\\"); // 파일이 저장된 경로 C:\\upload\\
-		String fileNm = nvl(pMap.get("SAVE_FILE_NAME")); // 파일명
+		String realFile = nvl(pMap.get("SAVE_FILE_PATH") + "/"); // 파일이 저장된 경로 : /usr/local/images/userimg/0000/00/00/
+		String fileNm = nvl(pMap.get("SAVE_FILE_NAME")); // 파일명 : 000000.jpg 000000.png
 		String ext = nvl(pMap.get("EXT")); // 파일 확장자
 		log.info("realFile : " + realFile);
 		log.info("fileNm : " + fileNm);
@@ -197,13 +197,13 @@ public class ImageController {
 		InputStream in = null;
 
 		try {
-			
+
 			if (!ext.equals("")) {
 				response.setContentType("image/" + ext);
 				response.setHeader("Content-Disposition", "inline;filename=" + fileNm);
 				File file = new File(realFile + fileNm);
 				log.info("file : " + file);
-				
+
 				in = new FileInputStream(file);
 				out = new BufferedOutputStream(response.getOutputStream());
 				int len;
@@ -212,11 +212,10 @@ public class ImageController {
 					out.write(buf, 0, len);
 				}
 			} else {
-				response.setContentType("image/" + ext);
-				response.setHeader("Content-Disposition", "inline;filename=" + fileNm);
-				log.info("basicFile start" );
-				String basicFile = "C:\\imgg\\basicimg.png";
-				
+				log.info("basicFile start");
+
+				String basicFile = "/imgg/basicimg.png";
+
 				File file1 = new File(basicFile);
 				log.info("basicFile : " + basicFile);
 				log.info("file1 : " + file1);
@@ -228,7 +227,7 @@ public class ImageController {
 				while ((len = in.read(buf)) > 0) {
 					out.write(buf, 0, len);
 				}
-				
+
 			}
 		} catch (Exception e) {
 			log.info(e.getStackTrace());
@@ -257,7 +256,7 @@ public class ImageController {
 		Map<String, String> pMap = imgService.getStudyImgList(study_name);
 		log.info("getStudyImgList end! ");
 
-		if(pMap == null) {
+		if (pMap == null) {
 			pMap = new HashMap<String, String>();
 		}
 		String realFile = nvl(pMap.get("SAVE_FILE_PATH") + "\\"); // 파일이 저장된 경로 C:\\upload\\
@@ -269,7 +268,6 @@ public class ImageController {
 
 		BufferedOutputStream out = null;
 		InputStream in = null;
-
 
 		try {
 
