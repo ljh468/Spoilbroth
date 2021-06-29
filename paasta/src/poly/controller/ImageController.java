@@ -37,12 +37,12 @@ public class ImageController {
 	IImgService imgService;
 
 	// 프로필 이미지가 업로드되는 파일이 저장되는 기본폴더 설정(자바에서 경로는 /로 표현함)
-	final private String USERFILE_UPLOAD_SAVE_PATH = "/usr/local/images/userimg"; // C:\\upload 폴더에 저장 /upload
+	final private String USERFILE_UPLOAD_SAVE_PATH = "/home/images/userimg"; // C:\\upload 폴더에 저장 /upload
 	// 스터디 이미지가 업로드되는 기본폴더 설정
-	final private String STUDYFILE_UPLOAD_SAVE_PATH = "/usr/local/images/studyimg"; // C:\\upload 폴더에 저장 /upload
+	final private String STUDYFILE_UPLOAD_SAVE_PATH = "/home/images/studyimg"; // C:\\upload 폴더에 저장 /upload
 
 	// 프로필 이미지파일 업로드 (ajax로 구현)
-	@RequestMapping(value = "/FileUplod")
+	@RequestMapping(value = "FileUplod", consumes = {"multipart/form-data"})
 	@ResponseBody
 	public Map<String, String> UserFileUpload(HttpServletRequest request, HttpServletResponse response, ModelMap model,
 			@RequestParam(value = "fileUplod") MultipartFile mf, HttpSession session) throws Exception {
@@ -68,9 +68,11 @@ public class ImageController {
 			String saveFileName = DateUtil.getDateTime("24hhmmss") + "." + ext;
 
 			// 웹서버에 업로드한 파일 저장하는 물리적 경로
-			String saveFilePath = FileUtil.mkdirForDate(USERFILE_UPLOAD_SAVE_PATH);
-			String fullFileInfo = saveFilePath + "/" + saveFileName;
-
+			String saveFilePath = USERFILE_UPLOAD_SAVE_PATH;
+			String fullFileInfo = "http://spoilbroth.ml"+saveFilePath + "/" + saveFileName;
+			System.out.println("saveFilePath : "+saveFilePath);
+			System.out.println("fullFileInfo : "+fullFileInfo);
+			System.out.println("USERFILE_UPLOAD_SAVE_PATH : " + USERFILE_UPLOAD_SAVE_PATH);
 			rMap.put("path", fullFileInfo);
 
 			// 정상적으로 값이 생성되었는지 로그에 찍어서 확인
@@ -83,8 +85,8 @@ public class ImageController {
 			// 업로드 되는 파일을 서버에 저장
 			File targetFile = new File(fullFileInfo);
 			targetFile.setReadable(true, false);
-			targetFile.setWritable(false, false);
-			targetFile.setWritable(true, true);
+            targetFile.setWritable(true, false);
+            targetFile.setExecutable(true, false);
 
 			mf.transferTo(targetFile);
 
@@ -106,7 +108,7 @@ public class ImageController {
 	}
 
 	// 스터디 이미지파일 업로드 (ajax로 구현)
-	@RequestMapping(value = "/FileUplod2")
+	@RequestMapping(value = "FileUplod2", consumes = {"multipart/form-data"})
 	@ResponseBody
 	public Map<String, String> StudyFileUpload(HttpServletRequest request, HttpServletResponse response, ModelMap model,
 			@RequestParam(value = "fileUplod2") MultipartFile mf, HttpSession session) throws Exception {
@@ -149,8 +151,8 @@ public class ImageController {
 			// 업로드 되는 파일을 서버에 저장
 			File targetFile = new File(fullFileInfo);
 			targetFile.setReadable(true, false);
-			targetFile.setWritable(false, false);
-			targetFile.setWritable(true, true);
+            targetFile.setWritable(true, false);
+            targetFile.setExecutable(true, false);
 
 			mf.transferTo(targetFile);
 			OcrDTO pDTO = new OcrDTO();
@@ -198,9 +200,9 @@ public class ImageController {
 		log.info("ext : " + ext);
 		
 		if (!ext.equals("")) {
-			return "/images" + realFile + fileNm;
+			return "http://13.125.99.115:80/images" + realFile + fileNm;
 		} else {
-			return "/images/imgg/basicimg.png";
+			return "http://13.125.99.115:80/images/imgg/basicimg.png";
 		}
 
 	}
@@ -229,7 +231,7 @@ public class ImageController {
 		log.info("ext : " + ext);
 
 		if (!ext.equals("")) {
-			return "/images" + realFile + fileNm;
+			return "http://13.125.99.115:80/images" + realFile + fileNm;
 		} else {
 			return "/andrea-master/images/study.jpg";
 		}

@@ -251,7 +251,7 @@ public class ImageController {
 
 		log.info("study_name : " + study_name);
 
-		// 가장 최근에 등록한 프로필 사진 정보가져오기
+		// 가장 최근에 등록한 스터디 사진 정보가져오기
 		log.info("getStudyImgList start! ");
 		Map<String, String> pMap = imgService.getStudyImgList(study_name);
 		log.info("getStudyImgList end! ");
