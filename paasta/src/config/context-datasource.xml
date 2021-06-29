@@ -17,7 +17,7 @@
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
         <property name="url" value="jdbc:mysql://192.168.0.58:3306/cf_2ced2391_3a15_4671_a501_8afde79c4d7a"></property>
-        <!--ssh Tunnel을 이용한 로컬연결 -->
+        <!-- ssh Tunnel을 이용한 로컬연결 -->
         <!-- <property name="url" value="jdbc:mysql://localhost:9000/cf_2ced2391_3a15_4671_a501_8afde79c4d7a"></property> -->
         <property name="username" value="KCU6ZjkCLt4RPFG0"></property> <!-- mysql 아이디 -->
         <property name="password" value="0T3NQFmu3j5YWUPV"></property> <!-- mysql 패스워드 -->

@@ -50,7 +50,7 @@ public class MainController {
 	public String mystudy(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
 
 		log.info(this.getClass().getClass().getName() + "spoilbroth/mystudy start!!");
-
+		log.info("돌고있나!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		String id = (String) session.getAttribute("user_id");
 		String pwd = (String) session.getAttribute("user_pwd");
 		if (id == null) {
@@ -66,7 +66,7 @@ public class MainController {
 		// 사용자 정보 조회
 		UserDTO rDTO = new UserDTO();
 		rDTO = userService.getUserInfo(uDTO);
-		
+
 		model.addAttribute("user_id", nvl(rDTO.getUser_id()));
 		model.addAttribute("user_name", nvl(rDTO.getUser_name()));
 		model.addAttribute("user_email", nvl(rDTO.getUser_email()));
@@ -85,10 +85,10 @@ public class MainController {
 		List<StudyListDTO> pList = studyService.getJoinStudyList(aList);
 		aList = null;
 		model.addAttribute("pList", pList);
-		
+
 		// 스터디에 가입된 유저 MBTI 가져오기
 		List<List<String>> mLists = new ArrayList<List<String>>();
-		
+
 		for (StudyListDTO sDTO : pList) {
 			List<String> mList = new ArrayList<String>();
 			String[] arr = sDTO.getStudy_member().split(",");
@@ -100,23 +100,58 @@ public class MainController {
 			mList = null;
 			log.info("getUserMbti end");
 		}
-		for(List<String> dd : mLists) {
-			log.info("dd : "+ dd);
+		for (List<String> dd : mLists) {
+			log.info("dd : " + dd);
 		}
 		// MBTI 점수 분석
 		String my_mbti = nvl(rDTO.getUser_mbti());
-		
+
 		log.info("getAnalysis start");
 		List<String> mbti_scores = MbtiUtil.getAnalysis(my_mbti, mLists);
 		log.info("getAnalysis end");
-		
-		for(String str : mbti_scores) {
-		log.info("mbti_scores : " + str);
+
+		for (String str : mbti_scores) {
+			log.info("mbti_scores : " + str);
 		}
 		model.addAttribute("mbti_scores", mbti_scores);
-		
-		log.info(this.getClass().getClass().getName() + "spoilbroth/mystudy end!!");
 
+		// 사용자 이미지 불러오기
+		// 가장 최근에 등록한 프로필 사진 정보가져오기
+		log.info("getImgList start! ");
+		Map<String, String> pMap = imgService.getImgList(id);
+		log.info("getImgList end! ");
+		if (pMap == null) {
+			pMap = new HashMap<String, String>();
+		}
+		String realFile = nvl(pMap.get("SAVE_FILE_PATH") + "/"); // 파일이 저장된 경로 : /usr/local/images/userimg/0000/00/00/
+		String fileNm = nvl(pMap.get("SAVE_FILE_NAME")); // 파일명 : 000000.jpg 000000.png
+		String ext = nvl(pMap.get("EXT")); // 파일 확장자
+		log.info("realFile : " + realFile);
+		log.info("fileNm : " + fileNm);
+		log.info("ext : " + ext);
+		if (!ext.equals("")) {
+			model.addAttribute("user_img", realFile + fileNm);
+		} else {
+			model.addAttribute("user_img", "/andrea-master/images/imgg/basicimg.png");
+		}
+		
+		List<String> iList = new ArrayList<String>();
+		// 가입한 스터디 이미지 불러오기
+		for (StudyListDTO iDTO : pList) {
+			// 가장 최근에 등록한 스터디 사진 정보가져오기
+			log.info("getStudyImgList start! ");
+			Map<String, String> iMap = imgService.getStudyImgList(iDTO.getStudy_name());
+			String studyrealFile = nvl(iMap.get("SAVE_FILE_PATH") + "/"); // 파일이 저장된 경로 : /img/studyimg/0000/00/00/
+			String studyfileNm = nvl(iMap.get("SAVE_FILE_NAME")); // 파일명
+			
+			// 가입한 스터디이미지 리스트에 담기
+			
+			iList.add(studyrealFile+studyfileNm);
+			log.info("getStudyImgList end! ");
+		}
+		
+		model.addAttribute("iList", iList);
+		log.info(this.getClass().getClass().getName() + "spoilbroth/mystudy end!!");
 		return "spoilbroth/mystudy";
 	}
 

@@ -27,6 +27,8 @@
 	
 	List<String> mbti_scores = (List<String>)request.getAttribute("mbti_scores");
 	
+	List<String> iList = (List<String>)request.getAttribute("iList");
+	
 %>
 
 <!DOCTYPE html>
@@ -133,7 +135,7 @@
 										<form id="uploadForm" enctype="multipart/form-data">
 											<div class="d-flex align-items-center">
 												<div class="image">
-													<img id="preview-image" src="/getImage.do?user_id=<%=user_id %>" class="rounded" width="100%" alt="My Image">
+													<img id="preview-image" src="<%=user_img %>" class="rounded" width="100%" alt="My Image">
 													<%-- <img id="preview-image" src="/getImage.do?user_id=<%=user_id %>" class="rounded" width="100%" alt="My Image"> --%>
 												</div>
 											</div>
@@ -272,7 +274,11 @@
 										<div class="d-flex align-items-center">
 											<div class="image">
 											
-												<img src="/getStudyImage.do?study_name=<%=pDTO.getStudy_name()%>" class="rounded" width="100%">
+												<img src="<%=iList.get(j)%>" class="rounded" width="100%">
+												<img src="/img/userimg/2021/06/29/24071908.jpg" class="rounded" width="100%">
+												<img src="http://spoilbroth.ncloudpaas-ta.com/img/userimg/2021/06/29/24071908.jpg" class="rounded" width="100%">
+												<img src="spoilbroth.ncloudpaas-ta.com/img/userimg/2021/06/29/24071908.jpg" class="rounded" width="100%">
+												<img src="/resource/img/userimg/2021/06/29/24071908.jpg" class="rounded" width="100%">
 											</div>
 										</div>
 										<div class="button mt-2 d-flex flex-row align-items-center">

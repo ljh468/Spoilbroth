@@ -37,9 +37,9 @@ public class ImageController {
 	IImgService imgService;
 
 	// 프로필 이미지가 업로드되는 파일이 저장되는 기본폴더 설정(자바에서 경로는 /로 표현함)
-	final private String USERFILE_UPLOAD_SAVE_PATH = "/home/images/userimg"; // C:\\upload 폴더에 저장 /upload
+	final private String USERFILE_UPLOAD_SAVE_PATH = "/img/userimg"; // C:\\upload 폴더에 저장 /upload
 	// 스터디 이미지가 업로드되는 기본폴더 설정
-	final private String STUDYFILE_UPLOAD_SAVE_PATH = "/home/images/studyimg"; // C:\\upload 폴더에 저장 /upload
+	final private String STUDYFILE_UPLOAD_SAVE_PATH = "/img/studyimg"; // C:\\upload 폴더에 저장 /upload
 
 	// 프로필 이미지파일 업로드 (ajax로 구현)
 	@RequestMapping(value = "FileUplod", consumes = {"multipart/form-data"})
@@ -68,8 +68,12 @@ public class ImageController {
 			String saveFileName = DateUtil.getDateTime("24hhmmss") + "." + ext;
 
 			// 웹서버에 업로드한 파일 저장하는 물리적 경로
-			String saveFilePath = USERFILE_UPLOAD_SAVE_PATH;
-			String fullFileInfo = "http://spoilbroth.ml"+saveFilePath + "/" + saveFileName;
+			/* String saveFilePath = USERFILE_UPLOAD_SAVE_PATH; */
+			String saveFilePath = FileUtil.mkdirForDate(USERFILE_UPLOAD_SAVE_PATH); 
+			/*
+			 * http:\\/\\/13.125.99.115"+
+			 */			
+			String fullFileInfo = saveFilePath + "/" + saveFileName;
 			System.out.println("saveFilePath : "+saveFilePath);
 			System.out.println("fullFileInfo : "+fullFileInfo);
 			System.out.println("USERFILE_UPLOAD_SAVE_PATH : " + USERFILE_UPLOAD_SAVE_PATH);
@@ -81,9 +85,17 @@ public class ImageController {
 			log.info("saveFileName : " + saveFileName);
 			log.info("saveFilePath : " + saveFilePath);
 			log.info("fullFileInfo : " + fullFileInfo);
-
+			
+			String path = request.getSession().getServletContext().getRealPath(saveFilePath);
+            System.out.println(path);
 			// 업로드 되는 파일을 서버에 저장
-			File targetFile = new File(fullFileInfo);
+			File targetFile = new File(path, saveFileName);
+			System.out.println(targetFile.toString());
+			
+			if(!targetFile.isDirectory()) {
+				targetFile.mkdirs();
+	            }
+			
 			targetFile.setReadable(true, false);
             targetFile.setWritable(true, false);
             targetFile.setExecutable(true, false);
@@ -199,11 +211,11 @@ public class ImageController {
 		log.info("fileNm : " + fileNm);
 		log.info("ext : " + ext);
 		
-		if (!ext.equals("")) {
-			return "http://13.125.99.115:80/images" + realFile + fileNm;
-		} else {
-			return "http://13.125.99.115:80/images/imgg/basicimg.png";
-		}
+		return "/andrea-master/images/imgg/basicimg.png";
+		/*
+		 * if (!ext.equals("")) { return realFile + fileNm; } else { return
+		 * "/andrea-master/images/imgg/basicimg.png"; }
+		 */
 
 	}
 
@@ -215,7 +227,7 @@ public class ImageController {
 
 		log.info("study_name : " + study_name);
 
-		// 가장 최근에 등록한 프로필 사진 정보가져오기
+		// 가장 최근에 등록한 스터디 사진 정보가져오기
 		log.info("getStudyImgList start! ");
 		Map<String, String> pMap = imgService.getStudyImgList(study_name);
 		log.info("getStudyImgList end! ");
@@ -230,11 +242,12 @@ public class ImageController {
 		log.info("fileNm : " + fileNm);
 		log.info("ext : " + ext);
 
-		if (!ext.equals("")) {
-			return "http://13.125.99.115:80/images" + realFile + fileNm;
-		} else {
-			return "/andrea-master/images/study.jpg";
-		}
+		/*
+		 * if (!ext.equals("")) { return "/img"+realFile + fileNm; } else { return
+		 * "/andrea-master/images/study.jpg"; }
+		 */
+		 return
+		 "/andrea-master/images/study.jpg";
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
