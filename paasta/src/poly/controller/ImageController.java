@@ -88,6 +88,7 @@ public class ImageController {
 			
 			String path = request.getSession().getServletContext().getRealPath(saveFilePath);
             System.out.println(path);
+            
 			// 업로드 되는 파일을 서버에 저장
 			File targetFile = new File(path, saveFileName);
 			System.out.println(targetFile.toString());
@@ -101,9 +102,10 @@ public class ImageController {
             targetFile.setExecutable(true, false);
 
 			mf.transferTo(targetFile);
-
+			
+			
+			// 이미지 경로 DB에 저장
 			OcrDTO pDTO = new OcrDTO();
-
 			pDTO.setSave_file_name(saveFileName);
 			pDTO.setSave_file_path(saveFilePath);
 			pDTO.setOrg_file_name(originalFileName);
@@ -160,15 +162,24 @@ public class ImageController {
 			log.info("saveFilePath : " + saveFilePath);
 			log.info("fullFileInfo : " + fullFileInfo);
 
+			String path = request.getSession().getServletContext().getRealPath(saveFilePath);
+            System.out.println(path);
 			// 업로드 되는 파일을 서버에 저장
-			File targetFile = new File(fullFileInfo);
+			File targetFile = new File(path, saveFileName);
+			System.out.println(targetFile.toString());
+			
+			if(!targetFile.isDirectory()) {
+				targetFile.mkdirs();
+	            }
+			
 			targetFile.setReadable(true, false);
             targetFile.setWritable(true, false);
             targetFile.setExecutable(true, false);
 
 			mf.transferTo(targetFile);
+			
+			// 이미지 경로 DB에 저장
 			OcrDTO pDTO = new OcrDTO();
-
 			pDTO.setSave_file_name(saveFileName);
 			pDTO.setSave_file_path(saveFilePath);
 			pDTO.setOrg_file_name(originalFileName);

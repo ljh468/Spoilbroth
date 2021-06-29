@@ -100,7 +100,7 @@
 							THEN #{user_id}
 							ELSE (CONCAT(STUDY_MEMBER,',',#{user_id})) END , 
 			JOIN_COUNT = JOIN_COUNT +1
-		WHERE STUDY_SEQ = (SELECT STUDY_SEQ FROM STUDY_INFO WHERE STUDY_NAME = #{study_name})
+		WHERE STUDY_NAME = #{study_name}
 	</update>
 	
 	<!-- 스터디 팀원정보에 가입한 유저 아이디 삭제 -->
@@ -108,7 +108,7 @@
 		UPDATE STUDY_INFO
 		SET STUDY_MEMBER = #{sutdy_member} ,
 			JOIN_COUNT = JOIN_COUNT -1
-		WHERE STUDY_SEQ = (SELECT STUDY_SEQ FROM STUDY_INFO WHERE STUDY_NAME = #{study_name})
+		WHERE STUDY_NAME = #{study_name}
 	</update>
 	
 	<!-- 스터디 삭제 하기 -->

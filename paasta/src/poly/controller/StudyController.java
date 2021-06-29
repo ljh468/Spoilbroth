@@ -44,7 +44,7 @@ public class StudyController {
 
 	private Logger log = Logger.getLogger(this.getClass());
 
-	final private String STUDYFILE_UPLOAD_SAVE_PATH = "/studyimg"; // C:\\upload 폴더에 저장 /upload
+	final private String STUDYFILE_UPLOAD_SAVE_PATH = "/img/studyimg"; // C:\\upload 폴더에 저장 /upload
 
 	@Resource(name = "UserService")
 	IUserService userService;
@@ -57,10 +57,10 @@ public class StudyController {
 
 	@Resource(name = "BoardService")
 	IBoardService boardService;
-	
+
 	@Resource(name = "ContestService")
 	IContestService contestService;
-	
+
 	// MyStudy Maching 메인화면
 	@RequestMapping(value = "study/match")
 	public String match(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
@@ -118,6 +118,29 @@ public class StudyController {
 		for (String str : mbti_scores) {
 			log.info("mbti_scores : " + str);
 		}
+
+		// 가입한 스터디 이미지 불러오기
+		List<String> iList = new ArrayList<String>();
+		for (StudyListDTO iDTO : pList) {
+			// 가장 최근에 등록한 스터디 사진 정보가져오기
+			log.info("getStudyImgList start! ");
+			Map<String, String> iMap = imgService.getStudyImgList(iDTO.getStudy_name());
+			if (iMap == null) {
+				iMap = new HashMap<String, String>();
+			}
+			log.info("iMap null?? : " + iMap == null);
+			log.info("iMap 1?? : " + iMap.get("SAVE_FILE_PATH"));
+			log.info("iMap 2?? : " + iMap.get("SAVE_FILE_NAME"));
+			String studyrealFile = nvl(iMap.get("SAVE_FILE_PATH") + "/"); // 파일이 저장된 경로 : /img/studyimg/0000/00/00/
+			String studyfileNm = nvl(iMap.get("SAVE_FILE_NAME")); // 파일명
+
+			// 가입한 스터디이미지 리스트에 담기
+			iList.add(studyrealFile + studyfileNm);
+			log.info("getStudyImgList end! ");
+		}
+
+		model.addAttribute("iList", iList);
+		/////////////////////////////////////////////////////////
 		model.addAttribute("mbti_scores", mbti_scores);
 		/////////////////////////////////////////////////////////
 		model.addAttribute("user_id", nvl(rDTO.getUser_id()));
@@ -187,6 +210,28 @@ public class StudyController {
 		for (String str : mbti_scores) {
 			log.info("mbti_scores : " + str);
 		}
+
+		// 가입한 스터디 이미지 불러오기
+		List<String> iList = new ArrayList<String>();
+		for (StudyListDTO iDTO : pList) {
+			// 가장 최근에 등록한 스터디 사진 정보가져오기
+			log.info("getStudyImgList start! ");
+			Map<String, String> iMap = imgService.getStudyImgList(iDTO.getStudy_name());
+			if (iMap == null) {
+				iMap = new HashMap<String, String>();
+			}
+			log.info("iMap null?? : " + iMap == null);
+			log.info("iMap 1?? : " + iMap.get("SAVE_FILE_PATH"));
+			log.info("iMap 2?? : " + iMap.get("SAVE_FILE_NAME"));
+			String studyrealFile = nvl(iMap.get("SAVE_FILE_PATH") + "/"); // 파일이 저장된 경로 : /img/studyimg/0000/00/00/
+			String studyfileNm = nvl(iMap.get("SAVE_FILE_NAME")); // 파일명
+
+			// 가입한 스터디이미지 리스트에 담기
+			iList.add(studyrealFile + studyfileNm);
+			log.info("getStudyImgList end! ");
+		}
+
+		model.addAttribute("iList", iList);
 		model.addAttribute("mbti_scores", mbti_scores);
 		/////////////////////////////////////////////////////////
 		model.addAttribute("user_id", nvl(rDTO.getUser_id()));
@@ -206,7 +251,7 @@ public class StudyController {
 	public String studyopen(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
 		log.info(this.getClass().getClass().getName() + "study/studyopen start!!");
 
-		String user_id = (String)session.getAttribute("user_id");
+		String user_id = (String) session.getAttribute("user_id");
 		UserDTO uDTO = new UserDTO();
 		uDTO.setUser_id(user_id);
 
@@ -223,10 +268,9 @@ public class StudyController {
 	@RequestMapping(value = "study/insertStudyInfo", method = RequestMethod.POST)
 	public String insertStudyInfo(HttpServletRequest request, HttpSession session, ModelMap model,
 			@RequestParam(value = "fileUplod2") MultipartFile mf) throws Exception {
-		
+
 		log.info(this.getClass().getClass().getName() + "study/inserStudyInfo start!!");
 		String user_id = (String) session.getAttribute("user_id");
-		
 
 		// 가입 결과에 대한 메시지 전달할 변수
 		String msg = "";
@@ -306,13 +350,21 @@ public class StudyController {
 				log.info("saveFileName : " + saveFileName);
 				log.info("saveFilePath : " + saveFilePath);
 				log.info("fullFileInfo : " + fullFileInfo);
-				
+
+				String path = request.getSession().getServletContext().getRealPath(saveFilePath);
+				System.out.println(path);
 				// 업로드 되는 파일을 서버에 저장
-				File targetFile = new File(fullFileInfo);
+				File targetFile = new File(path, saveFileName);
+				System.out.println(targetFile.toString());
+
+				if (!targetFile.isDirectory()) {
+					targetFile.mkdirs();
+				}
+
 				targetFile.setReadable(true, false);
-	            targetFile.setWritable(false, false);
-	            targetFile.setWritable(true, true);
-	            
+				targetFile.setWritable(true, false);
+				targetFile.setExecutable(true, false);
+
 				mf.transferTo(targetFile);
 
 				OcrDTO pDTO = new OcrDTO();
@@ -363,14 +415,13 @@ public class StudyController {
 		return "/redirect";
 	}
 
-
 	// 스터디 상세정보 페이지 (가입전 정보보기)
 	@RequestMapping(value = "study/studyinfo", method = RequestMethod.GET)
 	public String studyinfo(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
 		log.info(this.getClass().getClass().getName() + "study/studyinfo start!!");
 
 		String user_id = (String) session.getAttribute("user_id");
-		
+
 		String study_name = nvl(request.getParameter("study_name"));
 		log.info("study_name : " + study_name);
 
@@ -407,6 +458,23 @@ public class StudyController {
 		// 유저 MBTI 분석
 		int mbti_score = MbtiUtil.getStudyAnalysis(my_mbti, mList);
 
+		// 스터디 이미지 가져오기
+		// 가장 최근에 등록한 스터디 사진 정보가져오기
+		log.info("getStudyImgList start! ");
+		Map<String, String> iMap = imgService.getStudyImgList(sDTO.getStudy_name());
+		if (iMap == null) {
+			iMap = new HashMap<String, String>();
+		}
+		String studyrealFile = nvl(iMap.get("SAVE_FILE_PATH") + "/"); // 파일이 저장된 경로 : /img/studyimg/0000/00/00/
+		String studyfileNm = nvl(iMap.get("SAVE_FILE_NAME")); // 파일명
+
+		if (studyfileNm.equals("")) {
+			studyrealFile = "/andrea-master/images/";
+			studyfileNm = "study.jpg";
+		}
+		log.info("getStudyImgList end! ");
+		model.addAttribute("study_img", studyrealFile + studyfileNm);
+
 		model.addAttribute("mbti_score", mbti_score);
 		model.addAttribute("sDTO", sDTO);
 		model.addAttribute("rDTO", rDTO);
@@ -417,7 +485,7 @@ public class StudyController {
 	}
 
 	// 스터디 가입하기
-	@RequestMapping(value = "study/studysignup")
+	@RequestMapping(value = "study/studysignup", method = RequestMethod.GET)
 	public String studysignup(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
 		log.info(this.getClass().getClass().getName() + "study/studysignup start!!");
 
@@ -524,6 +592,24 @@ public class StudyController {
 		if (rList == null) {
 			rList = new ArrayList<>();
 		}
+
+		// 스터디 이미지 가져오기
+		// 가장 최근에 등록한 스터디 사진 정보가져오기
+		log.info("getStudyImgList start! ");
+		Map<String, String> iMap = imgService.getStudyImgList(sDTO.getStudy_name());
+		if (iMap == null) {
+			iMap = new HashMap<String, String>();
+		}
+		String studyrealFile = nvl(iMap.get("SAVE_FILE_PATH") + "/"); // 파일이 저장된 경로 : /img/studyimg/0000/00/00/
+		String studyfileNm = nvl(iMap.get("SAVE_FILE_NAME")); // 파일명
+
+		if (studyfileNm.equals("")) {
+			studyrealFile = "/andrea-master/images/";
+			studyfileNm = "study.jpg";
+		}
+		log.info("getStudyImgList end! ");
+		model.addAttribute("study_img", studyrealFile + studyfileNm);
+
 		model.addAttribute("mbti_score", mbti_score);
 		model.addAttribute("mList", mList); // 스터디에 가입된 유저의 MBTI
 		model.addAttribute("rList", rList); // 스터디별 게시판 정보
@@ -535,8 +621,6 @@ public class StudyController {
 
 		return "study/studyboard";
 	}
-
-	
 
 	// 스터디 탈퇴하기
 	@RequestMapping(value = "/study/leave", method = RequestMethod.GET)
@@ -702,17 +786,18 @@ public class StudyController {
 		model.addAttribute("url", url);
 		return "/redirect";
 	}
-	
+
 	@RequestMapping(value = "/study/textModify", method = RequestMethod.POST)
 	@ResponseBody
-	public int messageeForRedis(@RequestBody String data, HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
-		
+	public int messageeForRedis(@RequestBody String data, HttpServletRequest request, HttpServletResponse response,
+			ModelMap model) throws Exception {
+
 		JSONParser jsonParse = new JSONParser();
-		JSONObject jsonObject = (JSONObject)jsonParse.parse(data);    // json 파일을 읽어서 JSONObject에 저장
+		JSONObject jsonObject = (JSONObject) jsonParse.parse(data); // json 파일을 읽어서 JSONObject에 저장
 		log.info("jsonObject : " + jsonObject);
 		log.info("jsonObject : " + (Long) jsonObject.get("study_seq"));
 		log.info("jsonObject : " + (String) jsonObject.get("study_notify"));
-		
+
 		Long study_seq = (Long) jsonObject.get("study_seq");
 		String study_notify = nvl((String) jsonObject.get("study_notify"));
 		log.info("study_seq : " + study_seq);
@@ -721,17 +806,17 @@ public class StudyController {
 		Map<String, Object> pMap = new HashMap<String, Object>();
 		pMap.put("study_seq", study_seq);
 		pMap.put("study_notify", study_notify);
-		
+
 		log.info("modifyNotice start");
 		int res = studyService.modifyNotice(pMap);
-		
-		if(res == 1) {
+
+		if (res == 1) {
 			log.info("modifyNotice end");
-			
-		}else if(res == 0){
+
+		} else if (res == 0) {
 			log.info("modifyNotice falid");
 		}
-		
-	return res;
+
+		return res;
 	}
 }

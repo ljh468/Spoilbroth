@@ -36,6 +36,8 @@
 	String member_mbti = String.join(",", mList);
 
 	int mbti_score = (int) request.getAttribute("mbti_score");
+	
+	String study_img = (String) request.getAttribute("study_img");
 %>
 
 <!DOCTYPE html>
@@ -141,7 +143,7 @@
 										<div class="d-flex align-items-center">
 											<div class="image">
 												<img id="preview-image"
-													src="/getStudyImage.do?study_name=<%=study_name%>"
+													src="<%=study_img%>"
 													class="rounded" width="100%">
 											</div>
 										</div>

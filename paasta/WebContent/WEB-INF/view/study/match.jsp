@@ -16,6 +16,7 @@
 	List<StudyListDTO> pList = (List<StudyListDTO>)request.getAttribute("pList");
 	int count = pList.size();
 	List<String> mbti_scores = (List<String>)request.getAttribute("mbti_scores");
+	List<String> iList = (List<String>)request.getAttribute("iList");
 %>
 
 <!DOCTYPE html>
@@ -167,20 +168,20 @@
 								<div class="owl-carousel owl-theme">
 									<%
 										int i = 0;
-										for (StudyListDTO sDTO : pList) {
+										for (int p = 0; p<pList.size(); p++) {
 											if(Integer.parseInt(mbti_scores.get(i)) >= 4){
 									%>
 									<!-- 모든 스터디 리스트로 뿌려줌 -->
 									<div class="item"
 										style="font-size: 33px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; coler: white;">
-										<a href="/study/studyboard.do?study_name=<%=sDTO.getStudy_name()%>">
-										<img src="/getStudyImage.do?study_name=<%=sDTO.getStudy_name()%>" class="rounded" width="100%">
+										<a href="/study/studyboard.do?study_name=<%=pList.get(p).getStudy_name()%>">
+										<img src="<%=iList.get(p)%>" class="rounded" width="100%">
 										</a>
 										<div class="txt-box"></div>
 										<div style="margin-top: 10px; margin-bottom: 0px;">
 											<label style="font-size: 25px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
-											<%=sDTO.getStudy_name()%> </label>
-											<div style="font-size: 20px"><%=sDTO.getStudy_title()%></div>
+											<%=pList.get(p).getStudy_name()%> </label>
+											<div style="font-size: 20px"><%=pList.get(p).getStudy_title()%></div>
 											
 											<!-- asd -->
 											<div class="emp-profile">
@@ -291,8 +292,8 @@
 							<!-- 스터디 목록 정보 START-->
 							<%
 								int j = 0;
-								for(StudyListDTO pDTO : pList) {%>
-							<% 	String[] arr = pDTO.getStudy_member().split(",");
+								for(int pp = 0; pp< pList.size(); pp++) {%>
+							<% 	String[] arr = pList.get(pp).getStudy_member().split(",");
 								int membercount = arr.length;
 							%>
 							<div class="emp-profile">
@@ -300,15 +301,15 @@
 									<div class="profile-card">
 										<div class="d-flex align-items-center">
 											<div class="image">
-												<img src="/getStudyImage.do?study_name=<%=pDTO.getStudy_name() %>" class="rounded" width="100%">
+												<img src="<%=iList.get(pp)%>" class="rounded" width="100%">
 											</div>
 										</div>
 										<div class="button mt-2 d-flex flex-row align-items-center">
-										<% if(user_study.contains(pDTO.getStudy_name())) { %>
-											<button class="btn btn-sm btn-primary w-100" onclick="location.href='/study/studyboard.do?study_name=<%=pDTO.getStudy_name() %>' " method="get";>
+										<% if(user_study.contains(pList.get(pp).getStudy_name())) { %>
+											<button class="btn btn-sm btn-primary w-100" onclick="location.href='/study/studyboard.do?study_name=<%=pList.get(pp).getStudy_name() %>' " method="get";>
 												Study Join</button>
 										<% }else { %>
-											<button class="btn btn-sm btn-secondary w-100" onclick="location.href='/study/studyinfo.do?study_name=<%=pDTO.getStudy_name() %>' " method="get";>
+											<button class="btn btn-sm btn-secondary w-100" onclick="location.href='/study/studyinfo.do?study_name=<%=pList.get(pp).getStudy_name() %>' " method="get";>
 												Sign Up</button>
 										<% } %>
 										</div>
@@ -317,10 +318,10 @@
 									<div class="profile-card" style="padding-left: 20px; padding-top: 20px;">
 										<h5
 											style="font-size: 26px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;letter-spacing: 8px;">
-											<%=pDTO.getStudy_name()%></h5>
+											<%=pList.get(pp).getStudy_name()%></h5>
 										<h6
 											style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
-											<%=pDTO.getStudy_title()%></h6>
+											<%=pList.get(pp).getStudy_title()%></h6>
 										<p class="mb-2" style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; color: #6c757d;">
 											Join Study : <span><%=membercount%>/5</span>
 										</p>
@@ -369,10 +370,10 @@
 							<!-- asd -->
 							<div class="meta-wrap" style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
 								<p class="meta">
-									<span  style="color: cornflowerblue;"><i class="icon-folder-o mr-2"></i><%=pDTO.getStudy_field() %></span>
-									<span><i class="icon-calendar mr-2"></i><%=pDTO.getStudy_dt() %></span>
+									<span  style="color: cornflowerblue;"><i class="icon-folder-o mr-2"></i><%=pList.get(pp).getStudy_field() %></span>
+									<span><i class="icon-calendar mr-2"></i><%=pList.get(pp).getStudy_dt() %></span>
 								</p>
-								<p class="mb-4" style="font-size: 18px;"><%=pDTO.getStudy_contents()%></p>
+								<p class="mb-4" style="font-size: 18px;"><%=pList.get(pp).getStudy_contents()%></p>
 							</div>
 								
 							<!-- 스터디 목록 정보 END-->

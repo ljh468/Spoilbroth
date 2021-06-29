@@ -404,7 +404,7 @@
 			return;
 		}
 		//웹소켓 객체 만드는 코드
-		ws = new WebSocket("ws://13.125.99.115:8080/echo.do");
+		ws = new WebSocket("ws://spoilbroth.ncloudpaas-ta.com//echo.do");
 
 		ws.onopen = function(event) {
 			if (event.data === undefined)

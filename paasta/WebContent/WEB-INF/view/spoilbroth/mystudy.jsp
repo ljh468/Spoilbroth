@@ -262,10 +262,10 @@
 							<!-- 스터디 목록 정보 START-->
 							<%
 								int j = 0 ;
-								for (StudyListDTO pDTO : pList) {
+								for (int ppp = 0; ppp<pList.size(); ppp++) {
 							%>
 							<%
-								String[] arr = pDTO.getStudy_member().split(",");
+								String[] arr = pList.get(ppp).getStudy_member().split(",");
 									int membercount = arr.length;
 							%>
 							<div class="emp-profile">
@@ -274,17 +274,13 @@
 										<div class="d-flex align-items-center">
 											<div class="image">
 											
-												<img src="<%=iList.get(j)%>" class="rounded" width="100%">
-												<img src="/img/userimg/2021/06/29/24071908.jpg" class="rounded" width="100%">
-												<img src="http://spoilbroth.ncloudpaas-ta.com/img/userimg/2021/06/29/24071908.jpg" class="rounded" width="100%">
-												<img src="spoilbroth.ncloudpaas-ta.com/img/userimg/2021/06/29/24071908.jpg" class="rounded" width="100%">
-												<img src="/resource/img/userimg/2021/06/29/24071908.jpg" class="rounded" width="100%">
+												<img src="<%=iList.get(ppp)%>" class="rounded" width="100%">
 											</div>
 										</div>
 										<div class="button mt-2 d-flex flex-row align-items-center">
 											
 											<button class="btn btn-sm btn-primary w-100"
-												onclick="location.href='/study/studyboard.do?study_name=<%=pDTO.getStudy_name()%>'">
+												onclick="location.href='/study/studyboard.do?study_name=<%=pList.get(ppp).getStudy_name()%>'">
 												Study Join</button>
 											
 										</div>
@@ -294,10 +290,10 @@
 										style="padding-left: 20px; padding-top: 20px;">
 										<h5
 											style="font-size: 26px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; letter-spacing: 8px;">
-											<%=pDTO.getStudy_name()%></h5>
+											<%=pList.get(ppp).getStudy_name()%></h5>
 										<h6
 											style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
-											<%=pDTO.getStudy_title()%></h6>
+											<%=pList.get(ppp).getStudy_title()%></h6>
 										<p class="mb-2"
 											style="font-size: 20px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; color: #6c757d;">
 											Join Study : <span><%=membercount%>/5</span>
@@ -349,10 +345,10 @@
 								style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
 								<p class="meta">
 									<span style="color: cornflowerblue;"><i
-										class="icon-folder-o mr-2"></i><%=pDTO.getStudy_field()%></span> <span><i
-										class="icon-calendar mr-2"></i><%=pDTO.getStudy_dt()%></span>
+										class="icon-folder-o mr-2"></i><%=pList.get(ppp).getStudy_field()%></span> <span><i
+										class="icon-calendar mr-2"></i><%=pList.get(ppp).getStudy_dt()%></span>
 								</p>
-								<p class="mb-4" style="font-size: 18px;"><%=pDTO.getStudy_contents() %></p>
+								<p class="mb-4" style="font-size: 18px;"><%=pList.get(ppp).getStudy_contents() %></p>
 							</div>
 
 							<!-- 스터디 목록 정보 END-->

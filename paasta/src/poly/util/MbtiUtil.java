@@ -26,14 +26,14 @@ public class MbtiUtil {
 						} else if (mbti.equals("ENTP") || mbti.equals("ENTP") || mbti.equals("ISTJ")
 								|| mbti.equals("ENFJ")) {
 							// 갈등 관계
-							score += 3;
+							score += 2;
 						} else if (mbti.equals("INTJ") || mbti.equals("INTP") || mbti.equals("ENFP")
 								|| mbti.equals("INFJ") || mbti.equals("ISTP")) {
 							// 잠재적 관계
 							score += 3;
 						} else if (mbti.equals("ESTP") || mbti.equals("ESFP")) {
 							// 끈끈한 관계
-							score += 5;
+							score += 4;
 						} else if (mbti.equals("INFP") || mbti.equals("ISFP")) {
 							// 이상적인관계
 							score += 5;
@@ -47,14 +47,14 @@ public class MbtiUtil {
 						} else if (mbti.equals("ENTJ") || mbti.equals("ENFP") || mbti.equals("ESTP")
 								|| mbti.equals("ISTP")) {
 							// 갈등 관계
-							score += 3;
+							score += 2;
 						} else if (mbti.equals("INTJ") || mbti.equals("INTP") || mbti.equals("ENFJ")
 								|| mbti.equals("INFJ") || mbti.equals("INFP")) {
 							// 잠재적 관계
 							score += 3;
 						} else if (mbti.equals("ENTP") || mbti.equals("ENTP") || mbti.equals("ESFJ")) {
 							// 끈끈한 관계
-							score += 5;
+							score += 4;
 						} else if (mbti.equals("ISTJ") || mbti.equals("ISFJ")) {
 							// 이상적인관계
 							score += 5;
@@ -67,7 +67,7 @@ public class MbtiUtil {
 							score += 1;
 						} else if (mbti.equals("INTP") || mbti.equals("ENTP")) {
 							// 갈등 관계
-							score += 3;
+							score += 2;
 						} else if (mbti.equals("ENTJ") || mbti.equals("ENTP") || mbti.equals("INTJ")
 								|| mbti.equals("ISTJ") || mbti.equals("ENFJ") || mbti.equals("ENFP")
 								|| mbti.equals("INFJ") || mbti.equals("ISTP")) {
@@ -75,7 +75,7 @@ public class MbtiUtil {
 							score += 3;
 						} else if (mbti.equals("INFP") || mbti.equals("ISFP")) {
 							// 끈끈한 관계
-							score += 5;
+							score += 4;
 						} else if (mbti.equals("ESTP") || mbti.equals("ESFP")) {
 							// 이상적인관계
 							score += 5;
@@ -89,14 +89,14 @@ public class MbtiUtil {
 						} else if (mbti.equals("INTJ") || mbti.equals("INFP") || mbti.equals("ESTP")
 								|| mbti.equals("ISTP")) {
 							// 갈등 관계
-							score += 3;
+							score += 2;
 						} else if (mbti.equals("ENTJ") || mbti.equals("ENTP") || mbti.equals("INTP")
 								|| mbti.equals("ISTJ") || mbti.equals("ENFP")) {
 							// 잠재적 관계
 							score += 3;
 						} else if (mbti.equals("ENTP") || mbti.equals("INFJ")) {
 							// 끈끈한 관계
-							score += 5;
+							score += 4;
 						} else if (mbti.equals("ESFJ") || mbti.equals("ISFJ") || mbti.equals("ENFJ")) {
 							// 이상적인관계
 							score += 5;
@@ -109,14 +109,14 @@ public class MbtiUtil {
 							score += 1;
 						} else if (mbti.equals("ENTJ") || mbti.equals("INTJ") || mbti.equals("ESFJ")) {
 							// 갈등 관계
-							score += 3;
+							score += 2;
 						} else if (mbti.equals("ENTP") || mbti.equals("ISTJ") || mbti.equals("ISFJ")
 								|| mbti.equals("ENFP") || mbti.equals("ESFP") || mbti.equals("ISTP")) {
 							// 잠재적 관계
 							score += 3;
 						} else if (mbti.equals("ENTP") || mbti.equals("INTP")) {
 							// 끈끈한 관계
-							score += 5;
+							score += 4;
 						} else if (mbti.equals("INFP") || mbti.equals("ISFP")) {
 							// 이상적인관계
 							score += 5;
@@ -129,7 +129,7 @@ public class MbtiUtil {
 							score += 1;
 						} else if (mbti.equals("ENTP") || mbti.equals("INFJ") || mbti.equals("ESFP")) {
 							// 갈등 관계
-							score += 3;
+							score += 2;
 						} else if (mbti.equals("ESFJ") || mbti.equals("ISTJ") || mbti.equals("ISFJ")
 								|| mbti.equals("ENFJ") || mbti.equals("INFP") || mbti.equals("ESTP")
 								|| mbti.equals("ISFP")) {
@@ -137,7 +137,7 @@ public class MbtiUtil {
 							score += 3;
 						} else if (mbti.equals("ENTP") || mbti.equals("ENFP")) {
 							// 끈끈한 관계
-							score += 5;
+							score += 4;
 						} else if (mbti.equals("INTP") || mbti.equals("ISTP")) {
 							// 이상적인관계
 							score += 5;
@@ -150,7 +150,7 @@ public class MbtiUtil {
 							score += 1;
 						} else if (mbti.equals("ENTJ") || mbti.equals("ISFJ") || mbti.equals("ISTP")) {
 							// 갈등 관계
-							score += 3;
+							score += 2;
 						} else if (mbti.equals("INTJ") || mbti.equals("INTP") || mbti.equals("ENTP")
 								|| mbti.equals("ESFJ") || mbti.equals("ISTJ") || mbti.equals("ESTP")
 								|| mbti.equals("ESFP")) {
@@ -158,7 +158,7 @@ public class MbtiUtil {
 							score += 3;
 						} else if (mbti.equals("ISTP")) {
 							// 끈끈한 관계
-							score += 5;
+							score += 4;
 						} else if (mbti.equals("ENTP") || mbti.equals("INTP") || mbti.equals("ENFP")) {
 							// 이상적인관계
 							score += 5;
@@ -172,14 +172,14 @@ public class MbtiUtil {
 						} else if (mbti.equals("ISTJ") || mbti.equals("ISFJ") || mbti.equals("ENFJ")
 								|| mbti.equals("INFJ")) {
 							// 갈등 관계
-							score += 3;
+							score += 2;
 						} else if (mbti.equals("ENTP") || mbti.equals("ESFJ") || mbti.equals("INFP")
 								|| mbti.equals("ESTP") || mbti.equals("ESFP")) {
 							// 잠재적 관계
 							score += 3;
 						} else if (mbti.equals("ISTP")) {
 							// 끈끈한 관계
-							score += 5;
+							score += 4;
 						} else if (mbti.equals("ENTP") || mbti.equals("INTP") || mbti.equals("ENFP")) {
 							// 이상적인관계
 							score += 5;
@@ -192,14 +192,14 @@ public class MbtiUtil {
 							score += 1;
 						} else if (mbti.equals("ENTJ") || mbti.equals("ISFJ") || mbti.equals("ENFP")) {
 							// 갈등 관계
-							score += 3;
+							score += 2;
 						} else if (mbti.equals("ENTP") || mbti.equals("INTJ") || mbti.equals("ESFJ")
 								|| mbti.equals("INFJ") || mbti.equals("INFP") || mbti.equals("ISFP")) {
 							// 잠재적 관계
 							score += 3;
 						} else if (mbti.equals("ENFJ") || mbti.equals("ESTP") || mbti.equals("ESFP")) {
 							// 끈끈한 관계
-							score += 5;
+							score += 4;
 						} else if (mbti.equals("INTP") || mbti.equals("ISTP")) {
 							// 이상적인관계4
 							score += 5;
@@ -212,14 +212,14 @@ public class MbtiUtil {
 							score += 1;
 						} else if (mbti.equals("ENTP") || mbti.equals("ENFJ") || mbti.equals("INFP")) {
 							// 갈등 관계
-							score += 3;
+							score += 2;
 						} else if (mbti.equals("ENTJ") || mbti.equals("INTJ") || mbti.equals("INTP")
 								|| mbti.equals("ENFP") || mbti.equals("INFJ") || mbti.equals("ISFP")) {
 							// 잠재적 관계
 							score += 3;
 						} else if (mbti.equals("ENTP") || mbti.equals("ESFJ")) {
 							// 끈끈한 관계
-							score += 5;
+							score += 4;
 						} else if (mbti.equals("ISTJ") || mbti.equals("ISFJ")) {
 							// 이상적인관계
 							score += 5;
@@ -232,7 +232,7 @@ public class MbtiUtil {
 							score += 1;
 						} else if (mbti.equals("ESFJ") || mbti.equals("ISFJ")) {
 							// 갈등 관계
-							score += 3;
+							score += 2;
 						} else if (mbti.equals("ENTJ") || mbti.equals("ENTP") || mbti.equals("INTJ")
 								|| mbti.equals("ENFJ") || mbti.equals("ENFP") || mbti.equals("INFJ")
 								|| mbti.equals("ISFP")) {
@@ -240,7 +240,7 @@ public class MbtiUtil {
 							score += 3;
 						} else if (mbti.equals("INTP")) {
 							// 끈끈한 관계
-							score += 5;
+							score += 4;
 						} else if (mbti.equals("ESTP") || mbti.equals("ESFP") || mbti.equals("ISTP")) {
 							// 이상적인관계
 							score += 5;
@@ -254,14 +254,14 @@ public class MbtiUtil {
 						} else if (mbti.equals("INTP") || mbti.equals("ENFP") || mbti.equals("ESFP")
 								|| mbti.equals("ISTP") || mbti.equals("ISFP")) {
 							// 갈등 관계
-							score += 3;
+							score += 2;
 						} else if (mbti.equals("ENTP") || mbti.equals("ESFJ") || mbti.equals("ISFJ")
 								|| mbti.equals("ENFJ") || mbti.equals("INFP")) {
 							// 잠재적 관계
 							score += 3;
 						} else if (mbti.equals("INTJ") || mbti.equals("ISTJ")) {
 							// 끈끈한 관계
-							score += 5;
+							score += 4;
 						} else if (mbti.equals("ENTJ") || mbti.equals("ENTP")) {
 							// 이상적인관계
 							score += 5;
@@ -274,14 +274,14 @@ public class MbtiUtil {
 							score += 1;
 						} else if (mbti.equals("ENTP") || mbti.equals("INTP") || mbti.equals("ESFP")) {
 							// 갈등 관계
-							score += 3;
+							score += 2;
 						} else if (mbti.equals("ESFJ") || mbti.equals("ISTJ") || mbti.equals("ISFJ")
 								|| mbti.equals("ESTP") || mbti.equals("ISTP") || mbti.equals("ISFP")) {
 							// 잠재적 관계
 							score += 3;
 						} else if (mbti.equals("ENTJ") || mbti.equals("ENFJ")) {
 							// 끈끈한 관계
-							score += 5;
+							score += 4;
 						} else if (mbti.equals("INTJ") || mbti.equals("INFJ")) {
 							// 이상적인관계
 							score += 5;
@@ -295,14 +295,14 @@ public class MbtiUtil {
 						} else if (mbti.equals("ESFJ") || mbti.equals("INFP") || mbti.equals("ESTP")
 								|| mbti.equals("ESFP")) {
 							// 갈등 관계
-							score += 3;
+							score += 2;
 						} else if (mbti.equals("ENTP") || mbti.equals("ISTJ") || mbti.equals("ISFJ")
 								|| mbti.equals("ISTP") || mbti.equals("ISFP")) {
 							// 잠재적 관계
 							score += 3;
 						} else if (mbti.equals("ENTJ") || mbti.equals("ENFJ")) {
 							// 끈끈한 관계
-							score += 5;
+							score += 4;
 						} else if (mbti.equals("INTJ") || mbti.equals("INFJ")) {
 							// 이상적인관계
 							score += 5;
@@ -316,14 +316,14 @@ public class MbtiUtil {
 						} else if (mbti.equals("ENTP") || mbti.equals("INTP") || mbti.equals("ISTJ")
 								|| mbti.equals("ISTP") || mbti.equals("ISFP")) {
 							// 갈등 관계
-							score += 3;
+							score += 2;
 						} else if (mbti.equals("ENTJ") || mbti.equals("INTJ") || mbti.equals("ENTP")
 								|| mbti.equals("ESTP") || mbti.equals("ESFP")) {
 							// 잠재적 관계
 							score += 3;
 						} else if (mbti.equals("ISFJ")) {
 							// 끈끈한 관계
-							score += 5;
+							score += 4;
 						} else if (mbti.equals("ESFJ") || mbti.equals("ENFJ") || mbti.equals("INFJ")) {
 							// 이상적인관계
 							score += 5;
@@ -336,7 +336,7 @@ public class MbtiUtil {
 							score += 1;
 						} else if (mbti.equals("INFP") || mbti.equals("ISTP")) {
 							// 갈등 관계
-							score += 3;
+							score += 2;
 						} else if (mbti.equals("ESFJ") || mbti.equals("ENFJ") || mbti.equals("ENFP")
 								|| mbti.equals("INFJ") || mbti.equals("ESTP") || mbti.equals("ESFP")
 								|| mbti.equals("ISFP")) {
@@ -344,7 +344,7 @@ public class MbtiUtil {
 							score += 3;
 						} else if (mbti.equals("INTJ") || mbti.equals("ISTJ")) {
 							// 끈끈한 관계
-							score += 5;
+							score += 4;
 						} else if (mbti.equals("ENTJ") || mbti.equals("ENTP")) {
 							// 이상적인관계
 							score += 5;
@@ -385,14 +385,14 @@ public class MbtiUtil {
 					} else if (mbti.equals("ENTP") || mbti.equals("ENTP") || mbti.equals("ISTJ")
 							|| mbti.equals("ENFJ")) {
 						// 갈등 관계
-						score += 3;
+						score += 2;
 					} else if (mbti.equals("INTJ") || mbti.equals("INTP") || mbti.equals("ENFP") || mbti.equals("INFJ")
 							|| mbti.equals("ISTP")) {
 						// 잠재적 관계
 						score += 3;
 					} else if (mbti.equals("ESTP") || mbti.equals("ESFP")) {
 						// 끈끈한 관계
-						score += 5;
+						score += 4;
 					} else if (mbti.equals("INFP") || mbti.equals("ISFP")) {
 						// 이상적인관계
 						score += 5;
@@ -406,14 +406,14 @@ public class MbtiUtil {
 					} else if (mbti.equals("ENTJ") || mbti.equals("ENFP") || mbti.equals("ESTP")
 							|| mbti.equals("ISTP")) {
 						// 갈등 관계
-						score += 3;
+						score += 2;
 					} else if (mbti.equals("INTJ") || mbti.equals("INTP") || mbti.equals("ENFJ") || mbti.equals("INFJ")
 							|| mbti.equals("INFP")) {
 						// 잠재적 관계
 						score += 3;
 					} else if (mbti.equals("ENTP") || mbti.equals("ENTP") || mbti.equals("ESFJ")) {
 						// 끈끈한 관계
-						score += 5;
+						score += 4;
 					} else if (mbti.equals("ISTJ") || mbti.equals("ISFJ")) {
 						// 이상적인관계
 						score += 5;
@@ -426,7 +426,7 @@ public class MbtiUtil {
 						score += 1;
 					} else if (mbti.equals("INTP") || mbti.equals("ENTP")) {
 						// 갈등 관계
-						score += 3;
+						score += 2;
 					} else if (mbti.equals("ENTJ") || mbti.equals("ENTP") || mbti.equals("INTJ") || mbti.equals("ISTJ")
 							|| mbti.equals("ENFJ") || mbti.equals("ENFP") || mbti.equals("INFJ")
 							|| mbti.equals("ISTP")) {
@@ -434,7 +434,7 @@ public class MbtiUtil {
 						score += 3;
 					} else if (mbti.equals("INFP") || mbti.equals("ISFP")) {
 						// 끈끈한 관계
-						score += 5;
+						score += 4;
 					} else if (mbti.equals("ESTP") || mbti.equals("ESFP")) {
 						// 이상적인관계
 						score += 5;
@@ -448,14 +448,14 @@ public class MbtiUtil {
 					} else if (mbti.equals("INTJ") || mbti.equals("INFP") || mbti.equals("ESTP")
 							|| mbti.equals("ISTP")) {
 						// 갈등 관계
-						score += 3;
+						score += 2;
 					} else if (mbti.equals("ENTJ") || mbti.equals("ENTP") || mbti.equals("INTP") || mbti.equals("ISTJ")
 							|| mbti.equals("ENFP")) {
 						// 잠재적 관계
 						score += 3;
 					} else if (mbti.equals("ENTP") || mbti.equals("INFJ")) {
 						// 끈끈한 관계
-						score += 5;
+						score += 4;
 					} else if (mbti.equals("ESFJ") || mbti.equals("ISFJ") || mbti.equals("ENFJ")) {
 						// 이상적인관계
 						score += 5;
@@ -468,14 +468,14 @@ public class MbtiUtil {
 						score += 1;
 					} else if (mbti.equals("ENTJ") || mbti.equals("INTJ") || mbti.equals("ESFJ")) {
 						// 갈등 관계
-						score += 3;
+						score += 2;
 					} else if (mbti.equals("ENTP") || mbti.equals("ISTJ") || mbti.equals("ISFJ") || mbti.equals("ENFP")
 							|| mbti.equals("ESFP") || mbti.equals("ISTP")) {
 						// 잠재적 관계
 						score += 3;
 					} else if (mbti.equals("ENTP") || mbti.equals("INTP")) {
 						// 끈끈한 관계
-						score += 5;
+						score += 4;
 					} else if (mbti.equals("INFP") || mbti.equals("ISFP")) {
 						// 이상적인관계
 						score += 5;
@@ -488,14 +488,14 @@ public class MbtiUtil {
 						score += 1;
 					} else if (mbti.equals("ENTP") || mbti.equals("INFJ") || mbti.equals("ESFP")) {
 						// 갈등 관계
-						score += 3;
+						score += 2;
 					} else if (mbti.equals("ESFJ") || mbti.equals("ISTJ") || mbti.equals("ISFJ") || mbti.equals("ENFJ")
 							|| mbti.equals("INFP") || mbti.equals("ESTP") || mbti.equals("ISFP")) {
 						// 잠재적 관계
 						score += 3;
 					} else if (mbti.equals("ENTP") || mbti.equals("ENFP")) {
 						// 끈끈한 관계
-						score += 5;
+						score += 4;
 					} else if (mbti.equals("INTP") || mbti.equals("ISTP")) {
 						// 이상적인관계
 						score += 5;
@@ -508,14 +508,14 @@ public class MbtiUtil {
 						score += 1;
 					} else if (mbti.equals("ENTJ") || mbti.equals("ISFJ") || mbti.equals("ISTP")) {
 						// 갈등 관계
-						score += 3;
+						score += 2;
 					} else if (mbti.equals("INTJ") || mbti.equals("INTP") || mbti.equals("ENTP") || mbti.equals("ESFJ")
 							|| mbti.equals("ISTJ") || mbti.equals("ESTP") || mbti.equals("ESFP")) {
 						// 잠재적 관계
 						score += 3;
 					} else if (mbti.equals("ISTP")) {
 						// 끈끈한 관계
-						score += 5;
+						score += 4;
 					} else if (mbti.equals("ENTP") || mbti.equals("INTP") || mbti.equals("ENFP")) {
 						// 이상적인관계
 						score += 5;
@@ -529,14 +529,14 @@ public class MbtiUtil {
 					} else if (mbti.equals("ISTJ") || mbti.equals("ISFJ") || mbti.equals("ENFJ")
 							|| mbti.equals("INFJ")) {
 						// 갈등 관계
-						score += 3;
+						score += 2;
 					} else if (mbti.equals("ENTP") || mbti.equals("ESFJ") || mbti.equals("INFP") || mbti.equals("ESTP")
 							|| mbti.equals("ESFP")) {
 						// 잠재적 관계
 						score += 3;
 					} else if (mbti.equals("ISTP")) {
 						// 끈끈한 관계
-						score += 5;
+						score += 4;
 					} else if (mbti.equals("ENTP") || mbti.equals("INTP") || mbti.equals("ENFP")) {
 						// 이상적인관계
 						score += 5;
@@ -549,14 +549,14 @@ public class MbtiUtil {
 						score += 1;
 					} else if (mbti.equals("ENTJ") || mbti.equals("ISFJ") || mbti.equals("ENFP")) {
 						// 갈등 관계
-						score += 3;
+						score += 2;
 					} else if (mbti.equals("ENTP") || mbti.equals("INTJ") || mbti.equals("ESFJ") || mbti.equals("INFJ")
 							|| mbti.equals("INFP") || mbti.equals("ISFP")) {
 						// 잠재적 관계
 						score += 3;
 					} else if (mbti.equals("ENFJ") || mbti.equals("ESTP") || mbti.equals("ESFP")) {
 						// 끈끈한 관계
-						score += 5;
+						score += 4;
 					} else if (mbti.equals("INTP") || mbti.equals("ISTP")) {
 						// 이상적인관계4
 						score += 5;
@@ -569,14 +569,14 @@ public class MbtiUtil {
 						score += 1;
 					} else if (mbti.equals("ENTP") || mbti.equals("ENFJ") || mbti.equals("INFP")) {
 						// 갈등 관계
-						score += 3;
+						score += 2;
 					} else if (mbti.equals("ENTJ") || mbti.equals("INTJ") || mbti.equals("INTP") || mbti.equals("ENFP")
 							|| mbti.equals("INFJ") || mbti.equals("ISFP")) {
 						// 잠재적 관계
 						score += 3;
 					} else if (mbti.equals("ENTP") || mbti.equals("ESFJ")) {
 						// 끈끈한 관계
-						score += 5;
+						score += 4;
 					} else if (mbti.equals("ISTJ") || mbti.equals("ISFJ")) {
 						// 이상적인관계
 						score += 5;
@@ -589,14 +589,14 @@ public class MbtiUtil {
 						score += 1;
 					} else if (mbti.equals("ESFJ") || mbti.equals("ISFJ")) {
 						// 갈등 관계
-						score += 3;
+						score += 2;
 					} else if (mbti.equals("ENTJ") || mbti.equals("ENTP") || mbti.equals("INTJ") || mbti.equals("ENFJ")
 							|| mbti.equals("ENFP") || mbti.equals("INFJ") || mbti.equals("ISFP")) {
 						// 잠재적 관계
 						score += 3;
 					} else if (mbti.equals("INTP")) {
 						// 끈끈한 관계
-						score += 5;
+						score += 4;
 					} else if (mbti.equals("ESTP") || mbti.equals("ESFP") || mbti.equals("ISTP")) {
 						// 이상적인관계
 						score += 5;
@@ -610,14 +610,14 @@ public class MbtiUtil {
 					} else if (mbti.equals("INTP") || mbti.equals("ENFP") || mbti.equals("ESFP") || mbti.equals("ISTP")
 							|| mbti.equals("ISFP")) {
 						// 갈등 관계
-						score += 3;
+						score += 2;
 					} else if (mbti.equals("ENTP") || mbti.equals("ESFJ") || mbti.equals("ISFJ") || mbti.equals("ENFJ")
 							|| mbti.equals("INFP")) {
 						// 잠재적 관계
 						score += 3;
 					} else if (mbti.equals("INTJ") || mbti.equals("ISTJ")) {
 						// 끈끈한 관계
-						score += 5;
+						score += 4;
 					} else if (mbti.equals("ENTJ") || mbti.equals("ENTP")) {
 						// 이상적인관계
 						score += 5;
@@ -630,14 +630,14 @@ public class MbtiUtil {
 						score += 1;
 					} else if (mbti.equals("ENTP") || mbti.equals("INTP") || mbti.equals("ESFP")) {
 						// 갈등 관계
-						score += 3;
+						score += 2;
 					} else if (mbti.equals("ESFJ") || mbti.equals("ISTJ") || mbti.equals("ISFJ") || mbti.equals("ESTP")
 							|| mbti.equals("ISTP") || mbti.equals("ISFP")) {
 						// 잠재적 관계
 						score += 3;
 					} else if (mbti.equals("ENTJ") || mbti.equals("ENFJ")) {
 						// 끈끈한 관계
-						score += 5;
+						score += 4;
 					} else if (mbti.equals("INTJ") || mbti.equals("INFJ")) {
 						// 이상적인관계
 						score += 5;
@@ -651,14 +651,14 @@ public class MbtiUtil {
 					} else if (mbti.equals("ESFJ") || mbti.equals("INFP") || mbti.equals("ESTP")
 							|| mbti.equals("ESFP")) {
 						// 갈등 관계
-						score += 3;
+						score += 2;
 					} else if (mbti.equals("ENTP") || mbti.equals("ISTJ") || mbti.equals("ISFJ") || mbti.equals("ISTP")
 							|| mbti.equals("ISFP")) {
 						// 잠재적 관계
 						score += 3;
 					} else if (mbti.equals("ENTJ") || mbti.equals("ENFJ")) {
 						// 끈끈한 관계
-						score += 5;
+						score += 4;
 					} else if (mbti.equals("INTJ") || mbti.equals("INFJ")) {
 						// 이상적인관계
 						score += 5;
@@ -672,14 +672,14 @@ public class MbtiUtil {
 					} else if (mbti.equals("ENTP") || mbti.equals("INTP") || mbti.equals("ISTJ") || mbti.equals("ISTP")
 							|| mbti.equals("ISFP")) {
 						// 갈등 관계
-						score += 3;
+						score += 2;
 					} else if (mbti.equals("ENTJ") || mbti.equals("INTJ") || mbti.equals("ENTP") || mbti.equals("ESTP")
 							|| mbti.equals("ESFP")) {
 						// 잠재적 관계
 						score += 3;
 					} else if (mbti.equals("ISFJ")) {
 						// 끈끈한 관계
-						score += 5;
+						score += 4;
 					} else if (mbti.equals("ESFJ") || mbti.equals("ENFJ") || mbti.equals("INFJ")) {
 						// 이상적인관계
 						score += 5;
@@ -692,14 +692,14 @@ public class MbtiUtil {
 						score += 1;
 					} else if (mbti.equals("INFP") || mbti.equals("ISTP")) {
 						// 갈등 관계
-						score += 3;
+						score += 2;
 					} else if (mbti.equals("ESFJ") || mbti.equals("ENFJ") || mbti.equals("ENFP") || mbti.equals("INFJ")
 							|| mbti.equals("ESTP") || mbti.equals("ESFP") || mbti.equals("ISFP")) {
 						// 잠재적 관계
 						score += 3;
 					} else if (mbti.equals("INTJ") || mbti.equals("ISTJ")) {
 						// 끈끈한 관계
-						score += 5;
+						score += 4;
 					} else if (mbti.equals("ENTJ") || mbti.equals("ENTP")) {
 						// 이상적인관계
 						score += 5;

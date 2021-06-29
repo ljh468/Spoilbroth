@@ -174,7 +174,7 @@ public class ImageController {
 
 	@RequestMapping(value = "/getImage", method = RequestMethod.GET)
 
-	public String getImage(HttpServletRequest request, HttpSession session, HttpServletResponse response,
+	public void getImage(HttpServletRequest request, HttpSession session, HttpServletResponse response,
 			@RequestParam(value = "user_id") String user_id) throws Exception {
 
 		log.info("user_id : " + user_id);
