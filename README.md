@@ -6,7 +6,8 @@
 ## MBTI성향분석을 활용한 스터디매칭 애플리케이션(data mining, WebSocket)
 시연 영상 : [![](https://i.ytimg.com/an_webp/Gf1kTz76lh8/mqdefault_6s.webp?du=3000&sqp=COHSp4kG&rs=AOn4CLAIYAZPKinA_0gUN95Sxou-lp4Thw)](https://www.youtube.com/watch?v=Gf1kTz76lh8 "demo")
 
-![image](![image](![image](https://user-images.githubusercontent.com/64997253/131215204-8947dc2b-e130-4347-8283-b7e3024f02ac.png)))
+![image](![image](![mqdefault](https://user-images.githubusercontent.com/64997253/131215233-b7cfaf70-bb64-4474-944f-66ab915cc3c7.jpg)
+)))
 ## 적용 기술
         - 프레임워크 : SpringFramework
         - 데이터베이스 : MariaDB, RedisDB
