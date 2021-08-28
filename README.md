@@ -4,10 +4,8 @@
 - SpringPRJ -> WebContent -> WEB-INF -> view 에 들어가면 jps코드 확인 가능합니다. 
 
 ## MBTI성향분석을 활용한 스터디매칭 애플리케이션(data mining, WebSocket)
-시연 영상 : [![](https://i.ytimg.com/an_webp/Gf1kTz76lh8/mqdefault_6s.webp?du=3000&sqp=COHSp4kG&rs=AOn4CLAIYAZPKinA_0gUN95Sxou-lp4Thw)](https://www.youtube.com/watch?v=Gf1kTz76lh8 "demo")
+시연 영상 : [![](https://user-images.githubusercontent.com/64997253/131215235-c395ea58-bdc8-437f-966e-163ffb41fedb.jpg)](https://www.youtube.com/watch?v=Gf1kTz76lh8 "demo")
 
-![image](![image](![mqdefault](https://user-images.githubusercontent.com/64997253/131215233-b7cfaf70-bb64-4474-944f-66ab915cc3c7.jpg)
-)))
 ## 적용 기술
         - 프레임워크 : SpringFramework
         - 데이터베이스 : MariaDB, RedisDB
