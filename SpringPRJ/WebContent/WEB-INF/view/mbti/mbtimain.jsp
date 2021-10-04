@@ -72,23 +72,25 @@
 							My MBTI</div>
 							
 							<div class="row p-2">
-								<div class="card p-l-55 p-r-55 p-t-65 p-b-54 shadowbox col-6" 
-								style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 20px; margin-bottom: 0px;">
-								
 									<%if(mDTO.getMbti_name()==null){ %>
-										<div style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 20px;">
-										아직 측정이 되어있지 않습니다.</div>
+										<div class="card p-l-55 p-r-55 p-t-65 p-b-54 shadowbox col-12" 
+											style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 20px; margin-bottom: 0px;">
+											<div style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 20px;">
+											아직 측정이 되어있지 않습니다.</div>
+										</div>
 									<% }else{ %>
-										<div>
+										<div class="card p-l-55 p-r-55 p-t-65 p-b-54 shadowbox col-6" 
+											style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 20px; margin-bottom: 0px;">
 										<strong style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 30px;">
-										<%=mDTO.getMbti_name() %></strong></div>
+										<%=mDTO.getMbti_name() %></strong>
 										<div style="font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; font-size: 20px;">
 										<%=mDTO.getMbti_content() %></div>
+										</div>
+										<div class="card p-l-55 p-r-55 p-t-65 p-b-54 shadowbox col-6" style="border:none; border-radius: 7px;-moz-border-radius: 7px;
+											-khtml-border-radius: 7px;-webkit-border-radius: 7px; padding-left:0px;padding-right:0px; width:100%; margin-bottom: 0px;">
+											<img src="<%=mDTO.getMbti_img_path() %>" width="100%" height="202" alt="등록된 사진이 없습니다." style="border:none; border-radius: 7px;">
+										</div>	
 									<% } %>
-								</div>
-								<div class="card p-l-55 p-r-55 p-t-65 p-b-54 shadowbox col-6" style="border:none; border-radius: 7px;-moz-border-radius: 7px;
-									-khtml-border-radius: 7px;-webkit-border-radius: 7px; padding-left:0px;padding-right:0px; width:100%; margin-bottom: 0px;">
-								<img src="<%=mDTO.getMbti_img_path() %>" width="100%" height="202" alt="등록된 사진이 없습니다." style="border:none; border-radius: 7px;">
 								</div>
 							
 							</div>

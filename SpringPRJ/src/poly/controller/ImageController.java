@@ -183,6 +183,8 @@ public class ImageController {
 		log.info("getImgList start! ");
 		Map<String, String> pMap = imgService.getImgList(user_id);
 		log.info("getImgList end! ");
+		
+
 		if (pMap == null) {
 			pMap = new HashMap<String, String>();
 		}

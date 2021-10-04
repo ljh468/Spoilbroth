@@ -40,7 +40,7 @@
 					</span>
 				</div>
 
-				<form class="login100-form validate-form" action="/user/loginProc.do" method="post">
+				<form class="login100-form validate-form" action="/user/loginProc.do" method="post" style="padding: 35px 15px 35px 15px;">
 					<div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
 						<span class="label-input100">ID</span>
 						<input class="input100" type="text" name="user_id" placeholder="Enter userid">
@@ -68,7 +68,7 @@
 						</div>
 					</div>
 					
-					<div class="container-login100-form-btn" style="padding-top: 30px;">
+					<div class="container-login100-form-btn" style="padding-top: 20px;">
 						<button class="login100-form-btn" style="margin: auto;">
 							Login
 						</button>
@@ -79,11 +79,31 @@
 							Sign up
 						</button>
 					</div>
+					<!-- 페이스 로그인 -->
+					<div class="container-login100-form-btn" style="padding-top: 10px;">
+						<button onclick="location.href='/user/signup.do'" class="login100-form-btn" style="margin: auto; background-color: blueviolet;">
+							Face Login
+						</button>
+					</div>
+					
+					<!-- 카카오톡 로그인 -->
+					<div class="form-group row" id="kakaologin" style="padding-top: 10px;display: block;margin: auto;text-align: center;">
+						<div class="kakaobtn">
+							<input type="hidden" name="kakaoemail" id="kakaoemail" />
+							<input type="hidden" name="kakaoname" id="kakaoname" />
+							<input type="hidden" name="kakaobirth" id="kakaobirth" />
+								<a href="https://kauth.kakao.com/oauth/authorize?client_id=d953100edaca490adae7d0fde386bac5&
+								redirect_uri=http://localhost:8090/kakaoLogin.do&&response_type=code"> 
+									<img src="/login/images/kakao_login.png" />
+								</a>
+						</div>
+					</div>
 				</form>
+				
 			</div>
 		</div>
 	</div>
-	
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <!--===============================================================================================-->
 	<script src="/login/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->

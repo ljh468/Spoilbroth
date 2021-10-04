@@ -1,6 +1,11 @@
+<%@page import="poly.util.CmmUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	String email = CmmUtil.nvl((String)request.getAttribute("email"));
+	String nickname = CmmUtil.nvl((String)request.getAttribute("nickname"));
 
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,7 +56,9 @@
 	bottom: 0px;
 }
 </style>
+
 <script type="text/javascript">
+
 	// 회원가입 정보의 유효성 체크하기
 	function doRegUserCheck(f){
 		
@@ -111,14 +118,14 @@
 					<div class="wrap-input100 validate-input m-b-20"
 						data-validate="UserName is required">
 						<span class="label-input100">Name</span> <input class="input100"
-							type="text" name="user_name" id="user_name" placeholder="Enter userName">
+							type="text" name="user_name" id="user_name" placeholder="Enter userName" value="<%=nickname %>">
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-20"
 						data-validate="Useremail is required">
 						<span class="label-input100">Email</span> <input class="input100"
-							type="email" name="user_email" id="user_email" placeholder="Enter useremail">
+							type="email" name="user_email" id="user_email" placeholder="Enter useremail" value="<%=email %>">
 						<span class="focus-input100"></span>
 					</div>
 
@@ -193,6 +200,9 @@
 </body>
 
 <script>
+	$(document).ready(function(){
+	    	alert("간편 회원가입을 진행합니다.");
+	});
 	
 	$('#passWordCheck').on('keyup', function(){
 			
@@ -220,7 +230,7 @@
 			userId : $("#user_id").val()
 		};
 		$.ajax({
-			url : "idCheck.do",
+			url : "/user/idCheck.do",
 			type : "post",
 			data : query,
 			success : function(data) {

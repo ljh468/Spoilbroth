@@ -1,5 +1,6 @@
 package poly.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,5 +22,8 @@ public interface IUserService {
 
 	List<String> getUserMbti(List<String> list) throws Exception;
 
-	
+	UserDTO getUserKakao(HashMap<String, String> pMap);
+
+	HashMap<String, Integer> getMbtiCount();
+
 }

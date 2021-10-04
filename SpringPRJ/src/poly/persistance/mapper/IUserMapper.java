@@ -1,5 +1,7 @@
 package poly.persistance.mapper;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,5 +29,11 @@ public interface IUserMapper {
 	int updateUserMbti(UserDTO pDTO) throws Exception;
 
 	List<String> getUserMbti(List<String> list) throws Exception;
+
+	UserDTO getUserKakao(HashMap<String, String> pMap);
+
+	List<String> getMbtiCount();
+
+
 	
 }

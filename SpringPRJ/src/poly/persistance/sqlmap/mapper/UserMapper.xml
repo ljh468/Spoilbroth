@@ -92,6 +92,19 @@
 		<foreach collection="list" item="value" index="index" open="(" separator="," close=")">
 			 #{value}
 		</foreach>
+	</select>
 	
+	<!-- 카카오 이메일로 유저 정보 가져오기 -->
+	<select id="getUserKakao" parameterType="hashMap" resultType="UserDTO">
+		SELECT * 
+		FROM USER_INFO
+		WHERE 
+		USER_EMAIL = #{email}
+	</select>
+	
+	<!-- 가입인원의 MBTI가져오기 -->
+	<select id="getMbtiCount" resultType="String">
+		SELECT USER_MBTI
+		FROM USER_INFO
 	</select>
 </mapper>

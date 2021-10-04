@@ -2,6 +2,9 @@ package poly.service.impl;
 
 import static poly.util.CmmUtil.nvl;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -90,6 +93,32 @@ public class UserService implements IUserService {
 	@Override
 	public List<String> getUserMbti(List<String> list) throws Exception {
 		return userMapper.getUserMbti(list);
+	}
+
+	@Override
+	public UserDTO getUserKakao(HashMap<String, String> pMap) {
+		return userMapper.getUserKakao(pMap);
+	}
+
+	@Override
+	public HashMap<String, Integer> getMbtiCount() {
+		String[] mbti = {"ENFJ", "ENFP", "ENTJ", "ENTP", "ESFJ",
+						"ESFP", "ESTJ", "ESTP", "INFJ", "INFP",
+						"INTJ", "INTP", "ISFJ", "ISFP", "ISTJ", "ISTP" };
+				
+		List<String> wList = new ArrayList<String>();
+		wList = userMapper.getMbtiCount();
+		System.out.println("wList : " + wList);
+		
+		// 빈도수 체크 하여 HashMap으로 변환
+		HashMap<String, Integer> wMap = new HashMap<String, Integer>();
+		
+		for(int i=0; i<mbti.length; i++) {
+			int aFrequency = Collections.frequency(wList, mbti[i]);
+			wMap.put(mbti[i], aFrequency);
+		}
+		System.out.println("wMap : "+ wMap);
+		return wMap;
 	}
 
 	

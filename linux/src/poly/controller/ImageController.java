@@ -286,7 +286,7 @@ public class ImageController {
 				}
 			} else {
 				log.info("basicFile start");
-				String basicFile = "/imgg/basicimg.png";
+				String basicFile = "/imgg/study.jpg";
 
 				File file1 = new File(basicFile);
 				log.info("basicFile : " + basicFile);

@@ -1,6 +1,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="poly.dto.StudyListDTO"%>
 <%@page import="java.util.List"%>
+<%@ page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
@@ -26,6 +27,13 @@
 	int count = pList.size();
 	
 	List<String> mbti_scores = (List<String>)request.getAttribute("mbti_scores");
+	
+	HashMap<String, Integer> wMap = (HashMap<String, Integer>)request.getAttribute("wMap");
+	System.out.print("wMap!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! : " + wMap);
+	String[] mbti = {"ENFJ", "ENFP", "ENTJ", "ENTP", "ESFJ",
+			"ESFP", "ESTJ", "ESTP", "INFJ", "INFP",
+			"INTJ", "INTP", "ISFJ", "ISFP", "ISTJ", "ISTP" };
+
 %>
 
 <!DOCTYPE html>
@@ -121,13 +129,22 @@
 
 						<!-- 왼쪽 스크립트 -->
 						<div class="col-xl-8 px-md-5" style="background-color: #f7fbff;">
+							
+							<!-- 현재 가입된 MBTI 워드클라우드-->
+							<script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script> 
+							<script src="https://cdn.anychart.com/releases/v8/js/anychart-tag-cloud.min.js"></script>
+							<div class="emp-profile">
+								<div class="chart-area"> 
+									<div id="container" style="width:100%; height:100%;">
+									</div> 
+								</div>
+							</div>
+							
 							<!-- My 프로필 메인화면 -->
 							<div class="emp-profile">
 
 								<!-- 사진 프로필 START -->
 								<div class="d-flex">
-
-
 									<div class="profile-card">
 										<form id="uploadForm" enctype="multipart/form-data">
 											<div class="d-flex align-items-center">
@@ -473,4 +490,19 @@
 	    });
 	})
 </script>
+<script> anychart.onDocumentReady(function () {
+		// forEach
+		// 워드클라우드에 들어가는 key, value
+		var data = [ 
+			<% for(int i=0; i<mbti.length; i++){ %>
+				{ "x": "<%=mbti[i] %>", "value": <%=wMap.get(mbti[i])+1%>*1000000 },
+			<% } %>
+					]; 
+		var chart = anychart.tagCloud(data);
+		chart.angles([0]);
+		chart.container("container");
+		chart.draw(); 
+	}); 
+</script>
+
 </html>

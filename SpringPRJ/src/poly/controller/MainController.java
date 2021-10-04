@@ -116,7 +116,15 @@ public class MainController {
 		}
 		model.addAttribute("mbti_scores", mbti_scores);
 		log.info(this.getClass().getClass().getName() + "spoilbroth/mystudy end!!");
-
+		
+		// 워드 클라우드 가져오기
+		HashMap<String, Integer> wMap = new HashMap<String, Integer>();
+		log.info("getMbtiCount start ");
+		wMap = userService.getMbtiCount();
+		log.info("getMbtiCount end ");
+		
+		model.addAttribute("wMap", wMap);
+		
 		return "spoilbroth/mystudy";
 	}
 
@@ -150,25 +158,6 @@ public class MainController {
 		return "spoilbroth/main";
 	}
 
-	@RequestMapping(value = "spoilbroth/main2")
-	public String main2(HttpServletRequest request, HttpSession session) {
-		log.info(this.getClass().getClass().getName() + "user/login start!!");
-
-		return "spoilbroth/main2";
-	}
-
-	@RequestMapping(value = "spoilbroth/main3")
-	public String main3(HttpServletRequest request, HttpSession session) {
-		log.info(this.getClass().getClass().getName() + "user/login start!!");
-
-		return "spoilbroth/main3";
-	}
-
-	@RequestMapping(value = "spoilbroth/main4")
-	public String main4(HttpServletRequest request, HttpSession session) {
-		log.info(this.getClass().getClass().getName() + "user/login start!!");
-
-		return "spoilbroth/main4";
-	}
+	
 
 }
