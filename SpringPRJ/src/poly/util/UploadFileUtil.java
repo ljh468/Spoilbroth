@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 
 import javax.imageio.ImageIO;
@@ -50,16 +51,17 @@ public class UploadFileUtil {
 			targetFile.setWritable(true, true);
 
 			// 이미지 리사이징
-			File file = new File(mf.getOriginalFilename());
-			mf.transferTo(file); // MultipartFile을 File 로 변환
-
-			InputStream inputStream = new FileInputStream(file);
-			Image img = new ImageIcon(file.toString()).getImage(); // 파일정보 추출
-			System.out.println("사진의 가로길이 : " + img.getWidth(null));
-			System.out.println("사진의 세로길이 : " + img.getHeight(null));
+//			File file = new File(mf.getOriginalFilename());
+//			mf.transferTo(file); // MultipartFile을 File 로 변환
+			
+			InputStream inputStream = mf.getInputStream();
+			
+//			Image img = new ImageIcon(mf.).getImage(); // 파일정보 추출
+//			System.out.println("사진의 가로길이 : " + img.getWidth(null));
+//			System.out.println("사진의 세로길이 : " + img.getHeight(null));
 
 			int width = 700; // 리사이즈할 가로길이
-			int height = 500; // 리사이즈한 세로길이
+			int height = 550; // 리사이즈한 세로길이
 
 			BufferedImage resizedImage = ImageResizeUtil.resize(inputStream, width, height);
 			ImageIO.write(resizedImage, ext, new File(fullFileInfo));

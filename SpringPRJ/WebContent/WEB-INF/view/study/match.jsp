@@ -168,12 +168,12 @@
 									<%
 										int i = 0;
 										for (StudyListDTO sDTO : pList) {
-											if(Integer.parseInt(mbti_scores.get(i)) >= 4){
+											if(Integer.parseInt(mbti_scores.get(i)) >= 4 && !user_study.contains(sDTO.getStudy_name())){
 									%>
 									<!-- 모든 스터디 리스트로 뿌려줌 -->
 									<div class="item"
 										style="font-size: 33px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; coler: white;">
-										<a href="/study/studyboard.do?study_name=<%=sDTO.getStudy_name()%>">
+										<a href="/study/studyinfo.do?study_name=<%=sDTO.getStudy_name()%>">
 										<img src="/getStudyImage.do?study_name=<%=sDTO.getStudy_name()%>" class="rounded" width="100%">
 										</a>
 										<div class="txt-box"></div>
