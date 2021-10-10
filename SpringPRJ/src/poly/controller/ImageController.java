@@ -2,6 +2,8 @@ package poly.controller;
 
 import static poly.util.CmmUtil.nvl;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,9 +12,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.ImageIcon;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -27,6 +31,8 @@ import poly.dto.OcrDTO;
 import poly.service.IImgService;
 import poly.util.DateUtil;
 import poly.util.FileUtil;
+import poly.util.ImageResizeUtil;
+import poly.util.UploadFileUtil;
 
 @Controller
 public class ImageController {
@@ -44,132 +50,54 @@ public class ImageController {
 	// 프로필 이미지파일 업로드 (ajax로 구현)
 	@RequestMapping(value = "FileUplod")
 	@ResponseBody
-	public Map<String, String> UserFileUpload(HttpServletRequest request, HttpServletResponse response, ModelMap model,
+	public void UserFileUpload(HttpServletRequest request, HttpServletResponse response, ModelMap model,
 			@RequestParam(value = "fileUplod") MultipartFile mf, HttpSession session) throws Exception {
+		log.info("UserFileUpload start");
 
-		log.info("FileUplod start");
 		int res = 0;
-
-		Map<String, String> rMap = new HashMap<String, String>();
 		// 이미지 파일 저장하는 사용자 ID
 		String user_id = (String) session.getAttribute("user_id");
 
-		// 임의로 정의된 파일명을 원래대로 만들어주기 위한 목적
-		String originalFileName = mf.getOriginalFilename();
+		// 파일 업로드
+		log.info("uploadfile end");
+		OcrDTO pDTO = UploadFileUtil.uploadfile(mf, USERFILE_UPLOAD_SAVE_PATH, user_id);
+		log.info("uploadfile end");
+		
+		// 파일 저장할 경로를 DB에 저장
+		log.info("imgService start!!");
+		res = imgService.InsertImage(pDTO);
+		log.info("imgService end!!");
 
-		// 파일 확장자 가져오기
-		String ext = originalFileName.substring(originalFileName.lastIndexOf(".") + 1, originalFileName.length())
-				.toLowerCase();
-
-		// 이미지 파일만 실행되도록 함
-		if (ext.equals("jpeg") || ext.equals("jpg") || ext.equals("gif") || ext.equals("png")) {
-
-			// 웹서버에 저장되는 파일이름 (영어, 숫자로 파일명 변경)
-			String saveFileName = DateUtil.getDateTime("24hhmmss") + "." + ext;
-
-			// 웹서버에 업로드한 파일 저장하는 물리적 경로
-			String saveFilePath = FileUtil.mkdirForDate(USERFILE_UPLOAD_SAVE_PATH);
-			String fullFileInfo = saveFilePath + "/" + saveFileName;
-
-			rMap.put("path", fullFileInfo);
-
-			// 정상적으로 값이 생성되었는지 로그에 찍어서 확인
-			log.info("ext : " + ext);
-			log.info("originalFileName : " + originalFileName);
-			log.info("saveFileName : " + saveFileName);
-			log.info("saveFilePath : " + saveFilePath);
-			log.info("fullFileInfo : " + fullFileInfo);
-
-			// 업로드 되는 파일을 서버에 저장
-			File targetFile = new File(fullFileInfo);
-			targetFile.setReadable(true, false);
-			targetFile.setWritable(false, false);
-			targetFile.setWritable(true, true);
-
-			mf.transferTo(targetFile);
-
-			OcrDTO pDTO = new OcrDTO();
-
-			pDTO.setSave_file_name(saveFileName);
-			pDTO.setSave_file_path(saveFilePath);
-			pDTO.setOrg_file_name(originalFileName);
-			pDTO.setExt(ext);
-			pDTO.setChg_id(user_id);
-			pDTO.setChg_dt(DateUtil.getDateTime("yyyy-MM-dd-hh:mm:ss"));
-
-			log.info("imgService start!!");
-			res = imgService.InsertImage(pDTO);
-			log.info("imgService end!!");
-
-		}
-		return rMap;
+		log.info("UserFileUpload end");
+		// 유저 이미지 파일 업로드 끝
 	}
 
 	// 스터디 이미지파일 업로드 (ajax로 구현)
 	@RequestMapping(value = "FileUplod2")
 	@ResponseBody
-	public Map<String, String> StudyFileUpload(HttpServletRequest request, HttpServletResponse response, ModelMap model,
+	public void StudyFileUpload(HttpServletRequest request, HttpServletResponse response, ModelMap model,
 			@RequestParam(value = "fileUplod2") MultipartFile mf, HttpSession session) throws Exception {
 
-		// ###################################################################
 		// 스터디 이미지 파일 업로드 시작
 		log.info("fileUplod2 start");
 		int studyImg = 0;
 
-		Map<String, String> rMap = new HashMap<String, String>();
 		// 이미지 파일 저장하는 스터디이름
 		String study_name = nvl(request.getParameter("study_name"));
 
-		// 임의로 정의된 파일명을 원래대로 만들어주기 위한 목적
-		String originalFileName = mf.getOriginalFilename();
+		// 파일 업로드
+		log.info("uploadfile end");
+		OcrDTO pDTO = UploadFileUtil.uploadfile(mf, STUDYFILE_UPLOAD_SAVE_PATH, study_name);
+		log.info("uploadfile end");
 
-		// 파일 확장자 가져오기
-		String ext = originalFileName.substring(originalFileName.lastIndexOf(".") + 1, originalFileName.length())
-				.toLowerCase();
+		// 파일 저장할 경로를 DB에 저장
+		log.info("imgService start!!");
+		studyImg = imgService.StudyInsertImage(pDTO);
+		log.info("imgService end!!");
 
-		// 이미지 파일만 실행되도록 함
-		if (ext.equals("jpeg") || ext.equals("jpg") || ext.equals("gif") || ext.equals("png")) {
-
-			// 웹서버에 저장되는 파일이름 (영어, 숫자로 파일명 변경)
-			String saveFileName = DateUtil.getDateTime("24hhmmss") + "." + ext;
-
-			// 웹서버에 업로드한 파일 저장하는 물리적 경로
-			String saveFilePath = FileUtil.mkdirForDate(STUDYFILE_UPLOAD_SAVE_PATH);
-			String fullFileInfo = saveFilePath + "/" + saveFileName;
-
-			rMap.put("path", fullFileInfo);
-
-			// 정상적으로 값이 생성되었는지 로그에 찍어서 확인
-			log.info("ext : " + ext);
-			log.info("originalFileName : " + originalFileName);
-			log.info("saveFileName : " + saveFileName);
-			log.info("saveFilePath : " + saveFilePath);
-			log.info("fullFileInfo : " + fullFileInfo);
-
-			// 업로드 되는 파일을 서버에 저장
-			File targetFile = new File(fullFileInfo);
-			targetFile.setReadable(true, false);
-			targetFile.setWritable(false, false);
-			targetFile.setWritable(true, true);
-
-			mf.transferTo(targetFile);
-			OcrDTO pDTO = new OcrDTO();
-
-			pDTO.setSave_file_name(saveFileName);
-			pDTO.setSave_file_path(saveFilePath);
-			pDTO.setOrg_file_name(originalFileName);
-			pDTO.setExt(ext);
-			pDTO.setChg_id(study_name);
-			pDTO.setChg_dt(DateUtil.getDateTime("yyyy-MM-dd-hh:mm:ss"));
-
-			log.info("imgService start!!");
-			studyImg = imgService.StudyInsertImage(pDTO);
-			log.info("imgService end!!");
-		}
 		log.info("StudyFileUplod end!!");
-		// ###################################################################
 		// 스터디 이미지 파일 업로드 끝
-		return rMap;
+
 	}
 
 	@RequestMapping(value = "/getImage", method = RequestMethod.GET)
@@ -183,11 +111,11 @@ public class ImageController {
 		log.info("getImgList start! ");
 		Map<String, String> pMap = imgService.getImgList(user_id);
 		log.info("getImgList end! ");
-		
 
 		if (pMap == null) {
 			pMap = new HashMap<String, String>();
 		}
+
 		String realFile = nvl(pMap.get("SAVE_FILE_PATH") + "/"); // 파일이 저장된 경로 : /usr/local/images/userimg/0000/00/00/
 		String fileNm = nvl(pMap.get("SAVE_FILE_NAME")); // 파일명 : 000000.jpg 000000.png
 		String ext = nvl(pMap.get("EXT")); // 파일 확장자

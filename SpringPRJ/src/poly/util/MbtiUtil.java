@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MbtiUtil {
-
 	public static List<String> getAnalysis(String my_mbti, List<List<String>> mLists) throws Exception {
 
 		// 리스트형태로 점수를 내보내기위함

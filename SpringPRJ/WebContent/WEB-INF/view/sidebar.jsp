@@ -50,7 +50,8 @@
 					<li class="nana"><a href="/mbti/mbtimain.do">MBTI Analysis</a></li>
 					<li class="nana2"><a href="/study/match.do">Study Matching</a></li>
 					<li class="nana3"><a href="/study/contest.do">Study Imformation</a></li>
-					<li class="nana4"><a href="/mypage/setting.do">Setting</a></li>
+					<li class="nana4"><a href="/study/studyplace.do">Study Place</a></li>
+					<li class="nana5"><a href="/mypage/setting.do">Setting</a></li>
 				</ul>
 			</nav>
 
@@ -96,9 +97,15 @@ $(function(){
         }else if(activePage == "mbtianalysis.do"){
         	$(".nav2").find(".colorlib-active").removeClass("colorlib-active");
         	$('.nana').addClass('colorlib-active');
-        }else if(activePage == "match2.do"){
+        }else if(activePage == "match.do"){
         	$(".nav2").find(".colorlib-active").removeClass("colorlib-active");
         	$('.nana2').addClass('colorlib-active');
+        }else if(activePage == "contest.do"){
+        	$(".nav2").find(".colorlib-active").removeClass("colorlib-active");
+        	$('.nana3').addClass('colorlib-active');
+        }else if(activePage == "studyplace.do"){
+        	$(".nav2").find(".colorlib-active").removeClass("colorlib-active");
+        	$('.nana4').addClass('colorlib-active');
         }
     });
 })
