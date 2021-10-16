@@ -47,7 +47,8 @@
 		<hr style=" width: 90%; height: 1.5px; border: none; background-color: #666666;"/>
 				<ul class="nav2">
 					<li class="colorlib-active"><a href="/spoilbroth/mystudy.do">Home</a></li>
-					<li class="nana"><a href="/mbti/mbtimain.do">MBTI Analysis</a></li>
+					<li class="nana0"><a href="/face/faceregister.do">Face Register</a></li>
+					<li class="nana1"><a href="/mbti/mbtimain.do">MBTI Analysis</a></li>
 					<li class="nana2"><a href="/study/match.do">Study Matching</a></li>
 					<li class="nana3"><a href="/study/contest.do">Study Imformation</a></li>
 					<li class="nana4"><a href="/study/studyplace.do">Study Place</a></li>
@@ -94,9 +95,12 @@ $(function(){
             $(this).parent().addClass('colorlib-active');
             $(this).addClass('colorlib-active');
             
+        }else if(activePage == "faceregister.do"){
+        	$(".nav2").find(".colorlib-active").removeClass("colorlib-active");
+        	$('.nana0').addClass('colorlib-active');
         }else if(activePage == "mbtianalysis.do"){
         	$(".nav2").find(".colorlib-active").removeClass("colorlib-active");
-        	$('.nana').addClass('colorlib-active');
+        	$('.nana1').addClass('colorlib-active');
         }else if(activePage == "match.do"){
         	$(".nav2").find(".colorlib-active").removeClass("colorlib-active");
         	$('.nana2').addClass('colorlib-active');
