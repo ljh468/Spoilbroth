@@ -61,7 +61,7 @@ public class UploadFileUtil {
 //			System.out.println("사진의 세로길이 : " + img.getHeight(null));
 
 			int width = 700; // 리사이즈할 가로길이
-			int height = 550; // 리사이즈한 세로길이
+			int height = 600; // 리사이즈한 세로길이
 
 			BufferedImage resizedImage = ImageResizeUtil.resize(inputStream, width, height);
 			ImageIO.write(resizedImage, ext, new File(fullFileInfo));
