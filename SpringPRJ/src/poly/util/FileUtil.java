@@ -2,8 +2,6 @@ package poly.util;
 
 import java.io.File;
 
-import javax.mail.Folder;
-
 public class FileUtil {
 
 	/**
@@ -15,6 +13,20 @@ public class FileUtil {
 	public static String mkdirForDate(String uploadDir) {
 
 		String path = uploadDir + DateUtil.getDateTime("/yyyy/MM/dd"); // 폴더 경로
+	
+		File Folder = new File(path);
+		
+		if (!Folder.exists()) {
+			Folder.mkdirs(); // 폴더 생성합니다.
+
+		}
+		
+		return path;
+	}
+	
+	public static String mkdirface(String uploadDir, String user_id) {
+
+		String path = uploadDir + "\\" + user_id; // 폴더 경로
 	
 		File Folder = new File(path);
 		
