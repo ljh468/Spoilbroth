@@ -42,28 +42,28 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.theme.default.min.css">
 <link rel="stylesheet" href="/css/owlowl.css">
 <!-- owl -->
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 	function doRegFileCheck(f){
 		
 		if(f.fileUplod2.value==""){
-			alert("스터디 이미지를 등록해주세요.");
+			swal ('스터디 이미지를 등록해주세요.');
 			f.fileUplod2.focus();
 			return false;
 		}
 		
 		if(f.study_name.value==""){
-			alert("스터디 이름을 등록해주세요.");
+			swal ('스터디 이름을 등록해주세요.');
 			f.study_name.focus();
 			return false;
 		}
 		if(f.study_title.value==""){
-			alert("스터디 제목을 등록해주세요.");
+			swal ('스터디 제목을 등록해주세요.');
 			f.study_title.focus();
 			return false;
 		}
 		if(f.study_contents.value==""){
-			alert("스터디 메시지를 등록해주세요.");
+			swal ('스터디 메시지를 등록해주세요.');
 			f.study_contents.focus();
 			return false;
 		}
@@ -200,6 +200,7 @@
 	<script src="/andrea-master/js/scrollax.min.js"></script>
 	<script src="/andrea-master/js/main.js"></script>
 </body>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 		$(function () {
 			$('#btn-upload').click(function (e) {

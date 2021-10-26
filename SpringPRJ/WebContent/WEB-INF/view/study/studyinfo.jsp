@@ -76,7 +76,7 @@
 <link rel="stylesheet" href="/css/owlowl.css">
 <!-- owl -->
 
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body data-aos-easing="slide" data-aos-duration="800" data-aos-delay="0">
 

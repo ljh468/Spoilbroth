@@ -144,7 +144,7 @@ public class ImageController {
 			} else {
 				log.info("basicFile start");
 
-				String basicFile = "/imgg/basicimg.png";
+				String basicFile = "C:\\img\\basicimg2.jpg";
 
 				File file1 = new File(basicFile);
 				log.info("basicFile : " + basicFile);
@@ -218,7 +218,7 @@ public class ImageController {
 				response.setContentType("image/" + ext);
 				response.setHeader("Content-Disposition", "inline;filename=" + fileNm);
 				log.info("basicFile start");
-				String basicFile = "C:\\imgg\\basicimg.png";
+				String basicFile = "C:\\img\\study.jpg";
 
 				File file1 = new File(basicFile);
 				log.info("basicFile : " + basicFile);

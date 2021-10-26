@@ -81,7 +81,7 @@
 					</div>
 					<!-- 페이스 로그인 -->
 					<div class="container-login100-form-btn" style="padding-top: 10px;">
-						<button onclick="location.href='/user/signup.do'" class="login100-form-btn" style="margin: auto; background-color: blueviolet;">
+						<button onclick="location.href='/face/facelogin.do'" class="login100-form-btn" style="margin: auto; background-color: blueviolet;">
 							Face Login
 						</button>
 					</div>

@@ -121,5 +121,10 @@ public class UserService implements IUserService {
 		return wMap;
 	}
 
+	@Override
+	public UserDTO getFaceInfo(HashMap<String, String> pMap) {
+		return userMapper.getFaceInfo(pMap);
+	}
+
 	
 }

@@ -135,10 +135,10 @@
 										<input type="hidden" id="type" value="EI">
 										
 										<button type="button" id="A" class="btn btn-dark mt-3" style="font-family: 'Gamja Flower', cursive;
-										font-family: 'Nanum Gothic Coding', monospace; border-radius: 10px; font-size: 28px;background-color: saddlebrown;border-color: saddlebrown;">
+										font-family: 'Nanum Gothic Coding', monospace; border-radius: 10px; font-size: 28px;background-color: #F6EABE;border-color: #F6EABE; color: #c67800;">
 											YES</button>
 										<button type="button" id="B" class="btn btn-dark mt-2 mb-3" style="font-family: 'Gamja Flower', cursive;
-										font-family: 'Nanum Gothic Coding', monospace; border-radius: 10px; font-size: 28px;background-color: darkgreen;border-color: darkgreen;" >
+										font-family: 'Nanum Gothic Coding', monospace; border-radius: 10px; font-size: 28px;background-color: #C8E3D4;border-color: #C8E3D4;color: #506464;" >
 											NO</button>
 									
 									</article>
@@ -211,6 +211,7 @@
 
 
 <!-- 문제 가져오는 로직 -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 	var mbti = "";
 	var num = 1;
@@ -271,7 +272,7 @@
 			($("#SN").val() < 2 ) ? mbti += "N" : mbti += "S";
 			($("#TF").val() < 2 ) ? mbti += "F" : mbti += "T";
 			($("#JP").val() < 2 ) ? mbti += "P" : mbti += "J";
-			alert(mbti);
+			swal (mbti);
 			
 			$("#img").attr("src", result[mbti]["img"]);
 			$("#animal").html(result[mbti]["animal"]);

@@ -189,7 +189,7 @@ div.dataTables_length {
 		src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 
 </body>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ca9ca185a462a7a555b9983adefd2093&libraries=services"></script>
 <script>
@@ -223,7 +223,7 @@ div.dataTables_length {
 	    var keyword = document.getElementById('keyword').value;
 
 	    if (!keyword.replace(/^\s+|\s+$/g, '')) {
-	        alert('키워드를 입력해주세요!');
+	        swal ('키워드를 입력해주세요.!');
 	        return false;
 	    }
 
@@ -244,12 +244,12 @@ div.dataTables_length {
 
 	    } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
 
-	        alert('검색 결과가 존재하지 않습니다.');
+	        swal ('검색 결과가 존재하지 않습니다.');
 	        return;
 
 	    } else if (status === kakao.maps.services.Status.ERROR) {
 
-	        alert('검색 결과 중 오류가 발생했습니다.');
+	        swal ('검색 결과 중 오류가 발생했습니다.');
 	        return;
 
 	    }

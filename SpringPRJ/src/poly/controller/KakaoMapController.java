@@ -61,7 +61,13 @@ public class KakaoMapController {
 	
 	// 스터디 카페 장소 찾기
 	@RequestMapping(value = "study/studyplace")
-	public String studyplace(HttpServletRequest request, ModelMap model)throws Exception{
+	public String studyplace(HttpServletRequest request, HttpSession session, ModelMap model)throws Exception{
+		
+		String user_id = (String) session.getAttribute("user_id");
+		log.info("user_id : " + user_id);
+		if (user_id == null) {
+			return "/user/login";
+		}
 		return "study/studyplace";
 	}
 }

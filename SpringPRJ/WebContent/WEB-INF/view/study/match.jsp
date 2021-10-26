@@ -168,7 +168,7 @@
 									<%
 										int i = 0;
 										for (StudyListDTO sDTO : pList) {
-											if(Integer.parseInt(mbti_scores.get(i)) >= 4 && !user_study.contains(sDTO.getStudy_name())){
+											if(Integer.parseInt(mbti_scores.get(i)) >= 3 && !user_study.contains(sDTO.getStudy_name())){
 									%>
 									<!-- 모든 스터디 리스트로 뿌려줌 -->
 									<div class="item"

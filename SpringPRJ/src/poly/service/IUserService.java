@@ -26,4 +26,6 @@ public interface IUserService {
 
 	HashMap<String, Integer> getMbtiCount();
 
+	UserDTO getFaceInfo(HashMap<String, String> pMap);
+
 }

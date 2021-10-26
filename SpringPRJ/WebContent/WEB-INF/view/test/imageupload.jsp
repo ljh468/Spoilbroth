@@ -73,7 +73,7 @@
 		    readImage(e.target)
 		})
 </script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 	$('#btnUpload').on('click', function(event) {
 	    event.preventDefault();
@@ -94,11 +94,11 @@
 	        timeout: 600000,
 	        success: function (data) {
 	        	$('#btnUpload').prop('disabled', false);
-	        	alert('등록이 성공하였습니다.')
+	        	swal('등록이 성공하였습니다.')
 	        },
 	        error: function (e) {
 	            $('#btnUpload').prop('disabled', false);
-	            alert('등록이 실패하였습니다.');
+	            swal('등록이 실패하였습니다.');
 	        }
 	    });
 	})

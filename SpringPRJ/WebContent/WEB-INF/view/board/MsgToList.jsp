@@ -10,10 +10,12 @@ String msg = CmmUtil.nvl((String)request.getAttribute("msg"));
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>처리페이지</title>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
-	alert("<%=msg%>");
-	top.location.href="/notice/NoticeList.do";
-		
+	swal("<%=msg%>")
+	.then((value) => {
+		top.location.href="/notice/NoticeList.do";
+	});
 </script>
 </head>
 <body>

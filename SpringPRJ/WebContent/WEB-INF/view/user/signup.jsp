@@ -107,6 +107,7 @@
 
 				<form class="login100-form validate-form" method="post" action="/user/inserUserInfo.do" onsubmit="return doRegUserCheck(this)" 
 					style="padding-top: 30px; padding-bottom: 30px;">
+					
 					<div class="wrap-input100 validate-input m-b-20"
 						data-validate="UserId is required">
 						<span class="label-input100">ID</span> <input class="input100"
@@ -198,10 +199,11 @@
 	<script src="/login/js/main.js"></script>
 	
 </body>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 	$(document).ready(function(){
-	    	alert("간편 회원가입을 진행합니다.");
+			swal ( "간편 회원가입을 진행합니다." )   ;
+	    	// alert("간편 회원가입을 진행합니다.");
 	});
 	
 	$('#passWordCheck').on('keyup', function(){
@@ -255,4 +257,6 @@
 	}
 	
 	</script>
+	
+	
 </html>

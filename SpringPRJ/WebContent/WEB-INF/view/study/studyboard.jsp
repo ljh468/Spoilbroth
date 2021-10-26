@@ -396,7 +396,7 @@ function newReg(seq){
 		    readImage(e.target)
 		})
 </script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 	$('#btnUpload').on('click', function(event) {
 	    event.preventDefault();
@@ -416,11 +416,11 @@ function newReg(seq){
 	        timeout: 600000,
 	        success: function (data) {
 	        	$('#btnUpload').prop('disabled', false);
-	        	alert('등록이 성공하였습니다.')
+	        	swal ('등록이 완료 되었습니다.!');
 	        },
 	        error: function (e) {
 	            $('#btnUpload').prop('disabled', false);
-	            alert('등록이 실패하였습니다.');
+	            swal ('등록이 실패하였습니다.!');
 	        }
 	    });
 	})
@@ -474,11 +474,19 @@ function text_modify() {
 	.then(function(data){
 		console.log(data);
 		if(data == 1){
-		alert("수정을 완료되었습니다.");
+		
+		swal("수정이 완료 되었습니다.!")
+		.then((value) => {
+			location.reload();
+		});
+		
 		}else{
-		alert("수정을 실패했습니다.");	
+		swal("수정이 실패 되었습니다.!")
+		.then((value) => {
+			location.reload();
+		});
 		}
-		location.reload();
+		
 	})
 }
 </script>

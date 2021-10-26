@@ -172,6 +172,7 @@ System.out.println("user_id : "+ CmmUtil.nvl(rDTO.getUser_id()));
 
 
 </body>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 //수정하기
 function doEdit(){
@@ -179,10 +180,10 @@ function doEdit(){
 		location.href="/board/BoardEditInfo.do?notice_seq=<%=CmmUtil.nvl(rDTO.getNotice_seq())%>&&study_seq=<%=CmmUtil.nvl(rDTO.getStudy_seq()) %>";
 		
 	}else if ("<%=edit%>"==3){
-		alert("로그인 하시길 바랍니다.");
+		swal("로그인 하시길 바랍니다.");
 		
 	}else {
-		alert("본인이 작성한 글만 수정 가능합니다.");
+		swal("본인이 작성한 글만 수정 가능합니다.");
 		
 	}
 }
@@ -194,10 +195,10 @@ function doDelete(){
 		}
 		
 	}else if ("<%=edit%>"==3){
-		alert("로그인 하시길 바랍니다.");
+		swal("로그인 하시길 바랍니다.");
 		
 	}else {
-		alert("본인이 작성한 글만 삭제 가능합니다.");
+		swal("본인이 작성한 글만 삭제 가능합니다.");
 		
 	}
 }

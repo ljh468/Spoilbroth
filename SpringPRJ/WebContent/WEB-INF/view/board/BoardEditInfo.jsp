@@ -181,26 +181,28 @@
 
 
 </body>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 //작성자 여부체크
 function doOnload(){
 	
 	if ("<%=access%>"=="1"){
-		alert("작성자만 수정할 수 있습니다.");
-		location.href="/board/BoardInfo.do?notice_seq<%=rDTO.getNotice_seq()%>&&study_seq=<%=rDTO.getStudy_seq()%> ";
+		swal("작성자만 수정할 수 있습니다.")
+		.then((value) => {
+			location.href="/board/BoardInfo.do?notice_seq<%=rDTO.getNotice_seq()%>&&study_seq=<%=rDTO.getStudy_seq()%> ";
+		});
 		}
 	}
 	//전송시 유효성 체크
 	function doSubmit(f) {
 		if (f.title.value == "") {
-			alert("제목을 입력하시기 바랍니다.");
+			swal("제목을 입력하시기 바랍니다.");
 			f.title.focus();
 			return false;
 		}
 
 		if (calBytes(f.title.value) > 200) {
-			alert("최대 200Bytes까지 입력 가능합니다.");
+			swal("최대 200Bytes까지 입력 가능합니다.");
 			f.title.focus();
 			return false;
 		}
@@ -213,19 +215,19 @@ function doOnload(){
 		}
 
 		if (noticeCheck == false) {
-			alert("공지글 여부를 선택하시기 바랍니다.");
+			swal("공지글 여부를 선택하시기 바랍니다.");
 			f.noticeYn[0].focus();
 			return false;
 		}
 
 		if (f.contents.value == "") {
-			alert("내용을 입력하시기 바랍니다.");
+			swal("내용을 입력하시기 바랍니다.");
 			f.contents.focus();
 			return false;
 		}
 
 		if (calBytes(f.contents.value) > 4000) {
-			alert("최대 4000Bytes까지 입력 가능합니다.");
+			swal("최대 4000Bytes까지 입력 가능합니다.");
 			f.contents.focus();
 			return false;
 		}

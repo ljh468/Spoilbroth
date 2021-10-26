@@ -60,6 +60,7 @@ public class UserInfoController {
 			log.info("rDTO == null?"+(rDTO==null));
 			msg = "아이디 비밀번호를 확인해주세요";
 			url = "/user/login.do";
+			
 		}else {
 			log.info("데이터 조회완료");
 			

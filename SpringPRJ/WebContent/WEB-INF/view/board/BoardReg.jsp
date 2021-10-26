@@ -177,14 +177,18 @@
 
 
 </body>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript">
 	//로그인 여부 체크
 	function doOnload(){
 		var user_id = "<%=user_id%>";
 		
 		if (user_id==""){
-			alert("로그인된 사용자만 글을 쓸 수 있습니다.");
-			top.location.href="/study/studyboard.do?study_name="<%=study_name %>;
+			swal("로그인된 사용자만 글을 쓸 수 있습니다.")
+			.then((value) => {
+				top.location.href="/study/studyboard.do?study_name="<%=study_name %>;
+			});
+			
 			
 		}
 		
@@ -192,13 +196,13 @@
 	//전송시 유효성 체크
 	function doSubmit(f){
 		if(f.title.value == ""){
-			alert("제목을 입력하시기 바랍니다.");
+			swal("제목을 입력하시기 바랍니다.");
 			f.title.focus();
 			return false;
 		}
 		
 		if(calBytes(f.title.value) > 200){
-			alert("최대 200Bytes까지 입력 가능합니다.");
+			swal("최대 200Bytes까지 입력 가능합니다.");
 			f.title.focus();
 			return false;
 		}	
@@ -211,19 +215,19 @@
 		}
 		
 		if(noticeCheck==false){
-			alert("공지글 여부를 선택하시기 바랍니다.");
+			swal("공지글 여부를 선택하시기 바랍니다.");
 			f.noticeYn[0].focus();
 			return false;
 		}	
 		
 		if(f.contents.value == ""){
-			alert("내용을 입력하시기 바랍니다.");
+			swal("내용을 입력하시기 바랍니다.");
 			f.contents.focus();
 			return false;
 		}	
 		
 		if(calBytes(f.contents.value) > 4000){
-			alert("최대 4000Bytes까지 입력 가능합니다.");
+			swal("최대 4000Bytes까지 입력 가능합니다.");
 			f.contents.focus();
 			return false;
 		}		

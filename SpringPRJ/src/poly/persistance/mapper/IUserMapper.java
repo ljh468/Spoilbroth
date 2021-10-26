@@ -34,6 +34,8 @@ public interface IUserMapper {
 
 	List<String> getMbtiCount();
 
+	UserDTO getFaceInfo(HashMap<String, String> pMap);
+
 
 	
 }

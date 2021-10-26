@@ -8,13 +8,13 @@
 		
 		out.println( " <script type='text/javascript'> " );
 		if( flag == 0 ) {	//로그인성공
-			out.println( " alert('로그인에 성공했습니다.'); " );
+			out.println( " swal('로그인에 성공했습니다.'); " );
 			out.println( " location.href='./home.do'" );
 		} else if( flag == 1 ) {	//비번틀림
-			out.println( " alert('비밀번호가 틀립니다.'); " );
+			out.println( " swal ('비밀번호가 틀립니다.'); " );
 			out.println( " location.href='./loginForm.do' " );
 		} else if( flag == 2 ) {	//회원정보없음
-			out.println( " alert('회원정보가 없습니다. 회원가입해주세요.'); " );
+			out.println( " swal ('회원정보가 없습니다. 회원가입해주세요.'); " );
 			out.println( " location.href='./loginForm.do' " );
 		} else {					//기타 에러났을 때 또는 맨처음 시작
 			out.println( " location.href='./loginForm.do' " );
@@ -35,7 +35,7 @@
 
 
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 	
 	window.onload = function() {
