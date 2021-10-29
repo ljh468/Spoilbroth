@@ -43,7 +43,7 @@ while True:
 
             model.train(training_data, np.array(labels))
 
-            model.save("../model/face-trainner.yml")
+            model.save("../model/poly123-trainner.yml")
 
             # 얼굴 검출 사각형 그리기
             cv2.rectangle(my_image, faces[0], (255, 0, 0), 4)

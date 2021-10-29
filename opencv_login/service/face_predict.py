@@ -1,24 +1,27 @@
+import base64
+from io import BytesIO
+
 import cv2
+import numpy as np
+from PIL import Image
 
-# 학습된 얼굴 정면검출기 사용하기
-face_cascade = cv2.CascadeClassifier("../data/haarcascade_frontalface_alt2.xml")
 
-# 카메라로부터 이미지 가져오기
-vcp = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+def face_predict(user_id, contents):
+    face_result = "fail"
 
-# LBPH 알고리즘 선언
-model = cv2.face.LBPHFaceRecognizer_create()
+    for i in range(1, len(contents)):
 
-# 학습 모델 가져오기
-model.read("../model/test-trainner.yml")
+        img = np.array(Image.open(BytesIO(base64.b64decode(contents[i]))))
+        # cv2.imread("predict_my_face", img)
 
-# 카메라로부터 이미지 가져오기
-while True:
-    ret, my_image = vcp.read()
-
-    if ret is True:
+        # 학습된 얼굴 정면검출기 사용하기
+        face_cascade = cv2.CascadeClassifier("../data/haarcascade_frontalface_alt2.xml")
+        # LBPH 알고리즘 선언
+        model = cv2.face.LBPHFaceRecognizer_create()
+        # 학습 모델 가져오기
+        model.read("../model/" + user_id + "-trainner.yml")
         # 동영상의 프레임을 얼굴인식율을 높이기 위해 흑백으로 변경함
-        gray = cv2.cvtColor(my_image, cv2.COLOR_BGR2GRAY)
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
         # 변환한 흑백사진으로부터 히스토그램 평활화
         gray = cv2.equalizeHist(gray)
@@ -29,7 +32,6 @@ while True:
         facesCnt = len(faces)
 
         if facesCnt == 1:
-
             x, y, w, h = faces[0]
 
             face_image = gray[y:y + h, x:x + w]
@@ -39,16 +41,16 @@ while True:
             # 예측 결과 문자열
             result = "result : " + str(res) + "%"
             # 예측결과 문자열 사진에 추가하기
-            cv2.putText(my_image, result, (x, y - 15), 0, 1, (255, 0, 0), 2)
+            cv2.putText(img, result, (x, y - 15), 0, 1, (255, 0, 0), 2)
             # 얼굴 검출 사각형 그리기
-            cv2.rectangle(my_image, faces[0], (255, 0, 0), 4)
+            cv2.rectangle(img, faces[0], (255, 0, 0), 4)
 
+            if res >= 50:
+                face_result = "success"
+            else:
+                face_result = "fail"
         # 사이즈 변경된 이미지로 출력
-        cv2.imshow("predict_my_face", my_image)
-
-    if cv2.waitKey(1) > 0:
-        break
-
-vcp.release()
-
-cv2.destroyAllWindows()
+        cv2.imshow("predict_my_face", img)
+        # 사이즈 변경된 이미지로 출력
+        # cv2.imshow("predict_my_face", img)
+    return face_result
