@@ -42,7 +42,8 @@ public class CrawlingController {
 		int save = 0;
 		UrlUtil uu = new UrlUtil();
 
-		String url = "http://127.0.0.1:5000";
+//		String url = "http://127.0.0.1:5000";
+		String url = "http://13.125.99.115:5000";
 		String api = "/crawlingAPI";
 
 		// 호출 URL

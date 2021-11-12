@@ -271,7 +271,7 @@
 		
 		facebtn.onclick = function() {
 			
-			for (var i = 0; i < 100; i++) {
+			for (var i = 0; i < 50; i++) {
 				$(".progress-bar").attr('style','width : calc(100/12*'+i+'%)'); 
 				progressbar.innerHTML = i+1+"%";
 				// canvas에 이미지그리기

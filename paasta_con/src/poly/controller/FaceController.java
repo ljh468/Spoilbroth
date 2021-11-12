@@ -1,7 +1,5 @@
 package poly.controller;
 
-import static poly.util.CmmUtil.nvl;
-
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,7 +10,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,8 +52,8 @@ public class FaceController {
 	
 	private Logger log = Logger.getLogger(this.getClass());
 	
-	final private String FACE_UPLOAD_SAVE_PATH = "C:\\faceimg"; // C:\\faceimg 폴더에 저장, 윈도우용 경로
-	final private String FACE_MODEL_PATH = "C:\\opencv_login\\model"; // C:\\faceimg 폴더에 저장, 윈도우용 경로
+	final private String FACE_UPLOAD_SAVE_PATH = "/faceimg"; // C:\\faceimg 폴더에 저장, 윈도우용 경로
+	final private String FACE_MODEL_PATH = "/opencv_login/model"; // C:\\faceimg 폴더에 저장, 윈도우용 경로
 
 	@RequestMapping(value = "face/faceregister")
 	public String faceregister(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
@@ -144,7 +141,7 @@ public class FaceController {
 		int save = 0;
 		UrlUtil uu = new UrlUtil();
 
-		String url = "http://127.0.0.1:8000";
+		String url = "http://13.125.99.115:8000";
 		String api = "/facelearningAPI";
 		String pName = "?user_id=";
 
@@ -192,7 +189,7 @@ public class FaceController {
 		String inputLine=null;
         StringBuffer stringBuffer=new StringBuffer();
 
-        URL url=new URL("http://localhost:8000/faceloginAPI"); //URL객체 생성
+        URL url=new URL("http://13.125.99.115:8000/faceloginAPI"); //URL객체 생성
             
         HttpURLConnection conn=(HttpURLConnection)url.openConnection(); //url주소를 가지고 Http 커넥션 객체 생성
             

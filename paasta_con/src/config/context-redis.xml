@@ -7,18 +7,18 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 	
 	<!-- cf 터널링을 이용한 연결 -->
-	<!-- <bean id="jedisConnectionFactory"
+	<bean id="jedisConnectionFactory"
 		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
 		p:usePool="true" p:hostName="localhost" p:port="10000"
 		p:password="73efdc50-4319-4c25-bae6-eecca5f5c974">
-	</bean> -->
+	</bean>
 	
 	<!-- 배포 이용 -->
-	<bean id="jedisConnectionFactory"
+	<!-- <bean id="jedisConnectionFactory"
 		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
 		p:usePool="true" p:hostName="192.168.0.35" p:port="37369"
 		p:password="73efdc50-4319-4c25-bae6-eecca5f5c974">
-	</bean>
+	</bean> -->
 	
 	<bean id="redisTemplate"
 		class="org.springframework.data.redis.core.RedisTemplate"

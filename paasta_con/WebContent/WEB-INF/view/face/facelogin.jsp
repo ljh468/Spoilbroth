@@ -269,7 +269,7 @@
 		facebtn.onclick = function() {
 				console.log(userid.value);
 				imglist.push(userid.value);
-			for (var i = 0; i < 40; i++) {
+			for (var i = 0; i < 20; i++) {
 				// canvas에 이미지그리기
 				sleep(50);
 				context.drawImage(video, 0, 0, 640, 480);
