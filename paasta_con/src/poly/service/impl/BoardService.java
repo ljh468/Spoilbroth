@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import poly.dto.BoardDTO;
+import poly.dto.OcrDTO;
 import poly.persistance.mapper.IBoardMapper;
 import poly.service.IBoardService;
 
@@ -22,8 +23,8 @@ public class BoardService implements IBoardService{
 	}
 
 	@Override
-	public void InsertBoardInfo(BoardDTO pDTO) throws Exception {
-		boardMapper.InsertBoardInfo(pDTO);
+	public int InsertBoardInfo(BoardDTO pDTO) throws Exception {
+		return boardMapper.InsertBoardInfo(pDTO);
 	}
 
 	@Override
@@ -44,6 +45,16 @@ public class BoardService implements IBoardService{
 	@Override
 	public void deleteBoardInfo(BoardDTO pDTO) throws Exception {
 		boardMapper.deleteBoardInfo(pDTO);
+	}
+
+	@Override
+	public BoardDTO getNotiSeq(BoardDTO pDTO) throws Exception {
+		return boardMapper.getNotiSeq(pDTO);
+	}
+
+	@Override
+	public List<OcrDTO> getFileList(String notice_seq) throws Exception {
+		return boardMapper.getFileList(notice_seq);
 	}
 
 }

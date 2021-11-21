@@ -112,14 +112,14 @@ int study_count = study_group.length;
 										<div class="card-body">
 
 											<div style="text-align: right; font-size: 20px;">
-												<form action="/Mypage/passWordChangeProc.do"
+												<form action="/mbti/updateUserMbti.do"
 													onsubmit="return check()">
 													현재 MBTI: <div type="text" id="current_Password"><strong>ENTP</strong></div> <hr>
 														<span id="past">현재 MBTI입니다..</span> <br> 바꿀 MBTI: <input
-														type="password" id="newPassWord" name="mbti" required>
+														type="text" id="newmbti" name="user_mbti" required>
 													<br> <span class="new">바꿀 MBTI를 입력해주세요. 대문자입력</span> <br>
-													<br> MBTI 확인: <input type="password"
-														id="passWordCheck" required> <br> <span
+													<br> MBTI 확인: <input type="text"
+														id="newmbtiCheck" required> <br> <span
 														class="renew">확인을 위해 한 번 더 입력해주세요.</span> <br> <br>
 													<input class="btn btn-success btn-block btn-lg"
 														type="submit" value="수정하기"> <input type="button"

@@ -62,9 +62,7 @@
 						</div>
 
 						<div>
-							<a href="#" class="txt1">
-								Forgot Password?
-							</a>
+								<a href="/user/findId.do" class="txt1">ID찾기</a><a href="#">&nbsp;/&nbsp; </a><a href="/user/findPw.do" class="txt1">PASSWORD찾기</a>
 						</div>
 					</div>
 					

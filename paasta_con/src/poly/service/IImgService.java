@@ -26,4 +26,6 @@ public interface IImgService {
 	// 스터디 이미지 정보 가져오기
 	public Map<String, String> getStudyImgList(String study_name) throws Exception;
 	
+	//게시판 파일 업로드
+	public int insertFilePath(OcrDTO fDTO) throws Exception;
 }

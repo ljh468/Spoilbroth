@@ -28,4 +28,18 @@ public interface IUserService {
 
 	UserDTO getFaceInfo(HashMap<String, String> pMap);
 
+	//비멀번호 변경
+	int updateUserPwd(UserDTO pDTO)throws Exception;
+	
+	//회원 탚퇴
+	int deleteUserInfo(UserDTO pDTO)throws Exception;
+	
+	//아이디 찾기
+	UserDTO findUserid(UserDTO pDTO) throws Exception;
+	
+	//비밀번호 찾기
+	int findUserPwd(UserDTO pDTO) throws Exception;
+	
+	//로그인
+	UserDTO userLogin(UserDTO uDTO) throws Exception;
 }

@@ -208,23 +208,6 @@
 												role="tabpanel" aria-labelledby="home-tab">
 												<div class="row">
 													<div class="col-6">
-														<label>User Id</label>
-													</div>
-													<div class="col-6">
-														<div style="margin-left: 20px; color: #0062cc;"><%=user_id%></div>
-													</div>
-												</div>
-
-												<div class="row">
-													<div class="col-6">
-														<label>Email</label>
-													</div>
-													<div class="col-6">
-														<div style="margin-left: 20px; color: #0062cc;"><%=user_email%></div>
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-6">
 														<label>MBTI</label>
 													</div>
 													<div class="col-6">

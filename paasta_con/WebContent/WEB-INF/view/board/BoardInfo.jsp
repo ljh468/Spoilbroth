@@ -2,9 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ page import="poly.util.CmmUtil" %>
 <%@ page import="poly.dto.BoardDTO" %>
+<%@ page import="poly.dto.OcrDTO" %>
+<%@page import="java.util.List"%>
+
+
 <%
 String study_name = CmmUtil.nvl((String)request.getAttribute("study_name"));
 BoardDTO rDTO = (BoardDTO)request.getAttribute("rDTO");
+List<OcrDTO> rList = (List<OcrDTO>) request.getAttribute("fList");
 //공지글 정보를 못불러왔다면, 객체 생성
 if (rDTO==null){
 	rDTO = new BoardDTO();
@@ -120,7 +125,24 @@ System.out.println("user_id : "+ CmmUtil.nvl(rDTO.getUser_id()));
 								<div class="d-flex card p-3" style="magin: -11px;">
 									<div class="form-group mt-3">
 										<label style="font-size: 25px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
-											<%=rDTO.getTitle() %></label>
+											제목 : <%=rDTO.getTitle() %></label>
+											<br/>
+										첨부파일
+										<div class="card fontstyle p-2" style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
+												<%
+												for (int i = 0; i < rList.size(); i++) {
+												
+													String fname="filedown";
+													String fsrc = "/common/download.do?fileName=";
+													String src = "&src=";
+													String res = rList.get(i).getSave_file_path();
+											%>
+											<a href="<%=fsrc + rList.get(i).getSave_file_name()+src+res %>" title="<%= rList.get(i).getOrg_file_name() %>" id="<%= fname + i%>" class="fdown"><%= rList.get(i).getOrg_file_name() %></a>
+											 <%
+												}
+											 %>	
+										</div>	
+										내용
 										<div class="card fontstyle p-2" style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
 											<%=rDTO.getContents() %>
 										</div>
@@ -204,9 +226,11 @@ function doDelete(){
 }
 //목록으로 이동
 function doList(){
-	location.href="/study/studyboard.do?study_name=<%=CmmUtil.nvl(study_name) %>";
-		
+	location.href="/study/studyboard.do?study_name=<%=CmmUtil.nvl(study_name) %>";		
 }
+
+
+
 </script>	
 
 </html>

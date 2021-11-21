@@ -105,65 +105,70 @@
 					style="font-size: 30px; color: darkcyan; padding-bottom: 30px;">
 					Sign Up</div>
 
-				<form class="login100-form validate-form" method="post" action="/user/inserUserInfo.do" onsubmit="return doRegUserCheck(this)" 
+				<form class="login100-form validate-form" method="post"
+					action="/user/inserUserInfo.do"
+					onsubmit="return doRegUserCheck(this)"
 					style="padding-top: 30px; padding-bottom: 30px;">
-					
+
 					<div class="wrap-input100 validate-input m-b-20"
 						data-validate="UserId is required">
-						<span class="label-input100">ID</span> <input class="input100"
-							type="text" name="user_id" id="user_id" placeholder="Enter userId">
-						<span class="focus-input100"></span>
+						<span class="label-input100">아이디</span> <input class="input100"
+							type="text" name="user_id" id="user_id"
+							placeholder="Enter userId"> <span class="focus-input100"></span>
 					</div>
 					<div class="msg m-b-15"></div>
-					
+
 					<div class="wrap-input100 validate-input m-b-20"
 						data-validate="UserName is required">
-						<span class="label-input100">Name</span> <input class="input100"
-							type="text" name="user_name" id="user_name" placeholder="Enter userName" value="<%=nickname %>">
-						<span class="focus-input100"></span>
+						<span class="label-input100">이름</span> <input class="input100"
+							type="text" name="user_name" id="user_name"
+							placeholder="Enter userName" value="<%=nickname %>"> <span
+							class="focus-input100"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-20"
 						data-validate="Useremail is required">
-						<span class="label-input100">Email</span> <input class="input100"
-							type="email" name="user_email" id="user_email" placeholder="Enter useremail" value="<%=email %>">
-						<span class="focus-input100"></span>
+						<span class="label-input100">이메일</span> <input class="input100"
+							type="email" name="user_email" id="user_email"
+							placeholder="Enter useremail" value="<%=email %>"> <span
+							class="focus-input100"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-18"
 						data-validate="Password is required">
-						<span class="label-input100">Password</span> <input
-							class="input100" type="password" name="user_pwd" id="newPassWord"
+						<span class="label-input100">비밀번호</span> <input class="input100"
+							type="password" name="user_pwd" id="newPassWord"
 							placeholder="Enter password"> <span
 							class="focus-input100"></span>
 					</div>
 					<div class="wrap-input100 validate-input m-b-18"
 						data-validate="Password is required">
-						<span class="label-input100">Password check</span> <input
-							class="input100" type="password" name="user_pwd2" id="passWordCheck"
-							placeholder="your Password Check"> <span
+						<span class="label-input100">비밀번호 확인</span> <input
+							class="input100" type="password" name="user_pwd2"
+							id="passWordCheck" placeholder="your Password Check"> <span
 							class="focus-input100"></span>
 					</div>
-					<div class="renew m-b-15"></div> 
+					<div class="renew m-b-15"></div>
 
 					<div class="wrap-input100 m-b-20"
 						data-validate="userdept is required">
-						<span class="label-input100">DEPT</span> 
-						<select class="form-control" style="width: 100%" name="user_dept">
-							<option value="데이터분석과" selected>데이터분석과</option>
-							<option value="의료정보과">의료정보과</option>
-							<option value="디지털콘텐츠과">디지털콘텐츠과</option>
-							<option value="주얼리디자인과">주얼리디자인과</option>
-							<option value="패션디자인과">패션디자인과</option>
-							<option value="패션산업과">패션산업과</option>
+						<span class="label-input100">관심분야</span> <select
+							class="form-control" style="width: 100%" name="user_dept">
+							<option value="IT개발" selected>IT개발</option>
+							<option value="공모전">공모전</option>
+							<option value="어학/회화">어학/회화</option>
+							<option value="봉사활동">봉사활동</option>
+							<option value="취업/면접">취업/면접</option>
+							<option value="스포츠">스포츠</option>
+							<option value="여행">여행</option>
 						</select>
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-18"
 						data-validate="age is required">
-						<span class="label-input100">Age</span> <input class="input100"
-							name="user_age" id="user_age" type="number" min='18' max='40' step='1'>
-						<span class="focus-input100"></span>
+						<span class="label-input100">나이</span> <input class="input100"
+							name="user_age" id="user_age" type="number" min='18' max='40'
+							step='1'> <span class="focus-input100"></span>
 					</div>
 
 					<div class="padding" style="padding-bottom: 50px;"></div>
@@ -179,7 +184,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 
 	<!--===============================================================================================-->
 	<script src="/login/vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -197,7 +202,7 @@
 	<script src="/login/vendor/countdowntime/countdowntime.js"></script>
 	<!--===============================================================================================-->
 	<script src="/login/js/main.js"></script>
-	
+
 </body>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
@@ -257,6 +262,6 @@
 	}
 	
 	</script>
-	
-	
+
+
 </html>

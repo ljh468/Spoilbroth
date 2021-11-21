@@ -74,7 +74,6 @@ public class StudyController {
 		}
 		UserDTO uDTO = new UserDTO();
 		uDTO.setUser_id(id);
-		uDTO.setUser_pwd(pwd);
 
 		UserDTO rDTO = new UserDTO();
 		rDTO = userService.getUserInfo(uDTO);

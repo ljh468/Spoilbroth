@@ -55,4 +55,20 @@
 	FROM STUDY_BOARD
 	WHERE NOTICE_SEQ = #{notice_seq} AND STUDY_SEQ = #{study_seq}
 	</delete>
+	
+	<!-- 파일 업로드 할때 notice_seq 가져와서 db에 같이 저장-->
+	<select id="getNotiSeq" parameterType="BoardDTO" resultType="BoardDTO">
+	SELECT NOTICE_SEQ
+	FROM STUDY_BOARD
+	WHERE TITLE = #{title}
+	</select>
+	
+	<!-- 게시판 상세보기에 파일 같이 보여주는 방법 -->
+	<select id="getFileList" parameterType="String" resultType="OcrDTO">
+	SELECT *
+	FROM BORD_FILE_INFO
+	WHERE NOTICE_SEQ = #{notice_seq}
+	</select>
+	
+	
 </mapper>

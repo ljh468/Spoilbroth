@@ -1,10 +1,11 @@
 <%@page import="poly.dto.ContestDTO"%>
 <%@page import="java.util.List"%>
+<%@page import="poly.util.CmmUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
 <%
-	
+	String user_id = CmmUtil.nvl((String)request.getAttribute("user_id"));
 %>
 
 <!DOCTYPE html>
@@ -250,6 +251,8 @@
 		var imglist = [];
 		var target = null;
 		var myImg = null;
+		var userid = "<%=user_id %>"
+		console.log(userid)
 
 		if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 			navigator.mediaDevices.getUserMedia({
@@ -270,8 +273,10 @@
 			}
 		
 		facebtn.onclick = function() {
-			
+			imglist.push(userid);
 			for (var i = 0; i < 50; i++) {
+				
+				
 				$(".progress-bar").attr('style','width : calc(100/12*'+i+'%)'); 
 				progressbar.innerHTML = i+1+"%";
 				// canvas에 이미지그리기
@@ -305,7 +310,7 @@
 						
 						swal("등록이 성공 하였습니다.!")
 						.then((value) => {
-							location.href = "/spoilbroth/mystudy.do"+userid.value;
+							location.href = "/spoilbroth/mystudy.do";
 						});
 					
 					} else {
@@ -313,7 +318,7 @@
 						
 						swal("등록이 실패 하였습니다.!")
 						.then((value) => {
-							location.href = "/face/facelogin.do";
+							location.href = "/face/faceregister.do";
 						});
 						
 					}

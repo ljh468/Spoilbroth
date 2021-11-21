@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	String user_id = (String) request.getAttribute("user_id");
+String user_id = (String) request.getAttribute("user_id");
 String user_email = (String) request.getAttribute("user_email");
 String join_dt = (String) request.getAttribute("join_dt");
 String user_name = "이재훈";
@@ -83,7 +83,8 @@ int study_count = study_group.length;
 			<div class="hh" style="font-size: 23px; height: 32px;">
 				<span>M</span><span>Y</span><span>P</span><span>A</span><span>S</span><span>E</span>
 			</div>
-			<hr style="width: 90%; height: 1.5px; border: none; background-color: #666666;">
+			<hr
+				style="width: 90%; height: 1.5px; border: none; background-color: #666666;">
 		</div>
 		<!-- END 상단 NANI -->
 
@@ -97,7 +98,8 @@ int study_count = study_group.length;
 						<!-- 왼쪽 스크립트 -->
 						<div class="col-xl-8 px-md-5" style="background-color: #f7fbff;">
 							<!-- My 프로필 메인화면 -->
-							<div class="emp-profile" style="font-size: 25px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
+							<div class="emp-profile"
+								style="font-size: 25px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive;">
 
 
 								<div class="content">
@@ -111,22 +113,19 @@ int study_count = study_group.length;
 										<div class="card-body">
 
 											<div style="text-align: right; font-size: 20px;">
-												<form action="/Mypage/passWordChangeProc.do"
-													onsubmit="return check()">
+												<form action="/mypage/passWordChangeProc.do" onsubmit="return check()">
 
-													현재 비밀번호: <input type="password" id="current_Password"
-														required> <br> <span id="past">현재
-														비밀번호를 입력해주세요.</span> <br> <br> 신규 비밀번호: <input
-														type="password" id="newPassWord" name="pwd" required>
+													현재 비밀번호: <input type="password" id="current_Password" required> <br> 
+													<span id="past">현재 비밀번호를 입력해주세요.</span> <br>
+													 <br> 신규 비밀번호: <input type="password" id="newPassWord" name="pwd" required>
 													<br> <span class="new">신규 비밀번호를 입력해주세요.</span> <br>
-													<br> 비밀번호 확인: <input type="password"
-														id="passWordCheck" required> <br> <span
-														class="renew">비밀번호 확인을 위해 한 번 더 입력해주세요.</span> <br> <br>
+													<br> 비밀번호 확인: <input type="password"id="passWordCheck" required> <br>
+													 <span class="renew">비밀번호 확인을 위해 한 번 더 입력해주세요.</span> <br> <br>
+														<div id='pwd_check'></div>
 													<input class="btn btn-success btn-block btn-lg"
 														type="submit" value="수정하기"> <input type="button"
 														onclick="location.href='/mypage/setting.do'"
 														class="btn btn-warning btn-block btn-lg" value="뒤로">
-
 												</form>
 											</div>
 										</div>
@@ -191,4 +190,21 @@ int study_count = study_group.length;
 		$firstDot.addClass('active');
 	}, 100);
 </script>
+
+	<!-- 유저 비밀번호 중복 확인용 -->
+	<script type="text/javascript">
+   $('#passwordCheck').blur(function () {
+	   	var password = $('#newPassWord').val();
+	  	var passwordCheck = $('#passwordCheck').val();
+	  	
+				if(password == passwordCheck){
+					$('#pwd_check').text('비밀번호가 일치합니다');
+					$('#pwd_check').css('color', 'blue');
+				}else{
+					$('#pwd_check').text('비밀번호가 일치하지 않습니다');
+					$('#pwd_check').css('color', 'red');
+				}
+		});
+   
+  	</script>
 </html>

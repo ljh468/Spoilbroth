@@ -63,5 +63,41 @@
 		ORDER BY CHG_DT DESC LIMIT 1
 	</select>
 	
+	<!-- 게시판 등록시 파일 업로드 -->
+<insert id="insertFilePath" parameterType="OcrDTO">
+	INSERT INTO BORD_FILE_INFO
+	(
+	FILE_SEQ,
+	NOTICE_SEQ,
+	STUDY_SEQ,
+	FUll_FILE_INFO,
+	SAVE_FILE_PATH,
+	SAVE_FILE_NAME,
+	ORG_FILE_NAME,
+	EXT,
+	CHG_ID,
+	CHG_DT
+	)
+	VALUES(
+	(SELECT IFNULL(MAX(FILE_SEQ),0)+1 FROM BORD_FILE_INFO B),
+	#{notice_seq},
+	#{study_seq},
+	#{full_file_info},
+	#{save_file_path},
+	#{save_file_name},
+	#{org_file_name},
+	#{ext},
+	#{chg_id},
+	#{chg_dt}
+	)
+</insert>
+
+<!-- 게시판상세 정보에 파일 가져오기 -->
+<select id="getBoardFile" parameterType="String" resultType="hashmap">
+		SELECT *
+		FROM USER_IMG_INFO
+		WHERE CHG_ID = #{id}
+	</select>
+	
 	
 </mapper>

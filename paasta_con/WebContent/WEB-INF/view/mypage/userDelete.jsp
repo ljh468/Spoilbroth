@@ -110,7 +110,7 @@ int study_count = study_group.length;
 										<hr>
 										<div class="card-body">
 
-											<form action="/Mypage/TheUserDeleteProc.do"
+											<form action="/mypage/userDeleteProc.do"
 												onsubmit="return check()" class="text-center"
 												style="font-size: 22px">
 
@@ -121,7 +121,7 @@ int study_count = study_group.length;
 													<b>를 입력해주세요.</b>
 												</span> <br> <br> <br> <input class="text-center"
 													type="text" id="deleteCheck"
-													placeholder="삭제하겠습니다." required> <br>
+													placeholder="삭제하겠습니다." required name="delete_user"> <br>
 												<br> <input class="btn btn-success btn-block btn-lg"
 														type="submit" value="확인"> <input type="button"
 														onclick="location.href='/mypage/setting.do'"

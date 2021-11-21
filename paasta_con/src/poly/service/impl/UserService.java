@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
 import org.mortbay.log.Log;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,8 @@ import poly.service.IUserService;
 
 @Service("UserService")
 public class UserService implements IUserService {
-
+	
+	private Logger log = Logger.getLogger(this.getClass());
 	@Resource(name = "UserMapper")
 	private IUserMapper userMapper;
 
@@ -126,5 +128,74 @@ public class UserService implements IUserService {
 		return userMapper.getFaceInfo(pMap);
 	}
 
+	//유저 비밀번호 변경
+	@Override
+	public int updateUserPwd(UserDTO pDTO) throws Exception {
+		log.info(this.getClass().getName() + "유저 비밀번호 변경 서비스 시작!!!");
+
+		int res = 0;
+
+		if (pDTO == null) {
+			pDTO = new UserDTO();
+		}
+
+		res = userMapper.updateUserPwd(pDTO);
+		log.info(res);
+
+		log.info(this.getClass().getName() + "유저 비밀번호 변경 서비스 종료!!!");
+		return res;
+	}
 	
+	//회원탈퇴
+	@Override
+	public int deleteUserInfo(UserDTO pDTO) throws Exception {
+		log.info(this.getClass().getName() + "회원탈퇴 서비스 시작!!!");
+
+		int res = 0;
+
+		if (pDTO == null) {
+			pDTO = new UserDTO();
+		}
+		res = userMapper.deleteUserInfo(pDTO);
+		log.info(res);
+
+		log.info(this.getClass().getName() + "회원탈퇴 서비스 종료!!!");
+		return res;
+	}
+
+	@Override
+	public UserDTO findUserid(UserDTO pDTO) throws Exception {
+		return userMapper.findUserid(pDTO);
+	}
+
+	@Override
+	public int findUserPwd(UserDTO pDTO) throws Exception {
+		log.info(this.getClass().getName()+"findUserPwd start");
+		int res = 0;
+		
+		if(pDTO ==null) {
+			pDTO = new UserDTO();
+		}
+		UserDTO nDTO = new UserDTO();
+		
+		nDTO = userMapper.findUserPwd(pDTO);
+		
+		if(nDTO != null) {
+			res =1;
+		}else {
+			res =0;
+		}
+		
+		log.info(this.getClass().getName()+"findUserPwd end");
+		return res;
+	}
+
+	@Override
+	public UserDTO userLogin(UserDTO uDTO) throws Exception {
+		log.info(this.getClass().getName()+"로그인 서비스 로직 시작!!!!");
+	
+		log.info(this.getClass().getName()+"로그인 서비스 로직 종료!!!!");
+		return userMapper.userLogin(uDTO);
+	}
+
 }

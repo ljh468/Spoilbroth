@@ -50,8 +50,13 @@
 	FROM USER_INFO
 	WHERE 
 		USER_ID = #{user_id}
-		
-		
+	</select>
+	
+	<select id="userLogin" resultType="UserDTO">
+		SELECT *
+		FROM USER_INFO
+		WHERE 
+		 	USER_ID = #{user_id} AND USER_PWD = #{user_pwd}
 	</select>
 	
 	<!-- ID 조회 -->
@@ -115,4 +120,32 @@
 		WHERE
 		USER_ID = #{user_id}
 	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="updateUserPwd" parameterType="UserDTO">
+	UPDATE USER_INFO
+	SET USER_PWD=#{user_pwd}
+	WHERE USER_ID=#{user_id}
+	</update>
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="deleteUserInfo" parameterType="UserDTO">
+	DELETE 
+	FROM USER_INFO
+	WHERE USER_ID=#{user_id}
+	</delete>
+	
+	<!-- 아이디 찾기 -->
+	<select id ="findUserid" parameterType="UserDTO" resultType="UserDTO">
+	SELECT USER_ID
+	FROM USER_INFO
+	WHERE USER_EMAIL=#{user_email}
+	</select>
+	
+	<select id ="findUserPwd" parameterType="UserDTO" resultType="UserDTO">
+	SELECT *
+	FROM USER_INFO
+	WHERE USER_ID=#{user_id}
+	</select>
+		
 </mapper>

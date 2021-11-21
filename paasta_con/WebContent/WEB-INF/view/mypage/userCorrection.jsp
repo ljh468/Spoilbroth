@@ -1,22 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import = "poly.util.CmmUtil" %>
+<%@ page import = "poly.dto.UserDTO " %>
 
 <%
-	String user_id = (String) request.getAttribute("user_id");
-String user_email = (String) request.getAttribute("user_email");
-String join_dt = (String) request.getAttribute("join_dt");
-String user_name = "이재훈";
-String user_mbti = "ENTP";
-String user_dept = "데이터분석과";
 
-String[] study_group = user_name.split("");
-int study_count = study_group.length;
+String user_name = CmmUtil.nvl((String) request.getAttribute("user_name"));
+String user_email = CmmUtil.nvl((String) request.getAttribute("user_email"));
+String user_gender = CmmUtil.nvl((String) request.getAttribute("user_gender"));
+String user_dept = CmmUtil.nvl((String) request.getAttribute("user_dept"));
+String user_age = CmmUtil.nvl((String) request.getAttribute("user_age"));
+
+UserDTO rDTO = (UserDTO)request.getAttribute("rDTO");
+
+if (rDTO==null){
+	rDTO = new UserDTO();
+}
+
+
 %>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Spoilbroth_StudyGroup</title>
+<title>회원정보</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -104,7 +111,7 @@ int study_count = study_group.length;
 									<div class="card">
 										<div class="card-header">
 											<h4 class="mt-0 mb-0 text-center">
-												<b>회원정보 수정</b>
+												<b>회원정보</b>
 											</h4>
 										</div>
 										<hr>
@@ -112,16 +119,14 @@ int study_count = study_group.length;
 
 											<div style="text-align: left; font-size: 25px;">
 
-												닉네임: <spanid id="email">이코딩</span> <br>
-												Email: <spanid id="email">alsltnpf1209@naver.com</span> <br>
-												Gender: <span id="gender">남자</span><br>
-												Dept: <span id="gender">데이터분석과</span><br>
-												Age: <span>29살</span>
+												이름: <span id="user_name"><%=user_name %></span> <br>
+												나이: <span id="user_age"><%=user_age %></span> <br>
+												관심사: <span id="user_dept"><%=user_dept %></span><br>
+												
 
 												<form action="/Mypage/TheUserCorrectionDo.do">
 
-													<input class="btn btn-success btn-block btn-lg"
-														type="submit" value="수정하기"> <input type="button"
+													 <input type="button"
 														onclick="location.href='/mypage/setting.do'"
 														class="btn btn-warning btn-block btn-lg" value="뒤로">
 												</form>

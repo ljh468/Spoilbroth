@@ -36,4 +36,9 @@ public class ImgService implements IImgService{
 		return imgMapper.getStudyImgList(study_name);
 	}
 
+	@Override
+	public int insertFilePath(OcrDTO fDTO) throws Exception {
+		return imgMapper.insertFilePath(fDTO);
+	}
+
 }
