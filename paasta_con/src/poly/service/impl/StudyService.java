@@ -2,6 +2,7 @@ package poly.service.impl;
 
 import static poly.util.CmmUtil.nvl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import org.mortbay.log.Log;
 import org.springframework.stereotype.Service;
 
 import poly.dto.StudyListDTO;
+import poly.dto.UserDTO;
 import poly.persistance.mapper.IStudyMapper;
 import poly.service.IStudyService;
 
@@ -109,6 +111,11 @@ public class StudyService implements IStudyService {
 	@Override
 	public int modifyNotice(Map<String, Object> pMap) {
 		return studyMapper.modifyNotice(pMap);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> getcreator(UserDTO pDTO) {
+		return studyMapper.getcreator(pDTO);
 	}
 
 }

@@ -2,11 +2,14 @@ package poly.controller;
 
 import static poly.util.CmmUtil.nvl;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,6 +27,7 @@ import poly.dto.OcrDTO;
 import poly.service.IImgService;
 import poly.util.DateUtil;
 import poly.util.FileUtil;
+import poly.util.ImageResizeUtil;
 
 @Controller
 public class ImageController {
@@ -37,7 +41,10 @@ public class ImageController {
 	final private String USERFILE_UPLOAD_SAVE_PATH = "/img/userimg"; // C:\\upload 폴더에 저장 /upload
 	// 스터디 이미지가 업로드되는 기본폴더 설정
 	final private String STUDYFILE_UPLOAD_SAVE_PATH = "/img/studyimg"; // C:\\upload 폴더에 저장 /upload
-
+	
+	final private int width = 700; // 리사이즈할 가로길이
+	final private int height = 550; // 리사이즈한 세로길이
+	
 	// 프로필 이미지파일 업로드 (ajax로 구현)
 	@RequestMapping(value = "FileUplod")
 	@ResponseBody
@@ -82,7 +89,9 @@ public class ImageController {
 
 			String path = request.getSession().getServletContext().getRealPath(saveFilePath);
 			System.out.println(path);
-
+			
+			
+			
 			// 업로드 되는 파일을 서버에 저장
 			File targetFile = new File(path, saveFileName);
 			System.out.println(targetFile.toString());
@@ -96,7 +105,12 @@ public class ImageController {
 			targetFile.setExecutable(true, false);
 
 			mf.transferTo(targetFile);
-
+			
+//			// 이미지 리사이징해서 저장
+//			InputStream inputStream = mf.getInputStream();
+//			BufferedImage resizedImage = ImageResizeUtil.resize(inputStream, width, height);
+//			ImageIO.write(resizedImage, ext, new File(path));
+			
 			// 이미지 경로 DB에 저장
 			OcrDTO pDTO = new OcrDTO();
 			pDTO.setSave_file_name(saveFileName);
@@ -169,6 +183,10 @@ public class ImageController {
 			targetFile.setExecutable(true, false);
 
 			mf.transferTo(targetFile);
+			// 이미지 리사이징해서 저장
+//			InputStream inputStream = mf.getInputStream();
+//			BufferedImage resizedImage = ImageResizeUtil.resize(inputStream, width, height);
+//			ImageIO.write(resizedImage, ext, new File(path));
 
 			// 이미지 경로 DB에 저장
 			OcrDTO pDTO = new OcrDTO();

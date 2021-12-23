@@ -30,49 +30,44 @@ import poly.service.IUserService;
 import poly.util.CmmUtil;
 import poly.util.DateUtil;
 import poly.util.FileUtil;
-
-
-
+import poly.util.S3Util;
 
 
 @Controller
 public class NoticeController {
 
 	private Logger log = Logger.getLogger(this.getClass());
-	
-	final private String FILE_UPLOAD_SAVE_PATH = "/file/boardfile";
 
-	
-	@Resource(name="UserService")
+	final private String FILE_UPLOAD_SAVE_PATH = "c:/upload";
+
+	@Resource(name = "UserService")
 	IUserService userService;
-	
+
 	@Resource(name = "StudyService")
 	IStudyService studyService;
 
 	@Resource(name = "BoardService")
 	IBoardService boardService;
-	
+
 	@Resource(name = "ImgService")
 	private IImgService imgService;
-	
+
 	/**
 	 * 게시판 리스트 보여주기
 	 */
-	@RequestMapping(value="board/BoardReg", method=RequestMethod.GET)
-	public String BoardReg(HttpServletRequest request, HttpServletResponse response, 
-			ModelMap model) throws Exception {
+	@RequestMapping(value = "board/BoardReg", method = RequestMethod.GET)
+	public String BoardReg(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
 		log.info(this.getClass().getName() + ".BoardReg start!");
 		String study_seq = nvl(request.getParameter("study_seq"));
 		String study_name = studyService.getStudyName(study_seq);
 
-		
 		model.addAttribute("study_seq", study_seq);
 		model.addAttribute("study_name", study_name);
 		log.info(this.getClass().getName() + ".BoardReg end!");
-		
+
 		return "/board/BoardReg";
 	}
-	
+
 	/**
 	 * 게시판 글 등록
 	 */
@@ -146,45 +141,62 @@ public class NoticeController {
 				String ext = originalFileName
 						.substring(originalFileName.lastIndexOf(".") + 1, originalFileName.length()).toLowerCase();
 
-					String saveFileName = originalFileName;
-							//DateUtil.getDateTime("24hhmmss" + i) + "." + ext;
-
-					// 웹 서버에 업로드한 파일 저장하는 물리적 경로
-					String saveFilePath = FileUtil.mkdirForDate(FILE_UPLOAD_SAVE_PATH);
-
-					String fullFileInfo = saveFilePath + "/" + originalFileName;
-
-					log.info("ext : " + ext);
-					log.info("saveFileName : " + saveFileName);
-					log.info("saveFilePath : " + saveFilePath);
-					log.info("fullFileInfo : " + fullFileInfo);
-					
-					fDTO = new OcrDTO();
-
-					fDTO.setSave_file_name(saveFileName);// 저장되는 파일명
-					fDTO.setSave_file_path(saveFilePath);// 저장되는 경로
-					fDTO.setOrg_file_name(originalFileName);
-					fDTO.setNotice_seq((String) session.getAttribute("notice_seq"));
-					// 원래 파일명
-					fDTO.setExt(ext);
-					// 확장자명
-					fDTO.setChg_id(user_id);
-					fDTO.setStudy_seq(study_seq);
-					fDTO.setChg_dt(DateUtil.getDateTime("yyyy-MM-dd-hh:mm:ss"));
-					fDTO.setNotice_seq(notice_seq);
-					fDTO.setFull_file_info(fullFileInfo);
-
-					int result = imgService.insertFilePath(fDTO);
-
-					/* res += ocrService.InsertImage(rList); */
-
-					// 업로드 되는 파일을 서버에 저장
-					log.info(result);
-					mf.transferTo(new File(fullFileInfo));
-
-					}
 				
-			
+				String saveFileName = originalFileName;
+
+				// 웹 서버에 업로드한 파일 저장하는 물리적 경로
+				String saveFilePath = FileUtil.mkdirForDate(FILE_UPLOAD_SAVE_PATH);
+
+				String fullFileInfo = saveFilePath + "/" + originalFileName;
+
+				log.info("ext : " + ext);
+				log.info("saveFileName : " + saveFileName);
+				log.info("saveFilePath : " + saveFilePath);
+				log.info("fullFileInfo : " + fullFileInfo);
+				
+				mf.transferTo(new File(fullFileInfo));
+				  S3Util s3 = new S3Util();
+			     
+			        String bucketName = "passtafile";
+			        System.out.println("Bucket Name : " + bucketName);
+			         
+			        // 파일 업로드
+			        String fileName = fullFileInfo;
+			        log.info(fileName);
+			        
+			        s3.fileUpload(bucketName, new File(fileName));
+			        log.info(s3.getFileURL(bucketName, saveFileName));
+
+			        String fileurl = S3Util.getFileURL(bucketName, fileName);
+			        log.info(fileurl);
+			        
+				 
+
+				fDTO = new OcrDTO();
+
+				fDTO.setSave_file_name(saveFileName);// 저장되는 파일명
+				fDTO.setSave_file_path(fileurl);// 저장되는 경로
+				fDTO.setOrg_file_name(originalFileName);
+				fDTO.setNotice_seq((String) session.getAttribute("notice_seq"));
+				// 원래 파일명
+				fDTO.setExt(ext);
+				// 확장자명
+				fDTO.setChg_id(user_id);
+				fDTO.setStudy_seq(study_seq);
+				fDTO.setChg_dt(DateUtil.getDateTime("yyyy-MM-dd-hh:mm:ss"));
+				fDTO.setNotice_seq(notice_seq);
+				fDTO.setFull_file_info(fullFileInfo);
+
+				int result = imgService.insertFilePath(fDTO);
+
+				/* res += ocrService.InsertImage(rList); */
+
+				// 업로드 되는 파일을 서버에 저장
+				log.info(result);
+				// mf.transferTo(targetFile);
+				
+
+			}
 
 			// 저장이 완료되면 사용자에게 보여줄 메시지
 			msg = "등록되었습니다.";
@@ -214,7 +226,6 @@ public class NoticeController {
 		return "/redirect";
 	}
 
-	
 	/**
 	 * 게시판 상세보기
 	 */
@@ -281,83 +292,82 @@ public class NoticeController {
 		return "/board/BoardInfo";
 	}
 
-	
-	
 	/**
 	 * 게시판 수정 보기
-	 * */
-	@RequestMapping(value="board/BoardEditInfo", method=RequestMethod.GET)
-	public String BoardEditInfo(HttpServletRequest request, HttpServletResponse response, 
-			ModelMap model) throws Exception {
-		
+	 */
+	@RequestMapping(value = "board/BoardEditInfo", method = RequestMethod.GET)
+	public String BoardEditInfo(HttpServletRequest request, HttpServletResponse response, ModelMap model)
+			throws Exception {
+
 		log.info(this.getClass().getName() + ".BoardEditInfo start!");
-		
-		
-		String notice_seq = nvl(request.getParameter("notice_seq")); //공지글번호(PK)
+
+		String notice_seq = nvl(request.getParameter("notice_seq")); // 공지글번호(PK)
 		String study_seq = nvl(request.getParameter("study_seq")); // 스터디 고유번호
-		
-		log.info("notice_seq : "+ notice_seq);
-		
-		
+
+		log.info("notice_seq : " + notice_seq);
+
 		BoardDTO pDTO = new BoardDTO();
-		
-		pDTO.setNotice_seq(notice_seq);		
+
+		pDTO.setNotice_seq(notice_seq);
 		pDTO.setStudy_seq(study_seq);
 		/*
-		 * #######################################################
-		 * 	공지사항 수정정보 가져오기(상세보기 쿼리와 동일하여, 같은 서비스 쿼리 사용함)
+		 * ####################################################### 공지사항 수정정보 가져오기(상세보기
+		 * 쿼리와 동일하여, 같은 서비스 쿼리 사용함)
 		 * #######################################################
 		 */
 		BoardDTO rDTO = boardService.getBoardInfo(pDTO);
-		
-		if (rDTO==null){
+
+		if (rDTO == null) {
 			rDTO = new BoardDTO();
-			
+
 		}
 		
-		//조회된 리스트 결과값 넣어주기
+		List<OcrDTO> fList = boardService.getFileList(notice_seq);
+		log.info(fList);
+
+		// 조회된 리스트 결과값 넣어주기
 		model.addAttribute("rDTO", rDTO);
+		model.addAttribute("fList", fList);
 		
-		
-		//변수 초기화(메모리 효율화 시키기 위해 사용함)
+		// 변수 초기화(메모리 효율화 시키기 위해 사용함)
 		rDTO = null;
 		pDTO = null;
-		
+
 		log.info(this.getClass().getName() + ".BoardEditInfo end!");
-		
+
 		return "/board/BoardEditInfo";
 	}
-	
-	
+
 	/**
 	 * 게시판 글 수정
-	 * */
-	@RequestMapping(value="board/BoardUpdate", method=RequestMethod.POST)
-	public String BoardUpdate(HttpSession session, HttpServletRequest request, HttpServletResponse response, 
+	 */
+	@RequestMapping(value = "board/BoardUpdate", method = RequestMethod.POST)
+	public String BoardUpdate(HttpSession session, HttpServletRequest request, HttpServletResponse response,
 			ModelMap model) throws Exception {
-		
+
 		log.info(this.getClass().getName() + ".BoardUpdate start!");
-		
+
 		String msg = "";
 		String url = "";
-		
-		try{
-			
-			String user_id = nvl((String)session.getAttribute("user_id")); //아이디
-			String notice_seq = nvl(request.getParameter("notice_seq")); //글번호(PK)
-			String title = nvl(request.getParameter("title")); //제목
-			String notice_yn = nvl(request.getParameter("notice_yn")); //공지글 여부
-			String contents = nvl(request.getParameter("contents")); //내용
-			String study_seq = nvl(request.getParameter("study_seq")); //스터 고유번호
-	
-			log.info("user_id : "+ user_id);
-			log.info("notice_seq : "+ notice_seq);
-			log.info("title : "+ title);
-			log.info("notice_yn : "+ notice_yn);
-			log.info("contents : "+ contents);		
-			
+
+		try {
+
+			String user_id = nvl((String) session.getAttribute("user_id")); // 아이디
+			String notice_seq = nvl(request.getParameter("notice_seq")); // 글번호(PK)
+			String title = nvl(request.getParameter("title")); // 제목
+			String notice_yn = nvl(request.getParameter("notice_yn")); // 공지글 여부
+			String contents = nvl(request.getParameter("contents")); // 내용
+			String study_seq = nvl(request.getParameter("study_seq")); // 스터 고유번호
+
+			log.info("user_id : " + user_id);
+			log.info("notice_seq : " + notice_seq);
+			log.info("title : " + title);
+			log.info("notice_yn : " + notice_yn);
+			log.info("contents : " + contents);
+
+
 			BoardDTO pDTO = new BoardDTO();
-			
+
 			pDTO.setUser_id(user_id);
 			pDTO.setNotice_seq(notice_seq);
 			pDTO.setTitle(title);
@@ -365,90 +375,102 @@ public class NoticeController {
 			pDTO.setContents(contents);
 			pDTO.setChg_dt(DateUtil.getDateTime("yyyy-MM-dd"));
 			pDTO.setStudy_seq(study_seq);
-	
-			//게시글 수정하기 DB
+			
+			BoardDTO dDTO = new BoardDTO();
+			dDTO.setNotice_seq(notice_seq);
+		
+			// 게시글 수정하기 DB
 			boardService.updateBoardInfo(pDTO);
 			
 			msg = "수정되었습니다.";
-			url = "/board/BoardInfo.do?notice_seq="+nvl(request.getParameter("notice_seq"))+"&&study_seq="+nvl(request.getParameter("study_seq"));
-			
-			//변수 초기화(메모리 효율화 시키기 위해 사용함)
+			url = "/board/BoardInfo.do?notice_seq=" + nvl(request.getParameter("notice_seq")) + "&&study_seq="
+					+ nvl(request.getParameter("study_seq"));
+
+			// 변수 초기화(메모리 효율화 시키기 위해 사용함)
 			pDTO = null;
-			
-		}catch(Exception e){
-			msg = "실패하였습니다. : "+ e.toString();
-			url = "/board/BoardInfo.do?notice_seq="+nvl(request.getParameter("notice_seq"))+"&&study_seq="+nvl(request.getParameter("study_seq"));
+
+		} catch (Exception e) {
+			msg = "실패하였습니다. : " + e.toString();
+			url = "/board/BoardInfo.do?notice_seq=" + nvl(request.getParameter("notice_seq")) + "&&study_seq="
+					+ nvl(request.getParameter("study_seq"));
 			log.info(e.toString());
 			e.printStackTrace();
-			
-		}finally{
+
+		} finally {
 			log.info(this.getClass().getName() + ".BoardUpdate end!");
-			
-			//결과 메시지 전달하기
+
+			// 결과 메시지 전달하기
 			model.addAttribute("msg", msg);
 			model.addAttribute("url", url);
-			
+
 		}
-		
+
 		return "/redirect";
-	}	
-	
+	}
+
 	/**
 	 * 게시판 글 삭제
-	 * */
-	@RequestMapping(value="board/BoardDelete", method=RequestMethod.GET)
-	public String BoardDelete(HttpSession session, HttpServletRequest request, HttpServletResponse response, 
+	 */
+	@RequestMapping(value = "board/BoardDelete", method = RequestMethod.GET)
+	public String BoardDelete(HttpSession session, HttpServletRequest request, HttpServletResponse response,
 			ModelMap model) throws Exception {
-		
+
 		log.info(this.getClass().getName() + ".BoardDelete start!");
-		
+
 		String msg = "";
 		String url = "";
-		
-		try{
-			
-			String notice_seq = nvl(request.getParameter("notice_seq")); //글번호(PK)
+
+		try {
+
+			String notice_seq = nvl(request.getParameter("notice_seq")); // 글번호(PK)
 			String study_seq = nvl(request.getParameter("study_seq"));
-			
+
 			String study_name = studyService.getStudyName(study_seq);
-			
+
 			BoardDTO pDTO = new BoardDTO();
-			
+			BoardDTO dDTO = new BoardDTO();
 			pDTO.setNotice_seq(notice_seq);
 			pDTO.setStudy_seq(study_seq);
 			
-			//게시글 삭제하기 DB
-			boardService.deleteBoardInfo(pDTO);;
 			
+			// 게시글 삭제하기 DB
+			boardService.deleteBoardInfo(pDTO);
+			
+			//파일삭제
+			dDTO.setNotice_seq(notice_seq);
+			boardService.delBoardFile(dDTO);
+			
+			
+
 			msg = "삭제되었습니다.";
 			url = "/study/studyboard.do?study_name=" + study_name;
-			//변수 초기화(메모리 효율화 시키기 위해 사용함)
+			// 변수 초기화(메모리 효율화 시키기 위해 사용함)
 			pDTO = null;
-			
-		}catch(Exception e){
+
+		} catch (Exception e) {
 			String study_seq = nvl(request.getParameter("study_seq"));
 			String study_name = studyService.getStudyName(study_seq);
-			
-			msg = "실패하였습니다. : "+ e.toString();
+
+			msg = "실패하였습니다. : " + e.toString();
 			url = "/study/studyboard.do?study_name=" + study_name;
 			log.info(e.toString());
 			e.printStackTrace();
-			
-		}finally{
+
+		} finally {
 			log.info(this.getClass().getName() + ".BoardDelete end!");
-			
-			//결과 메시지 전달하기
+
+			// 결과 메시지 전달하기
 			model.addAttribute("msg", msg);
 			model.addAttribute("url", url);
 		}
-		
+
 		return "/redirect";
 	}
-	
+
 	@RequestMapping("/boadDown")
 	public ModelAndView board(@RequestParam HashMap<Object, Object> params, ModelAndView mv) {
 		mv.setViewName("board/BoardInfo");
 		return mv;
 	}
-	
+
 }

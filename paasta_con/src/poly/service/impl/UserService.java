@@ -198,4 +198,9 @@ public class UserService implements IUserService {
 		return userMapper.userLogin(uDTO);
 	}
 
+	@Override
+	public String getUserStudy(UserDTO pDTO) throws Exception {
+		return userMapper.getUserStudy(pDTO);
+	}
+
 }

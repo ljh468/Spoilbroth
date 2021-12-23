@@ -1,32 +1,31 @@
 package poly.controller;
 
-import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 
+import javax.annotation.Resource;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+
+import poly.service.impl.downloadS3;
 
 @Controller
 @RequestMapping("/common")
 public class CommonController {
+	@Resource(name="downloadS3")
+	private downloadS3 downloadS3;
+	
 	
 
+	 
 
 	@RequestMapping("/download")
-	public ModelAndView download(@RequestParam HashMap<Object, Object> params, ModelAndView mv) {
-		String filesrc = (String) params.get("src");
-		
-		final String FILE_SERVER_PATH = filesrc;
-		
-		String fileName = (String) params.get("fileName");
-		String fullPath = FILE_SERVER_PATH + "/" + fileName;
-		File file = new File(fullPath);
-		
-		mv.setViewName("downloadView");
-		mv.addObject("downloadFile", file);
-		return mv;
-	}
+	public ResponseEntity<byte[]>download(@RequestParam HashMap<Object, Object> params) throws IOException{
+		String filename = (String) params.get("fileName");
 
+		  return downloadS3.getObject(filename);
+	}
 }

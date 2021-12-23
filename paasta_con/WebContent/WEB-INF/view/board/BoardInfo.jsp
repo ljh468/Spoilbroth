@@ -4,6 +4,8 @@
 <%@ page import="poly.dto.BoardDTO" %>
 <%@ page import="poly.dto.OcrDTO" %>
 <%@page import="java.util.List"%>
+<%@page import="java.net.URLEncoder"%>
+
 
 
 <%
@@ -136,8 +138,10 @@ System.out.println("user_id : "+ CmmUtil.nvl(rDTO.getUser_id()));
 													String fsrc = "/common/download.do?fileName=";
 													String src = "&src=";
 													String res = rList.get(i).getSave_file_path();
-											%>
-											<a href="<%=fsrc + rList.get(i).getSave_file_name()+src+res %>" title="<%= rList.get(i).getOrg_file_name() %>" id="<%= fname + i%>" class="fdown"><%= rList.get(i).getOrg_file_name() %></a>
+													
+													//
+											%>	
+											<a href="<%=fsrc + rList.get(i).getSave_file_name()%>" title="<%= rList.get(i).getOrg_file_name() %>" id="<%= fname + i%>" class="fdown"><%= rList.get(i).getOrg_file_name() %></a>
 											 <%
 												}
 											 %>	

@@ -22,7 +22,8 @@ public interface IImgMapper {
 
 	//스터디 게시판 파일 저장하기
 	public int insertFilePath(OcrDTO fDTO) throws Exception;
-	
-	
+		
 	Map<String, String> getBoardFile(String notice_seq) throws Exception;
+	
+
 }

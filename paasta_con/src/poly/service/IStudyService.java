@@ -1,9 +1,11 @@
 package poly.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import poly.dto.StudyListDTO;
+import poly.dto.UserDTO;
 
 public interface IStudyService {
 
@@ -28,6 +30,8 @@ public interface IStudyService {
 	String getStudySeq(String study_name);
 
 	int modifyNotice(Map<String, Object> pMap);
+
+	List<HashMap<String, Object>> getcreator(UserDTO pDTO);
 
 	
 }

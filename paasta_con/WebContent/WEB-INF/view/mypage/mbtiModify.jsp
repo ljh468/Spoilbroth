@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ page import = "poly.util.CmmUtil" %>
+<%@ page import = "poly.dto.UserDTO " %>
 <%
 	String user_id = (String) request.getAttribute("user_id");
 String user_email = (String) request.getAttribute("user_email");
@@ -8,6 +9,13 @@ String join_dt = (String) request.getAttribute("join_dt");
 String user_name = "이재훈";
 String user_mbti = "ENTP";
 String user_dept = "데이터분석과";
+
+UserDTO pDTO = (UserDTO)request.getAttribute("pDTO");
+
+if (pDTO==null){
+	pDTO = new UserDTO();
+}
+
 
 String[] study_group = user_name.split("");
 int study_count = study_group.length;
@@ -114,7 +122,7 @@ int study_count = study_group.length;
 											<div style="text-align: right; font-size: 20px;">
 												<form action="/mbti/updateUserMbti.do"
 													onsubmit="return check()">
-													현재 MBTI: <div type="text" id="current_Password"><strong>ENTP</strong></div> <hr>
+													현재 MBTI: <div type="text" id="current_Password"><strong><%=pDTO.getUser_mbti() %></strong></div> <hr>
 														<span id="past">현재 MBTI입니다..</span> <br> 바꿀 MBTI: <input
 														type="text" id="newmbti" name="user_mbti" required>
 													<br> <span class="new">바꿀 MBTI를 입력해주세요. 대문자입력</span> <br>

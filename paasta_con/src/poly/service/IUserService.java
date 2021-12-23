@@ -42,4 +42,6 @@ public interface IUserService {
 	
 	//로그인
 	UserDTO userLogin(UserDTO uDTO) throws Exception;
+
+	String getUserStudy(UserDTO pDTO) throws Exception;
 }

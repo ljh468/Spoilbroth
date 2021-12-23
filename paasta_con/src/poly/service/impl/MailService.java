@@ -26,7 +26,7 @@ public class MailService implements IMailService{
 	
 	   final String host = "smtp.gmail.com";
 	   final String user = "qjawnd7939@gmail.com";
-	   final String password = "qjawnd1106!";
+	   final String password = "qjawnd6268!";
 	   final int port = 465;
 
 	

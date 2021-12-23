@@ -98,6 +98,6 @@
 		FROM USER_IMG_INFO
 		WHERE CHG_ID = #{id}
 	</select>
-	
+
 	
 </mapper>

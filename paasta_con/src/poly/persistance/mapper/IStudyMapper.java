@@ -1,10 +1,12 @@
 package poly.persistance.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import config.Mapper;
 import poly.dto.StudyListDTO;
+import poly.dto.UserDTO;
 
 @Mapper("StudyMapper")
 public interface IStudyMapper {
@@ -32,5 +34,7 @@ public interface IStudyMapper {
 	String getStudySeq(String study_name);
 
 	int modifyNotice(Map<String, Object> pMap);
+
+	List<HashMap<String, Object>> getcreator(UserDTO pDTO);
 
 }

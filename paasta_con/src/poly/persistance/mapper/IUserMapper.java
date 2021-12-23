@@ -1,6 +1,5 @@
 package poly.persistance.mapper;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,5 +49,8 @@ public interface IUserMapper {
 	
 	//로그인
 	UserDTO userLogin(UserDTO uDTO) throws Exception;
+	
+	String getUserStudy(UserDTO pDTO) throws Exception;
+
 	
 }

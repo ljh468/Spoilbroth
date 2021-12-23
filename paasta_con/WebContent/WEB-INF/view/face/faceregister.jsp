@@ -324,7 +324,10 @@
 					}
 				},
 				error : function(a, b, c) {
-					swal("에러 발생!");
+					swal("에러 발생!")
+					.then((value) => {
+						location.href = "/face/faceregister.do";
+					});
 				}
 			});
 		};

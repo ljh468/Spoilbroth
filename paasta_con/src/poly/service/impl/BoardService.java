@@ -57,4 +57,9 @@ public class BoardService implements IBoardService{
 		return boardMapper.getFileList(notice_seq);
 	}
 
+	@Override
+	public void delBoardFile(BoardDTO dDTO) throws Exception {
+		boardMapper.delBoardFile(dDTO);
+	}
+
 }

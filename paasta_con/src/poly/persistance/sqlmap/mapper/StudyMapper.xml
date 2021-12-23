@@ -123,4 +123,10 @@
 		SET STUDY_NOTIFY = #{study_notify}
 		WHERE STUDY_SEQ = #{study_seq}
 	</update>
+	
+	<select id="getcreator" parameterType="UserDTO" resultType="map">
+	SELECT STUDY_NAME
+	FROM STUDY_INFO
+	WHERE STUDY_CREATOR = #{user_id}
+	</select>
 </mapper>

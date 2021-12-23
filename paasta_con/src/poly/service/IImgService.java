@@ -28,4 +28,6 @@ public interface IImgService {
 	
 	//게시판 파일 업로드
 	public int insertFilePath(OcrDTO fDTO) throws Exception;
+	
+	
 }

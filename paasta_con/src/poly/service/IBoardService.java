@@ -30,4 +30,7 @@ public interface IBoardService {
 		
 		//게시판 상세 보기시 파일 보여주기
 		List<OcrDTO> getFileList(String notice_seq) throws Exception;
+		
+		//수정시 게시판 파일 삭제
+		void delBoardFile(BoardDTO dDTO) throws Exception;
 }

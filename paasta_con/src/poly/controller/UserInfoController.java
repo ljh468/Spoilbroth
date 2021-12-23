@@ -172,6 +172,7 @@ public class UserInfoController {
 				url = "/user/login.do";
 			} else if (res == 2) {
 				msg = "이미 가입된 이메일 주소 입니다.";
+				url = "/user/signup.do";
 			} else {
 				msg = "오류로 인해  회원가입이 실패 하였습니다.";
 				url = "/user/signup.do";
@@ -264,7 +265,8 @@ public class UserInfoController {
 			}
 		} catch (Exception e) {
 			// 저장이 실패되면 사용자에세 보여줄 메시지
-			msg = "실패하였습니다. : " + e.toString();
+			msg = "이름과 이메일을 다시한번 확인해 주세요";
+			url = "/user/findId.do";
 			log.info(e.toString());
 			e.printStackTrace();
 		} finally {

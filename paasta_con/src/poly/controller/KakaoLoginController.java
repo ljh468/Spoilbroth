@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import poly.dto.UserDTO;
 import poly.service.IKakaoService;
 import poly.service.IUserService;
+import poly.util.EncryptUtil;
 
 @Controller
 public class KakaoLoginController {
@@ -39,7 +40,7 @@ public class KakaoLoginController {
         log.info("profile_image : " + userInfo.get("profile_image"));
 		
         log.info("user/KakaologinProc Start!!");
-		String email = (String) userInfo.get("email");
+        String email = EncryptUtil.decAES128CBC((String) userInfo.get("email"));
 		String nickname = (String) userInfo.get("nickname");
 		
 		HashMap<String, String> pMap = new HashMap<String, String>();

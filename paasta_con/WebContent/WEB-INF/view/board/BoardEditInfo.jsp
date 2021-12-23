@@ -2,8 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="poly.util.CmmUtil"%>
 <%@ page import="poly.dto.BoardDTO"%>
+<%@ page import="poly.dto.OcrDTO" %>
+<%@page import="java.util.List"%>
 <%
-		BoardDTO rDTO = (BoardDTO) request.getAttribute("rDTO");
+List<OcrDTO> rList = (List<OcrDTO>) request.getAttribute("fList");		
+BoardDTO rDTO = (BoardDTO) request.getAttribute("rDTO");
 	//공지글 정보를 못불러왔다면, 객체 생성
 	if (rDTO == null) {
 		rDTO = new BoardDTO();
@@ -113,17 +116,38 @@
 							<!-- 사진 프로필 START -->
 							<div class="d-flex card p-3" style="magin: -11px;">
 								
-								<form name="f" method="post" action="/board/BoardUpdate.do" onsubmit="return doSubmit(this);">
+								<form name="f" method="post" enctype="multipart/form-data" action="/board/BoardUpdate.do" onsubmit="return doSubmit(this);">
 									<input type="hidden" name="notice_seq" value="<%=CmmUtil.nvl(rDTO.getNotice_seq())%>" />
 									<input type="hidden" name="study_seq" value="<%=CmmUtil.nvl(rDTO.getStudy_seq())%>" />
 										<div class="form-group">
 											<label style="font-size: 27px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-left: 5px; margin-top: 5px; margin-bottom: -8px;">
-											Title</label>
+											제목</label>
 											<hr style="margin-top: 10px; margin-bottom: 7px;" />
 												<div class="card fontstyle p-2" style="font-size: 25px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;width:100%;">
 												<input type="text" name="title" maxlength="100" value="<%=CmmUtil.nvl(rDTO.getTitle())%>" />
 												</div>
-											
+												
+											<br/>
+										첨부파일
+										<div class="card fontstyle p-2" style="font-size: 22px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;">
+												<%
+												for (int i = 0; i < rList.size(); i++) {
+												
+													String fname="filedown";
+													String fsrc = "/common/download.do?fileName=";
+													String src = "&src=";
+													String res = rList.get(i).getSave_file_path();
+													
+													//
+											%>	
+											<a href="<%=fsrc + rList.get(i).getSave_file_name()%>" title="<%= rList.get(i).getOrg_file_name() %>" id="<%= fname + i%>" class="fdown"><%= rList.get(i).getOrg_file_name() %></a>
+											 <%
+												}
+											 %>	
+										</div>	
+												
+										<hr style="margin-top: 10px; margin-bottom: 0px;" />
+										
 											<label style="font-size: 25px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-top: 18px; margin-bottom: -10px;">
 											공지글 여부</label>
 												<div style="font-size: 25px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-top: 5px; margin-bottom: -8px;">
@@ -132,7 +156,7 @@
 												</div>
 											<hr style="margin-top: 10px; margin-bottom: 0px;" />
 											<label style="font-size: 27px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-left: 5px; margin-top: 18px; margin-bottom: 0px;">
-											CONTENTS</label>
+											내용</label>
 											<div class="card fontstyle p-2" style="font-size: 25px; font-family: 'Do Hyeon', sans-serif; font-family: 'Nanum Pen Script', cursive; margin-bottom: 0px;width:100%;">
 												<textarea name="contents"><%=CmmUtil.nvl(rDTO.getContents())%></textarea>
 											</div>
